@@ -24,7 +24,13 @@ const {
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
   </div>
-  <div class="relative max-w-[1920px] mx-auto px-0">
+  <div class="relative max-w-[1920px] mx-auto px-0 overflow-hidden">
+
+  <!-- source: https://codepen.io/sarazond/pen/LYGbwj -->
+  <div id="stars"></div>
+  <div id="stars2"></div>
+  <div id="stars3"></div>
+
     <div class="pt-0 md:pt-[76px] pointer-events-none"></div>
     <div class="pt-12 md:pt-20">
       <div class="text-center pb-0 max-w-5xl mx-auto">
