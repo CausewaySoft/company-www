@@ -12,6 +12,7 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
 
 const metadata = {
   title: 'CausewaySoft - Web-Apps and Mobile Apps Developement Agency in Belfast, Northern Ireland ',
@@ -262,35 +263,8 @@ const metadata = {
 
   <!-- CallToAction Widget *********** -->
 
-  <!-- Steps2 Widget ****************** -->
 
-  <Steps2
-    title="Reach out to us"
-    subtitle="Have questions? Feel free to contact us using the form below.<br/><br/>Whether you’re building a unicorn or laying the first stone — we believe in your vision. We’re here to bring it to life with passion, power, and precision. Let’s build something remarkable together!"
-    callToAction={{
-      text: 'Contact us',
-      href: '/',
-    }}
-    items={[
-      {
-        title: 'Email us',
-        description: 'office@causewaysoft.com',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Call us',
-        description: '+44 7548 00 33 45',
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Follow us',
-        description: '@causewaysoft',
-        href: 'https://linkedin.com/company/causewaysoft',
-        icon: 'tabler:brand-linkedin',
-      },
-    ]}
-  />
-
+<!--
   <CallToAction
     actions={[
       {
@@ -312,7 +286,9 @@ const metadata = {
       Let’s build something <span class="font-bold">remarkable<span/> together.
     </Fragment>
   </CallToAction>
-  
+  -->
+
+<!--
   <CallToAction
     actions={[
       {
@@ -332,4 +308,59 @@ const metadata = {
       No shortcuts. No generic templates. Just bold ideas, solid code, and a process built on trust, grit, and creativity.
     </Fragment>
   </CallToAction>
+-->
+
+  <ContactUs
+    id="contact"
+    title="Drop us a message today!"
+    subtitle="Whether you’re building a unicorn or laying the first stone — we believe in your vision. We’re here to bring it to life with passion, power, and precision. Let’s build something remarkable together!"
+    tagline="Contact Us"
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+    }}
+    description="Our support team typically responds within 24 business hours."
+  />
+
+
+  <Features2
+    title="",
+    classes={
+      {container: '!pt-0 text-amber-600 dark:text-amber-600'}
+    },
+    items={[
+      {
+        title: 'Call us',
+        description: '+44 7548 00 33 45',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Email us',
+        description: 'office@causewaysoft.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Follow Us',
+        description: '@causewaysoft',
+        icon: 'tabler:brand-linkedin',
+      },
+    ]}
+  />
+
+
 </Layout>
