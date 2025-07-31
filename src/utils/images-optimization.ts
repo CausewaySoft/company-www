@@ -155,6 +155,7 @@ const getStyle = ({
     styleEntries.push(['width', '100%']);
     styleEntries.push(['aspect-ratio', aspectRatio ? `${aspectRatio}` : undefined]);
     styleEntries.push(['height', pixelate(height)]);
+    styleEntries.push(['object-position', 'top left']);
   }
   if (layout === 'responsive') {
     styleEntries.push(['width', '100%']);
