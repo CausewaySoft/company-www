@@ -26,18 +26,22 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Contact Us',
+        text: 'Contact Us ',
         href: 'https://github.com/onwidget/astrowind',
         target: '_blank',
-        icon: 'tabler:download',
+        icon: 'tabler:rocket',
       },
       { text: 'Learn more', href: '#features' },
     ]}
-    image={{ src: '~/assets/images/giants-causeway-causewaysoft-herobg.png', alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway' }}
+    image={{ src: '~/assets/images/giants-causeway-causewaysoft-herobg.png', alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway' }} 
   >
+    <!-- 
+      image={{ src: '~/assets/images/openart-try7.png', alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway' }}
+      image={{ src: '~/assets/images/giants-causeway-causewaysoft-herobg.png', alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway' }} 
+    -->
     <Fragment slot="title">
-      <span class="text-accent dark:text-white">Giant</span> Apps for
-      Giant<span class="text-accent dark:text-white"> Visionaries</span> 
+      <span class="text-accent">Giant</span> Apps for
+      Giant<span class="text-accent"> Visionaries</span> 
     </Fragment>
 
     <Fragment slot="subtitle">
@@ -49,7 +53,7 @@ const metadata = {
 
   <!-- Note Widget ******************* -->
 
-  <Note title="Philosophy:" description="Launch faster. Grow stronger. Build legendary." />
+  <Note icon="tabler:bulb" title="Philosophy:" description="Launch faster. Grow stronger. Build legendary." />
 
   <!-- Features Widget *************** -->
 
@@ -135,7 +139,7 @@ const metadata = {
     image={{
       src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
       alt: 'Giants Causeway',
-      class: ''
+      class: 'grayscale hover:grayscale-0 rounded shadow-lg'
     }}
   >
   <!-- Image sources:
@@ -194,7 +198,7 @@ const metadata = {
     image={{
       src: 'https://images.unsplash.com/photo-1505576457712-b769c0c0a354?q=70&w=690&auto=format&fit=crop',
       alt: 'Our App Development Process',
-      class: 'grayscale hover:grayscale-0'
+      class: ''
     }}
   />
   <!-- Image source: https://unsplash.com/@batjko -->
