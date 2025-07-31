@@ -76,6 +76,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
         <Logo />
       </a>
       <div class="flex items-center lg:hidden">
+        {
+          showToggleTheme && 
+          <ToggleTheme iconClass="w-6 h-6 lg:w-5 lg:h-5 lg:inline-block" />
+        }
         <ToggleMenu />
       </div>
     </div>
@@ -91,7 +95,6 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             <li class={links?.length ? 'dropdown' : ''}>
               {links?.length ? (
                 <>
-                yoyoyo
                   <button
                     type="button"
                     class="hover:text-link dark:hover:text-white px-4 py-3 flex items-center whitespace-nowrap"
@@ -140,7 +143,10 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
     >
       <div class="items-center flex justify-between w-full lg:w-auto">
         <div class="flex">
-          {showToggleTheme && <ToggleTheme iconClass="w-6 h-6 lg:w-5 lg:h-5 lg:inline-block" />}
+          {
+            showToggleTheme && 
+            <ToggleTheme iconClass="w-6 h-6 lg:w-5 lg:h-5 lg:inline-block" />
+          }
           {
             showRssFeed && (
               <a
@@ -153,6 +159,7 @@ const currentPath = `/${trimSlash(new URL(Astro.url).pathname)}`;
             )
           }
         </div>
+        <!-- CONTACT US BUTTON -->
         {
           actions?.length ? (
             <span class="ml-4 rtl:ml-0 rtl:mr-4">
