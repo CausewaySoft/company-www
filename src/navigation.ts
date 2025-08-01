@@ -135,7 +135,7 @@ export const headerData = {
       href: '/#faq',
     },
   ],
-  actions: [{ text: 'Contact Us', href: '/#contact', target: '_blank' }],
+  actions: [{ text: 'Contact Us', href: '/#contact'}],
 };
 
 export const footerData = {
