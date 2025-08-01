@@ -4,7 +4,7 @@ site:
   base: '/'
   trailingSlash: false
 
-  googleSiteVerificationId: orcPxI47GSa-cRvY11tUe6iGg2IO_RPvnA1q95iEM3M
+  googleSiteVerificationId: false
 
 # Default SEO metadata
 metadata:
@@ -19,12 +19,12 @@ metadata:
     site_name: CausewaySoft
     images:
       - url: '~/assets/images/default.png'
-        width: 1200
-        height: 628
-    type: website
+        width: 1000
+        height: 1000
+    type: website 
   twitter:
-    handle: '@onwidget'
-    site: '@onwidget'
+    handle: '@causewaysoft'
+    site: '@causewaysoft'
     cardType: summary_large_image
 
 i18n:
@@ -33,7 +33,7 @@ i18n:
 
 apps:
   blog:
-    isEnabled: true
+    isEnabled: false
     postsPerPage: 6
 
     post:
@@ -66,7 +66,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null # or "G-XXXXXXXXXX"
+      id: "UA-177353433-1"
 
 ui:
-  theme: 'system' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: "dark" # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
