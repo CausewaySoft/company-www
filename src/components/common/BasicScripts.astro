@@ -155,6 +155,41 @@ import { UI } from 'astrowind:config';
       elem.href = 'tel:' + decoded_phone;
     });
 
+
+    //
+    // Send Form
+    //
+    document.getElementById('contact-form').addEventListener('submit', function (e) {
+      e.preventDefault(); // prevent default form submission
+
+      const form = e.target;
+      const formData = new FormData(form);
+
+      fetch('forms/contact.php', {
+        method: 'POST',
+        headers: {
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: formData
+      })
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.text(); // or .json() if your PHP returns JSON
+      })
+      .then(data => {
+        // Optionally check the content of 'data'
+        document.getElementById('form-success').style.display = 'flex';
+        document.getElementById('form-error').style.display = 'none';
+        form.reset();
+      })
+      .catch(error => {
+        console.error('Form submission error:', error);
+        document.getElementById('form-success').style.display = 'none';
+        document.getElementById('form-error').style.display = 'flex';
+      });
+    });
+
+
   };
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');

@@ -1,11 +1,15 @@
 ---
 import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
+import { Icon } from 'astro-icon/components';
 
-const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const {id, action, inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
 ---
 
-<form>
+<form
+  id={id}
+  role='form'
+>
   {
     inputs &&
       inputs.map(
@@ -84,4 +88,18 @@ const { inputs, textarea, disclaimer, button = 'Contact us', description = '' } 
       </div>
     )
   }
+
+
+  <!-- Success and Error messages -->
+
+  <div id="form-success" class="hidden mt-8 flex items-center bg-green-500 rounded-lg text-white text-sm font-bolddd px-4 py-3" role="alert">
+    <Icon name="tabler:rocket" class="w-10 h-10 inline-block mr-3" />
+    <p>Message sent successfully! Thank you!</p>
+  </div>
+
+  <div id="form-error" class="hidden mt-8 flex items-center bg-red-500 rounded-lg text-white text-sm font-bolddd px-4 py-3" role="alert">
+    <Icon name="tabler:exclamation-circle" class="w-10 h-10 inline-block mr-3" />
+    <p>There was an error sending your message.<br/>Please contact us directly at the email addresses listed below.</p>
+  </div>
+
 </form>
