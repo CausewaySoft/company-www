@@ -28,11 +28,11 @@ const metadata = {
       {
         variant: 'primary',
         text: 'Contact Us ',
-        href: 'https://github.com/onwidget/astrowind',
+        href: '/#contact',
         target: '_blank',
         icon: 'tabler:rocket',
       },
-      { text: 'Learn more', href: '#features' },
+      { text: 'Learn more', href: '#services' },
     ]}
     image={{ src: '~/assets/images/giants-causeway-causewaysoft-herobg.png', alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway' }} 
   >
@@ -345,19 +345,26 @@ const metadata = {
     },
     items={[
       {
+        id: 'phoneLink',
         title: 'Call us',
         description: '+44 7548 00 33 45',
         icon: 'tabler:headset',
+        link:"tel:",
+        classes: 'phoneLink'
       },
       {
+        id: 'emailLink',
         title: 'Email us',
         description: 'office@causewaysoft.com',
         icon: 'tabler:mail',
+        link: "mailto:",
+        classes: 'emailLink'
       },
       {
         title: 'Follow Us',
         description: '@causewaysoft',
         icon: 'tabler:brand-linkedin',
+        link:"https://www.linkedin.com/company/causewaysoft"
       },
     ]}
   />

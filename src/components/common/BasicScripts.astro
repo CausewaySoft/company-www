@@ -138,6 +138,23 @@ import { UI } from 'astrowind:config';
         ticking = true;
       }
     });
+
+    //
+    // Spam protection
+    //
+    const encoded_email = 'b2ZmaWNlQGNhdXNld2F5c29mdC5jb20=';
+    const decoded_email = atob(encoded_email);
+    const encoded_phone = 'KzQ0NzU0ODAwMzM0NQ==';
+    const decoded_phone = atob(encoded_phone);
+
+    document.querySelectorAll('.emailLink').forEach(function(elem){
+      elem.href = 'mailto:' + decoded_email;
+    });
+
+    document.querySelectorAll('.phoneLink').forEach(function(elem){
+      elem.href = 'tel:' + decoded_phone;
+    });
+
   };
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');
@@ -159,6 +176,9 @@ import { UI } from 'astrowind:config';
     onLoad();
     onPageShow();
   });
+
+
+
 </script>
 
 <script is:inline>
