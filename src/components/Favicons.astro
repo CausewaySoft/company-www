@@ -2,9 +2,13 @@
 import favIcon from '~/assets/favicons/favicon.ico';
 import favIconSvg from '~/assets/favicons/favicon.svg';
 import appleTouchIcon from '~/assets/favicons/apple-touch-icon.png';
+import siteManifest from '~/assets/favicons/site.webmanifest';
+
 ---
 
 <link rel="shortcut icon" href={favIcon} />
 <link rel="icon" type="image/svg+xml" href={favIconSvg.src} />
-<link rel="mask-icon" href={favIconSvg.src} color="#8D46E7" />
+<link rel="mask-icon" href={favIconSvg.src} color="#2a2a2a" />
 <link rel="apple-touch-icon" sizes="180x180" href={appleTouchIcon.src} />
+<meta name="apple-mobile-web-app-title" content="CausewaySoft" />
+<link rel="manifest" href={siteManifest} />
