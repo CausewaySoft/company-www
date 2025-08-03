@@ -11,7 +11,7 @@ metadata:
   title:
     default: CausewaySoft
     template: '%s — CausewaySoft'
-  description: "\U0001F680 Suitable for Startups, Small Business, Sass Websites, Professional Portfolios, Marketing Websites, Landing Pages & Blogs."
+  description: "\U0001F680 CausewaySoft is an indie software studio crafting powerful web apps, PWAs, mobile apps, and AI-powered solutions for startups, entrepreneurs, and visionary businesses. Born at the Giant's Causeway, Northern Ireland - Giant Apps for Giant Visionaries."
   robots:
     index: true
     follow: true
