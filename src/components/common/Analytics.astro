@@ -2,13 +2,21 @@
 import { GoogleAnalytics } from '@astrolib/analytics';
 import { ANALYTICS } from 'astrowind:config';
 
+const id = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID;
+
+console.log("DEBUGGER: id: ", id);
+
+
+if (!id) {
+console.log("DEBUGGER: not null !!!!");
+  return null;
+}
+
 ---
 
 {
-  ANALYTICS?.vendors?.googleAnalytics?.id ? (
-    <GoogleAnalytics
-      id={String(ANALYTICS.vendors.googleAnalytics.id)}
-      partytown={ANALYTICS?.vendors?.googleAnalytics?.partytown}
-    />
-  ) : null
+  <GoogleAnalytics
+    id={id}
+    partytown={ANALYTICS?.vendors?.googleAnalytics?.partytown}
+  />
 }
