@@ -7,7 +7,7 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Services',
+  title: 'Custom Software Development Services',
 };
 ---
 
@@ -15,9 +15,9 @@ const metadata = {
   <!-- Hero Widget ******************* -->
 
   <Hero
-    tagline="Services"
-    title="Elevate your projects with our stunning templates"
-    subtitle="Explore our meticulously crafted templates tailored to various industries and purposes. From captivating presentations to functional website designs, we offer the tools you need to succeed."
+    tagline="From Tides to Triumph"
+    title="Transform Your Business with the Power of Digital"
+    subtitle="We partner with ambitious entrepreneurs, daring startups, and forward-thinking companies to reinvent their business models from the ground up. By fusing cutting-edge technology — AI agents, intelligent automation, predictive analytics, and next-generation workflows — with strategic insight, we don't just help you keep pace with change; we set you leagues ahead of it."
     actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
     image={{
       src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
@@ -25,66 +25,109 @@ const metadata = {
     }}
   />
 
-  <!-- Features2 Widget ************** -->
+  <!-- Features2 Widget ************** 
+  
+        call-to-actions = [
+        {
+          text = "Start Your Project",
+          href = "#contact",
+          variant = "primary"
+        },
+        {
+          text = "Book a Discovery Call",
+          href = "#contact",
+          variant = "secondary"
+        }
+      ],
+  
+  
+  -->
+
 
   <Features2
-    title="Explore our diverse templates"
-    subtitle="Discover our selection below to streamline and elevate your projects."
-    columns={3}
+    tagline="Your Vision, Our Journey",
+    title="Custom Software Engineering for bold Startups, forward-thinking Entrepreneurs, and growing Businesses",
+    subtitle="Some ventures need a spark. Others demand a voyage. At CausewaySoft, we shape our engagement to match your ambition — from lightning-fast product launches to full-scale transformations that reforge the way you do business.",
     items={[
       {
-        title: 'Educational',
-        description:
-          'By harmonizing instructional design and visual appeal, templates streamline content creation for varied materials, expediting development and cultivating engaging educational spaces.',
-        icon: 'tabler:school',
+        title: "Strategic Partnership",
+        description: "Like the stones of the Causeway, strong relationships are built piece by piece. We work as an extension of your team — not just delivering code, but helping shape your roadmap, refine your ideas, and make decisions that will carry your business into the future.",
+        icon: 'tabler:heart-handshake',
       },
       {
-        title: 'Interior Design',
-        description:
-          'Crafting functional, visually appealing spaces for residential and commercial use. Templates emphasize layout, colors, and furniture setups, offering a versatile toolkit for your design vision.',
-        icon: 'tabler:home-star',
+        title: "Digital Business Transformation",
+        description: "For companies ready to evolve, we go beyond development. We reimagine your workflows, integrate AI and automation, and create systems that turn complexity into clarity — ensuring your business doesn’t just survive the next wave of change, but commands it.",
+        icon: 'tabler:transaction-dollar',
       },
       {
-        title: 'Photography',
-        description: `Empowering photographers, our templates facilitate captivating storytelling. With a keen focus on layout, galleries, and typography, they cater to both professionals and enthusiasts.`,
-        icon: 'tabler:photo',
-      },
-      {
-        title: 'E-commerce',
-        description:
-          'Developing engaging online stores, our E-commerce templates ensure a dynamic presence to effectively showcase products. Ideal for startups or revamps.',
-        icon: 'tabler:shopping-cart',
-      },
-      {
-        title: 'Blog',
-        description:
-          'With attention to typography, these templates empower effective content presentation for writers at any stage, ensuring visually engaging and user-friendly blogs.',
-        icon: 'tabler:article',
-      },
-      {
-        title: 'Business',
-        description:
-          'Providing polished options for effective visual communication, these templates empower both startups and established companies for a professional brand presence.',
-        icon: 'tabler:building-store',
-      },
-      {
-        title: 'Branding',
-        description:
-          'Offering pre-designed elements for a consistent brand identity, including logos and marketing materials. Ideal for new ventures or revamps.',
-        icon: 'tabler:arrow-big-up-lines',
-      },
-      {
-        title: 'Medical',
-        description: `From presentations to patient forms, these tools enhance communication effectiveness for healthcare professionals. Ideal for medical practices and research pursuits.`,
-        icon: 'tabler:vaccine',
-      },
-      {
-        title: 'Fashion Design',
-        description:
-          'With attention to detail, customization, and contemporary design, they empower designers to showcase ideas cohesively. Ideal for all levels of designers.',
-        icon: 'tabler:tie',
-      },
+        title: "From Idea to Impact: Fast, Goal-Driven MVP Launch",
+        description: "When speed matters, we deliver. Using lean methods and rapid iteration, we get your Minimum Viable Product into the hands of users fast — so you can test, learn, and grow without wasting a single tide.",
+        icon: 'tabler:trophy',
+      }
     ]}
+    >
+
+  </Features2>
+
+  <Features2
+      tagline = "Explore Our Core Services",
+      title = "Bring your ideas to life with our services.",
+      subtitle = "From the spirit of the Giant’s Causeway, we forge digital experiences that blend heritage, ambition, and cutting-edge technology. Whether you’re launching your first product or transforming your business, our services are built to help visionaries succeed.",
+      columns={3}
+
+      items = {[
+        {
+          title: "Web Applications",
+          description:"From MVP to full-scale platforms, we engineer dynamic, high-performance web apps that scale with your ambition — clean code, solid architecture, and endless potential.",
+          icon: 'tabler:app-window'
+        },
+        {
+          title:"Progressive Web Apps (PWAs)",
+          description:"Blending the best of web and native, our PWAs are lightning-fast, offline-ready, and immersive — giving users an app-like experience without the app store friction.",
+          icon: 'tabler:rocket',
+        },
+        {
+          title:"Hybrid Mobile Apps",
+          description:"One build, many platforms. With React Native and modern stacks, we deliver cross-platform apps that feel native, run fast, and keep costs lean.",
+          icon: 'tabler:device-mobile-star',
+        },
+        {
+          title: "Websites",
+          description: "From sleek portfolio sites to high-converting business platforms, we build websites that are great looking, extremely fast, and strategically designed to grow your brand. Each site is optimized for performance, SEO, and user experience — and can be paired with AI-powered chat agents to turn visitors into leads, bookings, and loyal customers.",
+          icon: 'tabler:world-www'
+        },
+        {
+          title: "AI-Powered Solutions",
+          description: "From chatbots and intelligent automation to predictive analytics — we build AI into your apps to make them smarter, faster, and more intuitive.",
+          icon: 'tabler:ai',
+        },
+        {
+          title: "Digital Business Transformations",
+          description: "Reinvent your business model with cutting-edge tech like AI agents, workflow automation, and data-driven decision systems. We help you leap ahead, not just keep up.",
+          icon: 'tabler:transaction-dollar',
+        },
+        {
+          title: "Chrome Extensions",
+          description: "Compact yet powerful tools that integrate seamlessly with browsers, improving productivity and engagement for your users.",
+          icon: 'tabler:brand-chrome',
+        },
+        {
+          title: "UI/UX Design & Strategy",
+          description: "We craft intuitive interfaces and seamless user journeys — turning casual users into loyal advocates.",
+          icon: 'tabler:palette'
+        },
+        {
+          title: "Hosting",
+          description: "Our hosting solutions, located in the EU, UK, and Northern Ireland, deliver speed, security, and compliance. Keep your apps and websites online, resilient, and close to home.",
+          icon: 'tabler:server-spark'
+        },
+        {
+          title: "NI Cloud-Hosted GPT Models",
+          description: "Enterprise-grade GPT chatbots hosted securely in Northern Ireland. Tailored to your needs, protected by local compliance, and ready to transform how your business communicates.",
+          icon: 'tabler:cloud'
+        }
+      ]} 
+        
   />
 
   <!-- Content Widget **************** -->
