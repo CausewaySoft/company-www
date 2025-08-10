@@ -5,6 +5,7 @@ import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
 
 const metadata = {
   title: 'Custom Software Development Services',
@@ -134,81 +135,71 @@ const metadata = {
 
   <Content
     isReversed
+    tagline="Why Choose Our Software Development Services",
+    tagline="Why Choose Our Services",
+    title="CausewaySoft Stands Above the Rest",
+    subtitle="Most agencies will build you what you ask for. We go further. Like the builders of the Giant’s Causeway, we craft with purpose, precision, and a vision for the ages. Where others deliver a product, we deliver a launchpad for your ambitions. We don’t just write code — we help you write your legacy.",
     items={[
-      {
-        title: 'High-Quality Designs',
-        description:
-          'Our templates feature top-tier designs that ensure a professional and polished appearance for your projects.',
-        icon: 'tabler:wand',
-      },
-      {
-        title: 'Customization Tools',
-        description:
-          'Tailor each template to your unique needs with user-friendly customization tools that let you personalize colors, fonts, and content.',
-        icon: 'tabler:settings',
-      },
-      {
-        title: 'Pre-Designed Elements',
-        description:
-          'Save time and effort with our ready-to-use elements, including graphics, icons, and layouts that enhance the visual appeal of your creations.',
-        icon: 'tabler:presentation',
-      },
-      {
-        title: 'Preview and Mockup Views',
-        description:
-          'Visualize the final outcome before making any changes using our preview and mockup views, ensuring your projects meet your expectations.',
-        icon: 'tabler:carousel-horizontal',
-      },
-    ]}
+      { title: "Vision-First Approach", description: "We align our work with your long-term goals, not just the immediate brief.", icon: "tabler:eye" },
+      { title: "Mythic Inspiration", description: "Our roots in the Giant’s Causeway fuel a mindset where challenges become stepping stones.", icon: "tabler:mountain" },
+      { title: "Fewer Projects, More Focus", description: "We take on fewer clients so we can give each project the attention it deserves.", icon: "tabler:focus" },
+      { title: "Seamless Collaboration", description: "Clear, frequent communication with transparency at every step.", icon: "tabler:arrows-right-left" },
+      { title: "Proven Results", description: "A track record of delivering products that perform, scale, and impress.", icon: "tabler:check" }
+    ]},
     image={{
       src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
       alt: 'Features Image',
     }}
   >
-    <Fragment slot="content">
+    <!-- <Fragment slot="content">
       <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Main Features</h3>
-    </Fragment>
+    </Fragment> -->
   </Content>
 
   <!-- Content Widget **************** -->
 
   <Content
     isAfterContent
+    tagline="What We Provide in Every Service",
+    title="Excellence in Every Build",
     items={[
-      {
-        title: 'Time Savings',
-        description:
-          'Streamline your workflow, enabling you to create stunning materials efficiently and allocate more time to your core tasks.',
-        icon: 'tabler:clock',
-      },
-      {
-        title: 'Professional Appearance',
-        description:
-          'Elevate your projects with the polished and sophisticated look that our templates provide, making a lasting impression on your audience.',
-        icon: 'tabler:school',
-      },
-      {
-        title: 'Cost-Efficiency',
-        description:
-          'Benefit from cost savings by avoiding the need for custom design work, as our templates offer professional-grade designs at a fraction of the cost.',
-        icon: 'tabler:coin',
-      },
-      {
-        title: 'Instant Download',
-        description:
-          'Enjoy immediate access to your chosen templates upon purchase, enabling you to begin working on your projects without delay.',
-        icon: 'tabler:file-download',
-      },
-    ]}
+      { title: "Excellence in Engineering", description: "Clean, maintainable, high-performance code.", icon: "tabler:code" },
+      { title: "Optimized for Success", description: "SEO-friendly, fast-loading, and responsive on all devices.", icon: "tabler:rocket" },
+      { title: "Attention to Detail", description: "Every interaction, animation, and micro-feature is considered.", icon: "tabler:details" },
+      { title: "Security & Privacy", description: "Built with modern security best practices from day one.", icon: "tabler:lock" },
+      { title: "Scalability", description: "Architecture designed to grow with your business.", icon: "tabler:arrows-up-right" },
+      { title: "Post-Launch Support", description: "We’re with you beyond deployment to keep everything running flawlessly.", icon: "tabler:lifebuoy" }
+    ]},
     image={{
       src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
       alt: 'Benefits Image',
     }}
   >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Benefits</h3>
-    </Fragment>
   </Content>
+
+
+  <!-- Content Widget **************** -->
+  <Content
+    isAfterContent
+    tagline="Our Tech Stack",
+    title="Modern Tools for Legendary Results",
+    items={[
+      { title: "Frontend", description: "Vue, React, Next.js, Astro, Tailwind CSS, HTML5, CSS3, JavaScript (ES6+), TypeScript", icon: "tabler:layout" },
+      { title: "Backend", description: "C# .NET, TypeScript, Node.js, Express, Python, PostgreSQL, MongoDB, GraphQL", icon: "tabler:server" },
+      { title: "Mobile & Cross-Platform", description: "React Native, Progressive Web Apps (PWA)", icon: "tabler:device-mobile" },
+      { title: "AI & Automation", description: "OpenAI GPT integration, custom AI agents, workflow automation", icon: "tabler:cpu" },
+      { title: "3rd Party Integrations", description: "Shopify API, Zappier, Wordpress API, ", icon: "tabler:play-card-3" },
+      { title: "Hosting & Infrastructure", description: "EU/UK-based servers, NI-hosted GPT models, AWS, Vercel, DigitalOcean", icon: "tabler:cloud" },
+      { title: "DevOps & CI/CD", description: "GitHub Actions, Docker, Kubernetes (on request)", icon: "tabler:settings" },
+      { title: "Project Management", description: "Git, Agile, Scrum, MS Dev Ops, Jirra", icon: "tabler:calendar" }
+    ]},
+    image={{
+      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+      alt: 'Benefits Image',
+    }}
+  >
+  </Content>
+
 
   <!-- Testimonials Widget *********** -->
 
@@ -216,27 +207,30 @@ const metadata = {
     title="Words from real customers"
     testimonials={[
       {
-        testimonial: `The designs are not only visually appealing but also highly professional. The templates have saved me a significant amount of time while helping me make a lasting impression on my clients.`,
-        name: 'Emily Kennedy',
-        job: 'Front-end developer',
+        title: 'Simple Business Website for a local Cleaning Business',
+        testimonial: "I came to CausewaySoft, with a simple goal in mind, to show up online. I needed a simple and cost effective website for my cleaning business. They built me a beautiful website, and did initial marketing of it. Overtime, I noticed more customers telling me they found me online! It's made a massive difference to my confidence as a business owner and helped me elevate the quality of business that I get.",
+        name: "Betty's Cleaning",
+        job: 'Local Cleaning Agency | Coleraine Area',
         image: {
           src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
           alt: 'Emily Kennedy Image',
         },
       },
       {
-        testimonial: `It beautifully showcases my work, with its clean and elegant design that lets my photographs shine. Customization was a breeze, even for a non-tech person like me. The result is a professional and immersive portfolio that's garnered numerous compliments.`,
-        name: 'Sarah Hansen',
-        job: 'Photographer',
+        title: 'Corporate Client – Custom Login Screen with CMS',
+        testimonial: "We needed a polished, branded login page with the ability to easily update hero images and links. CausewaySoft delivered a solution that looked amazing and was incredibly simple for our team to manage. They understood our vision, nailed the design, and made the process smooth from start to finish.",
+        name: 'Martin ....',
+        job: 'IT Project Manager | Expro',
         image: {
           src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
           alt: 'Sarah Hansen Image',
         },
       },
       {
-        testimonial: `I discovered these templates and I'm impressed by their variety and quality. They've helped me establish a consistent brand image across my marketing and social platforms, elevating my business's overall appearance.`,
+        title: 'Medium-Sized Corporation – Real-Time Group Chat Integration',
+        testimonial: "Our engineering teams needed a better way to collaborate while working on the same SCADA dashboards. CausewaySoft integrated a seamless, real-time group chat right into our existing web app. Now our engineers can troubleshoot, share insights, and solve problems faster — all without leaving the dashboard. It's been a game-changer for our workflow.",
         name: 'Mark Wilkinson',
-        job: 'Small business owner',
+        job: 'IT Project Manager | MeasureSoft',
         image: {
           src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
           alt: 'Mark Wilkinson Image',
@@ -250,6 +244,28 @@ const metadata = {
       icon: 'tabler:chevron-right',
     }}
   />
+
+
+
+
+
+  <FAQs
+    id="faq"
+    title="Frequently Asked Questions"
+    subtitle="Dive into the following questions to gain insights into how we build the apps."
+    tagline="FAQs"
+    classes={{ container: 'max-w-6xl' }}
+    items={[
+      { title: "How long does it take to build a custom web or mobile app?", description: "Timelines vary depending on complexity, but MVPs typically launch within 6–12 weeks, with larger projects taking longer. We focus on rapid iteration without sacrificing quality.", icon: "tabler:calendar" },
+      { title: "What’s included in your post-launch support?", description: "We offer maintenance, updates, bug fixes, and performance monitoring to ensure your product runs smoothly long after launch.", icon: "tabler:tool" },
+      { title: "Do you work with international clients?", description: "Yes — while based in Northern Ireland, we work with ambitious clients across the UK, EU, USA, and beyond.", icon: "tabler:world" },
+      { title: "Can you integrate AI into my app or website?", description: "Absolutely. We specialize in integrating AI chatbots, automation tools, and AI-driven analytics to give you a competitive edge.", icon: "tabler:robot" },
+      { title: "How much does a custom software project cost?", description: "Costs depend on scope, features, and timelines. We offer transparent, milestone-based pricing so you know exactly what you’re paying for.", icon: "tabler:currency-pound" },
+      { title: "What industries do you serve?", description: "We work with startups, entrepreneurs, and SMEs across sectors — from e-commerce and SaaS to local service businesses and enterprise solutions.", icon: "tabler:building" }
+    ]}
+  />
+
+
 
   <!-- CallToAction Widget *********** -->
 
