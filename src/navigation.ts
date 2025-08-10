@@ -165,6 +165,7 @@ export const footerData = {
     {
       title: 'Resources',
       links: [
+        { text: 'FREE Technical Score of your website', href: 'https://pagespeed.web.dev/'},
         { text: 'Blog', isComingSoon: true },
         { text: 'Case Studies', isComingSoon: true },
         { text: 'Start-up Toolkit', isComingSoon: true },
