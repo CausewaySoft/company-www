@@ -1,0 +1,494 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: 'SaaS Landing Page',
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+  <!-- Hero2 Widget ******************* -->
+
+  <Hero2
+    tagline="Websites that grow your brand"
+    actions={[
+      { variant: 'primary', text: 'Book a discovery call', href: '/#' },
+      { text: 'Learn more', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1580481072645-022f9a6dbf27?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80',
+      alt: 'AstroWind Hero Image',
+    }}
+  >
+    <Fragment slot="title">
+        Custom <span class="text-accent dark:text-white"></span>Website</span> Design and Developement <br />
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <span class="hidden sm:inline">
+        From sleek portfolios to high-converting business platforms — beautiful design, lightning speed, and strategic UX that turns visitors into lifelong customers.
+    </Fragment>
+  </Hero2>
+
+  <!-- Features Widget *************** -->
+
+  <Features
+    tagline="Our Vision for Websites"
+    id="features"
+    title="Why choose our Website Design and Development Services"
+    subtitle="We design and build websites that are visually striking, technically robust, and purpose-driven — from single-page portfolios to multi-page platforms with integrated booking and AI chat.",
+    columns={2}
+    items={[
+        {
+            title: "Design + Development",
+            description:
+            "Responsive design, accessible markup, and intuitive interfaces so your site looks great on every device.",
+            icon: "tabler:brush",
+        },
+        {
+            title: "Performance & SEO",
+            description:
+            "Optimised load times, semantic structure, and SEO best-practices to help you be found and fast to engage.",
+            icon: "tabler:brush",
+        },
+        {
+            title: "Conversion Tools",
+            description:
+            "AI chat agents, booking flows, lead capture — built to convert curious visitors into real customers.",
+            icon: "tabler:message-circle",
+        },
+        {
+            title: "Security & Reliability",
+            description:
+            "We build every website with modern technology stack with robust infrastructure, ensuring your site stays safe, stable, and online around the clock.",
+            icon: "tabler:message-circle",
+        },
+        ]}
+  />
+
+   <Features
+    tagline="Client Benefits"
+    id="client-benefits"
+    title="Website features turned into business outcomes"
+    subtitle="We don’t sell features. We deliver outcomes: fast website that respect your brand and convert visitors into loyal customers.",
+    columns={2}
+    items={[
+       {
+            title: "Fast-loading pages",
+            description:
+            "so you can keep visitors engaged and reduce drop-off on every device. Extreme technical optimisation of the website serves as the SEO-friendly foundation.",
+            icon:"tabler:bolt",
+        },
+        {
+            title: "SEO-friendly foundation",
+            description:
+            "so you can get discovered by the right people and grow organic traffic over time.",
+            icon:"tabler:search",
+        },
+        {
+            title: "Conversion-focused UX",
+            description:
+            "so you can capture more leads, bookings, and sales without extra ad spend.",
+            icon:"tabler:click",
+        },
+        {
+            title: "Scalable architecture",
+            description:
+            "so you can add features — e-commerce, memberships, or bookings on your website; or any 3rd party integrations — when you're ready.",
+            icon:"tabler:stack",
+        },
+    ]}
+  />
+
+
+
+
+  <!-- Content Widget **************** -->
+  <Content
+    tagline='Use Cases'
+    title="Use cases"
+    subtitle="Discover how AstroWind's versatile template serves as the ideal solution for various use cases, providing tailored solutions to drive success."
+    isReversed >
+  </Content>
+
+<!-- UseCaseItem Widget 
+   UCeCase for Small Business Sites
+  **************** -->
+    <UseCaseItem
+        tagline='Simple Websites for Local Business'
+        title="Get found online and grow your calls"
+        isReversed
+        items={[
+        {
+            title: 'Description:',
+            description: "For many local businesses — cleaners, tradespeople, builders, decorators — the hardest part isn’t doing the work, it's getting found. A beautifully designed, single-page site changes that overnight. We craft pages that are lightning-fast, mobile-friendly, and search-optimized so your business shows up when customers need you most. Add a clear call-to-action and a click-to-call button, and you've just turned your online presence into a steady stream of real enquiries.",
+        },
+        {
+            title: 'Benefits:',
+            description: `Mobile-friendly and lightning fast,
+        Search engine optimized for local leads,
+        Clear calls-to-action for instant engagement,
+        Professional online presence within days`,
+        },
+        ]}
+        image={{
+        src: 'https://images.unsplash.com/photo-1620558138198-cfb9b4f3c294?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1671&q=80',
+        alt: 'Startup Image',
+        }}
+    >
+        <Fragment slot="content">
+        <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        <br />
+        </h3>
+        </Fragment>
+
+        <Fragment slot="bg">
+        <div class="absolute inset-0 bg-blue-50 dark:bg-transparent">"Get found online and grow your calls",</div>
+        </Fragment>
+    </UseCaseItem>
+
+
+  <!-- UseCaseItem Widget 
+   UCeCase for Startups
+  **************** -->
+  <UseCaseItem
+  tagline='Inspire visitors and win early adopters',
+  title='Startup Website Curiosity Converters',
+    isAfterContent={true}
+    items={[
+      {
+        title: 'Description:',
+        description: "For a startup, your website is often the very first handshake with the world — and first impressions matter. We design sites that blend clarity with intrigue, telling your story in a way that makes visitors lean in and want to know more. Clean, modern layouts. Bold headlines. Strategic calls-to-action. Every element is there to inspire trust, build excitement, and guide curious visitors toward becoming your first customers, backers, or partners.",
+      },
+      {
+        title: 'Benefits:',
+        description: `Modern, eye-catching design for brand impact,
+      Messaging that builds trust and curiosity,
+      Optimized for lead capture and conversion,
+      Scalable structure ready for future growth`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1531973486364-5fa64260d75b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1658&q=80',
+      alt: 'SaaS Businesses Image',
+    }}
+  >
+  </UseCaseItem>
+
+
+<!-- UseCaseItem Widget 
+   UCeCase for Small Business Sites
+  **************** -->
+    <UseCaseItem
+        tagline='SME Digital Growth Platforms'
+        title="Websites that work as hard as you do"
+        isReversed
+        items={[
+        {
+            title: 'Description:',
+            description: "For SMEs, your website isn't just a brochure — it's a living part of your business. Whether you're a consultancy, retailer, manufacturer, or service provider, your site needs to convert interest into action. We design custom solutions with features like integrated booking systems, client portals, AI chat assistants, and performance analytics — all tailored to your workflow. The result? A website that's not just online, but actively working to win you business every day.",
+        },
+        {
+            title: 'Benefits:',
+            description: `Custom features matched to your workflow,
+                Integrated booking, portals, and automation,
+                AI-powered chat assistants for instant support,
+                Analytics to track and improve performance`,
+        },
+        ]}
+        image={{
+        src: 'https://images.unsplash.com/photo-1620558138198-cfb9b4f3c294?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1671&q=80',
+        alt: 'Startup Image',
+        }}
+    >
+        <Fragment slot="content">
+        <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        <br />
+        </h3>
+        </Fragment>
+
+        <Fragment slot="bg">
+        <div class="absolute inset-0 bg-blue-50 dark:bg-transparent">"Get found online and grow your calls",</div>
+        </Fragment>
+    </UseCaseItem>
+
+
+
+    <!-- Steps Widget ****************** -->
+
+  <Steps
+    id="our-process"
+    tagline= "Project Steps",
+    title="Our Website Design and Development Process"
+    subtitle="A calm, clear process that keeps you informed, involved, and excited at every milestone.",
+    items={[
+      {
+        title: 'Step 1: <span class="font-medium">Discovery</span>',
+        description: "We listen. Goals, customers, and brand essence — so the site reflects what makes you unique.",
+        icon: 'tabler:telescope',
+      },
+      {
+        title: 'Step 2: <span class="font-medium">Strategy & Wireframes</span>',
+        description: "Structure and journeys mapped out so every page has a purpose and a path to conversion.",
+        icon: 'tabler:layout',
+      },
+      {
+        title: 'Step 3: <span class="font-medium">Design & Build</span>',
+        description: "Pixel-perfect design brought to life with fast, maintainable code and accessibility in mind.",
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Step 4: <span class="font-medium">Launch & Measure</span>',
+        description: "Go live with tracking, performance checks, and a plan to iterate for growth.",
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Step 5: <span class="font-medium">Support & Growth</span>',
+        description: "From content updates to new features and AI tuning — we stay partners in your growth.",
+        icon: 'tabler:message-chatbot',
+      },
+      {
+        title: 'Achieve and Succeed!',
+        icon: 'tabler:trophy',
+        classes: {
+          icon: 'text-amber-600 dark:text-amber-600',
+          title: 'text-amber-600 dark:text-amber-600'
+        }
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1692106979244-a2ac98253f6b??q=70&w=690&auto=format&fit=crop',
+      alt: 'Image of a MacBook laptop with Visual Studio Code opened, presenting moder software engineering tools being used.',
+    }}
+  />
+
+  
+
+  <!-- Testimonials Widget *********** -->
+
+  <Testimonials
+    title="Words from real customers"
+    testimonials={[
+      {
+        title: 'Simple Business Website for a local Cleaning Business',
+        testimonial: "I came to CausewaySoft, with a simple goal in mind, to show up online. I needed a simple and cost effective website for my cleaning business. They built me a beautiful website, and did initial marketing of it. Overtime, I noticed more customers telling me they found me online! It's made a massive difference to my confidence as a business owner and helped me elevate the quality of business that I get.",
+        name: "Betty's Cleaning",
+        job: 'Local Cleaning Agency | Coleraine Area',
+        image: {
+          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
+          alt: 'Emily Kennedy Image',
+        },
+      },
+      {
+        title: 'Corporate Client – Custom Login Screen with CMS',
+        testimonial: "We needed a polished, branded login page with the ability to easily update hero images and links. CausewaySoft delivered a solution that looked amazing and was incredibly simple for our team to manage. They understood our vision, nailed the design, and made the process smooth from start to finish.",
+        name: 'Martin ....',
+        job: 'IT Project Manager | Expro',
+        image: {
+          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
+          alt: 'Sarah Hansen Image',
+        },
+      },
+    ]}
+    callToAction={{
+      target: '_blank',
+      text: 'More testimonials...',
+      href: 'https://github.com/onwidget/astrowind',
+      icon: 'tabler:chevron-right',
+    }}
+  />
+
+
+     <Features
+    tagline="Our Edge"
+    id="features"
+    title="We are your #1 Website Design and Development Agency"
+    subtitle="We combine latest web-development technology, and your business strategy. The result is a site that not only looks magical — it works, measures, and grows.",
+    columns={2}
+    items={[
+        {
+            title: "Strategic-first design",
+            description:
+            "We start with your goals — not trendy templates. Every layout and CTA is designed to move customers forward.",
+            icon:"tabler:target",
+        },
+        {
+            title: "Performance obsessed",
+            description:
+            "Pages that load fast and rank better—so visitors stay, engage, and convert. We benchmark and optimise for results.",
+            icon:"tabler:clock",
+        },
+        {
+            title: "AI-powered conversion",
+            description:
+            "Optional AI chat agents and automated flows that capture leads and book meetings while you focus on what matters.",
+            icon:"tabler:cpu",
+        },
+        {
+            title: "Proven process & proof",
+            description:
+            "Years of experience, real client outcomes, and a transparent workflow from kickoff to launch.",
+            icon:"tabler:shield-check",
+        },
+    ]}
+  />
+
+
+
+
+
+  <!-- Pricing Widget ******************* -->
+<!--
+  <Pricing
+    title="Flexible pricing plans"
+    prices={[
+      {
+        title: 'free',
+        subtitle: 'Access to core features and a wide range of templates',
+        price: '0',
+        period: '/ month',
+        callToAction: {
+          target: '_blank',
+          text: 'Get Started for Free',
+          href: '#',
+        },
+      },
+      {
+        title: 'pro',
+        subtitle: 'Premium templates and advanced customization',
+        price: 15,
+        period: '/ Month',
+        callToAction: {
+          target: '_blank',
+          text: 'Upgrade to Pro',
+          href: '#',
+        },
+        hasRibbon: true,
+        ribbonTitle: 'popular',
+      },
+      {
+        title: 'Enterprise',
+        subtitle: 'Tailored solutions for large-scale projects',
+        price: 45,
+        period: '/ Month',
+        callToAction: {
+          target: '_blank',
+          text: 'Unlock Enterprise Features',
+          href: '#',
+        },
+      },
+    ]}
+  />
+   -->
+
+  <!-- FAQs Widget ******************* -->
+
+  <FAQs
+    tagline="FAQ",
+    title="Questions we often hear",
+    subtitle="Short answers so you can decide faster. If your question isn’t here, bring it to the Discovery call.",
+    items={[
+        {
+            title: "How long does a website take?",
+            description:
+            "Typical timelines: Starter sites 2–4 weeks, Business sites 4–8 weeks. Custom builds vary — we’ll confirm at Discovery.",
+            icon:"tabler:clock",
+        },
+        {
+            title: "Will my site rank on Google?",
+            description:
+            "We build an SEO-friendly foundation and optimise pages for search, but ranking depends on ongoing content and competition.",
+            icon:"tabler:search",
+        },
+        {
+            title: "Do you provide content and images?",
+            description:
+            "We can help with content strategy, writing, and sourcing imagery — or work with what you already have.",
+            icon:"tabler:camera",
+        },
+        {
+            title: "What if I need changes after launch?",
+            description:
+            "We offer support plans and one-off updates. We can also train your team to manage content independently.",
+            icon:"tabler:recharging",
+        },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>
