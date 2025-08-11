@@ -117,10 +117,74 @@ export const headerData = {
     {
       text: 'Home',
       href: '/',
+      links: [
+        {
+          text: 'Our Services',
+          href: '/#services',
+        },
+        {
+          text: 'About Us',
+          href: '/#about-us',
+        },
+        {
+          text: 'Our Process',
+          href: '/#our-process',
+        },
+        {
+          text: 'FAQ',
+          href: '/#faq',
+        },
+        {
+          text: 'Contact Us',
+          href: '/#contact',
+        },
+      ],
     },
     {
-      text: 'Our Services',
-      href: '/#services',
+      text: 'Services',
+      href: '/services',
+      links: [
+        {
+          text: 'Summary',
+          href: '/services',
+        },
+        {
+          text: "Websites",
+          href: '/services/websites',
+        },
+        {
+          text: "Web Applications",
+          href: '/services/web-applications',
+        },
+        {
+          text: "Progressive Web Apps (PWAs)",
+          href: '/services/progressive-web-apps',
+        },
+        {
+          text: "Hybrid Mobile Apps",
+          href: '/services/hybrid-apps',
+        },
+        {
+          text: "AI-Powered Solutions",
+          href: '/services/ai-agents-solutions',
+        },
+        {
+          text: "Digital Business Transformations",
+          href: '/services/digital-business-transformations',
+        },
+        {
+          text: "Chrome Extensions",
+          href: '/services/chrome-extensions',
+        },
+        {
+          text: "UI/UX Design & Strategy",
+          href: '/services/ui-ux-strategy',
+        },
+        {
+          text: "Hosting",
+          href: '/services/hosting-solutions',
+        },
+      ],
     },
     {
       text: 'About Us',
@@ -130,10 +194,7 @@ export const headerData = {
       text: 'Our Process',
       href: '/#our-process',
     },
-    {
-      text: 'FAQ',
-      href: '/#faq',
-    },
+
   ],
   actions: [{ text: 'Contact Us', href: '/#contact'}],
 };
@@ -143,13 +204,47 @@ export const footerData = {
     {
       title: 'Our Services',
       links: [
-        { text: 'Websites'},
-        { text: 'Web Applications'},
-        { text: 'Progressive Web Apps (PWAs)'},
-        { text: 'Hybrid Mobile Apps'},
-        { text: 'Chrome Extensions'},
-        { text: 'AI-Powered Solutions'}
-      ],
+        {
+          text: 'Summary of all',
+          href: '/services',
+        },
+        {
+          text: "Websites",
+          href: '/services/websites',
+        },
+        {
+          text: "Web Applications",
+          href: '/services/web-applications',
+        },
+        {
+          text: "Progressive Web Apps (PWAs)",
+          href: '/services/progressive-web-apps',
+        },
+        {
+          text: "Hybrid Mobile Apps",
+          href: '/services/hybrid-apps',
+        },
+        {
+          text: "AI-Powered Solutions",
+          href: '/services/ai-agents-solutions',
+        },
+        {
+          text: "Digital Business Transformations",
+          href: '/services/digital-business-transformations',
+        },
+        {
+          text: "Chrome Extensions",
+          href: '/services/chrome-extensions',
+        },
+        {
+          text: "UI/UX Design & Strategy",
+          href: '/services/ui-ux-strategy',
+        },
+        {
+          text: "Hosting",
+          href: '/services/hosting-solutions',
+        },
+      ]
     },
     {
       title: 'Company',
