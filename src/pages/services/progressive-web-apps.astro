@@ -1,0 +1,376 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: 'SaaS Landing Page',
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+<!-- Hero2 Widget ******************* -->
+
+<Hero2
+  tagline="Apps that feel like magic"
+  actions={[
+    { variant: 'primary', text: 'Book a discovery call', href: '/#' },
+    { text: 'Learn more', href: '#features' },
+  ]}
+  image={{
+    src: 'https://images.unsplash.com/photo-1508921912186-1d1a45ebb3c1?q=80&w=2069&auto=format&fit=crop',
+    alt: 'Progressive Web App Experience',
+  }}
+>
+  <Fragment slot="title">
+    Progressive <span class="text-accent dark:text-white">Web Apps</span> <br /> 
+    that blur the line between web and native
+  </Fragment>
+
+  <Fragment slot="subtitle">
+    <span class="hidden sm:inline">
+      Lightning-fast, offline-ready, installable on any device — PWAs bring the app experience without the app store friction.
+    </span>
+  </Fragment>
+</Hero2>
+
+<!-- Features Widget *************** -->
+
+<Features
+  tagline="Our Vision for PWAs"
+  id="features"
+  title="Why choose our Progressive Web App development"
+  subtitle="We design and build PWAs that combine the reach of the web with the engagement of mobile apps — accessible, fast, and built to delight."
+  columns={2}
+  items={[
+    {
+      title: "Native-like experience",
+      description: "Smooth animations, app-style navigation, and offline capabilities so your users never feel the gap between web and native.",
+      icon: "tabler:device-mobile",
+    },
+    {
+      title: "Offline-first design",
+      description: "Service workers and caching strategies keep your app usable even with unstable or no connection.",
+      icon: "tabler:cloud-off",
+    },
+    {
+      title: "Installable anywhere",
+      description: "Add-to-home-screen prompts turn your web app into an icon on mobile or desktop — no app store needed.",
+      icon: "tabler:download",
+    },
+    {
+      title: "Performance & SEO",
+      description: "Blazing-fast load times and discoverable by search engines, so you get app engagement and web visibility.",
+      icon: "tabler:rocket",
+    },
+  ]}
+/>
+
+<Features
+  tagline="Client Benefits"
+  id="client-benefits"
+  title="PWAs turn possibilities into outcomes"
+  subtitle="We don’t just deliver code. We deliver reach, retention, and revenue — with the best of both web and mobile."
+  columns={2}
+  items={[
+    {
+      title: "Lower acquisition costs",
+      description: "Skip app store fees and barriers — users can access instantly via a link.",
+      icon:"tabler:cash",
+    },
+    {
+      title: "Faster to market",
+      description: "One codebase works across devices — saving time, budget, and complexity.",
+      icon:"tabler:clock",
+    },
+    {
+      title: "Re-engagement ready",
+      description: "Push notifications and background sync bring users back at the right moment.",
+      icon:"tabler:bell",
+    },
+    {
+      title: "Future-proof tech",
+      description: "Built on open web standards and adaptable to any platform evolution.",
+      icon:"tabler:infinity",
+    },
+  ]}
+/>
+
+<!-- Content Widget **************** -->
+<Content
+  tagline='Use Cases'
+  title="Use cases"
+  subtitle="From local services to global platforms — PWAs adapt to any business model and customer journey."
+  isReversed
+/>
+
+<!-- UseCaseItem Widget - Small Business -->
+<UseCaseItem
+  tagline='Instant engagement for local businesses'
+  title="Be on your customer’s phone in seconds"
+  isReversed
+  items={[
+    {
+      title: 'Description:',
+      description: "For local businesses — from cafés to personal trainers — PWAs offer an installable app without the heavy app-store process. Customers can order, book, or browse instantly, even offline. The interface feels like a native app, the reach is as wide as the web, and updates happen instantly without forcing users to download anything new.",
+    },
+    {
+      title: 'Benefits:',
+      description: `No app store delays or fees,
+      Works offline for on-the-go customers,
+      Push notifications for offers & updates,
+      Instant install with a single tap`,
+    },
+  ]}
+  image={{
+    src: 'https://images.unsplash.com/photo-1556742204-3c52d6e88c62?q=80&w=1935&auto=format&fit=crop',
+    alt: 'Local business using PWA',
+  }}
+>
+</UseCaseItem>
+
+<!-- UseCaseItem Widget - SME -->
+<UseCaseItem
+  tagline='Efficiency for growing enterprises'
+  title="Unified app experience across devices"
+  isAfterContent={true}
+  items={[
+    {
+      title: 'Description:',
+      description: "For SMEs managing clients, teams, or orders — a PWA can unify your workflows across desktop and mobile. From booking platforms to inventory dashboards, we craft apps that sync data in real-time, integrate with your existing systems, and provide a secure, branded experience anywhere your team or customers are.",
+    },
+    {
+      title: 'Benefits:',
+      description: `One app for all platforms,
+      Lower maintenance costs,
+      Secure data syncing,
+      Integrated with your business tools`,
+    },
+  ]}
+  image={{
+    src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?q=80&w=1929&auto=format&fit=crop',
+    alt: 'SME PWA dashboard',
+  }}
+>
+</UseCaseItem>
+
+<!-- UseCaseItem Widget - Startups -->
+<UseCaseItem
+  tagline='Launch fast, iterate faster'
+  title="Startup-ready apps that scale"
+  isReversed
+  items={[
+    {
+      title: 'Description:',
+      description: "For startups, speed to market is everything. PWAs let you launch your MVP to the widest audience possible without splitting resources into multiple platforms. Engage early adopters, collect feedback, and push updates instantly — no app store reviews slowing you down.",
+    },
+    {
+      title: 'Benefits:',
+      description: `Launch on web + mobile in one go,
+      Instant updates without app store delay,
+      Built-in analytics for iteration,
+      Scales easily as your product grows`,
+    },
+  ]}
+  image={{
+    src: 'https://images.unsplash.com/photo-1521737604893-d14cc237f11d?q=80&w=2070&auto=format&fit=crop',
+    alt: 'Startup scaling with PWA',
+  }}
+>
+</UseCaseItem>
+
+<!-- Steps Widget ****************** -->
+<Steps
+  id="our-process"
+  tagline= "Project Steps"
+  title="Our Progressive Web App Development Process"
+  subtitle="A focused, transparent process that balances innovation with reliability."
+  items={[
+    {
+      title: 'Step 1: <span class="font-medium">Discovery</span>',
+      description: "We dig deep into your goals, user flows, and device usage — so your PWA works beautifully in every context.",
+      icon: 'tabler:telescope',
+    },
+    {
+      title: 'Step 2: <span class="font-medium">UX Mapping</span>',
+      description: "We map user journeys for both online and offline modes, ensuring smooth interaction anytime.",
+      icon: 'tabler:layout',
+    },
+    {
+      title: 'Step 3: <span class="font-medium">Design & Build</span>',
+      description: "We merge design with engineering — delivering a responsive, app-like interface with powerful backend logic.",
+      icon: 'tabler:code',
+    },
+    {
+      title: 'Step 4: <span class="font-medium">Launch & Optimise</span>',
+      description: "Deploy to the web, enable install prompts, and monitor performance with live analytics.",
+      icon: 'tabler:rocket',
+    },
+    {
+      title: 'Step 5: <span class="font-medium">Support & Scale</span>',
+      description: "We iterate with your feedback, add features, and ensure compatibility with new devices and browsers.",
+      icon: 'tabler:message-chatbot',
+    },
+    {
+      title: 'Achieve and Succeed!',
+      icon: 'tabler:trophy',
+      classes: {
+        icon: 'text-amber-600 dark:text-amber-600',
+        title: 'text-amber-600 dark:text-amber-600'
+      }
+    },
+  ]}
+  image={{
+    src: 'https://images.unsplash.com/photo-1505238680356-667803448bb6?q=80&w=1929&auto=format&fit=crop',
+    alt: 'PWA coding process',
+  }}
+/>
+
+<!-- Testimonials Widget *********** -->
+<Testimonials
+  title="Words from real customers"
+  testimonials={[
+    {
+      title: 'Retail PWA boosting repeat orders',
+      testimonial: "Our customers can now order directly from their phones without visiting the app store. Push notifications for offers have doubled our repeat business. The PWA feels just like a native app, but was faster and cheaper to build.",
+      name: "UrbanBites",
+      job: 'Local Café Chain',
+      image: {
+        src: 'https://images.unsplash.com/photo-1580910051074-3eb694886505?q=80&w=930&auto=format&fit=crop',
+        alt: 'UrbanBites team photo',
+      },
+    },
+    {
+      title: 'Enterprise client portal as a PWA',
+      testimonial: "We needed a secure, cross-platform portal for clients. CausewaySoft built a PWA that integrates perfectly with our backend systems and works flawlessly across devices. Our clients love it, and our team loves managing it.",
+      name: 'Nova Logistics',
+      job: 'Operations Director',
+      image: {
+        src: 'https://images.unsplash.com/photo-1549921296-3c9c387ec3db?q=80&w=774&auto=format&fit=crop',
+        alt: 'Nova Logistics team',
+      },
+    },
+  ]}
+  callToAction={{
+    target: '_blank',
+    text: 'More testimonials...',
+    href: '#',
+    icon: 'tabler:chevron-right',
+  }}
+/>
+
+<!-- Features Widget - Our Edge -->
+<Features
+  tagline="Our Edge"
+  id="features"
+  title="We are your #1 PWA Development Agency"
+  subtitle="We blend web innovation, mobile UX mastery, and business strategy — delivering apps that feel native, act global, and grow with you."
+  columns={2}
+  items={[
+    {
+      title: "Strategic-first design",
+      description:
+        "Every feature is built around your business goals, ensuring your PWA delivers real results.",
+      icon:"tabler:target",
+    },
+    {
+      title: "Performance obsessed",
+      description:
+        "PWAs optimised for speed, SEO, and engagement — measured, tested, and tuned.",
+      icon:"tabler:clock",
+    },
+    {
+      title: "AI-ready integrations",
+      description:
+        "From chatbots to recommendation engines, we can power your PWA with intelligent features.",
+      icon:"tabler:cpu",
+    },
+    {
+      title: "Future-proof code",
+      description:
+        "Built with modern frameworks and open web standards — ready for any device evolution.",
+      icon:"tabler:shield-check",
+    },
+  ]}
+/>
+
+<!-- FAQs Widget ******************* -->
+<FAQs
+  tagline="FAQ"
+  title="Questions we often hear"
+  subtitle="Your clarity matters. Here are quick answers to the most common PWA questions."
+  items={[
+    {
+      title: "Will my PWA work offline?",
+      description: "Yes. We use service workers to cache critical resources so your app works without an internet connection.",
+      icon:"tabler:cloud-off",
+    },
+    {
+      title: "Can PWAs send push notifications?",
+      description: "Absolutely — we set up browser push notifications so you can re-engage your audience.",
+      icon:"tabler:bell",
+    },
+    {
+      title: "Do PWAs go through app store approval?",
+      description: "No. They’re distributed via the web but can be added to a user’s device like a native app.",
+      icon:"tabler:download",
+    },
+    {
+      title: "Are PWAs secure?",
+      description: "Yes. All PWAs are served over HTTPS and follow strict security practices to protect user data.",
+      icon:"tabler:lock",
+    },
+  ]}
+>
+  <Fragment slot="bg">
+    <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+  </Fragment>
+</FAQs>
+
+
+
+
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>
