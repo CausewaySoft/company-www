@@ -1,0 +1,261 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: 'AI-Powered Solutions | Intelligent Apps for a Smarter Future"',
+  description: "From chatbots and automation to predictive analytics — we embed AI into your apps so they learn, adapt, and drive results.",
+  // keywords: "AI solutions, AI-powered apps, intelligent automation, predictive analytics, AI chatbots, machine learning software, business AI integration"
+};
+
+// SEO-Rich Use Case Images & Alt Text Suggestions:
+// 	1.	AI virtual assistant interacting on a website chat — “AI-powered virtual assistant chatting with user on website interface”
+// 	2.	Dashboard showing AI workflow automation status — “Business dashboard visualizing AI-powered automation workflows in real time”
+// 	3.	Customer support chatbot on mobile device — “Mobile screen displaying AI chatbot assisting customer inquiries instantly”
+
+
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+  <Hero2
+    tagline="Intelligence at the heart of your apps"
+    actions={[
+      { variant: 'primary', text: 'Book a strategy session', href: '/#' },
+      { text: 'Learn more', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1534723328310-e82dad3ee43f?q=80&w=2069&auto=format&fit=crop',
+      alt: 'AI digital brain concept',
+    }}
+  >
+    <Fragment slot="title">
+      AI-Powered <span class="text-accent dark:text-white">Solutions</span><br />
+      that learn, adapt, and accelerate growth
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      From chatbots and automation to predictive insights — we weave intelligence into your software so it thinks with you.
+    </Fragment>
+  </Hero2>
+
+  <Features
+    tagline="Our Vision for AI"
+    id="features"
+    title="Why choose our AI-powered development"
+    subtitle="We blend human creativity with machine intelligence — unlocking new capabilities for your business."
+    columns={2}
+    items={[
+      {
+        title: "Conversational AI",
+        description: "Chatbots and virtual assistants that engage naturally, answer instantly, and improve over time.",
+        icon: "tabler:message-chatbot",
+      },
+      {
+        title: "Predictive analytics",
+        description: "AI models that forecast trends, customer behavior, and business outcomes with precision.",
+        icon: "tabler:chart-line",
+      },
+      {
+        title: "Intelligent automation",
+        description: "Reduce manual work with smart workflows that adapt to changing conditions.",
+        icon: "tabler:cpu",
+      },
+      {
+        title: "Adaptive learning",
+        description: "Systems that evolve with your data — always getting faster, sharper, and more relevant.",
+        icon: "tabler:brain",
+      },
+    ]}
+  />
+
+  <UseCaseItem
+    tagline='AI for Local Businesses'
+    title="Your smart digital assistant"
+    items={[
+      {
+        title: 'Description:',
+        description: "Small businesses can harness AI for customer support, appointment scheduling, and sales tracking — without complex systems. A chatbot answers questions instantly, automation keeps operations flowing, and insights guide decisions.",
+      },
+      {
+        title: 'Benefits:',
+        description: `24/7 customer service,
+        Fewer missed sales,
+        Reduced admin time,
+        Data-driven insights`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1556742400-b5c8f5d6f4d0?q=80&w=1935&auto=format&fit=crop',
+      alt: 'Small business using AI assistant',
+    }}
+  />
+
+  <UseCaseItem
+    tagline='AI for SMEs'
+    title="Streamlined decisions at scale"
+    isAfterContent={true}
+    items={[
+      {
+        title: 'Description:',
+        description: "For growing companies, AI centralizes data, automates reporting, and reveals patterns. From predictive inventory to intelligent CRMs, we design AI tools that amplify your team’s impact.",
+      },
+      {
+        title: 'Benefits:',
+        description: `Faster reporting,
+        Better forecasts,
+        Workflow automation,
+        Lower operational costs`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=1929&auto=format&fit=crop',
+      alt: 'AI-powered SME dashboard',
+    }}
+  />
+
+  <UseCaseItem
+    tagline='AI for Startups'
+    title="MVPs that think ahead"
+    items={[
+      {
+        title: 'Description:',
+        description: "AI helps startups stand out — offering personalization, automation, and rapid iteration. Build smarter MVPs that adapt to feedback instantly.",
+      },
+      {
+        title: 'Benefits:',
+        description: `Smarter user experiences,
+        Personalised interactions,
+        Faster iteration cycles,
+        Scalable architecture`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581091012184-5c9661e20a3b?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Startup leveraging AI technology',
+    }}
+  />
+
+  <Steps
+    id="our-process"
+    tagline="Project Steps"
+    title="Our AI Development Process"
+    subtitle="We combine vision, data, and engineering into intelligent solutions."
+    items={[
+      { title: 'Step 1: Discovery', description: "We map your goals, available data, and use cases for maximum impact.", icon: 'tabler:telescope' },
+      { title: 'Step 2: Data Preparation', description: "We clean, structure, and prepare your data for optimal AI training.", icon: 'tabler:database' },
+      { title: 'Step 3: AI Model Design', description: "Choosing the right algorithms and architectures for your needs.", icon: 'tabler:cpu' },
+      { title: 'Step 4: Integration', description: "Seamlessly embedding AI into your app or platform.", icon: 'tabler:plug-connected' },
+      { title: 'Step 5: Optimisation', description: "Refining and tuning based on live feedback and usage patterns.", icon: 'tabler:adjustments-alt' },
+      { title: 'Achieve and Succeed!', icon: 'tabler:trophy', classes: { icon: 'text-amber-600', title: 'text-amber-600' } },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1929&auto=format&fit=crop',
+      alt: 'AI development process',
+    }}
+  />
+
+  <Testimonials
+    title="Words from real customers"
+    testimonials={[
+      {
+        title: 'Chatbot that boosted leads',
+        testimonial: "Our AI chatbot now handles 80% of customer queries instantly, freeing our team to focus on closing deals. Leads have gone up by 40%.",
+        name: "BrightClean",
+        job: 'Local Cleaning Service',
+        image: { src: 'https://images.unsplash.com/photo-1520975693419-5f37f5e6c6cc?q=80&w=930&auto=format&fit=crop', alt: 'BrightClean team' },
+      },
+      {
+        title: 'Predictive sales dashboard',
+        testimonial: "With our AI-powered dashboard, we now forecast sales trends months ahead and plan inventory with precision.",
+        name: 'FreshFlow Foods',
+        job: 'Operations Director',
+        image: { src: 'https://images.unsplash.com/photo-1549921296-3c9c387ec3db?q=80&w=774&auto=format&fit=crop', alt: 'FreshFlow team' },
+      },
+    ]}
+    callToAction={{ target: '_blank', text: 'More testimonials...', href: '#', icon: 'tabler:chevron-right' }}
+  />
+
+  <FAQs
+    tagline="FAQ"
+    title="Questions we often hear"
+    subtitle="Quick answers about AI-powered solutions."
+    items={[
+      { title: "Do I need a lot of data?", description: "Not always. We can start with smaller datasets and expand over time.", icon:"tabler:database" },
+      { title: "Will AI replace my team?", description: "No — AI works best as an assistant, freeing people for higher-value tasks.", icon:"tabler:users" },
+      { title: "Can AI integrate with my existing tools?", description: "Yes. We connect AI features to your current systems and workflows.", icon:"tabler:plug-connected" },
+      { title: "Is AI expensive to implement?", description: "Costs vary, but many solutions deliver ROI quickly through efficiency gains.", icon:"tabler:cash" },
+    ]}
+  />
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

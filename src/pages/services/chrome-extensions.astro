@@ -1,0 +1,142 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: "Chrome Extensions | Lightweight Productivity Tools",
+  description: "Compact yet powerful browser extensions to boost productivity, engagement, and user experience.",
+  // keywords: "chrome extensions, browser plugins, productivity tools, custom extensions, web enhancement"
+};
+
+// SEO Image Suggestions
+// 	1.	Productivity Boosters — “Chrome extension menu with task shortcuts and automations”
+// 	2.	Custom Integrations — “Browser plugin connected to CRM and task manager”
+// 	3.	Data Capture Tools — “Chrome extension extracting and organizing web data”
+
+
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+  <Hero2
+    tagline="Small in size, mighty in impact"
+    actions={[
+      { variant: 'primary', text: 'Build your extension', href: '/#' },
+      { text: 'View examples', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1533900298318-6b8da08a523e?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Chrome browser extension interface',
+    }}
+  >
+    <Fragment slot="title">
+      Chrome <span class="text-accent dark:text-white">Extensions</span>
+    </Fragment>
+    <Fragment slot="subtitle">
+      Compact yet powerful tools that integrate seamlessly with browsers to enhance productivity and engagement.
+    </Fragment>
+  </Hero2>
+
+  <Features
+    tagline="Why users love our extensions"
+    id="features"
+    title="Designed for speed and simplicity"
+    subtitle="No clutter, no lag — just the right functionality."
+    columns={2}
+    items={[
+      { title: "Lightweight", description: "Minimal impact on browser performance.", icon: "tabler:feather" },
+      { title: "Custom-built", description: "Tailored to your workflow or audience.", icon: "tabler:pencil" },
+      { title: "Secure", description: "Privacy-first development practices.", icon: "tabler:shield-lock" },
+      { title: "Cross-browser ready", description: "Extensions that work beyond Chrome.", icon: "tabler:device-desktop" },
+    ]}
+  />
+
+  <UseCaseItem
+    tagline='Productivity Boosters'
+    title="Tools that save clicks"
+    items={[
+      { title: 'Description:', description: "Custom shortcuts, automations, and integrations directly in the browser." },
+      { title: 'Benefits:', description: `Faster workflows, Easy adoption, Consistent results, Happier users` },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581091870627-3b5fef2ab9b2?q=80&w=2069&auto=format&fit=crop',
+      alt: 'Browser extension for quick productivity shortcuts',
+    }}
+  />
+
+
+
+
+
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

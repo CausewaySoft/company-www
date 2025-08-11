@@ -1,0 +1,256 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: "Web Applications | Scalable, High-Performance Platforms",
+  description: "From MVP to enterprise-grade platforms — we design web apps with clean code, solid architecture, and infinite scalability.",
+  // keywords: "web applications, MVP development, scalable platforms, SaaS apps, custom web app development, enterprise web apps, progressive web apps"
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+
+  <Hero2
+    tagline="Platforms that grow with your vision"
+    actions={[
+      { variant: 'primary', text: 'Start your web app journey', href: '/#' },
+      { text: 'See our process', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2069&auto=format&fit=crop',
+      alt: 'Modern web application interface on laptop and mobile',
+    }}
+  >
+    <Fragment slot="title">
+      Web <span class="text-accent dark:text-white">Applications</span><br />
+      engineered for scale and performance
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      From MVPs that prove your concept to platforms that serve millions — we craft dynamic apps with clean code, robust architecture, and infinite room to grow.
+    </Fragment>
+  </Hero2>
+
+  <Features
+    tagline="Why Our Web Apps Stand Out"
+    id="features"
+    title="Built to last, designed to perform"
+    subtitle="We engineer applications that are a joy to use — and a joy to maintain."
+    columns={2}
+    items={[
+      {
+        title: "Scalable architecture",
+        description: "Apps that grow effortlessly — from 100 to 1 million users without re-engineering.",
+        icon: "tabler:arrows-diagonal",
+      },
+      {
+        title: "MVP to full-scale",
+        description: "We launch fast, test fast, and scale fast — so your product meets the market at the right time.",
+        icon: "tabler:rocket",
+      },
+      {
+        title: "High performance",
+        description: "Optimized code, minimal load times, and smooth interactions that keep users engaged.",
+        icon: "tabler:bolt",
+      },
+      {
+        title: "Future-ready tech stack",
+        description: "React, Next.js, Node, and more — modern tools for modern challenges.",
+        icon: "tabler:code",
+      },
+    ]}
+  />
+
+  <UseCaseItem
+    tagline='Local Business Tools'
+    title="Simple, powerful web tools for local impact"
+    items={[
+      {
+        title: 'Description:',
+        description: "A single dashboard for bookings, invoices, and client management — all accessible from anywhere.",
+      },
+      {
+        title: 'Benefits:',
+        description: `Streamlined admin,
+        Always accessible,
+        Works on all devices,
+        Affordable to maintain`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1521791055366-0d553872125f?q=80&w=1935&auto=format&fit=crop',
+      alt: 'Web application dashboard for local business bookings and invoices',
+    }}
+  />
+
+  <UseCaseItem
+    tagline='Enterprise Platforms'
+    title="Robust systems for complex operations"
+    isAfterContent={true}
+    items={[
+      {
+        title: 'Description:',
+        description: "Custom-built platforms for large-scale data management, automation, and collaboration.",
+      },
+      {
+        title: 'Benefits:',
+        description: `Centralized workflows,
+        High security,
+        Scales with business growth,
+        Integrates with existing tools`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1555421689-03f2220c6f3d?q=80&w=1929&auto=format&fit=crop',
+      alt: 'Enterprise-grade web application with secure data dashboard',
+    }}
+  />
+
+  <UseCaseItem
+    tagline='Startup Launchpads'
+    title="Fast-track your idea to market"
+    items={[
+      {
+        title: 'Description:',
+        description: "MVPs built to validate your vision quickly — with a foundation ready to evolve into a full platform.",
+      },
+      {
+        title: 'Benefits:',
+        description: `Quick validation,
+        Lower initial costs,
+        Built for iteration,
+        Easy to scale`,
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Startup founders reviewing MVP web application on laptops',
+    }}
+  />
+
+  <Steps
+    id="our-process"
+    tagline="Project Steps"
+    title="Our Web App Development Process"
+    subtitle="Turning your vision into a high-performance reality."
+    items={[
+      { title: 'Step 1: Discovery', description: "We understand your goals, users, and vision.", icon: 'tabler:search' },
+      { title: 'Step 2: Architecture', description: "We plan a structure built for performance and scalability.", icon: 'tabler:building-arch' },
+      { title: 'Step 3: Development', description: "We build clean, maintainable code with future growth in mind.", icon: 'tabler:code' },
+      { title: 'Step 4: Testing', description: "Rigorous testing for speed, stability, and security.", icon: 'tabler:shield-check' },
+      { title: 'Step 5: Deployment', description: "Launch on stable, scalable infrastructure.", icon: 'tabler:cloud-upload' },
+      { title: 'Achieve and Succeed!', icon: 'tabler:trophy', classes: { icon: 'text-amber-600', title: 'text-amber-600' } },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1929&auto=format&fit=crop',
+      alt: 'Developers collaborating on scalable web application project',
+    }}
+  />
+
+  <Testimonials
+    title="What clients say"
+    testimonials={[
+      {
+        title: 'MVP that got us funded',
+        testimonial: "We went from idea to investor-ready MVP in under 8 weeks — the app looked polished and worked flawlessly.",
+        name: "FlowTrack",
+        job: 'Startup Founder',
+        image: { src: 'https://images.unsplash.com/photo-1520975693419-5f37f5d6c6cc?q=80&w=930&auto=format&fit=crop', alt: 'FlowTrack founder portrait' },
+      },
+      {
+        title: 'Enterprise platform overhaul',
+        testimonial: "Our old system was slow and outdated. The new platform is lightning fast and a joy to use.",
+        name: 'CoreData Systems',
+        job: 'CTO',
+        image: { src: 'https://images.unsplash.com/photo-1549921296-3c9c387ec3db?q=80&w=774&auto=format&fit=crop', alt: 'CTO from CoreData Systems' },
+      },
+    ]}
+    callToAction={{ target: '_blank', text: 'Read more stories...', href: '#', icon: 'tabler:chevron-right' }}
+  />
+
+  <FAQs
+    tagline="FAQ"
+    title="Common questions about web apps"
+    subtitle="We answer what clients ask us most."
+    items={[
+      { title: "What tech stack do you use?", description: "React, Next.js, Node.js, Tailwind CSS, and more — depending on your needs.", icon:"tabler:code" },
+      { title: "Can I start small and scale later?", description: "Yes — we design apps to expand with your business.", icon:"tabler:arrows-diagonal" },
+      { title: "Do you handle hosting?", description: "Yes, we offer secure, high-performance hosting in the EU and UK.", icon:"tabler:server" },
+      { title: "Can you integrate with my existing tools?", description: "Absolutely — we can connect to CRMs, payment gateways, APIs, and more.", icon:"tabler:plug-connected" },
+    ]}
+  />
+
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

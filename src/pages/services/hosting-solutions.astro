@@ -1,0 +1,143 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: "EU & UK Hosting | Secure, Fast, Compliant",
+  description: "Hosting in the EU, UK, and Northern Ireland — delivering speed, security, and compliance for your apps and sites.",
+  // keywords: "EU hosting, UK hosting, secure hosting, GDPR hosting, fast hosting, enterprise hosting"
+};
+
+// SEO Image Suggestions
+// 	1.	SMB Hosting — “Small business hosting servers in EU data center”
+// 	2.	Enterprise Hosting — “High-security data center racks in UK facility”
+// 	3.	Managed Hosting — “Engineer managing cloud hosting platform”
+
+
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+
+
+  <Hero2
+    tagline="Your digital home, close to home"
+    actions={[
+      { variant: 'primary', text: 'Get hosting', href: '/#' },
+      { text: 'See plans', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581091012184-5c8af4a8f7cc?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Data center servers in secure facility',
+    }}
+  >
+    <Fragment slot="title">
+      Hosting <span class="text-accent dark:text-white">Solutions</span>
+    </Fragment>
+    <Fragment slot="subtitle">
+      Speed, security, and compliance — with servers based in the EU, UK, and Northern Ireland.
+    </Fragment>
+  </Hero2>
+
+  <Features
+    tagline="Why our hosting stands out"
+    id="features"
+    title="Fast, safe, and future-ready"
+    subtitle="The right foundation for your digital presence."
+    columns={2}
+    items={[
+      { title: "Local data centers", description: "Low latency and jurisdictional compliance.", icon: "tabler:map-pin" },
+      { title: "Enterprise security", description: "Hardened infrastructure with 24/7 monitoring.", icon: "tabler:shield-lock" },
+      { title: "Scalable resources", description: "From small sites to massive traffic loads.", icon: "tabler:arrows-diagonal" },
+      { title: "Full management", description: "We handle backups, updates, and uptime.", icon: "tabler:server" },
+    ]}
+  />
+
+  <UseCaseItem
+    tagline='SMB Hosting'
+    title="Simple plans for small businesses"
+    items={[
+      { title: 'Description:', description: "Fast, affordable hosting that just works." },
+      { title: 'Benefits:', description: `Quick setup, Reliable uptime, GDPR-compliant, Great support` },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581090464777-f3220bbe1b8f?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Small business hosting server racks',
+    }}
+  />
+
+
+
+
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

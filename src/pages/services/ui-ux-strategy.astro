@@ -1,0 +1,142 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: "UI/UX Design & Strategy | Intuitive, Impactful Interfaces",
+  description: "We craft intuitive interfaces and seamless journeys — turning casual users into loyal advocates.",
+  // keywords: "UI design, UX strategy, user interface design, product design, user experience, design systems"
+};
+
+// SEO Image Suggestions
+// 	1.	SaaS Dashboards — “Minimalist dashboard UI for complex enterprise data”
+// 	2.	Mobile App UI — “Clean mobile app interface with intuitive navigation”
+// 	3.	E-commerce UX — “Product page designed for fast conversion”
+
+
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+
+  <Hero2
+    tagline="Design that moves hearts and minds"
+    actions={[
+      { variant: 'primary', text: 'Start your design journey', href: '/#' },
+      { text: 'See our work', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1559028012-481c04fa702d?q=80&w=2070&auto=format&fit=crop',
+      alt: 'UI/UX design sketches and digital mockups',
+    }}
+  >
+    <Fragment slot="title">
+      UI/UX <span class="text-accent dark:text-white">Design & Strategy</span>
+    </Fragment>
+    <Fragment slot="subtitle">
+      Interfaces that feel natural, journeys that feel effortless, and designs that leave an impression.
+    </Fragment>
+  </Hero2>
+
+  <Features
+    tagline="Why design matters"
+    id="features"
+    title="More than just good looks"
+    subtitle="We design for emotion, clarity, and conversion."
+    columns={2}
+    items={[
+      { title: "Human-centered", description: "Built around your users' real needs.", icon: "tabler:users" },
+      { title: "Conversion-focused", description: "Designs that guide and persuade.", icon: "tabler:chart-line" },
+      { title: "Consistent systems", description: "UI kits and patterns that scale with you.", icon: "tabler:layers-linked" },
+      { title: "Cross-platform ready", description: "Flawless experiences on web and mobile.", icon: "tabler:device-mobile" },
+    ]}
+  />
+
+  <UseCaseItem
+    tagline='SaaS Dashboards'
+    title="Clarity for complex data"
+    items={[
+      { title: 'Description:', description: "Data-heavy platforms simplified with clear layouts and visual hierarchy." },
+      { title: 'Benefits:', description: `Faster decisions, Happier users, Lower learning curve, Stronger retention` },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1532619187608-e5375cab36aa?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Clean and intuitive SaaS dashboard UI',
+    }}
+  />
+
+
+
+
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>

@@ -1,0 +1,169 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Header from '~/components/widgets/Header.astro';
+import Hero2 from '~/components/widgets/Hero2.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps2 from '~/components/widgets/Steps2.astro';
+import Content from '~/components/widgets/Content.astro';
+import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
+import Pricing from '~/components/widgets/Pricing.astro';
+
+import { headerData } from '~/navigation';
+import FAQs from '~/components/widgets/FAQs.astro';
+import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Testimonials from '~/components/widgets/Testimonials.astro';
+
+const metadata = {
+  title: "Digital Business Transformations | AI, Automation & Data Strategy",
+  description: "Reinvent your business with AI agents, automation, and data-driven systems — we help you leap ahead, not just keep up.",
+};
+---
+
+<Layout metadata={metadata}>
+  <Fragment slot="header">
+    <Header
+      {...headerData}
+      actions={[
+        {
+          variant: 'secondary',
+          text: 'Login',
+          href: '#',
+        },
+        {
+          variant: 'primary',
+          text: 'Sign Up',
+          href: '#',
+        },
+      ]}
+      isSticky
+    />
+  </Fragment>
+
+
+
+<!-- export const meta = {
+  title: "Digital Business Transformations | AI, Automation & Data Strategy",
+  description: "Reinvent your business with AI agents, automation, and data-driven systems — we help you leap ahead, not just keep up.",
+  keywords: "digital transformation, AI agents, workflow automation, data-driven business, enterprise AI, process optimization"
+}; -->
+
+
+  <Hero2
+    tagline="From present to future — fast"
+    actions={[
+      { variant: 'primary', text: 'Start your transformation', href: '/#' },
+      { text: 'Explore how', href: '#features' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop',
+      alt: 'AI-powered digital transformation concept',
+    }}
+  >
+    <Fragment slot="title">
+      Digital Business <span class="text-accent dark:text-white">Transformations</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Reinvent your business model with AI agents, workflow automation, and decision systems that make growth inevitable.
+    </Fragment>
+  </Hero2>
+
+  <Features
+    tagline="Why our transformations succeed"
+    id="features"
+    title="Beyond improvement — we reimagine"
+    subtitle="Technology is just the tool; the true transformation is strategic."
+    columns={2}
+    items={[
+      { title: "AI-driven automation", description: "Free your team from repetitive tasks with intelligent workflows.", icon: "tabler:robot" },
+      { title: "Data-powered decisions", description: "From dashboards to predictive analytics — know more, act faster.", icon: "tabler:chart-dots" },
+      { title: "Seamless integration", description: "We connect new capabilities with your existing ecosystem.", icon: "tabler:plug-connected" },
+      { title: "Sustainable scalability", description: "Build a foundation for growth without constant reinvention.", icon: "tabler:arrows-diagonal" },
+    ]}
+  />
+
+  <UseCaseItem
+    tagline='AI Customer Service'
+    title="Agents that never sleep"
+    items={[
+      { title: 'Description:', description: "AI chat agents handle customer queries instantly, 24/7." },
+      { title: 'Benefits:', description: `Reduce costs, Increase satisfaction, Handle peak loads, Learn over time` },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581092588429-9a8cc0d6e7b0?q=80&w=2069&auto=format&fit=crop',
+      alt: 'AI chatbot interface on mobile and desktop',
+    }}
+  />
+
+  <UseCaseItem
+    tagline='Automated Workflows'
+    title="Processes on autopilot"
+    isAfterContent={true}
+    items={[
+      { title: 'Description:', description: "Streamlined operations without human bottlenecks." },
+      { title: 'Benefits:', description: `Faster delivery, Fewer errors, Happier teams, More time for innovation` },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Workflow automation dashboard visualizing task flow',
+    }}
+  />
+
+  <UseCaseItem
+    tagline='Data-Driven Strategy'
+    title="From guesswork to precision"
+    items={[
+      { title: 'Description:', description: "Your decisions powered by live data and predictive insights." },
+      { title: 'Benefits:', description: `Accurate forecasting, Better resource allocation, Higher ROI, Competitive edge` },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1556155092-8707de31f9c4?q=80&w=2070&auto=format&fit=crop',
+      alt: 'Data analytics dashboard for enterprise strategy',
+    }}
+  />
+
+
+
+
+  <!-- Steps2 Widget ****************** -->
+
+  <Steps2
+    title="Reach out to us"
+    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
+    callToAction={{
+      text: 'Contact us',
+      href: '/',
+    }}
+    items={[
+      {
+        title: 'Email us',
+        description: 'contact@support.com',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: '+1 (234) 567-890',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@example',
+        icon: 'tabler:brand-twitter',
+      },
+    ]}
+  />
+
+  <!-- BlogLatestPost Widget **************** -->
+
+  <BlogLatestPosts
+    id="blog"
+    title="Stay informed with AstroWind's blog"
+    information={`Explore our collection of articles, guides, and tutorials on web development, design trends, and using AstroWind effectively for your projects.`}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </BlogLatestPosts>
+</Layout>
