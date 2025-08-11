@@ -6,6 +6,8 @@ import Hero from '~/components/widgets/Hero.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+
 
 const metadata = {
   title: 'Custom Software Development Services',
@@ -44,6 +46,53 @@ const metadata = {
   
   -->
 
+    <!-- Features3 Widget 
+     
+    '6 Reasons why Us'
+    
+    ************** -->
+
+  <Features3
+    tagline='6 Reasons why'
+    title="We are your #1 Custom Software Development Agency"
+    subtitle="At CausewaySoft, we believe your software should be as unique as your business. That’s why we combine custom-built solutions, direct collaboration, and full-spectrum expertise to deliver results that fit perfectly — and last. With competitive rates, modern scalable tech, and clear communication every step of the way, we make your vision a reality without compromise."
+    columns={3}
+    isBeforeContent={true}
+    items={[
+      {
+        "title": "Truly Bespoke Development",
+        "description": "We design and build every project from the ground up, avoiding cookie-cutter templates and focusing on your exact requirements.",
+        "icon": "tabler:code"
+      },
+      {
+        "title": "Direct Access to the Developer",
+        "description": "You work with the person actually writing your code, which means faster communication, fewer misunderstandings, and more flexibility.",
+        "icon": "tabler:user-code"
+      },
+      {
+        "title": "Full-Service Expertise",
+        "description": "We handle the entire process — UI/UX, backend, mobile, DevOps, and even product management — so you don't need multiple vendors.",
+        "icon": "tabler:layers-intersect"
+      },
+      {
+        "title": "High Quality at Competitive Rates",
+        "description": "We are a lean, independent setup keeps overhead low, allowing you to get premium quality without enterprise-level pricing.",
+        "icon": "tabler:currency-pound"
+      },
+      {
+        "title": "Long-Term Scalability",
+        "description": "We use modern, maintainable frameworks so your website or app can grow with your business.",
+        "icon": "tabler:arrows-diagonal"
+      },
+        {
+        "title": "Transparent Communication",
+        "description": "We maintain open, honest, and regular communication throughout the project, so you're always informed and in control.",
+        "icon": "tabler:messages"
+      }
+    ]}
+  />
+
+
 
   <Features2
     tagline="Your Vision, Our Journey",
@@ -74,13 +123,21 @@ const metadata = {
       tagline = "Explore Our Core Services",
       title = "Bring your ideas to life with our services.",
       subtitle = "From the spirit of the Giant’s Causeway, we forge digital experiences that blend heritage, ambition, and cutting-edge technology. Whether you’re launching your first product or transforming your business, our services are built to help visionaries succeed.",
-      columns={3}
+      columns={3},
 
       items = {[
         {
           title: "Web Applications",
           description:"From MVP to full-scale platforms, we engineer dynamic, high-performance web apps that scale with your ambition — clean code, solid architecture, and endless potential.",
-          icon: 'tabler:app-window'
+          icon: 'tabler:app-window',
+          link: '/services/websites',
+          callToAction:
+            {
+              variant: 'link',
+              text: 'Learn more ...',
+              href: '/services/websites',
+              target: '_blank',
+            }
         },
         {
           title:"Progressive Web Apps (PWAs)",
@@ -122,16 +179,19 @@ const metadata = {
           description: "Our hosting solutions, located in the EU, UK, and Northern Ireland, deliver speed, security, and compliance. Keep your apps and websites online, resilient, and close to home.",
           icon: 'tabler:server-spark'
         },
-        {
-          title: "NI Cloud-Hosted GPT Models",
-          description: "Enterprise-grade GPT chatbots hosted securely in Northern Ireland. Tailored to your needs, protected by local compliance, and ready to transform how your business communicates.",
-          icon: 'tabler:cloud'
-        }
+        // {
+        //   title: "NI Cloud-Hosted GPT Models",
+        //   description: "Enterprise-grade GPT chatbots hosted securely in Northern Ireland. Tailored to your needs, protected by local compliance, and ready to transform how your business communicates.",
+        //   icon: 'tabler:cloud'
+        // }
       ]} 
         
   />
 
-  <!-- Content Widget **************** -->
+  <!-- Content Widget 
+        image source: https://unsplash.com/photos/men-sitting-in-front-of-their-laptop-computer-MChSQHxGZrQ
+
+  **************** -->
 
   <Content
     isReversed
@@ -147,7 +207,7 @@ const metadata = {
       { title: "Proven Results", description: "A track record of delivering products that perform, scale, and impress.", icon: "tabler:check" }
     ]},
     image={{
-      src: 'https://images.unsplash.com/photo-1525909002-1b05e0c869d8?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80',
+      src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=870&q=80',
       alt: 'Features Image',
     }}
   >
@@ -156,7 +216,10 @@ const metadata = {
     </Fragment> -->
   </Content>
 
-  <!-- Content Widget **************** -->
+  <!-- Content Widget
+    image source: https://unsplash.com/photos/boy-in-front-of-computer-monitor-vJP-wZ6hGBg
+
+  **************** -->
 
   <Content
     isAfterContent
@@ -171,14 +234,18 @@ const metadata = {
       { title: "Post-Launch Support", description: "We’re with you beyond deployment to keep everything running flawlessly.", icon: "tabler:lifebuoy" }
     ]},
     image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
+      src: 'https://images.unsplash.com/photo-1536148935331-408321065b18?auto=format&fit=crop&w=774&q=80',
+      alt:  "Image showing a Software Engineer using high quality tools.",
     }}
   >
   </Content>
 
 
-  <!-- Content Widget **************** -->
+  <!-- Content Widget 
+
+    image credit: https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-desk-nBXwqxjDa5c
+
+  **************** -->
   <Content
     isAfterContent
     tagline="Our Tech Stack",
@@ -194,8 +261,8 @@ const metadata = {
       { title: "Project Management", description: "Git, Agile, Scrum, MS Dev Ops, Jirra", icon: "tabler:calendar" }
     ]},
     image={{
-      src: 'https://images.unsplash.com/photo-1552664688-cf412ec27db2?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-      alt: 'Benefits Image',
+      src: 'https://images.unsplash.com/photo-1692106979244-a2ac98253f6b??q=70&w=690&auto=format&fit=crop',
+      alt: 'Image of a MacBook laptop with Visual Studio Code opened, presenting moder software engineering tools being used.',
     }}
   >
   </Content>
