@@ -3,6 +3,7 @@ import { Icon } from 'astro-icon/components';
 import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
 import Logo from '~/components/Logo.astro';
+import Button from '../ui/Button.astro';
 
 
 interface Link {
@@ -48,6 +49,19 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
             <br/><br/>
             Indie software engineering studio crafting powerful web & mobile products for ambitious founders.
           </p>
+
+          <!-- Footer CTA -->
+          <div class="max-w-xs sm:max-w-md py-8 md:pb-16 lg:pb-20 gap-4 intersect-once intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade">
+            <div class="flex w-full sm:w-auto">
+                <Button
+                variant = 'primary',
+                target = '#contact',
+                text = 'Contact Us',
+                icon = 'tabler:rocket'
+                />
+            </div>
+          </div>
+
         </div>
         <div class="text-sm text-muted flex gap-1">
           {
