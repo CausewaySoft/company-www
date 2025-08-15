@@ -21,10 +21,11 @@ const metadata = {
     tagline="From Tides to Triumph"
     title="Transform Your Business with the Power of Digital"
     subtitle="We partner with ambitious entrepreneurs, daring startups, and forward-thinking companies to reinvent their business models from the ground up. By fusing cutting-edge technology — AI agents, intelligent automation, predictive analytics, and next-generation workflows — with strategic insight, we don't just help you keep pace with change; we set you leagues ahead of it."
-    actions={[{ variant: 'primary', target: '_blank', text: 'Start exploring', href: '/' }]}
+    actions={[{ variant: 'primary', text: 'Start exploring', icon: 'tabler:rocket', href: '#core-services' }]}
     image={{
       src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
       alt: 'AstroWind Hero Image',
+      class: 'grayscale hover:grayscale-0 rounded shadow-lg'
     }}
   />
 
@@ -45,52 +46,6 @@ const metadata = {
   
   
   -->
-
-    <!-- Features3 Widget 
-     
-    '6 Reasons why Us'
-    
-    ************** -->
-
-  <Features3
-    tagline='6 Reasons why'
-    title="We are your #1 Custom Software Development Agency"
-    subtitle="At CausewaySoft, we believe your software should be as unique as your business. That’s why we combine custom-built solutions, direct collaboration, and full-spectrum expertise to deliver results that fit perfectly — and last. With competitive rates, modern scalable tech, and clear communication every step of the way, we make your vision a reality without compromise."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        "title": "Truly Bespoke Development",
-        "description": "We design and build every project from the ground up, avoiding cookie-cutter templates and focusing on your exact requirements.",
-        "icon": "tabler:code"
-      },
-      {
-        "title": "Direct Access to the Developer",
-        "description": "You work with the person actually writing your code, which means faster communication, fewer misunderstandings, and more flexibility.",
-        "icon": "tabler:user-code"
-      },
-      {
-        "title": "Full-Service Expertise",
-        "description": "We handle the entire process — UI/UX, backend, mobile, DevOps, and even product management — so you don't need multiple vendors.",
-        "icon": "tabler:layers-intersect"
-      },
-      {
-        "title": "High Quality at Competitive Rates",
-        "description": "We are a lean, independent setup keeps overhead low, allowing you to get premium quality without enterprise-level pricing.",
-        "icon": "tabler:currency-pound"
-      },
-      {
-        "title": "Long-Term Scalability",
-        "description": "We use modern, maintainable frameworks so your website or app can grow with your business.",
-        "icon": "tabler:arrows-diagonal"
-      },
-        {
-        "title": "Transparent Communication",
-        "description": "We maintain open, honest, and regular communication throughout the project, so you're always informed and in control.",
-        "icon": "tabler:messages"
-      }
-    ]}
-  />
 
 
 
@@ -120,6 +75,7 @@ const metadata = {
   </Features2>
 
   <Features2
+      id="core-services"
       tagline = "Explore Our Core Services",
       title = "Bring your ideas to life with our services.",
       subtitle = "From the spirit of the Giant’s Causeway, we forge digital experiences that blend heritage, ambition, and cutting-edge technology. Whether you’re launching your first product or transforming your business, our services are built to help visionaries succeed.",
@@ -306,7 +262,7 @@ const metadata = {
       { title: "Backend", description: "C# .NET, TypeScript, Node.js, Express, Python, PostgreSQL, MongoDB, GraphQL", icon: "tabler:server" },
       { title: "Mobile & Cross-Platform", description: "React Native, Progressive Web Apps (PWA)", icon: "tabler:device-mobile" },
       { title: "AI & Automation", description: "OpenAI GPT integration, custom AI agents, workflow automation", icon: "tabler:cpu" },
-      { title: "3rd Party Integrations", description: "Shopify API, Zappier, Wordpress API, ", icon: "tabler:play-card-3" },
+      { title: "3rd Party Integrations", description: "Shopify API, Zappier, Wordpress API", icon: "tabler:play-card-3" },
       { title: "Hosting & Infrastructure", description: "EU/UK-based servers, NI-hosted GPT models, AWS, Vercel, DigitalOcean", icon: "tabler:cloud" },
       { title: "DevOps & CI/CD", description: "GitHub Actions, Docker, Kubernetes (on request)", icon: "tabler:settings" },
       { title: "Project Management", description: "Git, Agile, Scrum, MS Dev Ops, Jirra", icon: "tabler:calendar" }
@@ -364,6 +320,53 @@ const metadata = {
   />
 
 
+
+
+    <!-- Features3 Widget 
+     
+    '6 Reasons why Us'
+    
+    ************** -->
+
+  <Features3
+    tagline='6 Reasons why'
+    title="We are your #1 Custom Software Development Agency"
+    subtitle="At CausewaySoft, we believe your software should be as unique as your business. That’s why we combine custom-built solutions, direct collaboration, and full-spectrum expertise to deliver results that fit perfectly — and last. With competitive rates, modern scalable tech, and clear communication every step of the way, we make your vision a reality without compromise."
+    columns={3}
+    isBeforeContent={true}
+    items={[
+      {
+        "title": "Truly Bespoke Development",
+        "description": "We design and build every project from the ground up, avoiding cookie-cutter templates and focusing on your exact requirements.",
+        "icon": "tabler:code"
+      },
+      {
+        "title": "Direct Access to the Developer",
+        "description": "You work with the person actually writing your code, which means faster communication, fewer misunderstandings, and more flexibility.",
+        "icon": "tabler:user-code"
+      },
+      {
+        "title": "Full-Service Expertise",
+        "description": "We handle the entire process — UI/UX, backend, mobile, DevOps, and even product management — so you don't need multiple vendors.",
+        "icon": "tabler:layers-intersect"
+      },
+      {
+        "title": "High Quality at Competitive Rates",
+        "description": "We are a lean, independent setup keeps overhead low, allowing you to get premium quality without enterprise-level pricing.",
+        "icon": "tabler:currency-pound"
+      },
+      {
+        "title": "Long-Term Scalability",
+        "description": "We use modern, maintainable frameworks so your website or app can grow with your business.",
+        "icon": "tabler:arrows-diagonal"
+      },
+        {
+        "title": "Transparent Communication",
+        "description": "We maintain open, honest, and regular communication throughout the project, so you're always informed and in control.",
+        "icon": "tabler:messages"
+      }
+    ]}
+  />
 
 
 
