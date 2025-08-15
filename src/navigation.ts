@@ -145,7 +145,7 @@ export const headerData = {
       href: '/services',
       links: [
         {
-          text: 'Summary',
+          text: 'About our Services',
           href: '/services',
         },
         {
@@ -205,7 +205,7 @@ export const footerData = {
       title: 'Our Services',
       links: [
         {
-          text: 'Summary of all',
+          text: 'About our Services',
           href: '/services',
         },
         {
