@@ -24,7 +24,7 @@ const metadata = {
     actions={[{ variant: 'primary', text: 'Start exploring', icon: 'tabler:rocket', href: '#core-services' }]}
     image={{
       src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'AstroWind Hero Image',
+      alt: 'We offer Digital Services across Northern Ireland',
       class: 'grayscale hover:grayscale-0 rounded shadow-lg'
     }}
   />
@@ -389,16 +389,25 @@ const metadata = {
 
 
   <!-- CallToAction Widget *********** -->
-
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Start exploring',
-        href: '/',
+        text: 'Schedule a Discovery Call',
+        href: '',
+        target: '_blank',
+        icon: 'tabler:mail',
       },
     ]}
-    title="Dive into our template collection"
-    subtitle="Whether you're in business, design, or education, our templates are here to elevate your projects."
-  />
+  >
+    <Fragment slot="title">
+      🚀 Launch Your Legend
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Whether you’re building a unicorn or laying the first stone — we believe in your vision. We’re here to bring it to life with passion, power, and precision.
+      <br/>
+      Let’s build something <span class="font-bold">remarkable<span/> together.
+    </Fragment>
+  </CallToAction>
 </Layout>
