@@ -149,10 +149,12 @@ import { UI } from 'astrowind:config';
 
     document.querySelectorAll('.emailLink').forEach(function(elem){
       elem.href = 'mailto:' + decoded_email;
+      elem.textContent = decoded_email;
     });
 
     document.querySelectorAll('.phoneLink').forEach(function(elem){
       elem.href = 'tel:' + decoded_phone;
+      elem.textContent = decoded_phone;
     });
 
 
@@ -165,7 +167,7 @@ import { UI } from 'astrowind:config';
       const form = e.target;
       const formData = new FormData(form);
 
-      fetch('forms/contact.php', {
+      fetch('/forms/contact.php', {
         method: 'POST',
         headers: {
           'X-Requested-With': 'XMLHttpRequest'

@@ -35,6 +35,7 @@ const {id, action, inputs, textarea, disclaimer, button = 'Contact us', descript
   }
 
   {
+    // this neeeds to be refactored like inputs above
     textarea && (
       <div>
         <label for="textarea" class="block text-sm font-medium mb-3">
@@ -73,7 +74,7 @@ const {id, action, inputs, textarea, disclaimer, button = 'Contact us', descript
 
   {
     button && (
-      <div class="mt-10 grid">
+      <div class="mt-5 grid">
         <Button variant="primary" type="submit">
           {button}
         </Button>
