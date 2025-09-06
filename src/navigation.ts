@@ -196,7 +196,7 @@ export const headerData = {
     },
 
   ],
-  actions: [{ text: 'Contact Us', href: '/#contact'}],
+  actions: [{ text: 'Contact Us', href: '#contact'}],
 };
 
 export const footerData = {
@@ -271,7 +271,7 @@ export const footerData = {
     {
       title: 'Get in touch',
       links: [
-        { text: 'Contact Us', href: '/#contact' },
+        { text: 'Contact Us', href: '#contact' },
         { text: 'Book a FREE Discovery Call ', href: 'https://calendly.com/causewaysoft' },
         { text: 'We love ambitious ideas. Let’s build something legendary together.'},
       ],
