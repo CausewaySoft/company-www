@@ -3,60 +3,6 @@ import { getPermalink, getBlogPermalink, getAsset } from './utils/permalinks';
 export const headerData = {
   links: [
     // {
-    //   text: 'Homes',
-    //   links: [
-    //     {
-    //       text: 'SaaS',
-    //       href: getPermalink('/homes/saas'),
-    //     },
-    //     {
-    //       text: 'Startup',
-    //       href: getPermalink('/homes/startup'),
-    //     },
-    //     {
-    //       text: 'Mobile App',
-    //       href: getPermalink('/homes/mobile-app'),
-    //     },
-    //     {
-    //       text: 'Personal',
-    //       href: getPermalink('/homes/personal'),
-    //     },
-    //   ],
-    // },
-    // {
-    //   text: 'Pages',
-    //   links: [
-    //     {
-    //       text: 'Features (Anchor Link)',
-    //       href: getPermalink('/#features'),
-    //     },
-    //     {
-    //       text: 'Services',
-    //       href: getPermalink('/services'),
-    //     },
-    //     {
-    //       text: 'Pricing',
-    //       href: getPermalink('/pricing'),
-    //     },
-    //     {
-    //       text: 'About us',
-    //       href: getPermalink('/about'),
-    //     },
-    //     {
-    //       text: 'Contact',
-    //       href: getPermalink('/contact'),
-    //     },
-    //     {
-    //       text: 'Terms',
-    //       href: getPermalink('/terms'),
-    //     },
-    //     {
-    //       text: 'Privacy policy',
-    //       href: getPermalink('/privacy'),
-    //     },
-    //   ],
-    // },
-    // {
     //   text: 'Landing',
     //   links: [
     //     {
@@ -169,21 +115,10 @@ export const headerData = {
           href: '/services/ai-agents-solutions',
         },
         {
-          text: "Digital Business Transformations",
-          href: '/services/digital-business-transformations',
-        },
-        {
           text: "Chrome Extensions",
           href: '/services/chrome-extensions',
-        },
-        {
-          text: "UI/UX Design & Strategy",
-          href: '/services/ui-ux-strategy',
-        },
-        {
-          text: "Hosting",
-          href: '/services/hosting-solutions',
-        },
+          icon: 'tabler:brand-chrome',
+        }
       ],
     },
     {
@@ -209,6 +144,10 @@ export const footerData = {
           href: '/services',
         },
         {
+          text: "AI-Powered Solutions",
+          href: '/services/ai-agents-solutions',
+        },
+        {
           text: "Websites",
           href: '/services/websites',
         },
@@ -225,25 +164,9 @@ export const footerData = {
           href: '/services/hybrid-apps',
         },
         {
-          text: "AI-Powered Solutions",
-          href: '/services/ai-agents-solutions',
-        },
-        {
-          text: "Digital Business Transformations",
-          href: '/services/digital-business-transformations',
-        },
-        {
           text: "Chrome Extensions",
           href: '/services/chrome-extensions',
-        },
-        {
-          text: "UI/UX Design & Strategy",
-          href: '/services/ui-ux-strategy',
-        },
-        {
-          text: "Hosting",
-          href: '/services/hosting-solutions',
-        },
+        }
       ]
     },
     {
