@@ -7,7 +7,7 @@ import Testimonials from '~/components/widgets/Testimonials.astro';
 import Layout from '~/layouts/PageLayout.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Features3 from '~/components/widgets/Features3.astro';
-
+import ContactInline from '~/components/widgets/ContactInline.astro';
 
 const metadata = {
   title: 'Custom Software Development Services',
@@ -386,6 +386,58 @@ const metadata = {
     ]}
   />
 
+
+  <ContactInline
+    id="contact"
+    tagline="Contact Us"
+    title="Let us help you Excel your Business using Custom Software Solutions"
+    subtitle="Send us an email or Book a FREE Discovery Call to begin your journey."
+    formInputs={[
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+        placeholder: "Where shall our reply find you?"
+      },
+    ]},
+    textarea={{
+      label: 'Message',
+      placeholder: "Tell us your challenges, dreams, or sparks"
+    }}
+    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours.",
+    button='Send Your Message'
+
+    items={[
+       {
+        description: 'Book a Discovery Call',
+        classes: {
+          container: 'd-flex content-center	',
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+        },
+        href: 'https://calendly.com/causewaysoft',
+        target: '_blank',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Email us',
+        classes: {ctaLinks: 'emailLink'},
+        href: 'enable javascript...',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        href: '+1 (234) 567-890',
+        classes: {ctaLinks: 'phoneLink'},
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@causewaysoft',
+        href: 'https://www.linkedin.com/company/causewaysoft',
+        icon: 'tabler:brand-linkedin',
+      },
+    ]}
+  />
 
 
   <!-- CallToAction Widget *********** -->
