@@ -13,6 +13,7 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import ContactUs from '~/components/widgets/Contact.astro';
+import ContactInline from '~/components/widgets/ContactInline.astro';
 
 const metadata = {
   title: 'CausewaySoft - Web-Apps and Mobile Apps Developement Agency in Belfast, Northern Ireland ',
@@ -310,64 +311,61 @@ const metadata = {
   </CallToAction>
 -->
 
-  <ContactUs
-    id="contact"
-    title="Drop us a message today!"
-    subtitle="Whether you’re building a unicorn or laying the first stone — we believe in your vision. We’re here to bring it to life with passion, power, and precision. Let’s build something remarkable together!"
+  <ContactInline
     tagline="Contact Us"
-    inputs={[
+    title="Drop us a message today!"
+    subtitle="Send us an email or Book a FREE Discovery Call to begin your journey."
+    formInputs={[
       {
         type: 'text',
         name: 'name',
         label: 'Name',
+        placeholder: "The hero behind this message is…"
       },
       {
         type: 'email',
         name: 'email',
         label: 'Email',
+        placeholder: "Where shall our reply find you?"
       },
-    ]}
+    ]},
     textarea={{
       label: 'Message',
+      placeholder: "Tell us your challenges, dreams, or sparks"
     }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
+    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours.",
+    button='Send Message'
 
-
-  <Features2
-    title="",
-    classes={
-      {container: '!pt-0 text-amber-600 dark:text-amber-600'}
-    },
     items={[
-      {
-        id: 'phoneLink',
-        title: 'Call us',
-        description: '+44 7548 00 33 45',
-        icon: 'tabler:headset',
-        link:"tel:",
-        classes: 'phoneLink'
+       {
+        description: 'Book a Discovery Call',
+        classes: {
+          container: 'd-flex content-center	',
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+        },
+        href: 'https://calendly.com/causewaysoft',
+        target: '_blank',
+        icon: 'tabler:calendar',
       },
       {
-        id: 'emailLink',
         title: 'Email us',
-        description: 'office@causewaysoft.com',
+        classes: {ctaLinks: 'emailLink'},
+        href: 'enable javascript...',
         icon: 'tabler:mail',
-        link: "mailto:",
-        classes: 'emailLink'
       },
       {
-        title: 'Follow Us',
+        title: 'Call us',
+        href: '+1 (234) 567-890',
+        classes: {ctaLinks: 'phoneLink'},
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
         description: '@causewaysoft',
+        href: 'https://www.linkedin.com/company/causewaysoft',
         icon: 'tabler:brand-linkedin',
-        link:"https://www.linkedin.com/company/causewaysoft"
       },
     ]}
   />
-
 
 </Layout>
