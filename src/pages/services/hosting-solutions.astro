@@ -14,6 +14,7 @@ import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Testimonials from '~/components/widgets/Testimonials.astro';
+import ContactInline from '~/components/widgets/ContactInline.astro';
 
 const metadata = {
   title: "EU & UK Hosting | Secure, Fast, Compliant",
@@ -81,33 +82,59 @@ const metadata = {
   />
 
 
-
-
-
-  <!-- Steps2 Widget ****************** -->
-
-  <Steps2
-    title="Reach out to us"
-    subtitle="Have questions? Feel free to contact us using the form below. We're here to help!"
-    callToAction={{
-      text: 'Contact us',
-      href: '/',
+  <ContactInline
+    tagline="Contact Us"
+    title="Let us take care of DevOps and Hosting Solutions for your Business"
+    subtitle="Send us an email or Book a FREE Discovery Call to begin your journey."
+    formInputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+        placeholder: "The hero behind this message is…"
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+        placeholder: "Where shall our reply find you?"
+      },
+    ]},
+    textarea={{
+      label: 'Message',
+      placeholder: "Tell us your challenges, dreams, or sparks"
     }}
+    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours.",
+    button='Send Message'
+
     items={[
+       {
+        description: 'Book a Discovery Call',
+        classes: {
+          container: 'd-flex content-center	',
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+        },
+        href: 'https://calendly.com/causewaysoft',
+        target: '_blank',
+        icon: 'tabler:calendar',
+      },
       {
         title: 'Email us',
-        description: 'contact@support.com',
+        classes: {ctaLinks: 'emailLink'},
+        href: 'enable javascript...',
         icon: 'tabler:mail',
       },
       {
         title: 'Call us',
-        description: '+1 (234) 567-890',
+        href: '+1 (234) 567-890',
+        classes: {ctaLinks: 'phoneLink'},
         icon: 'tabler:headset',
       },
       {
         title: 'Follow us',
-        description: '@example',
-        icon: 'tabler:brand-twitter',
+        description: '@causewaysoft',
+        href: 'https://www.linkedin.com/company/causewaysoft',
+        icon: 'tabler:brand-linkedin',
       },
     ]}
   />
