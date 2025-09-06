@@ -3,7 +3,7 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Testimonials from '~/components/widgets/Testimonials.astro';
+
 import Layout from '~/layouts/PageLayout.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Features3 from '~/components/widgets/Features3.astro';
@@ -240,53 +240,6 @@ const metadata = {
     }}
   >
   </Content>
-
-
-  <!-- Testimonials Widget *********** -->
-
-  <Testimonials
-    title="Words from real customers"
-    testimonials={[
-      {
-        title: 'Simple Business Website for a local Cleaning Business',
-        testimonial: "I came to CausewaySoft, with a simple goal in mind, to show up online. I needed a simple and cost effective website for my cleaning business. They built me a beautiful website, and did initial marketing of it. Overtime, I noticed more customers telling me they found me online! It's made a massive difference to my confidence as a business owner and helped me elevate the quality of business that I get.",
-        name: "Betty's Cleaning",
-        job: 'Local Cleaning Agency | Coleraine Area',
-        image: {
-          src: 'https://images.unsplash.com/photo-1618835962148-cf177563c6c0?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=930&q=80',
-          alt: 'Emily Kennedy Image',
-        },
-      },
-      {
-        title: 'Corporate Client – Custom Login Screen with CMS',
-        testimonial: "We needed a polished, branded login page with the ability to easily update hero images and links. CausewaySoft delivered a solution that looked amazing and was incredibly simple for our team to manage. They understood our vision, nailed the design, and made the process smooth from start to finish.",
-        name: 'Martin ....',
-        job: 'IT Project Manager | Expro',
-        image: {
-          src: 'https://images.unsplash.com/photo-1561406636-b80293969660?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80',
-          alt: 'Sarah Hansen Image',
-        },
-      },
-      {
-        title: 'Medium-Sized Corporation – Real-Time Group Chat Integration',
-        testimonial: "Our engineering teams needed a better way to collaborate while working on the same SCADA dashboards. CausewaySoft integrated a seamless, real-time group chat right into our existing web app. Now our engineers can troubleshoot, share insights, and solve problems faster — all without leaving the dashboard. It's been a game-changer for our workflow.",
-        name: 'Mark Wilkinson',
-        job: 'IT Project Manager | MeasureSoft',
-        image: {
-          src: 'https://images.unsplash.com/photo-1545167622-3a6ac756afa4?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=824&q=80',
-          alt: 'Mark Wilkinson Image',
-        },
-      },
-    ]}
-    callToAction={{
-      target: '_blank',
-      text: 'More testimonials...',
-      href: 'https://github.com/onwidget/astrowind',
-      icon: 'tabler:chevron-right',
-    }}
-  />
-
-
 
 
     <!-- Features3 Widget 
