@@ -103,7 +103,7 @@ export const headerData = {
           href: '/services/web-applications',
         },
         {
-          text: "Progressive Web Apps (PWAs)",
+          text: "Progressive Web Apps (PWA)",
           href: '/services/progressive-web-apps',
         },
         {
@@ -156,7 +156,7 @@ export const footerData = {
           href: '/services/web-applications',
         },
         {
-          text: "Progressive Web Apps (PWAs)",
+          text: "Progressive Web Apps (PWA)",
           href: '/services/progressive-web-apps',
         },
         {
