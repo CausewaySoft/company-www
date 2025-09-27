@@ -175,9 +175,8 @@ export const footerData = {
         { text: 'About Us', href: '/#about-us' },
         { text: 'Our Process', href: '/#our-process' },
         { text: 'FAQ', href: '/#faq' },
-        { text: 'No Cookie Policy', href: '#' },
-        { text: 'Privacy Policy', href: '#' },
-        { text: 'Terms of Service', href: '#' },
+        { text: 'Privacy Policy', href: '/privacy' },
+        { text: 'Terms of Service', href: '/terms' },
       ],
     },
     {
@@ -196,7 +195,7 @@ export const footerData = {
       links: [
         { text: 'Contact Us', href: '#contact' },
         { text: 'Book a FREE Discovery Call ', href: 'https://calendly.com/causewaysoft' },
-        { text: 'We love ambitious ideas. Let’s build something legendary together.'},
+        { text: "We love ambitious ideas. Let's build something legendary together."},
       ],
     },
   ],
