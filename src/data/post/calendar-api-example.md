@@ -1,10 +1,10 @@
 ---
-publishDate: 2024-01-15T00:00:00Z
+publishDate: 2025-10-06T00:00:00Z
 author: Matthew
-title: Adding Calendar Events to Your AstroJS Blog - API Route Example
+title: Adding Calendar Events to Your Blog Post - AstroJS API Route Example
 excerpt: Learn how to create downloadable .ics calendar events in your AstroJS blog using TypeScript API routes. This example shows how to generate calendar files that users can add to their calendars.
-image: https://images.pexels.com/photos/4386431/pexels-photo-4386431.jpeg?auto=format&fit=crop&w=2070&q=80
-category: Tutorial
+image: '~/assets/images/blog-post-downloadable-calendar-event.png'
+category: Technical Tutorial
 tags:
   - AstroJS
   - TypeScript
@@ -32,18 +32,8 @@ Here's how you can link to the calendar APIs from your blog posts:
 
 ```html
 <!-- Tech Grant Webinar -->
-<a href="/api/calendar/tech-grant-webinar.ics">
+<a href="/api/calendar/dtff-tech-grant-webinar.ics">
   📅 Add Tech Grant Webinar to Calendar
-</a>
-
-<!-- General Webinar -->
-<a href="/api/calendar/general-webinar.ics">
-  📅 Add General Webinar to Calendar
-</a>
-
-<!-- Default Event -->
-<a href="/api/calendar-event.ics">
-  📅 Add Event to Calendar
 </a>
 ```
 
@@ -116,21 +106,19 @@ END:VCALENDAR`;
 Let's say we're hosting a webinar about the Digital Transformation Flexible Fund:
 
 <div class="bg-blue-50 border-l-4 border-blue-400 p-4 my-6">
-  <h3 class="text-lg font-semibold text-blue-800 mb-2">🎯 Tech Grant Webinar</h3>
+  <h3 class="text-lg font-semibold text-blue-800 mb-2">🎯 20K Tech Grant Deadline</h3>
   <p class="text-blue-700 mb-3">
-    <strong>Date:</strong> February 15, 2024<br>
-    <strong>Time:</strong> 2:00 PM GMT<br>
-    <strong>Duration:</strong> 60 minutes<br>
-    <strong>Location:</strong> Online Event
+    <strong>Date:</strong> 24 October, 2025<br>
+    <strong>Time:</strong> 5:00 PM GMT<br>
   </p>
   <p class="text-blue-600 mb-4">
-    Join us to learn about the Digital Transformation Flexible Fund and how your Northern Ireland business can access up to £20,000 in funding.
+    Don’t miss the DTFF grant deadline! Download the calendar event now to get automatic reminders - starting 7 days before and every day until the deadline. Add it to your calendar and don't miss your chance for up to £20,000 in funding.
   </p>
   <a 
-    href="/api/calendar/tech-grant-webinar.ics"
-    class="inline-flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+    href="/api/calendar/dtff-tech-grant-webinar.ics"
+    class="inline-flex items-center px-4 py-2 bg-blue-600 !text-white no-underline rounded-lg hover:bg-blue-700 transition-colors"
   >
-    📅 Add to Calendar
+    🗓️ Add to Calendar
   </a>
 </div>
 

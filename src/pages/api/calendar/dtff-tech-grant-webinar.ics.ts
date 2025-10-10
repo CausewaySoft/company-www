@@ -8,12 +8,12 @@
 export const GET = async () => {
   try {
     // Event data for Tech Grant Webinar
-    const title = 'DTFF 20k Grant Deadline';
-    const description = 'Learn about the Digital Transformation Flexible Fund and how your Northern Ireland business can access up to £20,000 in funding for AI, IoT, robotics, AR/VR, and other advanced technologies.';
+    const title = 'DTFF 20k Grant Deadline - Don\'t miss out!';
+    const description = "Don't miss this opportunity! Get up to £20k to Digitally Transform your business with the DTFF. Take the first step toward a digitally empowered future! Contact CausewaySoft now! office@causewaysoft.com";
     const location = 'Online Event';
     const startDate = '2025-10-24';
-    const startTime = '17:00';
-    const duration = 60; // minutes
+    const startTime = '09:15';
+    const duration = 465; // minutes
     
     // Parse date and time
     const [year, month, day] = startDate.split('-').map(Number);
@@ -31,7 +31,7 @@ export const GET = async () => {
     const uid = `tech-grant-webinar-${Date.now()}@causewaysoft.com`;
     
     // Create .ics file content
-    const icsContent = `BEGIN:VCALENDAR
+const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//CausewaySoft//Calendar//EN
 CALSCALE:GREGORIAN
@@ -46,8 +46,15 @@ DESCRIPTION:${description}
 LOCATION:${location}
 STATUS:CONFIRMED
 SEQUENCE:0
-ORGANIZER;CN=CausewaySoft:mailto:info@causewaysoft.com
+ORGANIZER;CN=CausewaySoft:mailto:office@causewaysoft.com
 URL:https://causewaysoft.com/blog/tech-grant-for-ni-businesses
+${[7,6,5,4,3,2,1].map(days => 
+`BEGIN:VALARM
+TRIGGER:-P${days}D
+ACTION:DISPLAY
+DESCRIPTION:Reminder: DTFF 20k Grant Webinar in ${days} day${days > 1 ? 's' : ''}
+END:VALARM`
+).join('\n')}
 END:VEVENT
 END:VCALENDAR`;
 
@@ -56,7 +63,7 @@ END:VCALENDAR`;
       status: 200,
       headers: {
         'Content-Type': 'text/calendar; charset=utf-8',
-        'Content-Disposition': 'attachment; filename="tech-grant-webinar.ics"',
+        'Content-Disposition': 'attachment; filename="20k-tech-grant-deadline.ics"',
         'Cache-Control': 'no-cache, no-store, must-revalidate',
         'Pragma': 'no-cache',
         'Expires': '0'
