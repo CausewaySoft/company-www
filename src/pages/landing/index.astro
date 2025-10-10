@@ -1,0 +1,240 @@
+---
+import Layout from '~/layouts/LandingLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Digitally Transform Your Professional Services Business — DTFF Funding Northern Ireland',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- HERO -->
+  <Hero
+    actions={[
+      { variant: 'primary', text: '📅 Book Your Free DTFF Consultation', href: 'https://calendly.com/causewaysoft' },
+      { text: '💡 Learn more', href: '#what-is-dtff' },
+    ]}
+    image={{ src: '~/assets/images/hero-team-dashboard.jpg', alt: 'Professional team using dashboards' }}
+  >
+    <Fragment slot="title">
+      Transform Your Professional Services Business<br />
+      with up to <span class="text-accent">£20,000 in DTFF Funding</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      <strong>Digital transformation is no longer optional - streamline your workflows, automate admin, and unlock business intelligence with support from the Digital Transformation Flexible Fund (DTFF).</strong>
+    </Fragment>
+  </Hero>
+
+  <!-- QUICK NOTE / CTA -->
+  <Note
+    title="Deadline: < 2 weeks left! "
+    description="Act now to secure DTFF funding and modernise operations with minimal upfront cost. <br>Book a free consultation to confirm eligibility."
+  />
+
+  <!-- WHAT IS DTFF -->
+  <Content
+    id="what-is-dtff"
+    tagline="What is the DTFF?"
+    title="What is the Digital Transformation Flexible Fund (DTFF)?"
+    video={{
+      id: 'TBNTAH6w_9Q'
+    }}
+    >
+    <Fragment slot="content">
+      <p>
+        The <strong>DTFF grant</strong> gives Northern Ireland SMEs up to <strong>£20,000</strong> to invest in technology and software that accelerates growth and efficiency.
+      </p>
+
+      <ul class="list-disc list-inside mt-4 space-y-2">
+        <li>Covers up to <strong>70%</strong> of project costs</li>
+        <li>Eligible for businesses trading <strong>12+ months</strong> with <strong>10–249 employees</strong></li>
+        <li>Supports technologies such as <em>AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain</em>, and more</li>
+      </ul>
+
+      <p class="mt-4">
+        <strong>Why this matters:</strong> Most small businesses still struggle with manual processes and legacy systems. DTFF funding lets you implement modern solutions without shouldering the full cost.
+      </p>
+    </Fragment>
+  </Content>
+
+  <!-- WHY IT MATTERS -->
+  <Features2
+    id="why-it-matters"
+    tagline="Why It Matters"
+    title="Why It Matters - Act Now"
+    subtitle="Professional services firms are under pressure to deliver faster, more accurate, and more personalised services."
+    items={[
+      { title: 'Repetitive admin', description: 'Repetitive admin consuming staff hours', icon: 'tabler:clock' },
+      { title: 'Reporting errors', description: 'Errors in reporting and compliance', icon: 'tabler:file-check' },
+      { title: 'Slow decision-making', description: 'Lack of real-time insights', icon: 'tabler:chart-pie' },
+      { title: 'Poor client communication', description: 'Missed follow-ups, forgotten knowledge and delayed responses', icon: 'tabler:message-circle' },
+      { title: 'Lost opportunities', description: 'Manual workflows slow business growth', icon: 'tabler:arrow-up-right' },
+      { title: 'Competitive risk', description: 'Competitors adopting tech faster', icon: 'tabler:brand-bitbucket' },
+    ]}
+  />
+
+  <!-- SOLUTION / DIGITAL OPERATIONS HUB (DETAILED FEATURES) -->
+  <Features
+    id="digital-operations-hub"
+    tagline="Our Solution"
+    title="Our Solution - The Digital Operations Hub"
+    subtitle="A £25-28k package built for professional services firms. Measurable outcomes, not shiny toys."
+    items={[
+      { title: 'Smart Client Portal', description: 'Secure document sharing, client task tracking, and e-signatures.', icon: 'tabler:folder' },
+      { title: 'Workflow Automation', description: 'Streamline lead → project → invoice processes; save hours per week.', icon: 'tabler:automatic-gearbox' },
+      { title: 'Analytics Dashboard', description: 'Real-time performance tracking for staff, clients, and projects.', icon: 'tabler:chart-line' },
+      { title: 'Integrated CRM', description: 'Custom-built for your firm’s processes, not a generic off-the-shelf tool.', icon: 'tabler:users' },
+      { title: 'AI Document Assistant', description: 'Summarise, flag, and analyse client documents automatically.', icon: 'tabler:robot' },
+      { title: 'Compliance & Audit Automation', description: 'Track GDPR, deadlines and quality control effortlessly.', icon: 'tabler:shield-check' },
+      { title: 'Collaboration Layer', description: 'Multi-user access, messaging and shared workspaces with clients.', icon: 'tabler:message-circle' },
+    ]}
+  />
+
+  <!-- EXAMPLE MINI-CASE -->
+  <!-- <Content
+    isReversed
+    tagline="Example"
+    title="Real impact — example outcome"
+    items={[
+      { title: 'Accounting firm outcome', description: 'Reduced manual invoice processing by 40% — more time for advisory work.' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=60',
+      alt: 'Accounting dashboard example',
+    }}
+  /> -->
+
+  <!-- BENEFITS / OUTCOMES (STATS & CALLS) -->
+  <Stats
+    stats={[
+      { title: 'Time Savings', amount: '30–50%' },
+      { title: 'Accuracy & Compliance', amount: 'Reduced errors' },
+      { title: 'Business Intelligence', amount: 'Real-time dashboards' },
+      { title: 'Client Experience', amount: 'Modern portals' },
+    ]}
+  />
+
+
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: '📅 Book Your Free DTFF Consultation', href: 'https://calendly.com/causewaysoft' },
+    ]}
+  >
+    <Fragment slot="title">Ready to Transform Your Business?</Fragment>
+    <Fragment slot="subtitle">
+      The DTFF gives you a fast route to modernise operations — but the deadline is less than <strong>2 weeks away</strong>. Book a free consultation now.
+    </Fragment>
+  </CallToAction>
+
+
+  <!-- MINI CASE -->
+  <!-- <Content
+    isAfterContent
+    tagline="Mini-case"
+    title="Mini-case: Accounting firm"
+    items={[
+      { title: 'Result', description: 'A 15-person accounting firm reduced invoice processing by 40% and secured £18,500 in DTFF funding.' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=1200&q=60',
+      alt: 'Team celebrating results',
+    }}
+  /> -->
+
+
+  <!-- HOW IT WORKS (STEPS) -->
+  <Steps
+    title="How we deliver your Digital Operations Hub"
+    items={[
+      { title: 'Assessment & Audit', description: 'We evaluate systems, processes and opportunities.', icon: 'tabler:search' },
+      { title: 'Implementation', description: 'Deploy CRM, portal, dashboard and AI modules.', icon: 'tabler:settings' },
+      { title: 'Training & Adoption', description: 'Ensure staff adoption and measure early wins.', icon: 'tabler:school' },
+      { title: 'Measure ROI', description: 'Track outcomes and iterate for continuous improvement.', icon: 'tabler:trending-up' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=60',
+      alt: 'Process steps illustration',
+    }}
+  />
+
+
+  <!-- TAILORED SOLUTIONS FOR SECTORS -->
+  <section id="sectors" class="relative py-12">
+    <div class="container mx-auto px-4">
+      <h2 class="text-2xl font-semibold mb-6">Tailored Solutions for Your Sector</h2>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="p-6 bg-white rounded-lg shadow">
+          <h3 class="font-bold text-lg mb-2">For Accountants</h3>
+          <p class="mb-3">Streamline client management, reporting, and compliance.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Automated invoicing, reminders, and reconciliation</li>
+            <li>Client dashboards for real-time financial tracking</li>
+            <li>AI-powered report generation and anomaly detection</li>
+          </ul>
+          <!-- <p class="mt-4 italic text-sm">Figma mockup placeholder: accountant dashboard animation / workflow screenshot</p> -->
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow">
+          <h3 class="font-bold text-lg mb-2">For Solicitors</h3>
+          <p class="mb-3">Simplify case management and document workflows.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Secure client portal for document sharing</li>
+            <li>Automated case updates, deadlines & task notifications</li>
+            <li>AI-assisted document review and summarisation</li>
+          </ul>
+          <!-- <p class="mt-4 italic text-sm">Figma mockup placeholder: solicitor portal animation / workflow screenshot</p> -->
+        </div>
+
+        <div class="p-6 bg-white rounded-lg shadow">
+          <h3 class="font-bold text-lg mb-2">Other Professional Services</h3>
+          <p class="mb-3">Adapting solutions for consultancies, marketing agencies and more.</p>
+          <ul class="list-disc list-inside text-sm space-y-1">
+            <li>Custom reporting and automated client workflows</li>
+            <li>Shared client portals and collaboration tools</li>
+            <li>Rapid deployment to fit tight DTFF timelines</li>
+          </ul>
+          <!-- <p class="mt-4 italic text-sm">Figma mockup placeholder: generic dashboard animation / workflow screenshot</p> -->
+        </div>
+      </div>
+    </div>
+  </section>
+
+    <!-- FAQ -->
+  <FAQs
+    title="FAQ"
+    subtitle="Common questions about DTFF and our packages"
+    tagline="Frequently Asked"
+    items={[
+      { title: 'Who is eligible?', description: 'Businesses trading 12+ months, 10–249 employees, Northern Ireland-based.' },
+      { title: 'How much funding can I get?', description: '£5,000–£20,000 (up to 70% of project costs).' },
+      { title: 'What technologies are supported?', description: 'AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain, and more.' },
+      { title: 'How fast can the project be delivered?', description: 'Our packages are designed for rapid deployment to meet DTFF timelines.' },
+    ]}
+  />
+
+  <!-- FINAL CTA with urgency -->
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: '📅 Book Your Free DTFF Consultation', href: 'https://calendly.com/causewaysoft' },
+    ]}
+  >
+    <Fragment slot="title">Secure Your DTFF-Funded Transformation</Fragment>
+    <Fragment slot="subtitle">
+      Limited slots available. Deadline: <strong>less than 2 weeks!</strong> Reserve your free consultation and start the application process.
+    </Fragment>
+  </CallToAction>
+
+</Layout>
