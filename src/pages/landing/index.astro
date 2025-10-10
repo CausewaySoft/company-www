@@ -1,0 +1,142 @@
+---
+import Layout from '~/layouts/LandingLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import FAQs from '~/components/widgets/FAQs.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Digital Transformation Package for Professional Services SMEs',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+
+  <!-- Hero Section -->
+  <Hero
+    actions={[
+      { variant: 'primary', text: 'Check Your Eligibility', href: '#eligibility' },
+    ]}
+    image={{ src: '~/assets/images/hero-team-dashboard.jpg', alt: 'Professional team using dashboards' }}
+  >
+    <Fragment slot="title">
+      Transform Your Professional Services Business<br/>
+      with up to <span class="text-accent dark:text-whiteee">£20,000 DTFF Funding</span>
+    </Fragment>
+    <Fragment slot="subtitle">
+      Modernise operations, boost efficiency and grow revenue.   
+      Empowering Northern Irish businesses with co-funding from the Digital Transformation Flexible Grant.
+    </Fragment>
+  </Hero>
+
+  <!-- Note / Pain Points -->
+  <Note
+    title="Is your business struggling with outdated workflows?"
+    description="Many professional services SMEs face manual workflows, lost leads, inefficient client management, and missed opportunities. Our £25–28k package provides a complete solution."
+  />
+
+  <!-- Detailed Features Section -->
+  <Features
+    id="features-detailed"
+    tagline="Core Features"
+    title="What Our £25–28k Package Includes"
+    subtitle="High-impact deliverables designed to save time, increase revenue and ensure ROI"
+    items={[
+      { title: 'Automated Client Lifecycle Management', description: 'Save admin time, reduce missed follow-ups, and increase repeat business.', icon: 'tabler:device-floppy' },
+      { title: 'Revenue Forecasting & Profitability Dashboard', description: 'Know which clients/projects are profitable and anticipate cash flow.', icon: 'tabler:chart-line' },
+      { title: 'Proposal & Contract Automation', description: 'Close deals faster and reduce errors.', icon: 'tabler:file-text' },
+      { title: 'Client Experience Optimisation', description: 'Increase satisfaction & referrals with a client portal, feedback forms, and notifications.', icon: 'tabler:users' },
+      { title: 'Digital Operations Health Check', description: 'Identify bottlenecks, save costs, improve delivery speed.', icon: 'tabler:settings' },
+      { title: 'Integrated Knowledge & Document Management', description: 'Reduce duplicated work, improve collaboration.', icon: 'tabler:folder' },
+      { title: 'Time & Resource Optimisation Tools', description: 'Improve project profitability and reduce staff overload.', icon: 'tabler:clock' },
+      { title: 'Staff Training & Adoption Support', description: 'Ensure measurable ROI and adoption of tools.', icon: 'tabler:school' },
+    ]}
+  />
+
+  <!-- AI Tools Section -->
+  <Features2
+    id="ai-tools"
+    tagline="AI Productivity Tools"
+    title="Boost Team Productivity with AI"
+    subtitle="Practical tools designed for SME teams"
+    items={[
+      { title: 'AI Proposal Generator', description: 'Reduces proposal prep time and increases deal closure.', icon: 'tabler:ai' },
+      { title: 'Smart Email & Meeting Summariser', description: 'Saves 1–2 hours/week per employee.', icon: 'tabler:mail' },
+      { title: 'Predictive Lead Scoring', description: 'Focus sales on hottest leads, improve conversion.', icon: 'tabler:trending-up' },
+      { title: 'Automated KPI Dashboard & Insights', description: 'Fast decision-making, 3–5 hours saved/week.', icon: 'tabler:dashboard' },
+      { title: 'Document Analysis & Smart Search', description: 'Reduces time searching documents, prevents missed deadlines.', icon: 'tabler:search' },
+      { title: 'Client Retention Predictor', description: 'Proactively engage at-risk clients, increase upsell revenue.', icon: 'tabler:refresh' },
+      { title: 'Task & Resource Optimiser', description: 'Improves project margins, prevents bottlenecks.', icon: 'tabler:tools' },
+      { title: 'AI-Generated Marketing & Automation Workflows', description: 'Frees 5–10 hours/week, increases engagement 15–25%.', icon: 'tabler:brand-google' },
+    ]}
+  />
+
+  <!-- Grouped Features / Modular Version -->
+  <Features2
+    id="features-grouped"
+    tagline="Key Modules"
+    title="Grouped Features for Quick Overview"
+    subtitle="Modules summarising main benefits"
+    items={[
+      { title: 'Client & Operations Automation', description: 'Client lifecycle management, proposal & contract automation, and operations health check.', icon: 'tabler:settings-automation' },
+      { title: 'Revenue & Performance Insights', description: 'Revenue dashboards, KPI insights, predictive lead scoring, and client retention analytics.', icon: 'tabler:chart-bar' },
+      { title: 'Team Productivity & Knowledge', description: 'Document management, time/resource optimisation, staff training, AI summarisation, and marketing automation.', icon: 'tabler:users' },
+    ]}
+  />
+
+  <!-- Steps / How It Works -->
+  <Steps
+    title="How Our Package Works"
+    items={[
+      { title: 'Step 1: Assessment & Audit', description: 'We evaluate your current operations, systems, and workflows.', icon: 'tabler:search' },
+      { title: 'Step 2: Implementation', description: 'Deploy modern tools including CRM, dashboards, portals, and AI modules.', icon: 'tabler:settings' },
+      { title: 'Step 3: Training & Adoption', description: 'Ensure your team gets up to speed and starts seeing results.', icon: 'tabler:school' },
+      { title: 'Step 4: Measure ROI', description: 'Track time saved, revenue increased, and productivity improvements.', icon: 'tabler:trending-up' },
+    ]}
+  />
+
+  <!-- DTFF Co-Funding Call to Action -->
+  <CallToAction
+    actions={[
+      { variant: 'primary', text: 'Reserve Your Grant Slot', href: '#eligibility' },
+    ]}
+  >
+    <Fragment slot="title">
+      Original Price £28k → Your Cost £10–15k
+    </Fragment>
+    <Fragment slot="subtitle">
+      Co-funded by the Northern Ireland DTFF grant. Hurry! Limited slots and grant deadline approaching.
+    </Fragment>
+  </CallToAction>
+
+  <!-- Eligibility CTA -->
+  <CallToAction
+    id="eligibility"
+    actions={[
+      { variant: 'primary', text: 'Book 20-min Eligibility Call', href: 'https://calendly.com/your-link', target: '_blank' },
+    ]}
+  >
+    <Fragment slot="title">Check if Your Business Qualifies</Fragment>
+    <Fragment slot="subtitle">
+      See your ROI potential and secure your DTFF co-funding before slots run out!
+    </Fragment>
+  </CallToAction>
+
+  <!-- Testimonials / ROI Stats -->
+  <Stats
+    stats={[
+      { title: 'Time Saved per Week', amount: '10+ hours' },
+      { title: 'Increase in Repeat Business', amount: '20%' },
+      { title: 'Revenue Growth', amount: '15–25%' },
+      { title: 'Project Margin Improvement', amount: '10–15%' },
+    ]}
+  />
+
+</Layout>
