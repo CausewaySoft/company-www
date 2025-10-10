@@ -5,6 +5,7 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import Image from '~/components/common/Image.astro';
 import Button from '~/components/ui/Button.astro';
 import ItemGrid from '~/components/ui/ItemGrid.astro';
+import { YouTube } from 'astro-embed';
 
 const {
   title = await Astro.slots.render('title'),
@@ -14,6 +15,7 @@ const {
   callToAction,
   items = [],
   columns,
+  video = '',
   image = await Astro.slots.render('image'),
   isReversed = false,
   isAfterContent = false,
@@ -88,6 +90,12 @@ const {
                    {...image}
                 />
               )}
+            </div>
+          )
+          ||
+          video && (
+            <div class="relative m-auto h-full max-w-4xl">
+              <YouTube {...video} class="rounded-md shadow-lg" />
             </div>
           )
         }

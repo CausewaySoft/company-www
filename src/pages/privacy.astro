@@ -22,6 +22,14 @@ export const metadata = {
   // keywords: "custom websites, responsive design, website development, SEO websites, high-performance web"
 };
 
+
+export const prerender = true; // optional if you want static HTML
+export const pageOptions = {
+  // This makes it build as privacy.html
+  build: { htmlFileName: 'privacy.html' }
+};
+
+
 // SEO-Rich Use Case Images & Alt Text Suggestions:
 // 	1.	Modern responsive website homepage on desktop and mobile — “Responsive business website displayed on desktop and smartphone screens”
 // 	2.	Website speed optimization dashboard — “Website performance metrics showing fast load times and SEO scores”
