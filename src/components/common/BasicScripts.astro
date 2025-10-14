@@ -148,13 +148,25 @@ import { UI } from 'astrowind:config';
     const decoded_phone = atob(encoded_phone);
 
     document.querySelectorAll('.emailLink').forEach(function(elem){
+      let classList = elem.className;
+      
       elem.href = 'mailto:' + decoded_email;
-      elem.textContent = decoded_email;
+
+      if (!classList.includes('dont-replace-title')) {
+        elem.textContent = decoded_email;
+      }
     });
 
     document.querySelectorAll('.phoneLink').forEach(function(elem){
+      let classList = elem.className;
+
       elem.href = 'tel:' + decoded_phone;
-      elem.textContent = decoded_phone;
+      
+      //elem.textContent = decoded_phone;
+
+      if (!classList.includes('dont-replace-title')) {
+        elem.textContent = decoded_phone;
+      }
     });
 
 

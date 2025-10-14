@@ -1,0 +1,103 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+
+const metadata = {
+  title: 'Contact',
+};
+---
+
+<Layout metadata={metadata}>
+  <!-- HeroText Widget ******************* -->
+
+  <HeroText tagline="Contact" title="Let's Connect!" />
+
+  <ContactUs
+    id="form"
+    title="Drop us a message today!"
+    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Name',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+      },
+    ]}
+    textarea={{
+      label: 'Message',
+    }}
+    disclaimer={{
+      label:
+        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
+    }}
+    description="Our support team typically responds within 24 business hours."
+  />
+
+  <!-- Features2 Widget ************** -->
+
+  <Features2
+    title="We are here to help!"
+    items={[
+      {
+        title: 'Phone',
+        description: 'anti-spam protection, please enable javascript...',
+        icon: 'tabler:headset',
+        classes: {ctaLinks: 'phoneLink'},
+        link: '/'
+      },
+      {
+        title: 'Email',
+        description: 'anti-spam protection, please enable javascript...',
+        icon: 'tabler:mail',
+        classes: {ctaLinks: 'emailLink'},
+        link: '/',
+      },
+      {
+        title: 'Book a Meeting',
+        description: 'Schedule a Video-Call consultation with us.',
+        icon: 'tabler:calendar',
+        link: 'https://calendly.com/causewaysoft',
+      },
+    ]}
+  />
+
+  <Features2
+    title="We are social! Give us a follow!"
+    columns={4}
+    items={[
+      {
+        title: 'LinkedIn',
+        description: '@causewaysoft',
+        link: 'https://www.linkedin.com/company/causewaysoft',
+        icon: 'tabler:brand-linkedin',
+      },
+      {
+        title: 'Instagram',
+        description: '@causewaysoft',
+        link: 'https://www.instagram.com/causewaysoft',
+        icon: 'tabler:brand-instagram',
+      },
+      {
+        title: 'Facebook',
+        description: '@causewaysoft',
+        link: 'https://www.facebook.com/CausewaySoft',
+        icon: 'tabler:brand-facebook',
+      },
+      {
+        title: 'X',
+        description: '@causewaysoft',
+        link: 'https://x.com/CausewaySoft',
+        icon: 'tabler:brand-x',
+      },
+    ]}
+  />
+
+
+</Layout>
