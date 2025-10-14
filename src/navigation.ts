@@ -106,7 +106,7 @@ export const headerData = {
     },
 
   ],
-  actions: [{ text: 'Contact Us', href: '#contact'}],
+  actions: [{ text: 'Contact Us', href: '/contact'}],
 };
 
 export const footerData = {
