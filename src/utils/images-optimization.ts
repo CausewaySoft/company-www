@@ -167,6 +167,7 @@ const getStyle = ({
     styleEntries.push(['max-height', '100%']);
     styleEntries.push(['object-fit', 'contain']);
     styleEntries.push(['aspect-ratio', aspectRatio ? `${aspectRatio}` : undefined]);
+    styleEntries.push(['object-position', 'bottom right']); // mainly used in the features cards items for Solutions page
   }
   if (layout === 'cover') {
     styleEntries.push(['max-width', '100%']);
