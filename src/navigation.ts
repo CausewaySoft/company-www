@@ -37,29 +37,7 @@ export const headerData = {
     },
     {
       text: 'Home',
-      href: '/',
-      links: [
-        {
-          text: 'Our Services',
-          href: '/#services',
-        },
-        {
-          text: 'About Us',
-          href: '/#about-us',
-        },
-        {
-          text: 'Our Process',
-          href: '/#our-process',
-        },
-        {
-          text: 'FAQ',
-          href: '/#faq',
-        },
-        {
-          text: 'Contact Us',
-          href: '/#contact',
-        },
-      ],
+      href: '/'
     },
     {
       text: 'Services',
@@ -94,6 +72,16 @@ export const headerData = {
           href: '/services/chrome-extensions',
           icon: 'tabler:brand-chrome',
         }
+      ],
+    },
+    {
+      text: 'Solutions',
+      href: '/solutions',
+      links: [
+        {
+          text: 'Healthcare',
+          href: '/solutions/healthcare',
+        },
       ],
     },
     {
