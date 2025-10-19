@@ -10,6 +10,7 @@ import Content from '~/components/widgets/Content.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
   title: 'Solutions for Healthcare | CausewaySoft',
@@ -24,17 +25,19 @@ const metadata = {
   <Hero
     tagline="Solutions for healthcare"
     actions={[
-      { variant: 'primary', text: 'Try it out', href: '' },
-      { text: 'Contact Sales', href: '#contact' },
+      { variant: 'primary', text: 'Book Your Free Consultation', href: 'https://calendly.com/causewaysoft' },
+      { text: 'Try a Demo', href: '/contact' },
     ]}
     image={{ src: '~/assets/images/hero-team-dashboard.jpg', alt: 'Professional team using dashboards' }}
   >
     <Fragment slot="title">
-      Improve productivity and create better patient experiences with our AI-powered Digital Operations Hub.
+      Transform Your Medical Practice with Smart Digital Systems
     </Fragment>
 
     <Fragment slot="subtitle">
-      <strong>Enable your teams to focus on creating more impact - and keep your data secure.</strong>
+      <strong>Automate admin. Improve patient experience. Grow your clinic.</strong>
+      <br/>
+      DTFF funding may cover up to 70% of your digital transformation project.
     </Fragment>
   </Hero>
 
@@ -42,69 +45,80 @@ const metadata = {
     title="Deadline: < 2 weeks left! "
    
   -->
+  
   <Note
-    description="Elegible for <b>£20k funding</b> from DTFF. Modernise operations with minimal upfront cost. <br>Book a free consultation call."
+    description="Eligible for up to <b>£20,000</b> in DTFF funding. Empower your healthcare teams with secure, enterprise-grade AI tools designed to enhance productivity and patient care."
   />
 
   <!-- 
-      id="key-features"
-    title="Key Features"
-    subtitle="What you get with our Digital Operations Hub"
-    tagline="Designed for healthcare teams"
+    subtitle='Empower your healthcare teams with secure, enterprise-grade AI tools designed to enhance productivity and patient care.'
   -->
-  <FeatureList
+  <!-- PROBLEM STATEMENT -->
+  <Content
+    tagline="Challenge"
+    title="Your Clinic is Running on Too Many Disconnected Tools…"
+  >
+    <Fragment slot="content">
+      <p>Booking systems, spreadsheets, CRMs… your team spends more time managing tools than patients.</p>
+      <p>We build a single, intelligent system to manage patients, admin, and data — all in one place.</p>
+    </Fragment>
+  </Content>
 
-    columns={4}
+  <!-- WHAT YOU'LL GAIN -->
+  <Features
+    title="What You’ll Gain"
     items={[
-      { 
-        title: 'Automate documentation and admin tasks to improve care quality',
-        image: {
-          src: '~/assets/images/solutions/healthcare/feature-1.png',
-          alt: '',
-        }
-    },
-      { 
-        title: 'Improve the care journey for patients and clinicians through AI-assisted tools',
-        image: {
-          src: '~/assets/images/solutions/healthcare/feature-2.png',
-          alt: '',
-        }
+      {
+        title: 'Streamlined Operations',
+        description: 'Replace disconnected apps and paperwork with a single system that connects appointments, patient communications, billing, reporting, CRM and follow-ups.',
+        icon: 'tabler:stack-2'
       },
-      { 
-        title: 'Connect ChatGPT to your internal systems like Google Drive, Outlook and more',
-        image: {
-          src: '~/assets/images/solutions/healthcare/feature-3.png',
-          alt: '',
-        }
+      {
+        title: 'Automation & AI',
+        description: 'Automate reminders, post-visit messages, AI-powered triage/chat tools, and lead tracking for private consultations.',
+        icon: 'tabler:robot'
       },
-      { 
-        title: 'Streamline clinical and operational workflows across teams',
-        image: {
-          src: '~/assets/images/solutions/healthcare/feature-4.png',
-          alt: '',
-        }
-      }
+      {
+        title: 'Data You Can Trust',
+        description: 'All your key numbers — patient volume, revenue, and no-shows — in one live dashboard. No more exporting CSVs.',
+        icon: 'tabler:gauge'
+      },
     ]}
   />
 
   <!-- SOLUTION / DIGITAL OPERATIONS HUB (DETAILED FEATURES) -->
   <Features
-    id="digital-operations-hub"
-    tagline="Our Solution"
-    title="Our Solution - The Digital Operations Hub"
-    subtitle="A £25-28k package built for professional services firms. Measurable outcomes, not shiny toys."
+    title="Meet the Digital Operations Hub"
     items={[
-      { 
-        title: 'Smart Client Portal',
-        description: 'Secure document sharing, client task tracking, and e-signatures.',
-        icon: 'tabler:folder', 
-        image: 'https://images.unsplash.com/photo-1758691462370-cef1774278cd?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=2532' },
-      { title: 'Workflow Automation', description: 'Streamline lead → project → invoice processes; save hours per week.', icon: 'tabler:automatic-gearbox' },
-      { title: 'Analytics Dashboard', description: 'Real-time performance tracking for staff, clients, and projects.', icon: 'tabler:chart-line' },
-      { title: 'Integrated CRM', description: 'Custom-built for your firm’s processes, not a generic off-the-shelf tool.', icon: 'tabler:users' },
-      { title: 'AI Document Assistant', description: 'Summarise, flag, and analyse client documents automatically.', icon: 'tabler:robot' },
-      { title: 'Compliance & Audit Automation', description: 'Track GDPR, deadlines and quality control effortlessly.', icon: 'tabler:shield-check' },
-      { title: 'Collaboration Layer', description: 'Multi-user access, messaging and shared workspaces with clients.', icon: 'tabler:message-circle' },
+      { title: 'Patient Management', description: 'Seamless appointments, reminders, and follow-ups.', icon: 'tabler:calendar-check' },
+      { title: 'Automation', description: 'AI-powered workflows for repetitive admin.', icon: 'tabler:automatic-gearbox' },
+      { title: 'Analytics', description: 'Real-time dashboards for insights and growth.', icon: 'tabler:chart-line' },
+      { title: 'Compliance', description: 'Secure, GDPR-compliant systems and processes.', icon: 'tabler:shield-check' },
+    ]}
+  />
+
+
+  <!-- Features2 Widget ************** -->
+  <Features2
+  columns={4}
+    title="Security & Compliance You Can Trust"
+    items={[
+      {
+        title: 'We never train on your documents or patient data',
+        icon: 'tabler:file-text-shield',
+      },
+      {
+        title: 'Your confidential information remains private and protected',
+        icon: 'tabler:lock-password',
+      },
+      {
+        title: 'Data encryption at rest and in transit',
+        icon: 'tabler:cloud-lock',
+      },
+      {
+        title: 'Multi-factor authentication keeps your account secure',
+        icon: 'tabler:key',
+      },
     ]}
   />
 
@@ -125,24 +139,21 @@ const metadata = {
   <!-- BENEFITS / OUTCOMES (STATS & CALLS) -->
   <Stats
     stats={[
-      { title: 'Time Savings', amount: '30–50%' },
-      { title: 'Accuracy & Compliance', amount: 'Reduced errors' },
-      { title: 'Business Intelligence', amount: 'Real-time dashboards' },
-      { title: 'Client Experience', amount: 'Modern portals' },
+      { title: 'of users saved at least 2 hours/week', amount: '88%' },
+      { title: 'saw productivity gains', amount: '92%' },
+      { title: 'experienced greater innovation and creativity', amount: '75%' },
     ]}
   />
 
-
-  <CallToAction
-    actions={[
-      { variant: 'primary', text: '📅 Book Your Free DTFF Consultation', href: 'https://calendly.com/causewaysoft' },
-    ]}
+  <!-- TESTIMONIAL -->
+  <Content
+    tagline="Testimonial"
+    title="What our clients say"
   >
-    <Fragment slot="title">Ready to Transform Your Business?</Fragment>
-    <Fragment slot="subtitle">
-      The DTFF gives you a fast route to modernise operations — but the deadline is less than <strong>2 weeks away</strong>. Book a free consultation now.
+    <Fragment slot="content">
+      <blockquote>“The new system transformed how we manage patients — our team spends more time caring and less time chasing data.” — Dr. A, Private GP</blockquote>
     </Fragment>
-  </CallToAction>
+  </Content>
 
 
   <!-- MINI CASE -->
@@ -162,12 +173,12 @@ const metadata = {
 
   <!-- HOW IT WORKS (STEPS) -->
   <Steps
-    title="How we deliver your Digital Operations Hub"
+    title="How It Works: 4 Simple Steps"
     items={[
-      { title: 'Assessment & Audit', description: 'We evaluate systems, processes and opportunities.', icon: 'tabler:search' },
-      { title: 'Implementation', description: 'Deploy CRM, portal, dashboard and AI modules.', icon: 'tabler:settings' },
-      { title: 'Training & Adoption', description: 'Ensure staff adoption and measure early wins.', icon: 'tabler:school' },
-      { title: 'Measure ROI', description: 'Track outcomes and iterate for continuous improvement.', icon: 'tabler:trending-up' },
+      { title: 'Discovery Session', description: 'Map workflows & identify automation opportunities.', icon: 'tabler:search' },
+      { title: 'System Design', description: 'Select the right tools & integrations for your clinic.', icon: 'tabler:layout' },
+      { title: 'Build & Integrate', description: 'Connect systems and create a unified portal/dashboard.', icon: 'tabler:plug-connected' },
+      { title: 'Training & Handover', description: 'Empower your team to manage the new system confidently.', icon: 'tabler:school' },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=60',
@@ -176,98 +187,58 @@ const metadata = {
   />
 
 
-  <!-- TAILORED SOLUTIONS FOR SECTORS -->
-  <section id="sectors" class="relative py-12">
-    <div class="container mx-auto px-4">
-      <h2 class="text-2xl font-semibold mb-6">Tailored Solutions for Your Sector</h2>
 
-      <div class="grid md:grid-cols-3 gap-6">
-        <div class="p-6 bg-white rounded-lg shadow">
-          <h3 class="font-bold text-lg mb-2">For Accountants</h3>
-          <p class="mb-3">Streamline client management, reporting, and compliance.</p>
-          <ul class="list-disc list-inside text-sm space-y-1">
-            <li>Automated invoicing, reminders, and reconciliation</li>
-            <li>Client dashboards for real-time financial tracking</li>
-            <li>AI-powered report generation and anomaly detection</li>
-          </ul>
-          <!-- <p class="mt-4 italic text-sm">Figma mockup placeholder: accountant dashboard animation / workflow screenshot</p> -->
-        </div>
+  <!-- FUND YOUR TRANSFORMATION -->
+  <Content
+    tagline="Funding"
+    title="Fund Your Transformation with DTFF"
+  >
+    <Fragment slot="content">
+      <p>Up to <strong>£20,000</strong> available to help modernize your clinic.</p>
+      <p>We guide you through the funding process and ensure your project qualifies.</p>
+    </Fragment>
+  </Content>
 
-        <div class="p-6 bg-white rounded-lg shadow">
-          <h3 class="font-bold text-lg mb-2">For Solicitors</h3>
-          <p class="mb-3">Simplify case management and document workflows.</p>
-          <ul class="list-disc list-inside text-sm space-y-1">
-            <li>Secure client portal for document sharing</li>
-            <li>Automated case updates, deadlines & task notifications</li>
-            <li>AI-assisted document review and summarisation</li>
-          </ul>
-          <!-- <p class="mt-4 italic text-sm">Figma mockup placeholder: solicitor portal animation / workflow screenshot</p> -->
-        </div>
-
-        <div class="p-6 bg-white rounded-lg shadow">
-          <h3 class="font-bold text-lg mb-2">Other Professional Services</h3>
-          <p class="mb-3">Adapting solutions for consultancies, marketing agencies and more.</p>
-          <ul class="list-disc list-inside text-sm space-y-1">
-            <li>Custom reporting and automated client workflows</li>
-            <li>Shared client portals and collaboration tools</li>
-            <li>Rapid deployment to fit tight DTFF timelines</li>
-          </ul>
-          <!-- <p class="mt-4 italic text-sm">Figma mockup placeholder: generic dashboard animation / workflow screenshot</p> -->
-        </div>
-      </div>
-    </div>
-  </section>
-
-    <!-- FAQ -->
-  <FAQs
-    title="FAQ"
-    subtitle="Common questions about DTFF and our packages"
-    tagline="Frequently Asked"
-    items={[
-      { title: 'Who is eligible?', description: 'Businesses trading 12+ months, 10–249 employees, Northern Ireland-based.' },
-      { title: 'How much funding can I get?', description: '£5,000–£20,000 (up to 70% of project costs).' },
-      { title: 'What technologies are supported?', description: 'AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain, and more.' },
-      { title: 'How fast can the project be delivered?', description: 'Our packages are designed for rapid deployment to meet DTFF timelines.' },
-    ]}
-  />
 
    <!-- WHAT IS DTFF -->
   <Content
     id="what-is-dtff"
     tagline="What is the DTFF?"
-    title="What is the Digital Transformation Flexible Fund (DTFF)?"
+    title="How to use the Digital Transformation Flexible Fund (DTFF) for your Medical Practice?"
     video={{
       id: 'TBNTAH6w_9Q'
     }}
     >
     <Fragment slot="content">
       <p>
-        The <strong>DTFF grant</strong> gives Northern Ireland SMEs up to <strong>£20,000</strong> to invest in technology and software that accelerates growth and efficiency.
+        The <strong>DTFF grant</strong> gives Northern Ireland micro and small businesses up to <strong>£20,000</strong> to invest in technology and software that accelerates growth and efficiency.
       </p>
 
       <ul class="list-disc list-inside mt-4 space-y-2">
         <li>Covers up to <strong>70%</strong> of project costs</li>
-        <li>Eligible for <strong>Micro</strong> (1-10 FTE) and <strong>Small</strong> (10-49 FTEs) Northern Irish businesses trading for <strong>12+ months</strong></li>
-        <li>Supports technologies such as <em>AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain</em>, and more</li>
+        <li>Eligible for <strong>Micro</strong> and <strong>Small</strong> (1-49 FTEs) Northern Irish businesses trading for <strong>12+ months</strong>, and who are <strong>VAT registered</strong></li>
+        <li></li>
       </ul>
 
       <p class="mt-4">
-        <strong>Why this matters:</strong> Most small businesses still struggle with manual processes and legacy systems. DTFF funding lets you implement modern solutions without shouldering the full cost.
+        The £20K grant supports digital transformation of your practice using modern technologies such as <em>AI, workflow automation, analytics dashboards, blockchain</em>, which is exactly the technologies we took to create the Digital Operations Hub powering your practice.
+      </p>
+      <p class="mt-4">
+        <strong>Why this matters:</strong> Most small medical practices still struggle with manual processes and legacy systems. DTFF funding lets you implement modern solutions across your entire practice without shouldering the full cost.
       </p>
     </Fragment>
   </Content>
 
 
-  <!-- FINAL CTA with urgency -->
+  <!-- FINAL CTA -->
   <CallToAction
     actions={[
-      { variant: 'primary', text: '📅 Book Your Free DTFF Consultation', href: 'https://calendly.com/causewaysoft' },
+      { variant: 'primary', text: 'Book a Free Consultation', href: 'https://calendly.com/causewaysoft' },
+      { text: 'Start Your Transformation Today', href: '/contact' },
     ]}
   >
-    <Fragment slot="title">Secure Your DTFF-Funded Transformation</Fragment>
-    <Fragment slot="subtitle">
-      Limited slots available. Deadline: <strong>less than 2 weeks!</strong> Reserve your free consultation and start the application process.
-    </Fragment>
+    <Fragment slot="title">Ready to Grow Your Clinic?</Fragment>
+    <Fragment slot="subtitle">DTFF funding can cover up to 70% of your project costs.</Fragment>
   </CallToAction>
 
 </Layout>
