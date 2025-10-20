@@ -173,7 +173,11 @@ import { UI } from 'astrowind:config';
     //
     // Send Form
     //
-    document.getElementById('contact-form').addEventListener('submit', function (e) {
+    const contactForm = document.getElementById('contact-form');
+
+    if (!contactForm) return;
+    
+    contactForm.addEventListener('submit', function (e) {
       e.preventDefault(); // prevent default form submission
 
       const form = e.target;
