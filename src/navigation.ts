@@ -32,12 +32,12 @@ export const headerData = {
     //   ],
     // },
     {
-      text: 'Blog',
-      href: '/blog',
-    },
-    {
       text: 'Home',
       href: '/'
+    },
+    {
+      text: 'Blog',
+      href: '/blog',
     },
     {
       text: 'Services',
