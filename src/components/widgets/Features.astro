@@ -3,6 +3,8 @@ import WidgetWrapper from '~/components/ui/WidgetWrapper.astro';
 import ItemGrid from '~/components/ui/ItemGrid.astro';
 import Headline from '~/components/ui/Headline.astro';
 import type { Features as Props } from '~/types';
+import Image from '~/components/common/Image.astro';
+import { YouTube } from 'astro-embed';
 
 const {
   title = await Astro.slots.render('title'),
@@ -10,7 +12,8 @@ const {
   tagline = await Astro.slots.render('tagline'),
   items = [],
   columns = 2,
-
+  image = await Astro.slots.render('image'),
+  video = '',
   defaultIcon,
 
   id,
@@ -22,6 +25,27 @@ const {
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
+  
+  {
+    image && (
+      <div class="relative m-auto h-full max-w-4xl">
+        {typeof image === 'string' ? (
+          <Fragment set:html={image} />
+        ) : (
+          <Image
+            width={500}
+            height={500}
+            widths={[400, 768]}
+            sizes="(max-width: 768px) 100vw, 432px"
+            layout="responsive"
+            class="grayscale hover:grayscale-0 rounded-md shadow-lg"
+              {...image}
+          />
+        )}
+      </div>
+    )
+  }
+
   <ItemGrid
     items={items}
     columns={columns}
@@ -33,4 +57,5 @@ const {
       ...((classes?.items as Record<string, never>) ?? {}),
     }}
   />
+
 </WidgetWrapper>

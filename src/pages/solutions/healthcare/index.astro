@@ -3,40 +3,53 @@ import Layout from '~/layouts/LandingLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import FeatureList from '~/components/widgets/FeatureCardsSimple.astro';
+// import Features from '~/components/widgets/Features.astro';
+// import FeatureList from '~/components/widgets/FeatureCardsSimple.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
+import Content from '~/components/widgets/ContentSingleColumn.astro';
+// import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Features2 from '~/components/widgets/Features2.astro';
+import Image from '~/components/common/Image.astro';
+import Features from '~/components/widgets/Features.astro';
+import Features3 from '~/components/widgets/Features3.astro';
 
 const metadata = {
   title: 'Solutions for Healthcare | CausewaySoft',
-  description: 'Transform your healthcare practice with our tailored digital solutions. Enhance patient care, streamline operations, and improve outcomes with CausewaySoft.',
+  description:
+    'Transform your healthcare practice with our tailored digital solutions. Enhance patient care, streamline operations, and improve outcomes with CausewaySoft.',
   ignoreTitleTemplate: true,
 };
 ---
 
 <Layout metadata={metadata}>
-
-  <!-- HERO -->
+  <!--
+   HERO 
+   
+   image={{ src: '~/assets/images/solutions/healthcare/hero-img-showcase.png', alt: 'Professional team using dashboards' }}
+   -->
   <Hero
     tagline="Solutions for healthcare"
     actions={[
-      { variant: 'primary', text: 'Book Your Free Consultation', href: 'https://calendly.com/causewaysoft' },
-      { text: 'Try a Demo', href: '/contact' },
+      {
+        variant: 'primary',
+        text: 'Book Your Free Consultation',
+        href: 'https://calendly.com/causewaysoft',
+        target: '_blank',
+        icon: 'tabler:calendar',
+      },
+      {
+        text: 'Learn more',
+        href: '#stop-using-old-tools',
+      },
     ]}
-    image={{ src: '~/assets/images/hero-team-dashboard.jpg', alt: 'Professional team using dashboards' }}
   >
-    <Fragment slot="title">
-      Transform Your Medical Practice with Smart Digital Systems
-    </Fragment>
+    <Fragment slot="title"> Transform Your Medical Practice with Smart Digital Systems </Fragment>
 
     <Fragment slot="subtitle">
       <strong>Automate admin. Improve patient experience. Grow your clinic.</strong>
-      <br/>
+      <br />
       DTFF funding may cover up to 70% of your digital transformation project.
     </Fragment>
   </Hero>
@@ -45,7 +58,7 @@ const metadata = {
     title="Deadline: < 2 weeks left! "
    
   -->
-  
+
   <Note
     description="Eligible for up to <b>£20,000</b> in DTFF funding. Empower your healthcare teams with secure, enterprise-grade AI tools designed to enhance productivity and patient care."
   />
@@ -55,52 +68,69 @@ const metadata = {
   -->
   <!-- PROBLEM STATEMENT -->
   <Content
-    tagline="Challenge"
-    title="Your Clinic is Running on Too Many Disconnected Tools…"
+    id="stop-using-old-tools"
+    tagline="Stop Juggling Tools. Focus on Patients."
+    title="Is your Clinic running on too many Disconnected Tools?"
+    subtitle="Booking systems, spreadsheets, EHRs, EMRs, CRMs… your team spends more time managing tools than patients. It doesn't have to be this way!"
   >
     <Fragment slot="content">
-      <p>Booking systems, spreadsheets, CRMs… your team spends more time managing tools than patients.</p>
-      <p>We build a single, intelligent system to manage patients, admin, and data — all in one place.</p>
+      <h3 class="mt-4 max-w-3xl mx-auto font-bold">
+        We guide practices in replacing outdated tools with a unified, digital system.
+      </h3>
+      <p>Safely, Securely, and Seamlessly.</p>
+      <!-- <Image src="~/assets/images/solutions/healthcare/hero-img-showcase.png" class="my-4" alt="Hero Image Showcase" /> -->
+      <!-- <p>Contact us to find out how we can transform your medical practice with a modern intelligent system for managing patients, admin, and data.</p> -->
     </Fragment>
   </Content>
 
-  <!-- WHAT YOU'LL GAIN -->
-  <Features
-    title="What You’ll Gain"
-    items={[
-      {
-        title: 'Streamlined Operations',
-        description: 'Replace disconnected apps and paperwork with a single system that connects appointments, patient communications, billing, reporting, CRM and follow-ups.',
-        icon: 'tabler:stack-2'
-      },
-      {
-        title: 'Automation & AI',
-        description: 'Automate reminders, post-visit messages, AI-powered triage/chat tools, and lead tracking for private consultations.',
-        icon: 'tabler:robot'
-      },
-      {
-        title: 'Data You Can Trust',
-        description: 'All your key numbers — patient volume, revenue, and no-shows — in one live dashboard. No more exporting CSVs.',
-        icon: 'tabler:gauge'
-      },
-    ]}
-  />
-
-  <!-- SOLUTION / DIGITAL OPERATIONS HUB (DETAILED FEATURES) -->
-  <Features
+  <!-- SOLUTION / DIGITAL OPERATIONS HUB (DETAILED FEATURES) 
+   
+  image={{
+      src: '~/assets/images/solutions/healthcare/hero-img-showcase.png',
+      alt: 'Medical Clinic Dashboard powered by Artificial Intelligence tools example',
+    }}
+  
+  -->
+  <Features3
+    columns={2}
+    tagline="Modern Tools for Modern Clinics"
     title="Meet the Digital Operations Hub"
+    
+    classes={{
+      headline: {
+        titleClass: 'asdfasdf'
+      },
+      
+    }}
     items={[
-      { title: 'Patient Management', description: 'Seamless appointments, reminders, and follow-ups.', icon: 'tabler:calendar-check' },
-      { title: 'Automation', description: 'AI-powered workflows for repetitive admin.', icon: 'tabler:automatic-gearbox' },
-      { title: 'Analytics', description: 'Real-time dashboards for insights and growth.', icon: 'tabler:chart-line' },
-      { title: 'Compliance', description: 'Secure, GDPR-compliant systems and processes.', icon: 'tabler:shield-check' },
+      {
+        title: 'Save Time & Reduce Admin Stress',
+        description:
+          'Automate repetitive tasks, reminders, follow-ups, and AI-powered triage — freeing your team to focus on patients.',
+        icon: 'tabler:mood-dollar',
+      },
+      {
+        title: 'Know Your Numbers Instantly',
+        description:
+          'Access real-time dashboards with patient volume, revenue, no-shows, and more — no manual reports or CSV exports.',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Simplify Patient Management',
+        description: 'Handle appointments, communications, billing, and CRM in one seamless system.',
+        icon: 'tabler:settings-automation',
+      },
+      {
+        title: 'Operate Safely & Confidently',
+        description: 'Keep patient data secure with GDPR-compliant systems and workflows.',
+        icon: 'tabler:shield-check',
+      },
     ]}
   />
-
 
   <!-- Features2 Widget ************** -->
   <Features2
-  columns={4}
+    columns={4}
     title="Security & Compliance You Can Trust"
     items={[
       {
@@ -137,24 +167,23 @@ const metadata = {
   /> -->
 
   <!-- BENEFITS / OUTCOMES (STATS & CALLS) -->
-  <Stats
+  <!-- <Stats
     stats={[
       { title: 'of users saved at least 2 hours/week', amount: '88%' },
       { title: 'saw productivity gains', amount: '92%' },
       { title: 'experienced greater innovation and creativity', amount: '75%' },
     ]}
-  />
+  /> -->
 
   <!-- TESTIMONIAL -->
-  <Content
+  <!-- <Content
     tagline="Testimonial"
     title="What our clients say"
   >
     <Fragment slot="content">
       <blockquote>“The new system transformed how we manage patients — our team spends more time caring and less time chasing data.” — Dr. A, Private GP</blockquote>
     </Fragment>
-  </Content>
-
+  </Content> -->
 
   <!-- MINI CASE -->
   <!-- <Content
@@ -170,75 +199,72 @@ const metadata = {
     }}
   /> -->
 
-
   <!-- HOW IT WORKS (STEPS) -->
   <Steps
     title="How It Works: 4 Simple Steps"
     items={[
-      { title: 'Discovery Session', description: 'Map workflows & identify automation opportunities.', icon: 'tabler:search' },
-      { title: 'System Design', description: 'Select the right tools & integrations for your clinic.', icon: 'tabler:layout' },
-      { title: 'Build & Integrate', description: 'Connect systems and create a unified portal/dashboard.', icon: 'tabler:plug-connected' },
-      { title: 'Training & Handover', description: 'Empower your team to manage the new system confidently.', icon: 'tabler:school' },
+      {
+        title: 'Discovery Sessions',
+        description: 'Map workflows & identify bottlenecks and automation opportunities.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'System Design',
+        description: 'Select the right tools & integrations for your clinic.',
+        icon: 'tabler:layout',
+      },
+      {
+        title: 'Build & Integrate',
+        description: 'Connect systems and create a unified portal/dashboard.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Training & Handover',
+        description: 'Empower your team to manage the new system confidently.',
+        icon: 'tabler:school',
+      },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=60',
-      alt: 'Process steps illustration',
+      alt: '',
     }}
   />
 
-
-
-  <!-- FUND YOUR TRANSFORMATION -->
+  <!-- FUND YOUR TRANSFORMATION with DTFF -->
   <Content
-    tagline="Funding"
-    title="Fund Your Transformation with DTFF"
+    tagline="Get up to £20k Funding"
+    title="Fund the Digital Transformation of your Medical Practice with DTFF"
+    video={{
+      id: 'TBNTAH6w_9Q',
+    }}
   >
     <Fragment slot="content">
-      <p>Up to <strong>£20,000</strong> available to help modernize your clinic.</p>
-      <p>We guide you through the funding process and ensure your project qualifies.</p>
-    </Fragment>
-  </Content>
-
-
-   <!-- WHAT IS DTFF -->
-  <Content
-    id="what-is-dtff"
-    tagline="What is the DTFF?"
-    title="How to use the Digital Transformation Flexible Fund (DTFF) for your Medical Practice?"
-    video={{
-      id: 'TBNTAH6w_9Q'
-    }}
-    >
-    <Fragment slot="content">
       <p>
-        The <strong>DTFF grant</strong> gives Northern Ireland micro and small businesses up to <strong>£20,000</strong> to invest in technology and software that accelerates growth and efficiency.
-      </p>
+        Modernize your clinic with DTFF funding - up to <strong>£20,000</strong> to invest in advanced technology and software
+        that boosts your growth and efficiency. We make the application simple and ensure your project qualifies.
 
-      <ul class="list-disc list-inside mt-4 space-y-2">
-        <li>Covers up to <strong>70%</strong> of project costs</li>
-        <li>Eligible for <strong>Micro</strong> and <strong>Small</strong> (1-49 FTEs) Northern Irish businesses trading for <strong>12+ months</strong>, and who are <strong>VAT registered</strong></li>
-        <li></li>
-      </ul>
+        <br /><br />
+        <strong>Eligible Medical Practices:</strong>
+        <ul class="list-disc list-inside my-2">
+          <li>Micro & small businesses in Northern Ireland (1–49 employees)</li>
+          <li>Trading 12+ months and VAT registered</li>
+          <li>Covers up to 70% of project costs</li>
+        </ul>
 
-      <p class="mt-4">
-        The £20K grant supports digital transformation of your practice using modern technologies such as <em>AI, workflow automation, analytics dashboards, blockchain</em>, which is exactly the technologies we took to create the Digital Operations Hub powering your practice.
-      </p>
-      <p class="mt-4">
-        <strong>Why this matters:</strong> Most small medical practices still struggle with manual processes and legacy systems. DTFF funding lets you implement modern solutions across your entire practice without shouldering the full cost.
+        <br/>
+        <strong>Use funding to implement AI, workflow automation, analytics dashboards, and other modern technologies—like
+          those powering our Digital Operations Hub.</strong>
       </p>
     </Fragment>
   </Content>
-
 
   <!-- FINAL CTA -->
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Book a Free Consultation', href: 'https://calendly.com/causewaysoft' },
-      { text: 'Start Your Transformation Today', href: '/contact' },
+      { variant: 'primary', text: 'Book a Free Consultation', href: 'https://calendly.com/causewaysoft', icon: 'tabler:calendar'},
     ]}
   >
     <Fragment slot="title">Ready to Grow Your Clinic?</Fragment>
     <Fragment slot="subtitle">DTFF funding can cover up to 70% of your project costs.</Fragment>
   </CallToAction>
-
 </Layout>
