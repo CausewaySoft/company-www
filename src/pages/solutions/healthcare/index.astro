@@ -14,6 +14,7 @@ import Features2 from '~/components/widgets/Features2.astro';
 import Image from '~/components/common/Image.astro';
 import Features from '~/components/widgets/Features.astro';
 import Features3 from '~/components/widgets/Features3.astro';
+import ContactInline from '~/components/widgets/ContactInline.astro';
 
 const metadata = {
   title: 'Solutions for Healthcare | CausewaySoft',
@@ -123,6 +124,16 @@ const metadata = {
         description: 'Keep patient data secure with GDPR-compliant systems and workflows.',
         icon: 'tabler:shield-check',
       },
+      {
+        title: 'Empower Patients with the Tele-Diary',
+        description: 'Give patients a simple way to log their daily habits, symptoms, and recovery progress. Clinicians can review entries remotely, spot early trends, and tailor care plans — transforming routine check-ups into continuous, data-driven care.',
+        icon: 'tabler:notebook',
+      },
+      {
+        title: 'Collaborate Seamlessly as a Team',
+        description: 'Keep everyone in sync — from reception to consulting rooms. Share notes, delegate tasks, and track progress in real time, so your clinic runs like a well-orchestrated team rather than a collection of busy individuals.',
+        icon: 'tabler:users-group',
+      },
     ]}
   />
 
@@ -198,39 +209,6 @@ const metadata = {
     }}
   /> -->
 
-  <!-- HOW IT WORKS (STEPS) -->
-  <Steps
-    tagline='Straight-forward Delivery'
-    title="How we deliver the Digital Hub to your Practice: in 4 Simple Steps"
-    items={[
-      {
-        title: 'Discovery Sessions',
-        description:
-          'Meting key people running the practice and identifying their pain-points. Mapping workflows, identifying bottlenecks and finding opportunities for automation.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'System Design',
-        description: 'Select the right tools & integrations for your clinic.',
-        icon: 'tabler:layout',
-      },
-      {
-        title: 'Build & Integrate',
-        description: 'Connect systems and create a unified portal/dashboard.',
-        icon: 'tabler:plug-connected',
-      },
-      {
-        title: 'Training & Handover',
-        description: 'Empower your team to manage the new system confidently.',
-        icon: 'tabler:school',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=60',
-      alt: '',
-    }}
-  />
-
   <!-- FUND YOUR TRANSFORMATION with DTFF -->
   <ContentSingleColumn
     tagline="Get up to £20k Funding"
@@ -276,4 +254,96 @@ const metadata = {
     <Fragment slot="title">Ready to Grow Your Clinic?</Fragment>
     <Fragment slot="subtitle">DTFF funding can cover up to 70% of your project costs.</Fragment>
   </CallToAction>
+
+
+  <!-- HOW IT WORKS (STEPS) -->
+  <Steps
+    tagline='Straight-forward Delivery'
+    title="How we deliver the Digital Hub to your Practice: in 4 Simple Steps"
+    items={[
+      {
+        title: 'Discovery Sessions',
+        description:
+          'Meting key people running the practice and identifying their pain-points. Mapping workflows, identifying bottlenecks and finding opportunities for automation.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'System Design',
+        description: 'Select the right tools & integrations for your clinic.',
+        icon: 'tabler:layout',
+      },
+      {
+        title: 'Build & Integrate',
+        description: 'Connect systems and create a unified portal/dashboard.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Training & Handover',
+        description: 'Empower your team to manage the new system confidently.',
+        icon: 'tabler:school',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=60',
+      alt: '',
+    }}
+  />
+
+<!-- 
+
+  <ContactInline
+    id="contact"
+    tagline="Any questions?"
+    title="Drop us a message today!"
+    subtitle="Send us an email or Book a FREE Discovery Call to begin your Digital Transformation journey."
+    formInputs={[
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+        placeholder: "Where shall our reply find you?"
+      },
+    ]},
+    textarea={{
+      label: 'Message',
+      placeholder: "Tell us your challenges, dreams, or sparks"
+    }}
+    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours.",
+    button='Send Your Message'
+
+    items={[
+       {
+        description: 'Book a Discovery Call',
+        classes: {
+          container: 'd-flex content-center	',
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+        },
+        href: 'https://calendly.com/causewaysoft',
+        target: '_blank',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Email us',
+        description: 'anti-spam protection, please enable javascript...',
+        classes: {ctaLinks: 'emailLink'},
+        href: '/',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: 'anti-spam protection, please enable javascript...',
+        href: '/',
+        classes: {ctaLinks: 'phoneLink'},
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@causewaysoft',
+        href: 'https://www.linkedin.com/company/causewaysoft',
+        icon: 'tabler:brand-linkedin',
+      },
+    ]}
+  /> -->
+  
+
 </Layout>
