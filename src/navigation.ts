@@ -53,6 +53,10 @@ export const headerData = {
           text: 'Healthcare',
           href: '/solutions/healthcare',
         },
+        {
+          text: 'Professional Services',
+          href: '/solutions/professional-services',
+        },
       ],
     },
     {

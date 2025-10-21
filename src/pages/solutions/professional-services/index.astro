@@ -1,0 +1,334 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Note from '~/components/widgets/Note.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import ContentSingleColumn from '~/components/widgets/ContentSingleColumn.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Features3 from '~/components/widgets/Features3.astro';
+
+const metadata = {
+  title: 'Solutions for Professional Services | CausewaySoft',
+  description:
+    'Transform your professional services firm with our tailored digital solutions. Streamline operations, enhance client experience, and accelerate growth with CausewaySoft.',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <!--
+   HERO 
+   
+   image={{ src: '~/assets/images/solutions/healthcare/hero-img-showcase.png', alt: 'Professional team using dashboards' }}
+   -->
+  <Hero
+    tagline="Solutions for professional services"
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book Your Free Consultation',
+        href: 'https://calendly.com/causewaysoft',
+        target: '_blank',
+        icon: 'tabler:calendar',
+      },
+      {
+        text: 'Learn more',
+        href: '#stop-using-old-tools',
+      },
+    ]}
+  >
+    <Fragment slot="title"> Transform Your Professional Services Firm with Smart Digital Systems </Fragment>
+
+    <Fragment slot="subtitle">
+      <strong>Automate admin. Delight clients. Scale your practice.</strong>
+      <br />
+      DTFF funding may cover up to 70% of your digital transformation project.
+    </Fragment>
+  </Hero>
+
+  <!-- QUICK NOTE / CTA 
+    title="Deadline: < 2 weeks left! "
+   
+  -->
+
+  <Note
+    description="Eligible for up to <b>£20,000</b> in DTFF funding. Empower your professional services teams with secure, enterprise-grade AI tools designed to enhance productivity and client satisfaction."
+  />
+
+  <!-- 
+    subtitle='Empower your healthcare teams with secure, enterprise-grade AI tools designed to enhance productivity and patient care.'
+  -->
+  <!-- PROBLEM STATEMENT -->
+  <ContentSingleColumn
+    id="stop-using-old-tools"
+    tagline="Stop Juggling Tools.<br class='sm:hidden inline' /> Focus on Clients."
+    title="Is your Professional Services Firm running on too many Disconnected Tools?"
+    subtitle="CRM systems, project management tools, accounting software, time tracking, billing platforms… your team spends more time managing tools than serving clients. It doesn't have to be this way!"
+  >
+    <Fragment slot="content">
+      <h3 class="mt-4 mx-auto font-bold">
+        We guide professional services firms in replacing outdated tools with a unified, digital system.
+      </h3>
+      <p>Safely, Securely, and Seamlessly.</p>
+      <!-- <Image src="~/assets/images/solutions/healthcare/hero-img-showcase.png" class="my-4" alt="Hero Image Showcase" /> -->
+      <!-- <p>Contact us to find out how we can transform your professional services firm with a modern intelligent system for managing clients, projects, and operations.</p> -->
+    </Fragment>
+  </ContentSingleColumn>
+
+  <!-- SOLUTION / DIGITAL OPERATIONS HUB (DETAILED FEATURES) -->
+  <Features3
+    columns={2}
+    tagline="Modern Tools for <br class='sm:hidden inline' /> Modern Professional Services"
+    title="Meet your Digital Operations Hub"
+    classes={{
+      headline: {
+        titleClass: ' asd333 ',
+      },
+    }}
+    items={[
+      {
+        title: 'Save Time & Reduce Admin Stress',
+        description:
+          'Automate repetitive tasks, client communications, project tracking, and AI-powered insights — freeing your team to focus on high-value client work.',
+        icon: 'tabler:mood-dollar',
+      },
+      {
+        title: 'Know Your Numbers Instantly',
+        description:
+          'Access real-time dashboards with billable hours, project profitability, client satisfaction, and revenue trends — no manual reports or spreadsheet exports.',
+        icon: 'tabler:trending-up',
+      },
+      {
+        title: 'Simplify Client Management',
+        description: 'Handle client onboarding, project delivery, billing, and relationship management in one seamless system.',
+        icon: 'tabler:settings-automation',
+      },
+      {
+        title: 'Operate Safely & Confidently',
+        description: 'Keep client data secure with GDPR-compliant systems and workflows that meet professional standards.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Empower Clients with Self-Service Portal',
+        description: 'Give clients a simple way to track project progress, access documents, and communicate with your team. Monitor engagement remotely, spot opportunities for additional services, and deliver exceptional client experience — transforming one-off projects into long-term partnerships.',
+        icon: 'tabler:notebook',
+      },
+      {
+        title: 'Collaborate Seamlessly as a Team',
+        description: 'Keep everyone in sync — from business development to project delivery. Share insights, delegate tasks, and track progress in real time, so your firm operates like a well-orchestrated team rather than a collection of busy professionals.',
+        icon: 'tabler:users-group',
+      },
+    ]}
+  />
+
+  <!-- Features2 Widget ************** -->
+  <Features2
+    tagline='Data Security First'
+    columns={4}
+    title="Security & Compliance You Can Trust"
+    items={[
+      {
+        title: 'We never train on your documents or client data',
+        icon: 'tabler:file-text-shield',
+      },
+      {
+        title: 'Your confidential client information remains private and protected',
+        icon: 'tabler:lock-password',
+      },
+      {
+        title: 'Data encryption at rest and in transit',
+        icon: 'tabler:cloud-lock',
+      },
+      {
+        title: 'Multi-factor authentication keeps your account secure',
+        icon: 'tabler:key',
+      },
+    ]}
+  />
+
+  <!-- EXAMPLE MINI-CASE -->
+  <!-- <Content
+    isReversed
+    tagline="Example"
+    title="Real impact — example outcome"
+    items={[
+      { title: 'Accounting firm outcome', description: 'Reduced manual invoice processing by 40% — more time for advisory work.' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1556157382-97eda2d62296?auto=format&fit=crop&w=1200&q=60',
+      alt: 'Accounting dashboard example',
+    }}
+  /> -->
+
+  <!-- BENEFITS / OUTCOMES (STATS & CALLS) -->
+  <!-- <Stats
+    stats={[
+      { title: 'of users saved at least 2 hours/week', amount: '88%' },
+      { title: 'saw productivity gains', amount: '92%' },
+      { title: 'experienced greater innovation and creativity', amount: '75%' },
+    ]}
+  /> -->
+
+  <!-- TESTIMONIAL -->
+  <!-- <Content
+    tagline="Testimonial"
+    title="What our clients say"
+  >
+    <Fragment slot="content">
+      <blockquote>“The new system transformed how we manage patients — our team spends more time caring and less time chasing data.” — Dr. A, Private GP</blockquote>
+    </Fragment>
+  </Content> -->
+
+  <!-- MINI CASE -->
+  <!-- <Content
+    isAfterContent
+    tagline="Mini-case"
+    title="Mini-case: Accounting firm"
+    items={[
+      { title: 'Result', description: 'A 15-person accounting firm reduced invoice processing by 40% and secured £18,500 in DTFF funding.' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1554224154-22dec7ec8818?auto=format&fit=crop&w=1200&q=60',
+      alt: 'Team celebrating results',
+    }}
+  /> -->
+
+  <!-- FUND YOUR TRANSFORMATION with DTFF -->
+  <ContentSingleColumn
+    tagline="Get up to £20k Funding"
+    title="Fund the Digital Transformation of your Professional Services Firm with DTFF"
+    video={{
+      id: 'TBNTAH6w_9Q',
+    }}
+  >
+    <Fragment slot="content">
+        <p>
+          Modernize your professional services firm with DTFF funding - up to <strong>£20,000</strong> to invest in advanced technology and software
+          that boosts your growth and efficiency. We make the application simple and ensure your project qualifies.
+
+          <br /><br />
+          <strong>Eligible Professional Services Firms:</strong>
+          <ul class="list-disc list-inside my-2">
+            <li>Micro & small businesses in Northern Ireland (1–49 employees)</li>
+            <li>Trading 12+ months and VAT registered</li>
+            <li>Covers up to 70% of project costs</li>
+          </ul>
+
+          <br />
+          <strong
+            >Use funding to implement AI, workflow automation, analytics dashboards, and other modern technologies—like
+            those powering our Digital Operations Hub.</strong
+          >
+        </p>
+
+    </Fragment>
+  </ContentSingleColumn>
+
+  <!-- FINAL CTA -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Book a Free Consultation',
+        href: 'https://calendly.com/causewaysoft',
+        icon: 'tabler:calendar',
+      },
+    ]}
+  >
+    <Fragment slot="title">Ready to Scale Your Professional Services Firm?</Fragment>
+    <Fragment slot="subtitle">DTFF funding can cover up to 70% of your project costs.</Fragment>
+  </CallToAction>
+
+
+  <!-- HOW IT WORKS (STEPS) -->
+  <Steps
+    tagline='Straight-forward Delivery'
+    title="How we deliver the Digital Hub to your Professional Services Firm: in 4 Simple Steps"
+    items={[
+      {
+        title: 'Discovery Sessions',
+        description:
+          'Meeting key people running the firm and identifying their pain-points. Mapping workflows, identifying bottlenecks and finding opportunities for automation.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'System Design',
+        description: 'Select the right tools & integrations for your professional services firm.',
+        icon: 'tabler:layout',
+      },
+      {
+        title: 'Build & Integrate',
+        description: 'Connect systems and create a unified portal/dashboard.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Training & Handover',
+        description: 'Empower your team to manage the new system confidently.',
+        icon: 'tabler:school',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=60',
+      alt: '',
+    }}
+  />
+
+<!-- 
+
+  <ContactInline
+    id="contact"
+    tagline="Any questions?"
+    title="Drop us a message today!"
+    subtitle="Send us an email or Book a FREE Discovery Call to begin your Digital Transformation journey."
+    formInputs={[
+      {
+        type: 'email',
+        name: 'email',
+        label: 'Email',
+        placeholder: "Where shall our reply find you?"
+      },
+    ]},
+    textarea={{
+      label: 'Message',
+      placeholder: "Tell us your challenges, dreams, or sparks"
+    }}
+    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours.",
+    button='Send Your Message'
+
+    items={[
+       {
+        description: 'Book a Discovery Call',
+        classes: {
+          container: 'd-flex content-center	',
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+        },
+        href: 'https://calendly.com/causewaysoft',
+        target: '_blank',
+        icon: 'tabler:calendar',
+      },
+      {
+        title: 'Email us',
+        description: 'anti-spam protection, please enable javascript...',
+        classes: {ctaLinks: 'emailLink'},
+        href: '/',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Call us',
+        description: 'anti-spam protection, please enable javascript...',
+        href: '/',
+        classes: {ctaLinks: 'phoneLink'},
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Follow us',
+        description: '@causewaysoft',
+        href: 'https://www.linkedin.com/company/causewaysoft',
+        icon: 'tabler:brand-linkedin',
+      },
+    ]}
+  /> -->
+  
+
+</Layout>
