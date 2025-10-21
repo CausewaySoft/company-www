@@ -1,12 +1,12 @@
 ---
-import Layout from '~/layouts/LandingLayout.astro';
+import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Note from '~/components/widgets/Note.astro';
 // import Features from '~/components/widgets/Features.astro';
 // import FeatureList from '~/components/widgets/FeatureCardsSimple.astro';
 import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/ContentSingleColumn.astro';
+import ContentSingleColumn from '~/components/widgets/ContentSingleColumn.astro';
 // import FAQs from '~/components/widgets/FAQs.astro';
 import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
@@ -67,21 +67,21 @@ const metadata = {
     subtitle='Empower your healthcare teams with secure, enterprise-grade AI tools designed to enhance productivity and patient care.'
   -->
   <!-- PROBLEM STATEMENT -->
-  <Content
+  <ContentSingleColumn
     id="stop-using-old-tools"
     tagline="Stop Juggling Tools.<br class='sm:hidden inline' /> Focus on Patients."
     title="Is your Clinic running on too many Disconnected Tools?"
     subtitle="Booking systems, spreadsheets, EHRs, EMRs, CRMs… your team spends more time managing tools than patients. It doesn't have to be this way!"
   >
     <Fragment slot="content">
-      <h3 class="mt-4 max-w-3xl mx-auto font-bold">
+      <h3 class="mt-4 mx-auto font-bold">
         We guide practices in replacing outdated tools with a unified, digital system.
       </h3>
       <p>Safely, Securely, and Seamlessly.</p>
       <!-- <Image src="~/assets/images/solutions/healthcare/hero-img-showcase.png" class="my-4" alt="Hero Image Showcase" /> -->
       <!-- <p>Contact us to find out how we can transform your medical practice with a modern intelligent system for managing patients, admin, and data.</p> -->
     </Fragment>
-  </Content>
+  </ContentSingleColumn>
 
   <!-- SOLUTION / DIGITAL OPERATIONS HUB (DETAILED FEATURES) 
    
@@ -94,13 +94,11 @@ const metadata = {
   <Features3
     columns={2}
     tagline="Modern Tools for <br class='sm:hidden inline' /> Modern Clinics"
-    title="Meet the Digital Operations Hub"
-    
+    title="Meet your Digital Operations Hub"
     classes={{
       headline: {
-        titleClass: 'asdfasdf'
+        titleClass: ' asd333 ',
       },
-      
     }}
     items={[
       {
@@ -130,6 +128,7 @@ const metadata = {
 
   <!-- Features2 Widget ************** -->
   <Features2
+    tagline='Data Security First'
     columns={4}
     title="Security & Compliance You Can Trust"
     items={[
@@ -201,11 +200,13 @@ const metadata = {
 
   <!-- HOW IT WORKS (STEPS) -->
   <Steps
-    title="How It Works: 4 Simple Steps"
+    tagline='Straight-forward Delivery'
+    title="How we deliver the Digital Hub to your Practice: in 4 Simple Steps"
     items={[
       {
         title: 'Discovery Sessions',
-        description: 'Map workflows & identify bottlenecks and automation opportunities.',
+        description:
+          'Meting key people running the practice and identifying their pain-points. Mapping workflows, identifying bottlenecks and finding opportunities for automation.',
         icon: 'tabler:search',
       },
       {
@@ -231,7 +232,7 @@ const metadata = {
   />
 
   <!-- FUND YOUR TRANSFORMATION with DTFF -->
-  <Content
+  <ContentSingleColumn
     tagline="Get up to £20k Funding"
     title="Fund the Digital Transformation of your Medical Practice with DTFF"
     video={{
@@ -239,29 +240,37 @@ const metadata = {
     }}
   >
     <Fragment slot="content">
-      <p>
-        Modernize your clinic with DTFF funding - up to <strong>£20,000</strong> to invest in advanced technology and software
-        that boosts your growth and efficiency. We make the application simple and ensure your project qualifies.
+        <p>
+          Modernize your clinic with DTFF funding - up to <strong>£20,000</strong> to invest in advanced technology and software
+          that boosts your growth and efficiency. We make the application simple and ensure your project qualifies.
 
-        <br /><br />
-        <strong>Eligible Medical Practices:</strong>
-        <ul class="list-disc list-inside my-2">
-          <li>Micro & small businesses in Northern Ireland (1–49 employees)</li>
-          <li>Trading 12+ months and VAT registered</li>
-          <li>Covers up to 70% of project costs</li>
-        </ul>
+          <br /><br />
+          <strong>Eligible Medical Practices:</strong>
+          <ul class="list-disc list-inside my-2">
+            <li>Micro & small businesses in Northern Ireland (1–49 employees)</li>
+            <li>Trading 12+ months and VAT registered</li>
+            <li>Covers up to 70% of project costs</li>
+          </ul>
 
-        <br/>
-        <strong>Use funding to implement AI, workflow automation, analytics dashboards, and other modern technologies—like
-          those powering our Digital Operations Hub.</strong>
-      </p>
+          <br />
+          <strong
+            >Use funding to implement AI, workflow automation, analytics dashboards, and other modern technologies—like
+            those powering our Digital Operations Hub.</strong
+          >
+        </p>
+
     </Fragment>
-  </Content>
+  </ContentSingleColumn>
 
   <!-- FINAL CTA -->
   <CallToAction
     actions={[
-      { variant: 'primary', text: 'Book a Free Consultation', href: 'https://calendly.com/causewaysoft', icon: 'tabler:calendar'},
+      {
+        variant: 'primary',
+        text: 'Book a Free Consultation',
+        href: 'https://calendly.com/causewaysoft',
+        icon: 'tabler:calendar',
+      },
     ]}
   >
     <Fragment slot="title">Ready to Grow Your Clinic?</Fragment>
