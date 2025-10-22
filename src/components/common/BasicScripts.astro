@@ -147,9 +147,9 @@ import { UI } from 'astrowind:config';
     const encoded_phone = 'KzQ0NzU0ODAwMzM0NQ==';
     const decoded_phone = atob(encoded_phone);
 
-    document.querySelectorAll('.emailLink').forEach(function(elem){
+    document.querySelectorAll('.emailLink').forEach(function (elem) {
       let classList = elem.className;
-      
+
       elem.href = 'mailto:' + decoded_email;
 
       if (!classList.includes('dont-replace-title')) {
@@ -157,11 +157,11 @@ import { UI } from 'astrowind:config';
       }
     });
 
-    document.querySelectorAll('.phoneLink').forEach(function(elem){
+    document.querySelectorAll('.phoneLink').forEach(function (elem) {
       let classList = elem.className;
 
       elem.href = 'tel:' + decoded_phone;
-      
+
       //elem.textContent = decoded_phone;
 
       if (!classList.includes('dont-replace-title')) {
@@ -169,14 +169,13 @@ import { UI } from 'astrowind:config';
       }
     });
 
-
     //
     // Send Form
     //
     const contactForm = document.getElementById('contact-form');
 
     if (!contactForm) return;
-    
+
     contactForm.addEventListener('submit', function (e) {
       e.preventDefault(); // prevent default form submission
 
@@ -186,28 +185,26 @@ import { UI } from 'astrowind:config';
       fetch('/forms/contact.php', {
         method: 'POST',
         headers: {
-          'X-Requested-With': 'XMLHttpRequest'
+          'X-Requested-With': 'XMLHttpRequest',
         },
-        body: formData
+        body: formData,
       })
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.text(); // or .json() if your PHP returns JSON
-      })
-      .then(data => {
-        // Optionally check the content of 'data'
-        document.getElementById('form-success').style.display = 'flex';
-        document.getElementById('form-error').style.display = 'none';
-        form.reset();
-      })
-      .catch(error => {
-        console.error('Form submission error:', error);
-        document.getElementById('form-success').style.display = 'none';
-        document.getElementById('form-error').style.display = 'flex';
-      });
+        .then((response) => {
+          if (!response.ok) throw new Error('Network response was not ok');
+          return response.text(); // or .json() if your PHP returns JSON
+        })
+        .then((data) => {
+          // Optionally check the content of 'data'
+          document.getElementById('form-success').style.display = 'flex';
+          document.getElementById('form-error').style.display = 'none';
+          form.reset();
+        })
+        .catch((error) => {
+          console.error('Form submission error:', error);
+          document.getElementById('form-success').style.display = 'none';
+          document.getElementById('form-error').style.display = 'flex';
+        });
     });
-
-
   };
   const onPageShow = function () {
     document.documentElement.classList.add('motion-safe:scroll-smooth');
@@ -229,9 +226,6 @@ import { UI } from 'astrowind:config';
     onLoad();
     onPageShow();
   });
-
-
-
 </script>
 
 <script is:inline>
