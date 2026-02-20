@@ -7,8 +7,12 @@ export const headerData = {
       href: '/'
     },
     {
-      text: 'Blog',
-      href: '/blog',
+      text: 'About Us',
+      href: '/#about-us',
+    },
+    {
+      text: 'Our Process',
+      href: '/#our-process',
     },
     {
       text: 'Services',
@@ -60,12 +64,8 @@ export const headerData = {
       ],
     },
     {
-      text: 'About Us',
-      href: '/#about-us',
-    },
-    {
-      text: 'Our Process',
-      href: '/#our-process',
+      text: 'Blog',
+      href: '/blog',
     },
 
   ],
