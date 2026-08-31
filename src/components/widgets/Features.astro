@@ -4,7 +4,6 @@ import ItemGrid from '~/components/ui/ItemGrid.astro';
 import Headline from '~/components/ui/Headline.astro';
 import type { Features as Props } from '~/types';
 import Image from '~/components/common/Image.astro';
-import { YouTube } from 'astro-embed';
 
 const {
   title = await Astro.slots.render('title'),
@@ -13,7 +12,6 @@ const {
   items = [],
   columns = 2,
   image = await Astro.slots.render('image'),
-  video = '',
   defaultIcon,
 
   id,

@@ -1,9 +1,7 @@
 ---
 import { Icon } from 'astro-icon/components';
-import { SITE } from 'astrowind:config';
 import { getHomePermalink } from '~/utils/permalinks';
 import Logo from '~/components/Logo.astro';
-import Button from '../ui/Button.astro';
 
 
 interface Link {
@@ -88,7 +86,6 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
               <ul class="text-sm">
                 {links.map(({ text, href, ariaLabel, isComingSoon }) => (
                   <li class="mb-2">
-
                    {
                         href ? 
                         (
@@ -107,7 +104,6 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                         )
                       }
 
-
                       {
                         isComingSoon ? 
                         (
@@ -117,14 +113,12 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                         )
                         : ''
                       }
-                     
-                    </a>
                   </li>
                 ))}
               </ul>
             )}
           </div>
-        ))
+          ))
       }
     </div>
     <div class="md:flex md:items-center md:justify-between py-6 md:py-8">

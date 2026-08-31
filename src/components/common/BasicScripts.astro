@@ -193,7 +193,7 @@ import { UI } from 'astrowind:config';
           if (!response.ok) throw new Error('Network response was not ok');
           return response.text(); // or .json() if your PHP returns JSON
         })
-        .then((data) => {
+        .then(() => {
           // Optionally check the content of 'data'
           document.getElementById('form-success').style.display = 'flex';
           document.getElementById('form-error').style.display = 'none';

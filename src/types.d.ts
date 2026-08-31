@@ -136,6 +136,7 @@ export interface Item {
   title?: string;
   description?: string;
   icon?: string;
+  link?: string;
   classes?: Record<string, string>;
   callToAction?: CallToAction;
   image?: Image;
@@ -163,7 +164,7 @@ export interface Testimonial {
 
 export interface Input {
   type: HTMLInputTypeAttribute;
-  name: string;
+  name?: string;
   label?: string;
   autocomplete?: string;
   placeholder?: string;
@@ -205,11 +206,15 @@ export interface Collapse {
 }
 
 export interface Form {
+  id?: string;
+  action?: { url: string; method: string; };
   inputs?: Array<Input>;
   textarea?: Textarea;
   disclaimer?: Disclaimer;
   button?: string;
   description?: string;
+  isReversed?: boolean;
+  items?: Array<Item>;
 }
 
 // WIDGETS
