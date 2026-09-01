@@ -6,7 +6,8 @@
     "baseUrl": ".",
     "paths": {
       "~/*": ["src/*"]
-    }
+    },
+    "ignoreDeprecations": "6.0" // ignore the deprecation warnings for baseURL
   },
   "include": [".astro/types.d.ts", "**/*"],
   "exclude": ["dist/"]
