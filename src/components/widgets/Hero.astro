@@ -18,18 +18,17 @@ const {
 } = Astro.props;
 ---
 
-<section class="relative -mt-[73px] md:-mt-[96px]    not-prose" {...id ? { id } : {}}>
+<section class="relative -mt-[73px] md:-mt-[96px] not-prose" {...id ? { id } : {}}>
   <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
     <slot name="bg">
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
   </div>
   <div class="relative max-w-[1920px] mx-auto px-0 overflow-hidden">
-
-  <!-- source: https://codepen.io/sarazond/pen/LYGbwj -->
-  <div id="stars"></div>
-  <div id="stars2"></div>
-  <div id="stars3"></div>
+    <!-- source: https://codepen.io/sarazond/pen/LYGbwj -->
+    <div id="stars"></div>
+    <div id="stars2"></div>
+    <div id="stars3"></div>
 
     <div class="pt-0 pt-[73px] md:pt-[96px] pointer-events-none"></div>
     <div class="pt-12 md:pt-20">
@@ -92,7 +91,6 @@ const {
                   layout="fullWidth"
                   widths={[400, 768, 1024, 1444]}
                   sizes="(max-width: 767px) 767px, (max-width: 1023px) 1023px, (max-width: 2039px) 1444px, 1444px"
-                  
                   loading="eager"
                   {...image}
                 />

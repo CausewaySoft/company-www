@@ -21,7 +21,7 @@ metadata:
       - url: '~/assets/images/default.png'
         width: 1000
         height: 1000
-    type: website 
+    type: website
   twitter:
     handle: '@causewaysoft'
     site: '@causewaysoft'
@@ -66,8 +66,8 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: "G-lookAtEnvVariables" #actual id is in the .env variables, to only collect analytics on actual build and not during development
+      id: 'G-lookAtEnvVariables' #actual id is in the .env variables, to only collect analytics on actual build and not during development
       partytown: false
 
 ui:
-  theme: "dark" # Values: "system" | "light" | "dark" | "light:only" | "dark:only"
+  theme: 'dark' # Values: "system" | "light" | "dark" | "light:only" | "dark:only"

@@ -207,7 +207,7 @@ export interface Collapse {
 
 export interface Form {
   id?: string;
-  action?: { url: string; method: string; };
+  action?: { url: string; method: string };
   inputs?: Array<Input>;
   textarea?: Textarea;
   disclaimer?: Disclaimer;

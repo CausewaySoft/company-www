@@ -17,7 +17,7 @@ metadata:
   canonical: https://causewaysoft.com/blog/inclusive-app-design-development-childrens-code
 ---
 
-In the UK, the **Children’s Code** (officially the *Age-Appropriate Design Code*, enforced by the ICO) sets out clear standards for how online services should handle children’s data. At CausewaySoft, we see this not as a compliance checkbox, but as a responsibility. When we design and develop software — from websites to mobile apps — we bake in privacy, transparency, and fairness for younger users right from the start.
+In the UK, the **Children’s Code** (officially the _Age-Appropriate Design Code_, enforced by the ICO) sets out clear standards for how online services should handle children’s data. At CausewaySoft, we see this not as a compliance checkbox, but as a responsibility. When we design and develop software — from websites to mobile apps — we bake in privacy, transparency, and fairness for younger users right from the start.
 
 ---
 

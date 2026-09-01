@@ -32,9 +32,7 @@ Here's how you can link to the calendar APIs from your blog posts:
 
 ```html
 <!-- Tech Grant Webinar -->
-<a href="/api/calendar/dtff-tech-grant-webinar.ics">
-  📅 Add Tech Grant Webinar to Calendar
-</a>
+<a href="/api/calendar/dtff-tech-grant-webinar.ics"> 📅 Add Tech Grant Webinar to Calendar </a>
 ```
 
 ### Creating Custom Calendar Events
@@ -51,20 +49,20 @@ export const GET = async () => {
     const startDate = '2024-03-20';
     const startTime = '10:00';
     const duration = 60;
-    
+
     // Parse and format dates...
     const [year, month, day] = startDate.split('-').map(Number);
     const [hours, minutes] = startTime.split(':').map(Number);
-    
+
     const startDateTime = new Date(year, month - 1, day, hours, minutes);
     const endDateTime = new Date(startDateTime.getTime() + duration * 60000);
-    
+
     const formatDate = (date: Date) => {
       return date.toISOString().replace(/[-:]/g, '').split('.')[0] + 'Z';
     };
-    
+
     const uid = `my-event-${Date.now()}@causewaysoft.com`;
-    
+
     const icsContent = `BEGIN:VCALENDAR
 VERSION:2.0
 PRODID:-//CausewaySoft//Calendar//EN
@@ -90,9 +88,9 @@ END:VCALENDAR`;
         'Content-Type': 'text/calendar; charset=utf-8',
         'Content-Disposition': 'attachment; filename="my-event.ics"',
         'Cache-Control': 'no-cache, no-store, must-revalidate',
-        'Pragma': 'no-cache',
-        'Expires': '0'
-      }
+        Pragma: 'no-cache',
+        Expires: '0',
+      },
     });
   } catch (error) {
     console.error('Error in calendar API:', error);
@@ -126,15 +124,15 @@ Let's say we're hosting a webinar about the Digital Transformation Flexible Fund
 
 When creating a new calendar event, configure these parameters in your API route:
 
-| Parameter | Required | Description | Example |
-|-----------|----------|-------------|---------|
-| `title` | **Yes** | Event title | `Tech Grant Webinar` |
-| `description` | No | Event description | `Learn about funding opportunities` |
-| `location` | No | Event location | `Online Event` |
-| `startDate` | **Yes** | Start date (YYYY-MM-DD) | `2024-02-15` |
-| `startTime` | **Yes** | Start time (HH:MM) | `14:00` |
-| `duration` | **Yes** | Duration in minutes | `60` |
-| `filename` | No | Custom filename | `webinar-2024` |
+| Parameter     | Required | Description             | Example                             |
+| ------------- | -------- | ----------------------- | ----------------------------------- |
+| `title`       | **Yes**  | Event title             | `Tech Grant Webinar`                |
+| `description` | No       | Event description       | `Learn about funding opportunities` |
+| `location`    | No       | Event location          | `Online Event`                      |
+| `startDate`   | **Yes**  | Start date (YYYY-MM-DD) | `2024-02-15`                        |
+| `startTime`   | **Yes**  | Start time (HH:MM)      | `14:00`                             |
+| `duration`    | **Yes**  | Duration in minutes     | `60`                                |
+| `filename`    | No       | Custom filename         | `webinar-2024`                      |
 
 ## JavaScript Integration
 
@@ -179,7 +177,9 @@ Here are some CSS classes you can use to style your calendar links:
   text-decoration: none;
   border-radius: 0.5rem;
   font-weight: 500;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .calendar-link:hover {
@@ -200,6 +200,7 @@ Always test your calendar links before publishing to ensure they work correctly.
 ## Browser Compatibility
 
 The generated `.ics` files work with:
+
 - ✅ Google Calendar
 - ✅ Apple Calendar
 - ✅ Microsoft Outlook
@@ -239,4 +240,4 @@ Try adding calendar links to your next event or webinar post!
 
 ---
 
-*Need help implementing this in your AstroJS project? Contact our team at CausewaySoft for custom development services.*
+_Need help implementing this in your AstroJS project? Contact our team at CausewaySoft for custom development services._

@@ -71,10 +71,12 @@ export const adaptOpenGraphImages = async (
           };
         }
 
-        let _image: {
-          src: string;
-          width: number;
-        } | undefined = undefined;
+        let _image:
+          | {
+              src: string;
+              width: number;
+            }
+          | undefined = undefined;
 
         if (
           typeof resolvedImage === 'string' &&
@@ -87,9 +89,7 @@ export const adaptOpenGraphImages = async (
             typeof resolvedImage !== 'string' && resolvedImage?.width <= defaultWidth
               ? [resolvedImage?.width, resolvedImage?.height]
               : [defaultWidth, defaultHeight];
-          _image = (
-            await astroAssetsOptimizer(resolvedImage, [dimensions[0]], dimensions[0], dimensions[1], 'jpg')
-          )[0];
+          _image = (await astroAssetsOptimizer(resolvedImage, [dimensions[0]], dimensions[0], dimensions[1], 'jpg'))[0];
         }
 
         if (_image && typeof _image === 'object') {

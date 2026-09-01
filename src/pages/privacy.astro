@@ -2,18 +2,17 @@
 import Layout from '~/layouts/PageLayout.astro';
 
 export const metadata = {
-  title: "Websites | Custom, Responsive & High-Performance",
-  description: "From landing pages to enterprise sites, we build responsive, lightning-fast websites that elevate your brand and convert visitors.",
+  title: 'Websites | Custom, Responsive & High-Performance',
+  description:
+    'From landing pages to enterprise sites, we build responsive, lightning-fast websites that elevate your brand and convert visitors.',
   // keywords: "custom websites, responsive design, website development, SEO websites, high-performance web"
 };
-
 
 export const prerender = true; // optional if you want static HTML
 export const pageOptions = {
   // This makes it build as privacy.html
-  build: { htmlFileName: 'privacy.html' }
+  build: { htmlFileName: 'privacy.html' },
 };
-
 
 // SEO-Rich Use Case Images & Alt Text Suggestions:
 // 	1.	Modern responsive website homepage on desktop and mobile — “Responsive business website displayed on desktop and smartphone screens”
@@ -21,108 +20,120 @@ export const pageOptions = {
 // 	3.	Creative agency homepage with bold visuals — “Creative agency homepage featuring modern design and engaging visuals”
 
 // class="text-base text-secondary  font-bold tracking-wide uppercase intersect-once motion-safe:md:intersect:animate-fade motion-safe:md:opacity-0 intersect-quarter"
-
 ---
 
 <Layout metadata={metadata}>
-  
-    <article class="prose text-base dark:prose-invert max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
-      <header>
-        <h1>Privacy Policy</h1>
-        <p>Last updated: September 27, 2025</p>
-      </header>
+  <article class="prose text-base dark:prose-invert max-w-4xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+    <header>
+      <h1>Privacy Policy</h1>
+      <p>Last updated: September 27, 2025</p>
+    </header>
 
-      <section>
-        <h2>1. Introduction</h2>
-        <p>
-          Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal information when you visit our website.
-        </p>
-      </section>
+    <section>
+      <h2>1. Introduction</h2>
+      <p>
+        Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect your personal
+        information when you visit our website.
+      </p>
+    </section>
 
-      <section>
-        <h2>2. Information We Collect</h2>
-        <p>We may collect the following information:</p>
-        <ul>
-          <li>Personal details you provide (e.g., name, email address, phone number)</li>
-          <li>Information automatically collected via cookies or analytics tools (e.g., IP address, browser type, pages visited)</li>
-          <li>Any other information you voluntarily provide through forms or contact requests</li>
-        </ul>
-      </section>
+    <section>
+      <h2>2. Information We Collect</h2>
+      <p>We may collect the following information:</p>
+      <ul>
+        <li>Personal details you provide (e.g., name, email address, phone number)</li>
+        <li>
+          Information automatically collected via cookies or analytics tools (e.g., IP address, browser type, pages
+          visited)
+        </li>
+        <li>Any other information you voluntarily provide through forms or contact requests</li>
+      </ul>
+    </section>
 
-      <section>
-        <h2>3. How We Use Your Information</h2>
-        <p>We use your information for purposes including:</p>
-        <ul>
-          <li>Responding to your inquiries or requests</li>
-          <li>Improving our website and services</li>
-          <li>Analyzing website traffic and usage</li>
-          <li>Complying with legal obligations</li>
-        </ul>
-      </section>
+    <section>
+      <h2>3. How We Use Your Information</h2>
+      <p>We use your information for purposes including:</p>
+      <ul>
+        <li>Responding to your inquiries or requests</li>
+        <li>Improving our website and services</li>
+        <li>Analyzing website traffic and usage</li>
+        <li>Complying with legal obligations</li>
+      </ul>
+    </section>
 
-      <section>
-        <h2>4. Cookies and Tracking</h2>
-        <p>
-          We use cookies and similar tracking technologies to enhance your experience. If you do not wish to accept cookies, you may adjust your browser settings accordingly.
-        </p>
-      </section>
+    <section>
+      <h2>4. Cookies and Tracking</h2>
+      <p>
+        We use cookies and similar tracking technologies to enhance your experience. If you do not wish to accept
+        cookies, you may adjust your browser settings accordingly.
+      </p>
+    </section>
 
-      <section>
-        <h2>5. Sharing Your Information</h2>
-        <p>
-          We do not sell or rent your personal information. We may share your data with trusted service providers who help us operate the website, subject to strict confidentiality agreements.
-        </p>
-      </section>
+    <section>
+      <h2>5. Sharing Your Information</h2>
+      <p>
+        We do not sell or rent your personal information. We may share your data with trusted service providers who help
+        us operate the website, subject to strict confidentiality agreements.
+      </p>
+    </section>
 
-      <section>
-        <h2>6. Your Rights</h2>
-        <p>
-          Depending on your location, you may have the right to access, correct, or delete your personal information, or to withdraw consent for certain processing activities. Please contact us to exercise these rights.
-        </p>
-      </section>
+    <section>
+      <h2>6. Your Rights</h2>
+      <p>
+        Depending on your location, you may have the right to access, correct, or delete your personal information, or
+        to withdraw consent for certain processing activities. Please contact us to exercise these rights.
+      </p>
+    </section>
 
-      <section>
-        <h2>7. Data Security</h2>
-        <p>
-          We implement reasonable security measures to protect your personal information. However, no method of transmission over the Internet or storage system is completely secure.
-        </p>
-      </section>
+    <section>
+      <h2>7. Data Security</h2>
+      <p>
+        We implement reasonable security measures to protect your personal information. However, no method of
+        transmission over the Internet or storage system is completely secure.
+      </p>
+    </section>
 
-      <section>
-        <h2>8. Children's Privacy</h2>
-        <p>
-          Our website is not intended for children under 13. We do not knowingly collect personal information from children.
-        </p>
-      </section>
+    <section>
+      <h2>8. Children's Privacy</h2>
+      <p>
+        Our website is not intended for children under 13. We do not knowingly collect personal information from
+        children.
+      </p>
+    </section>
 
-      <section>
-        <h2>9. Cookies and Tracking Technologies</h2>
-        <p>
-          We use cookies and similar tracking technologies, such as Google Analytics, to understand how visitors interact with our website and services. These cookies may collect information about your device, browser, pages visited, and time spent on our site. This data helps us improve our website and provide a better user experience.
-        </p>
-        <p>
-          The cookies we use are considered non-essential and require your consent if you are located in regions with privacy regulations like the EU or UK. You can manage your cookie preferences and opt out of analytics tracking at any time by adjusting your browser settings or using available opt-out tools, such as the <a href="https://tools.google.com/dlpage/gaoptout" target="_blank" rel="noopener">Google Analytics Opt-out Browser Add-on</a>.
-        </p>
-        <p>
-          Please note that blocking or deleting cookies may impact the functionality and features of our Services.
-        </p>
-      </section>
+    <section>
+      <h2>9. Cookies and Tracking Technologies</h2>
+      <p>
+        We use cookies and similar tracking technologies, such as Google Analytics, to understand how visitors interact
+        with our website and services. These cookies may collect information about your device, browser, pages visited,
+        and time spent on our site. This data helps us improve our website and provide a better user experience.
+      </p>
+      <p>
+        The cookies we use are considered non-essential and require your consent if you are located in regions with
+        privacy regulations like the EU or UK. You can manage your cookie preferences and opt out of analytics tracking
+        at any time by adjusting your browser settings or using available opt-out tools, such as the <a
+          href="https://tools.google.com/dlpage/gaoptout"
+          target="_blank"
+          rel="noopener">Google Analytics Opt-out Browser Add-on</a
+        >.
+      </p>
+      <p>Please note that blocking or deleting cookies may impact the functionality and features of our Services.</p>
+    </section>
 
-      <section>
-        <h2>9. Changes to This Policy</h2>
-        <p>
-          We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated effective date.
-        </p>
-      </section>
+    <section>
+      <h2>9. Changes to This Policy</h2>
+      <p>
+        We may update this Privacy Policy from time to time. Any changes will be posted on this page with an updated
+        effective date.
+      </p>
+    </section>
 
-      <section>
-        <h2>10. Contact Us</h2>
-        <p>
-          If you have questions about this Privacy Policy or your personal data, please contact us at: 
-          <a class="emailLink" href="mailto:">office@causewaysoft.com</a>.
-        </p>
-      </section>
-
-    </article>
-
+    <section>
+      <h2>10. Contact Us</h2>
+      <p>
+        If you have questions about this Privacy Policy or your personal data, please contact us at:
+        <a class="emailLink" href="mailto:">office@causewaysoft.com</a>.
+      </p>
+    </section>
+  </article>
 </Layout>

@@ -16,11 +16,7 @@ const { metadata } = Astro.props;
   </Fragment>
   <Fragment slot="header">
     <slot name="header">
-      <Header
-        showToggleTheme
-        showRssFeed={false}
-        position="right"
-      />
+      <Header showToggleTheme showRssFeed={false} position="right" />
     </slot>
   </Fragment>
   <slot />

@@ -21,7 +21,7 @@ const {
 ---
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
- <Headline
+  <Headline
     title={title}
     subtitle={subtitle}
     tagline={tagline}
@@ -30,7 +30,7 @@ const {
       title: 'text-4xl md:text-5xl font-bold tracking-tighter mb-4 font-heading',
       subtitle: 'max-w-3xl mx-auto sm:text-center text-xl text-muted dark:text-slate-400',
     }}
-      />
+  />
   <div class:list={['flex flex-col gap-8 md:gap-12', { 'md:flex-row-reverse': isReversed }, { 'md:flex-row': image }]}>
     <div class:list={['md:py-4 md:self-center', { 'md:basis-1/2': image }, { 'w-full': !image }]}>
       <Timeline items={items} classes={classes?.items as Record<string, never>} />

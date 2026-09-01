@@ -3,7 +3,6 @@ import { Icon } from 'astro-icon/components';
 import { getHomePermalink } from '~/utils/permalinks';
 import Logo from '~/components/Logo.astro';
 
-
 interface Link {
   text?: string;
   href?: string;
@@ -35,19 +34,19 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
   >
     <div class="grid grid-cols-12 gap-4 gap-y-8 sm:gap-8 py-8 md:py-12">
       <div class="col-span-12 lg:col-span-4">
-
         <div class="mb-2">
           <a class="inline-block font-bold text-xl" href={getHomePermalink()}>
-          <Logo/>
+            <Logo />
           </a>
           <p class="mt-2">
             <span class="font-bold">
               <span class="text-accent">Giant</span> Apps for Giant <span class="text-accent">Visionaries.</span>
             </span>
-            <br/><br/>
-            We are an indie software engineering studio crafting powerful web and mobile products for ambitious, forward‑thinking entrepreneurs.
+            <br /><br />
+            We are an indie software engineering studio crafting powerful web and mobile products for ambitious, forward‑thinking
+            entrepreneurs.
             <!-- "We build giant web and mobile products for ambitious visionaries who want to move fast and make an impact." -->
-             <!-- "An indie studio building high‑impact web and mobile products for ambitious entrepreneurs." -->
+            <!-- "An indie studio building high‑impact web and mobile products for ambitious entrepreneurs." -->
           </p>
 
           <!-- Footer CTA -->
@@ -61,7 +60,6 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
                 />
             </div>
           </div> -->
-
         </div>
         <div class="text-sm text-muted flex gap-1">
           {
@@ -86,39 +84,33 @@ const { socialLinks = [], secondaryLinks = [], links = [], footNote = '', theme 
               <ul class="text-sm">
                 {links.map(({ text, href, ariaLabel, isComingSoon }) => (
                   <li class="mb-2">
-                   {
-                        href ? 
-                        (
-                          <a
-                            class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
-                            href={href}
-                            aria-label={ariaLabel}
-                          >
-                            <Fragment set:html={text} />
-                          </a>
-                        ) : 
-                        (
-                          <span class="text-muted hover:text-gray-700 dark:text-gray-400 transition duration-150 ease-in-out">
-                            <Fragment set:html={text} />
-                          </span>
-                        )
-                      }
+                    {href ? (
+                      <a
+                        class="text-muted hover:text-gray-700 hover:underline dark:text-gray-400 transition duration-150 ease-in-out"
+                        href={href}
+                        aria-label={ariaLabel}
+                      >
+                        <Fragment set:html={text} />
+                      </a>
+                    ) : (
+                      <span class="text-muted hover:text-gray-700 dark:text-gray-400 transition duration-150 ease-in-out">
+                        <Fragment set:html={text} />
+                      </span>
+                    )}
 
-                      {
-                        isComingSoon ? 
-                        (
-                          <span class="ml-2 inline-block rounded-full bg-yellow-100 dark:text-white dark:bg-primary px-2 py-0.5 text-xs font-semibold text-yellow-800">
-                            Coming Soon
-                          </span>
-                        )
-                        : ''
-                      }
+                    {isComingSoon ? (
+                      <span class="ml-2 inline-block rounded-full bg-yellow-100 dark:text-white dark:bg-primary px-2 py-0.5 text-xs font-semibold text-yellow-800">
+                        Coming Soon
+                      </span>
+                    ) : (
+                      ''
+                    )}
                   </li>
                 ))}
               </ul>
             )}
           </div>
-          ))
+        ))
       }
     </div>
     <div class="md:flex md:items-center md:justify-between py-6 md:py-8">

@@ -4,19 +4,12 @@ import { ANALYTICS } from 'astrowind:config';
 
 const id = import.meta.env.PUBLIC_GOOGLE_ANALYTICS_ID;
 
-console.log("DEBUGGER: id: ", id);
-
+console.log('DEBUGGER: id: ', id);
 
 if (!id) {
-console.log("DEBUGGER: not null !!!!");
+  console.log('DEBUGGER: not null !!!!');
   return null;
 }
-
 ---
 
-{
-  <GoogleAnalytics
-    id={id}
-    partytown={ANALYTICS?.vendors?.googleAnalytics?.partytown}
-  />
-}
+{(<GoogleAnalytics id={id} partytown={ANALYTICS?.vendors?.googleAnalytics?.partytown} />)}

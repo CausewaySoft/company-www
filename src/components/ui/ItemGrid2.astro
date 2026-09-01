@@ -13,7 +13,6 @@ const {
   title: titleClass = '',
   description: descriptionClass = '',
   icon: defaultIconClass = 'text-primary',
-
 } = classes;
 ---
 
@@ -45,23 +44,23 @@ const {
             <Icon name={icon || defaultIcon} class={twMerge('mb-2 w-10 h-10', defaultIconClass, itemClasses?.icon)} />
           )}
           <div class={twMerge('text-xl font-bold', titleClass, itemClasses?.title)}>
-          {
-            title && link && (
-              <a href={link} class={`${itemClasses?.ctaLinks} dont-replace-title`}>{title}</a>
-            ) || (
-              title
-            )
-          }
-          </div>
-          {
-            description && link && (
-              <a href={link} class={itemClasses?.ctaLinks}>
-                <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
+            {(title && link && (
+              <a href={link} class={`${itemClasses?.ctaLinks} dont-replace-title`}>
+                {title}
               </a>
-            ) || (
-                <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
-            )
-          }
+            )) ||
+              title}
+          </div>
+          {(description && link && (
+            <a href={link} class={itemClasses?.ctaLinks}>
+              <p
+                class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)}
+                set:html={description}
+              />
+            </a>
+          )) || (
+            <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
+          )}
           {callToAction && (
             <div class="mt-4">
               <Button {...callToAction} />

@@ -3,13 +3,10 @@ import type { Form as Props } from '~/types';
 import Button from '~/components/ui/Button.astro';
 import { Icon } from 'astro-icon/components';
 
-const {id, inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
+const { id, inputs, textarea, disclaimer, button = 'Contact us', description = '' } = Astro.props;
 ---
 
-<form
-  id={id}
-  role='form'
->
+<form id={id} role="form">
   {
     inputs &&
       inputs.map(
@@ -85,23 +82,29 @@ const {id, inputs, textarea, disclaimer, button = 'Contact us', description = ''
   {
     description && (
       <div class="mt-3 text-center">
-         {disclaimer && ( <p class="text-sm text-gray-600 dark:text-gray-400">{disclaimer.label}</p>)}
+        {disclaimer && <p class="text-sm text-gray-600 dark:text-gray-400">{disclaimer.label}</p>}
         <p class="text-sm text-gray-600 dark:text-gray-400">{description}</p>
       </div>
     )
   }
 
-
   <!-- Success and Error messages -->
 
-  <div id="form-success" class="hidden mt-8 flex items-center bg-green-500 rounded-lg text-white text-sm font-bolddd px-4 py-3" role="alert">
+  <div
+    id="form-success"
+    class="hidden mt-8 flex items-center bg-green-500 rounded-lg text-white text-sm font-bolddd px-4 py-3"
+    role="alert"
+  >
     <Icon name="tabler:rocket" class="w-10 h-10 inline-block mr-3" />
     <p>Message sent successfully! Thank you!</p>
   </div>
 
-  <div id="form-error" class="hidden mt-8 flex items-center bg-red-500 rounded-lg text-white text-sm font-bolddd px-4 py-3" role="alert">
+  <div
+    id="form-error"
+    class="hidden mt-8 flex items-center bg-red-500 rounded-lg text-white text-sm font-bolddd px-4 py-3"
+    role="alert"
+  >
     <Icon name="tabler:exclamation-circle" class="w-10 h-10 inline-block mr-3" />
-    <p>There was an error sending your message.<br/>Please contact us directly at the email addresses listed below.</p>
+    <p>There was an error sending your message.<br />Please contact us directly at the email addresses listed below.</p>
   </div>
-
 </form>

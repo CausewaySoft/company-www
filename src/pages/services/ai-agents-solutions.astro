@@ -10,7 +10,8 @@ import Steps from '~/components/widgets/Steps.astro';
 
 const metadata = {
   title: 'AI-Powered Solutions | Intelligent Apps for a Smarter Future"',
-  description: "From chatbots and automation to predictive analytics — we embed AI into your apps so they learn, adapt, and drive results.",
+  description:
+    'From chatbots and automation to predictive analytics — we embed AI into your apps so they learn, adapt, and drive results.',
   // keywords: "AI solutions, AI-powered apps, intelligent automation, predictive analytics, AI chatbots, machine learning software, business AI integration"
 };
 
@@ -18,16 +19,19 @@ const metadata = {
 // 	1.	AI virtual assistant interacting on a website chat — “AI-powered virtual assistant chatting with user on website interface”
 // 	2.	Dashboard showing AI workflow automation status — “Business dashboard visualizing AI-powered automation workflows in real time”
 // 	3.	Customer support chatbot on mobile device — “Mobile screen displaying AI chatbot assisting customer inquiries instantly”
-
-
 ---
 
 <Layout metadata={metadata}>
-
   <Hero2
     tagline="Intelligence at the heart of your apps"
     actions={[
-      { variant: 'primary', text: 'Book a strategy session', href: 'https://calendly.com/causewaysoft/30min', icon: 'tabler:calendar', target: '_blank' },
+      {
+        variant: 'primary',
+        text: 'Book a strategy session',
+        href: 'https://calendly.com/causewaysoft/30min',
+        icon: 'tabler:calendar',
+        target: '_blank',
+      },
       { text: 'Learn more', href: '#features' },
     ]}
     image={{
@@ -41,7 +45,8 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      From chatbots and automation to predictive insights — we weave intelligence into your software so it thinks with you.
+      From chatbots and automation to predictive insights — we weave intelligence into your software so it thinks with
+      you.
     </Fragment>
   </Hero2>
 
@@ -53,36 +58,37 @@ const metadata = {
     columns={2}
     items={[
       {
-        title: "Conversational AI",
-        description: "Chatbots and virtual assistants that engage naturally, answer instantly, and improve over time.",
-        icon: "tabler:message-chatbot",
+        title: 'Conversational AI',
+        description: 'Chatbots and virtual assistants that engage naturally, answer instantly, and improve over time.',
+        icon: 'tabler:message-chatbot',
       },
       {
-        title: "Predictive analytics",
-        description: "AI models that forecast trends, customer behavior, and business outcomes with precision.",
-        icon: "tabler:chart-line",
+        title: 'Predictive analytics',
+        description: 'AI models that forecast trends, customer behavior, and business outcomes with precision.',
+        icon: 'tabler:chart-line',
       },
       {
-        title: "Intelligent automation",
-        description: "Reduce manual work with smart workflows that adapt to changing conditions.",
-        icon: "tabler:cpu",
+        title: 'Intelligent automation',
+        description: 'Reduce manual work with smart workflows that adapt to changing conditions.',
+        icon: 'tabler:cpu',
       },
       {
-        title: "Adaptive learning",
-        description: "Systems that evolve with your data — always getting faster, sharper, and more relevant.",
-        icon: "tabler:brain",
+        title: 'Adaptive learning',
+        description: 'Systems that evolve with your data — always getting faster, sharper, and more relevant.',
+        icon: 'tabler:brain',
       },
     ]}
   />
 
-<!-- https://unsplash.com/photos/person-holding-smartphone-iIn8IKBOva0 -->
+  <!-- https://unsplash.com/photos/person-holding-smartphone-iIn8IKBOva0 -->
   <UseCaseItem
-    tagline='AI for Local Businesses'
+    tagline="AI for Local Businesses"
     title="Your smart digital assistant"
     items={[
       {
         title: 'Description:',
-        description: "Small businesses can harness AI for customer support, appointment scheduling, and sales tracking — without complex systems. A chatbot answers questions instantly, automation keeps operations flowing, and insights guide decisions.",
+        description:
+          'Small businesses can harness AI for customer support, appointment scheduling, and sales tracking — without complex systems. A chatbot answers questions instantly, automation keeps operations flowing, and insights guide decisions.',
       },
       {
         title: 'Benefits:',
@@ -100,13 +106,14 @@ const metadata = {
 
   <!-- https://unsplash.com/photos/a-group-of-white-robots-sitting-on-top-of-laptops-2iUrK025cec -->
   <UseCaseItem
-    tagline='AI for SMEs'
+    tagline="AI for SMEs"
     title="Streamlined decisions at scale"
     isAfterContent={true}
     items={[
       {
         title: 'Description:',
-        description: "For growing companies, AI centralizes data, automates reporting, and reveals patterns. From predictive inventory to intelligent CRMs, we design AI tools that amplify your team’s impact.",
+        description:
+          'For growing companies, AI centralizes data, automates reporting, and reveals patterns. From predictive inventory to intelligent CRMs, we design AI tools that amplify your team’s impact.',
       },
       {
         title: 'Benefits:',
@@ -123,12 +130,13 @@ const metadata = {
   />
 
   <UseCaseItem
-    tagline='AI for Startups'
+    tagline="AI for Startups"
     title="MVPs that think ahead"
     items={[
       {
         title: 'Description:',
-        description: "AI helps startups stand out — offering personalization, automation, and rapid iteration. Build smarter MVPs that adapt to feedback instantly.",
+        description:
+          'AI helps startups stand out — offering personalization, automation, and rapid iteration. Build smarter MVPs that adapt to feedback instantly.',
       },
       {
         title: 'Benefits:',
@@ -152,19 +160,43 @@ const metadata = {
     title="Our AI Development Process"
     subtitle="We combine vision, data, and engineering into intelligent solutions."
     items={[
-      { title: 'Step 1: Discovery', description: "We map your goals, available data, and use cases for maximum impact.", icon: 'tabler:telescope' },
-      { title: 'Step 2: Data Preparation', description: "We clean, structure, and prepare your data for optimal AI training.", icon: 'tabler:database' },
-      { title: 'Step 3: AI Model Design', description: "Choosing the right algorithms and architectures for your needs.", icon: 'tabler:cpu' },
-      { title: 'Step 4: Integration', description: "Seamlessly embedding AI into your app or platform.", icon: 'tabler:plug-connected' },
-      { title: 'Step 5: Optimisation', description: "Refining and tuning based on live feedback and usage patterns.", icon: 'tabler:adjustments-alt' },
-      { title: 'Achieve and Succeed!', icon: 'tabler:trophy', classes: { icon: 'text-amber-600', title: 'text-amber-600' } },
+      {
+        title: 'Step 1: Discovery',
+        description: 'We map your goals, available data, and use cases for maximum impact.',
+        icon: 'tabler:telescope',
+      },
+      {
+        title: 'Step 2: Data Preparation',
+        description: 'We clean, structure, and prepare your data for optimal AI training.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Step 3: AI Model Design',
+        description: 'Choosing the right algorithms and architectures for your needs.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Step 4: Integration',
+        description: 'Seamlessly embedding AI into your app or platform.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Step 5: Optimisation',
+        description: 'Refining and tuning based on live feedback and usage patterns.',
+        icon: 'tabler:adjustments-alt',
+      },
+      {
+        title: 'Achieve and Succeed!',
+        icon: 'tabler:trophy',
+        classes: { icon: 'text-amber-600', title: 'text-amber-600' },
+      },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1692106979244-a2ac98253f6b??q=70&w=690&auto=format&fit=crop',
       alt: 'AI development process',
     }}
   />
-<!-- 
+  <!-- 
   <Testimonials
     title="Words from real customers"
     testimonials={[
@@ -191,15 +223,31 @@ const metadata = {
     title="Questions we often hear"
     subtitle="Quick answers about AI-powered solutions."
     items={[
-      { title: "Do I need a lot of data?", description: "Not always. We can start with smaller datasets and expand over time.", icon:"tabler:database" },
-      { title: "Will AI replace my team?", description: "No — AI works best as an assistant, freeing people for higher-value tasks.", icon:"tabler:users" },
-      { title: "Can AI integrate with my existing tools?", description: "Yes. We connect AI features to your current systems and workflows.", icon:"tabler:plug-connected" },
-      { title: "Is AI expensive to implement?", description: "Costs vary, but many solutions deliver ROI quickly through efficiency gains.", icon:"tabler:cash" },
+      {
+        title: 'Do I need a lot of data?',
+        description: 'Not always. We can start with smaller datasets and expand over time.',
+        icon: 'tabler:database',
+      },
+      {
+        title: 'Will AI replace my team?',
+        description: 'No — AI works best as an assistant, freeing people for higher-value tasks.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'Can AI integrate with my existing tools?',
+        description: 'Yes. We connect AI features to your current systems and workflows.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Is AI expensive to implement?',
+        description: 'Costs vary, but many solutions deliver ROI quickly through efficiency gains.',
+        icon: 'tabler:cash',
+      },
     ]}
   />
 
   <!-- Steps2 Widget ****************** -->
-  
+
   <!-- tagline="Ignite the First Spark" -->
   <!-- subtitle="Send us an email or<br>Book a FREE Discovery Call<br>to begin your journey." -->
   <!-- title="Contact us about AI Solutions for your Business" -->
@@ -213,22 +261,21 @@ const metadata = {
         type: 'email',
         name: 'email',
         label: 'Email',
-        placeholder: "Where shall our reply find you?"
+        placeholder: 'Where shall our reply find you?',
       },
     ]}
     textarea={{
       label: 'Message',
-      placeholder: "Tell us your challenges, dreams, or sparks"
+      placeholder: 'Tell us your challenges, dreams, or sparks',
     }}
     description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours."
-    button='Send Your Message'
-
+    button="Send Your Message"
     items={[
-       {
+      {
         description: 'Book a Discovery Call',
         classes: {
           container: 'd-flex content-center	',
-          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading',
         },
         href: 'https://calendly.com/causewaysoft',
         target: '_blank',
@@ -237,7 +284,7 @@ const metadata = {
       {
         title: 'Email us',
         description: 'anti-spam protection, please enable javascript...',
-        classes: {ctaLinks: 'emailLink'},
+        classes: { ctaLinks: 'emailLink' },
         href: '/',
         icon: 'tabler:mail',
       },
@@ -245,7 +292,7 @@ const metadata = {
         title: 'Call us',
         description: 'anti-spam protection, please enable javascript...',
         href: '/',
-        classes: {ctaLinks: 'phoneLink'},
+        classes: { ctaLinks: 'phoneLink' },
         icon: 'tabler:headset',
       },
       {

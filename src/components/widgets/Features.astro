@@ -23,7 +23,7 @@ const {
 
 <WidgetWrapper id={id} isDark={isDark} containerClass={`max-w-5xl ${classes?.container ?? ''}`} bg={bg}>
   <Headline title={title} subtitle={subtitle} tagline={tagline} classes={classes?.headline as Record<string, string>} />
-  
+
   {
     image && (
       <div class="relative m-auto h-full max-w-4xl">
@@ -37,7 +37,7 @@ const {
             sizes="(max-width: 768px) 100vw, 432px"
             layout="responsive"
             class="grayscale hover:grayscale-0 rounded-md shadow-lg"
-              {...image}
+            {...image}
           />
         )}
       </div>
@@ -55,5 +55,4 @@ const {
       ...((classes?.items as Record<string, never>) ?? {}),
     }}
   />
-
 </WidgetWrapper>

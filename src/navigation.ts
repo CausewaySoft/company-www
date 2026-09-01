@@ -2,7 +2,7 @@ export const headerData = {
   links: [
     {
       text: 'Home',
-      href: '/'
+      href: '/',
     },
     {
       text: 'About Us',
@@ -21,30 +21,30 @@ export const headerData = {
           href: '/services',
         },
         {
-          text: "Websites",
+          text: 'Websites',
           href: '/services/websites',
         },
         {
-          text: "Web Applications",
+          text: 'Web Applications',
           href: '/services/web-applications',
         },
         {
-          text: "Progressive Web Apps (PWA)",
+          text: 'Progressive Web Apps (PWA)',
           href: '/services/progressive-web-apps',
         },
         {
-          text: "Hybrid Mobile Apps",
+          text: 'Hybrid Mobile Apps',
           href: '/services/hybrid-apps',
         },
         {
-          text: "AI-Powered Solutions",
+          text: 'AI-Powered Solutions',
           href: '/services/ai-agents-solutions',
         },
         {
-          text: "Chrome Extensions",
+          text: 'Chrome Extensions',
           href: '/services/chrome-extensions',
           icon: 'tabler:brand-chrome',
-        }
+        },
       ],
     },
     {
@@ -65,9 +65,8 @@ export const headerData = {
       text: 'Blog',
       href: '/blog',
     },
-
   ],
-  actions: [{ text: 'Contact Us', href: '/contact'}],
+  actions: [{ text: 'Contact Us', href: '/contact' }],
 };
 
 export const footerData = {
@@ -80,30 +79,30 @@ export const footerData = {
           href: '/services',
         },
         {
-          text: "AI-Powered Solutions",
+          text: 'AI-Powered Solutions',
           href: '/services/ai-agents-solutions',
         },
         {
-          text: "Websites",
+          text: 'Websites',
           href: '/services/websites',
         },
         {
-          text: "Web Applications",
+          text: 'Web Applications',
           href: '/services/web-applications',
         },
         {
-          text: "Progressive Web Apps (PWA)",
+          text: 'Progressive Web Apps (PWA)',
           href: '/services/progressive-web-apps',
         },
         {
-          text: "Hybrid Mobile Apps",
+          text: 'Hybrid Mobile Apps',
           href: '/services/hybrid-apps',
         },
         {
-          text: "Chrome Extensions",
+          text: 'Chrome Extensions',
           href: '/services/chrome-extensions',
-        }
-      ]
+        },
+      ],
     },
     {
       title: 'Company',
@@ -118,7 +117,7 @@ export const footerData = {
     {
       title: 'Resources',
       links: [
-        { text: 'FREE Technical Score of your website', href: 'https://pagespeed.web.dev/'},
+        { text: 'FREE Technical Score of your website', href: 'https://pagespeed.web.dev/' },
         { text: 'Blog', href: '/blog' },
         { text: 'Case Studies', isComingSoon: true },
         { text: 'Start-up Toolkit', isComingSoon: true },
@@ -131,7 +130,7 @@ export const footerData = {
       links: [
         { text: 'Contact Us', href: '#contact' },
         { text: 'Book a FREE Discovery Call ', href: 'https://calendly.com/causewaysoft' },
-        { text: "We love ambitious ideas. Let's build something legendary together."},
+        { text: "We love ambitious ideas. Let's build something legendary together." },
       ],
     },
   ],

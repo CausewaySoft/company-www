@@ -11,19 +11,25 @@ import ContactInline from '~/components/widgets/ContactInline.astro';
 
 const metadata = {
   title: 'Hybrid Apps',
-  description: "Build once, launch everywhere. Our hybrid mobile apps with React Native deliver native performance, fast development, and cost savings for iOS and Android.",
+  description:
+    'Build once, launch everywhere. Our hybrid mobile apps with React Native deliver native performance, fast development, and cost savings for iOS and Android.',
   // keywords: "hybrid mobile app development, React Native developers, cross-platform apps, mobile app agency, iOS and Android app development, hybrid apps, cost-effective app development, native performance apps, single codebase apps, cross-platform app agency, mobile app development Northern Ireland, hybrid mobile app design"
 };
 ---
 
 <Layout metadata={metadata}>
-
   <!-- Hero2 Widget ******************* -->
-   <!-- https://unsplash.com/photos/cosmic-view-during-night-time-TV2gg2kZD1o -->
+  <!-- https://unsplash.com/photos/cosmic-view-during-night-time-TV2gg2kZD1o -->
   <Hero2
     tagline="Apps that feel like destiny"
     actions={[
-      { variant: 'primary', text: 'Book a discovery session', href: 'https://calendly.com/causewaysoft/30min', icon: 'tabler:calendar', target: '_blank' },
+      {
+        variant: 'primary',
+        text: 'Book a discovery session',
+        href: 'https://calendly.com/causewaysoft/30min',
+        icon: 'tabler:calendar',
+        target: '_blank',
+      },
       { text: 'Learn more', href: '#features' },
     ]}
     image={{
@@ -32,13 +38,15 @@ const metadata = {
     }}
   >
     <Fragment slot="title">
-      Hybrid <span class="text-accent dark:text-white">Apps</span> <br /> 
+      Hybrid <span class="text-accent dark:text-white">Apps</span>
+      <br />
       that merge the worlds of web and native
     </Fragment>
 
     <Fragment slot="subtitle">
       <span class="hidden sm:inline">
-        A single build. Infinite reach. Powered by Progressive Web App technology, our creations install on any device, run lightning-fast, and work even when the network sleeps.
+        A single build. Infinite reach. Powered by Progressive Web App technology, our creations install on any device,
+        run lightning-fast, and work even when the network sleeps.
       </span>
     </Fragment>
   </Hero2>
@@ -52,24 +60,27 @@ const metadata = {
     columns={2}
     items={[
       {
-        title: "Seamless native feel",
-        description: "Fluid animations, intuitive navigation, and touch-perfect responsiveness that mirrors the best native apps.",
-        icon: "tabler:device-mobile",
+        title: 'Seamless native feel',
+        description:
+          'Fluid animations, intuitive navigation, and touch-perfect responsiveness that mirrors the best native apps.',
+        icon: 'tabler:device-mobile',
       },
       {
-        title: "Always accessible",
-        description: "Offline-first technology ensures your app works flawlessly in cafés, trains, or remote mountain peaks.",
-        icon: "tabler:cloud-off",
+        title: 'Always accessible',
+        description:
+          'Offline-first technology ensures your app works flawlessly in cafés, trains, or remote mountain peaks.',
+        icon: 'tabler:cloud-off',
       },
       {
-        title: "Installable everywhere",
-        description: "Turn your hybrid app into a one-tap install on mobile or desktop — no app store gatekeepers.",
-        icon: "tabler:download",
+        title: 'Installable everywhere',
+        description: 'Turn your hybrid app into a one-tap install on mobile or desktop — no app store gatekeepers.',
+        icon: 'tabler:download',
       },
       {
-        title: "Performance & discoverability",
-        description: "Fast to load, smooth to use, and visible to search engines — marrying app engagement with web reach.",
-        icon: "tabler:rocket",
+        title: 'Performance & discoverability',
+        description:
+          'Fast to load, smooth to use, and visible to search engines — marrying app engagement with web reach.',
+        icon: 'tabler:rocket',
       },
     ]}
   />
@@ -82,31 +93,31 @@ const metadata = {
     columns={2}
     items={[
       {
-        title: "Lower barriers to entry",
-        description: "Skip app store delays and reach users instantly via a simple link.",
-        icon:"tabler:cash",
+        title: 'Lower barriers to entry',
+        description: 'Skip app store delays and reach users instantly via a simple link.',
+        icon: 'tabler:cash',
       },
       {
-        title: "Rapid deployment",
-        description: "One codebase runs everywhere — reducing build times and costs.",
-        icon:"tabler:clock",
+        title: 'Rapid deployment',
+        description: 'One codebase runs everywhere — reducing build times and costs.',
+        icon: 'tabler:clock',
       },
       {
-        title: "Push-powered engagement",
-        description: "Notifications and background updates keep your audience coming back.",
-        icon:"tabler:bell",
+        title: 'Push-powered engagement',
+        description: 'Notifications and background updates keep your audience coming back.',
+        icon: 'tabler:bell',
       },
       {
-        title: "Future-ready foundations",
-        description: "Built with modern stacks that evolve as devices and platforms do.",
-        icon:"tabler:infinity",
+        title: 'Future-ready foundations',
+        description: 'Built with modern stacks that evolve as devices and platforms do.',
+        icon: 'tabler:infinity',
       },
     ]}
   />
 
   <!-- Content Widget **************** -->
   <Content
-    tagline='Use Cases'
+    tagline="Use Cases"
     title="Case Studies for Hybrid Apps"
     subtitle="From neighbourhood shops to global ventures — Hybrid Apps adapt to every vision."
     isReversed
@@ -114,13 +125,14 @@ const metadata = {
 
   <!-- UseCaseItem Widget - Small Business -->
   <UseCaseItem
-    tagline='Local business, instant presence'
+    tagline="Local business, instant presence"
     title="Be installed on your customer’s phone in moments"
     isReversed
     items={[
       {
         title: 'Description:',
-        description: "For cafés, tradespeople, fitness instructors — a Hybrid App gives you an installable, app-like presence without app-store overhead. Customers can book, order, or browse instantly — online or offline — with updates delivered in the background.",
+        description:
+          'For cafés, tradespeople, fitness instructors — a Hybrid App gives you an installable, app-like presence without app-store overhead. Customers can book, order, or browse instantly — online or offline — with updates delivered in the background.',
       },
       {
         title: 'Benefits:',
@@ -134,20 +146,20 @@ const metadata = {
       src: 'https://images.unsplash.com/photo-1653762381400-2762e3a403e5?q=80&w=1935&auto=format&fit=crop',
       alt: 'Local business using Hybrid App',
     }}
-  >
-  </UseCaseItem>
+  />
 
   <!-- UseCaseItem Widget - SME 
     image source: https://unsplash.com/photos/turned-on-monitor-displaying-digital-products-pKRNxEguRgM 
   -->
   <UseCaseItem
-    tagline='Efficiency for growing enterprises'
+    tagline="Efficiency for growing enterprises"
     title="One app to unite every device"
     isAfterContent={true}
     items={[
       {
         title: 'Description:',
-        description: "For SMEs running operations across desktops, tablets, and phones — Hybrid Apps unify your workflows and data in one secure, branded platform. Whether managing orders, clients, or team schedules, your app works anywhere, instantly.",
+        description:
+          'For SMEs running operations across desktops, tablets, and phones — Hybrid Apps unify your workflows and data in one secure, branded platform. Whether managing orders, clients, or team schedules, your app works anywhere, instantly.',
       },
       {
         title: 'Benefits:',
@@ -161,20 +173,20 @@ const metadata = {
       src: 'https://images.unsplash.com/photo-1547658719-da2b51169166?q=80&w=1929&auto=format&fit=crop',
       alt: 'SME Hybrid App dashboard',
     }}
-  >
-  </UseCaseItem>
+  />
 
   <!-- UseCaseItem Widget - Startups 
    Image source: https://unsplash.com/photos/a-view-of-the-earth-from-space-at-night-Xu4Pz7GI9JY
    -->
   <UseCaseItem
-    tagline='Launch fast, scale fearlessly'
+    tagline="Launch fast, scale fearlessly"
     title="Startup-ready apps with global reach"
     isReversed
     items={[
       {
         title: 'Description:',
-        description: "For startups racing the clock, Hybrid Apps let you launch on every major device with one build. Capture early adopters, update instantly, and pivot without waiting for app-store approvals — so your momentum never slows.",
+        description:
+          'For startups racing the clock, Hybrid Apps let you launch on every major device with one build. Capture early adopters, update instantly, and pivot without waiting for app-store approvals — so your momentum never slows.',
       },
       {
         title: 'Benefits:',
@@ -188,39 +200,39 @@ const metadata = {
       src: 'https://images.unsplash.com/photo-1634176866089-b633f4aec882?q=80&w=2070&auto=format&fit=crop',
       alt: 'Startup scaling with Hybrid App',
     }}
-  >
-  </UseCaseItem>
+  />
 
   <!-- Steps Widget ****************** -->
   <Steps
     id="our-process"
-    tagline= "Project Steps"
+    tagline="Project Steps"
     title="Our Hybrid App Development Process"
     subtitle="Focused creativity and technical mastery — bringing your idea from spark to screen."
     items={[
       {
         title: 'Step 1: <span class="font-medium">Discovery</span>',
-        description: "We immerse ourselves in your vision, audience, and goals — ensuring your app thrives in every context.",
+        description:
+          'We immerse ourselves in your vision, audience, and goals — ensuring your app thrives in every context.',
         icon: 'tabler:telescope',
       },
       {
         title: 'Step 2: <span class="font-medium">UX Blueprint</span>',
-        description: "We map journeys that work seamlessly online and offline, across devices.",
+        description: 'We map journeys that work seamlessly online and offline, across devices.',
         icon: 'tabler:layout',
       },
       {
         title: 'Step 3: <span class="font-medium">Design & Build</span>',
-        description: "We merge art with engineering — delivering an app that feels native and performs flawlessly.",
+        description: 'We merge art with engineering — delivering an app that feels native and performs flawlessly.',
         icon: 'tabler:code',
       },
       {
         title: 'Step 4: <span class="font-medium">Launch & Optimise</span>',
-        description: "We release your app to the web, enable install prompts, and monitor performance live.",
+        description: 'We release your app to the web, enable install prompts, and monitor performance live.',
         icon: 'tabler:rocket',
       },
       {
         title: 'Step 5: <span class="font-medium">Evolve & Grow</span>',
-        description: "With your feedback, we refine features, expand reach, and ensure your app remains future-proof.",
+        description: 'With your feedback, we refine features, expand reach, and ensure your app remains future-proof.',
         icon: 'tabler:message-chatbot',
       },
       {
@@ -228,8 +240,8 @@ const metadata = {
         icon: 'tabler:trophy',
         classes: {
           icon: 'text-amber-600 dark:text-amber-600',
-          title: 'text-amber-600 dark:text-amber-600'
-        }
+          title: 'text-amber-600 dark:text-amber-600',
+        },
       },
     ]}
     image={{
@@ -237,7 +249,6 @@ const metadata = {
       alt: 'Hybrid App coding process',
     }}
   />
-
 
   <!-- Features Widget - Our Edge -->
   <Features
@@ -248,28 +259,24 @@ const metadata = {
     columns={2}
     items={[
       {
-        title: "Strategy-driven design",
-        description:
-          "Every choice we make serves your long-term goals, ensuring ROI from day one.",
-        icon:"tabler:target",
+        title: 'Strategy-driven design',
+        description: 'Every choice we make serves your long-term goals, ensuring ROI from day one.',
+        icon: 'tabler:target',
       },
       {
-        title: "Performance obsessed",
-        description:
-          "Apps fine-tuned for speed, engagement, and discoverability.",
-        icon:"tabler:clock",
+        title: 'Performance obsessed',
+        description: 'Apps fine-tuned for speed, engagement, and discoverability.',
+        icon: 'tabler:clock',
       },
       {
-        title: "AI-ready integrations",
-        description:
-          "We can power your app with intelligent features — from chatbots to smart recommendations.",
-        icon:"tabler:cpu",
+        title: 'AI-ready integrations',
+        description: 'We can power your app with intelligent features — from chatbots to smart recommendations.',
+        icon: 'tabler:cpu',
       },
       {
-        title: "Future-proof technology",
-        description:
-          "Built with open standards and modern frameworks, ready for tomorrow.",
-        icon:"tabler:shield-check",
+        title: 'Future-proof technology',
+        description: 'Built with open standards and modern frameworks, ready for tomorrow.',
+        icon: 'tabler:shield-check',
       },
     ]}
   />
@@ -281,24 +288,24 @@ const metadata = {
     subtitle="Here's what clients ask us most — so you can start your journey with clarity."
     items={[
       {
-        title: "Will my hybrid app work offline?",
-        description: "Yes — we use caching and offline-first strategies to ensure functionality anywhere.",
-        icon:"tabler:cloud-off",
+        title: 'Will my hybrid app work offline?',
+        description: 'Yes — we use caching and offline-first strategies to ensure functionality anywhere.',
+        icon: 'tabler:cloud-off',
       },
       {
-        title: "Can it send push notifications?",
-        description: "Absolutely — we set up notifications to re-engage users at the right time.",
-        icon:"tabler:bell",
+        title: 'Can it send push notifications?',
+        description: 'Absolutely — we set up notifications to re-engage users at the right time.',
+        icon: 'tabler:bell',
       },
       {
-        title: "Do I need to publish it to app stores?",
-        description: "No — users can install it directly from your website, though store publishing is still optional.",
-        icon:"tabler:download",
+        title: 'Do I need to publish it to app stores?',
+        description: 'No — users can install it directly from your website, though store publishing is still optional.',
+        icon: 'tabler:download',
       },
       {
-        title: "Is it secure?",
-        description: "Yes — built over HTTPS with modern security standards to protect your users and data.",
-        icon:"tabler:lock",
+        title: 'Is it secure?',
+        description: 'Yes — built over HTTPS with modern security standards to protect your users and data.',
+        icon: 'tabler:lock',
       },
     ]}
   >
@@ -307,8 +314,6 @@ const metadata = {
     </Fragment>
   </FAQs>
 
-
-  
   <ContactInline
     id="contact"
     tagline="Contact Us"
@@ -319,22 +324,21 @@ const metadata = {
         type: 'email',
         name: 'email',
         label: 'Email',
-        placeholder: "Where shall our reply find you?"
+        placeholder: 'Where shall our reply find you?',
       },
     ]}
     textarea={{
       label: 'Message',
-      placeholder: "Tell us your challenges, dreams, or sparks"
+      placeholder: 'Tell us your challenges, dreams, or sparks',
     }}
     description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours."
-    button='Send Your Message'
-
+    button="Send Your Message"
     items={[
-       {
+      {
         description: 'Book a Discovery Call',
         classes: {
           container: 'd-flex content-center	',
-          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading',
         },
         href: 'https://calendly.com/causewaysoft',
         target: '_blank',
@@ -343,7 +347,7 @@ const metadata = {
       {
         title: 'Email us',
         description: 'anti-spam protection, please enable javascript...',
-        classes: {ctaLinks: 'emailLink'},
+        classes: { ctaLinks: 'emailLink' },
         href: '/',
         icon: 'tabler:mail',
       },
@@ -351,7 +355,7 @@ const metadata = {
         title: 'Call us',
         description: 'anti-spam protection, please enable javascript...',
         href: '/',
-        classes: {ctaLinks: 'phoneLink'},
+        classes: { ctaLinks: 'phoneLink' },
         icon: 'tabler:headset',
       },
       {
@@ -362,7 +366,6 @@ const metadata = {
       },
     ]}
   />
-
 
   <!-- BlogLatestPost Widget **************** -->
 

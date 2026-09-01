@@ -7,8 +7,8 @@ import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import ContactInline from '~/components/widgets/ContactInline.astro';
 
 const metadata = {
-  title: "Chrome Extensions | Lightweight Productivity Tools",
-  description: "Compact yet powerful browser extensions to boost productivity, engagement, and user experience.",
+  title: 'Chrome Extensions | Lightweight Productivity Tools',
+  description: 'Compact yet powerful browser extensions to boost productivity, engagement, and user experience.',
   // keywords: "chrome extensions, browser plugins, productivity tools, custom extensions, web enhancement"
 };
 
@@ -16,17 +16,20 @@ const metadata = {
 // 	1.	Productivity Boosters — “Chrome extension menu with task shortcuts and automations”
 // 	2.	Custom Integrations — “Browser plugin connected to CRM and task manager”
 // 	3.	Data Capture Tools — “Chrome extension extracting and organizing web data”
-
-
 ---
 
 <Layout metadata={metadata}>
-
   <!-- image source: https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-desk-oeS-ZzFqCaw -->
   <Hero2
     tagline="Small in size, mighty in impact"
     actions={[
-      { variant: 'primary', text: 'Book a discovery session', href: 'https://calendly.com/causewaysoft/30min', icon: 'tabler:calendar', target: '_blank' },
+      {
+        variant: 'primary',
+        text: 'Book a discovery session',
+        href: 'https://calendly.com/causewaysoft/30min',
+        icon: 'tabler:calendar',
+        target: '_blank',
+      },
       { text: 'Learn more', href: '#features' },
     ]}
     image={{
@@ -38,7 +41,8 @@ const metadata = {
       Chrome <span class="text-accent dark:text-white">Extensions</span>
     </Fragment>
     <Fragment slot="subtitle">
-      We develop Chromium Extensions - Compact yet powerful tools that integrate seamlessly with browsers to enhance productivity and engagement.
+      We develop Chromium Extensions - Compact yet powerful tools that integrate seamlessly with browsers to enhance
+      productivity and engagement.
     </Fragment>
   </Hero2>
 
@@ -49,10 +53,14 @@ const metadata = {
     subtitle="No clutter, no lag — just the right functionality."
     columns={2}
     items={[
-      { title: "Lightweight", description: "Minimal impact on browser performance.", icon: "tabler:feather" },
-      { title: "Custom-built", description: "Tailored to your workflow or audience.", icon: "tabler:pencil" },
-      { title: "Secure", description: "Privacy-first development practices.", icon: "tabler:shield-lock" },
-      { title: "Cross-browser ready", description: "Extensions that work beyond Chrome.", icon: "tabler:device-desktop" },
+      { title: 'Lightweight', description: 'Minimal impact on browser performance.', icon: 'tabler:feather' },
+      { title: 'Custom-built', description: 'Tailored to your workflow or audience.', icon: 'tabler:pencil' },
+      { title: 'Secure', description: 'Privacy-first development practices.', icon: 'tabler:shield-lock' },
+      {
+        title: 'Cross-browser ready',
+        description: 'Extensions that work beyond Chrome.',
+        icon: 'tabler:device-desktop',
+      },
     ]}
   />
 
@@ -60,10 +68,13 @@ const metadata = {
     image source: https://unsplash.com/photos/man-holding-cup-filled-with-coffee-on-table-TTPMpLl_2lc
    -->
   <UseCaseItem
-    tagline='Productivity Boosters'
+    tagline="Productivity Boosters"
     title="Tools that save clicks"
     items={[
-      { title: 'Description:', description: "Custom shortcuts, automations, and integrations directly in the browser." },
+      {
+        title: 'Description:',
+        description: 'Custom shortcuts, automations, and integrations directly in the browser.',
+      },
       { title: 'Benefits:', description: `Faster workflows, Easy adoption, Consistent results, Happier users` },
     ]}
     image={{
@@ -82,22 +93,21 @@ const metadata = {
         type: 'email',
         name: 'email',
         label: 'Email',
-        placeholder: "Where shall our reply find you?"
+        placeholder: 'Where shall our reply find you?',
       },
     ]}
     textarea={{
       label: 'Message',
-      placeholder: "Tell us your challenges, dreams, or sparks"
+      placeholder: 'Tell us your challenges, dreams, or sparks',
     }}
     description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours."
-    button='Send Your Message'
-
+    button="Send Your Message"
     items={[
-       {
+      {
         description: 'Book a Discovery Call',
         classes: {
           container: 'd-flex content-center	',
-          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading',
         },
         href: 'https://calendly.com/causewaysoft',
         target: '_blank',
@@ -106,7 +116,7 @@ const metadata = {
       {
         title: 'Email us',
         description: 'anti-spam protection, please enable javascript...',
-        classes: {ctaLinks: 'emailLink'},
+        classes: { ctaLinks: 'emailLink' },
         href: '/',
         icon: 'tabler:mail',
       },
@@ -114,7 +124,7 @@ const metadata = {
         title: 'Call us',
         description: 'anti-spam protection, please enable javascript...',
         href: '/',
-        classes: {ctaLinks: 'phoneLink'},
+        classes: { ctaLinks: 'phoneLink' },
         icon: 'tabler:headset',
       },
       {
@@ -125,7 +135,6 @@ const metadata = {
       },
     ]}
   />
-
 
   <!-- BlogLatestPost Widget **************** -->
 

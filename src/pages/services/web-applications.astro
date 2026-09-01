@@ -9,18 +9,24 @@ import Steps from '~/components/widgets/Steps.astro';
 import ContactInline from '~/components/widgets/ContactInline.astro';
 
 const metadata = {
-  title: "Web Applications | Scalable, High-Performance Platforms",
-  description: "From MVP to enterprise-grade platforms - we design web apps with clean code, solid architecture, and infinite scalability.",
+  title: 'Web Applications | Scalable, High-Performance Platforms',
+  description:
+    'From MVP to enterprise-grade platforms - we design web apps with clean code, solid architecture, and infinite scalability.',
   // keywords: "web applications, MVP development, scalable platforms, SaaS apps, custom web app development, enterprise web apps, progressive web apps"
 };
 ---
 
 <Layout metadata={metadata}>
-
   <Hero2
     tagline="Platforms that grow with your vision"
     actions={[
-      { variant: 'primary', text: 'Start your web app journey', href: 'https://calendly.com/causewaysoft/30min', icon: 'tabler:calendar', target: '_blank' },
+      {
+        variant: 'primary',
+        text: 'Start your web app journey',
+        href: 'https://calendly.com/causewaysoft/30min',
+        icon: 'tabler:calendar',
+        target: '_blank',
+      },
       { text: 'See our process', href: '#features' },
     ]}
     image={{
@@ -34,7 +40,8 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      From MVPs that prove your concept to platforms that serve millions — we craft dynamic apps with clean code, robust architecture, and infinite room to grow.
+      From MVPs that prove your concept to platforms that serve millions — we craft dynamic apps with clean code, robust
+      architecture, and infinite room to grow.
     </Fragment>
   </Hero2>
 
@@ -46,36 +53,36 @@ const metadata = {
     columns={2}
     items={[
       {
-        title: "Scalable architecture",
-        description: "Apps that grow effortlessly — from 100 to 1 million users without re-engineering.",
-        icon: "tabler:arrows-diagonal",
+        title: 'Scalable architecture',
+        description: 'Apps that grow effortlessly — from 100 to 1 million users without re-engineering.',
+        icon: 'tabler:arrows-diagonal',
       },
       {
-        title: "MVP to full-scale",
-        description: "We launch fast, test fast, and scale fast — so your product meets the market at the right time.",
-        icon: "tabler:rocket",
+        title: 'MVP to full-scale',
+        description: 'We launch fast, test fast, and scale fast — so your product meets the market at the right time.',
+        icon: 'tabler:rocket',
       },
       {
-        title: "High performance",
-        description: "Optimized code, minimal load times, and smooth interactions that keep users engaged.",
-        icon: "tabler:bolt",
+        title: 'High performance',
+        description: 'Optimized code, minimal load times, and smooth interactions that keep users engaged.',
+        icon: 'tabler:bolt',
       },
       {
-        title: "Future-ready tech stack",
-        description: "React, Next.js, Node, and more — modern tools for modern challenges.",
-        icon: "tabler:code",
+        title: 'Future-ready tech stack',
+        description: 'React, Next.js, Node, and more — modern tools for modern challenges.',
+        icon: 'tabler:code',
       },
     ]}
   />
 
   <!-- https://unsplash.com/photos/laptop-computer-on-glass-top-table-hpjSkU2UYSU -->
   <UseCaseItem
-    tagline='Local Business Tools'
+    tagline="Local Business Tools"
     title="Simple, powerful web tools for local impact"
     items={[
       {
         title: 'Description:',
-        description: "A single dashboard for bookings, invoices, and client management — all accessible from anywhere.",
+        description: 'A single dashboard for bookings, invoices, and client management — all accessible from anywhere.',
       },
       {
         title: 'Benefits:',
@@ -96,13 +103,13 @@ const metadata = {
       https://www.pexels.com/photo/close-up-photo-of-programming-of-codes-546819/
     -->
   <UseCaseItem
-    tagline='Enterprise Platforms'
+    tagline="Enterprise Platforms"
     title="Robust systems for complex operations"
     isAfterContent={true}
     items={[
       {
         title: 'Description:',
-        description: "Custom-built platforms for large-scale data management, automation, and collaboration.",
+        description: 'Custom-built platforms for large-scale data management, automation, and collaboration.',
       },
       {
         title: 'Benefits:',
@@ -119,12 +126,13 @@ const metadata = {
   />
 
   <UseCaseItem
-    tagline='Startup Launchpads'
+    tagline="Startup Launchpads"
     title="Fast-track your idea to market"
     items={[
       {
         title: 'Description:',
-        description: "MVPs built to validate your vision quickly — with a foundation ready to evolve into a full platform.",
+        description:
+          'MVPs built to validate your vision quickly — with a foundation ready to evolve into a full platform.',
       },
       {
         title: 'Benefits:',
@@ -146,12 +154,36 @@ const metadata = {
     title="Our Web App Development Process"
     subtitle="Turning your vision into a high-performance reality."
     items={[
-      { title: 'Step 1: Discovery', description: "We understand your goals, users, and vision.", icon: 'tabler:search' },
-      { title: 'Step 2: Architecture', description: "We plan a structure built for performance and scalability.", icon: 'tabler:building-arch' },
-      { title: 'Step 3: Development', description: "We build clean, maintainable code with future growth in mind.", icon: 'tabler:code' },
-      { title: 'Step 4: Testing', description: "Rigorous testing for speed, stability, and security.", icon: 'tabler:shield-check' },
-      { title: 'Step 5: Deployment', description: "Launch on stable, scalable infrastructure.", icon: 'tabler:cloud-upload' },
-      { title: 'Achieve and Succeed!', icon: 'tabler:trophy', classes: { icon: 'text-amber-600', title: 'text-amber-600' } },
+      {
+        title: 'Step 1: Discovery',
+        description: 'We understand your goals, users, and vision.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Step 2: Architecture',
+        description: 'We plan a structure built for performance and scalability.',
+        icon: 'tabler:building-arch',
+      },
+      {
+        title: 'Step 3: Development',
+        description: 'We build clean, maintainable code with future growth in mind.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Step 4: Testing',
+        description: 'Rigorous testing for speed, stability, and security.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Step 5: Deployment',
+        description: 'Launch on stable, scalable infrastructure.',
+        icon: 'tabler:cloud-upload',
+      },
+      {
+        title: 'Achieve and Succeed!',
+        icon: 'tabler:trophy',
+        classes: { icon: 'text-amber-600', title: 'text-amber-600' },
+      },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1929&auto=format&fit=crop',
@@ -185,13 +217,28 @@ const metadata = {
     title="Common questions about web apps"
     subtitle="We answer what clients ask us most."
     items={[
-      { title: "What tech stack do you use?", description: "React, Next.js, Node.js, Tailwind CSS, and more — depending on your needs.", icon:"tabler:code" },
-      { title: "Can I start small and scale later?", description: "Yes — we design apps to expand with your business.", icon:"tabler:arrows-diagonal" },
-      { title: "Do you handle hosting?", description: "Yes, we offer secure, high-performance hosting in the EU and UK.", icon:"tabler:server" },
-      { title: "Can you integrate with my existing tools?", description: "Absolutely — we can connect to CRMs, payment gateways, APIs, and more.", icon:"tabler:plug-connected" },
+      {
+        title: 'What tech stack do you use?',
+        description: 'React, Next.js, Node.js, Tailwind CSS, and more — depending on your needs.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Can I start small and scale later?',
+        description: 'Yes — we design apps to expand with your business.',
+        icon: 'tabler:arrows-diagonal',
+      },
+      {
+        title: 'Do you handle hosting?',
+        description: 'Yes, we offer secure, high-performance hosting in the EU and UK.',
+        icon: 'tabler:server',
+      },
+      {
+        title: 'Can you integrate with my existing tools?',
+        description: 'Absolutely — we can connect to CRMs, payment gateways, APIs, and more.',
+        icon: 'tabler:plug-connected',
+      },
     ]}
   />
-
 
   <ContactInline
     id="contact"
@@ -203,22 +250,21 @@ const metadata = {
         type: 'email',
         name: 'email',
         label: 'Email',
-        placeholder: "Where shall our reply find you?"
+        placeholder: 'Where shall our reply find you?',
       },
     ]}
     textarea={{
       label: 'Message',
-      placeholder: "Tell us your challenges, dreams, or sparks"
+      placeholder: 'Tell us your challenges, dreams, or sparks',
     }}
     description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours."
-    button='Send Your Message'
-
+    button="Send Your Message"
     items={[
-       {
+      {
         description: 'Book a Discovery Call',
         classes: {
           container: 'd-flex content-center	',
-          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading'
+          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading',
         },
         href: 'https://calendly.com/causewaysoft',
         target: '_blank',
@@ -227,7 +273,7 @@ const metadata = {
       {
         title: 'Email us',
         description: 'anti-spam protection, please enable javascript...',
-        classes: {ctaLinks: 'emailLink'},
+        classes: { ctaLinks: 'emailLink' },
         href: '/',
         icon: 'tabler:mail',
       },
@@ -235,7 +281,7 @@ const metadata = {
         title: 'Call us',
         description: 'anti-spam protection, please enable javascript...',
         href: '/',
-        classes: {ctaLinks: 'phoneLink'},
+        classes: { ctaLinks: 'phoneLink' },
         icon: 'tabler:headset',
       },
       {
@@ -246,7 +292,6 @@ const metadata = {
       },
     ]}
   />
-
 
   <!-- BlogLatestPost Widget **************** -->
 

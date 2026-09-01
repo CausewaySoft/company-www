@@ -18,7 +18,6 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-
   <!-- HERO -->
   <Hero
     actions={[
@@ -33,7 +32,10 @@ const metadata = {
     </Fragment>
 
     <Fragment slot="subtitle">
-      <strong>Digital transformation is no longer optional - streamline your workflows, automate admin, and unlock business intelligence with support from the Digital Transformation Flexible Fund (DTFF).</strong>
+      <strong
+        >Digital transformation is no longer optional - streamline your workflows, automate admin, and unlock business
+        intelligence with support from the Digital Transformation Flexible Fund (DTFF).</strong
+      >
     </Fragment>
   </Hero>
 
@@ -49,22 +51,31 @@ const metadata = {
     tagline="What is the DTFF?"
     title="What is the Digital Transformation Flexible Fund (DTFF)?"
     video={{
-      id: 'TBNTAH6w_9Q'
+      id: 'TBNTAH6w_9Q',
     }}
-    >
+  >
     <Fragment slot="content">
       <p>
-        The <strong>DTFF grant</strong> gives Northern Ireland SMEs up to <strong>£20,000</strong> to invest in technology and software that accelerates growth and efficiency.
+        The <strong>DTFF grant</strong> gives Northern Ireland SMEs up to <strong>£20,000</strong> to invest in technology
+        and software that accelerates growth and efficiency.
       </p>
 
       <ul class="list-disc list-inside mt-4 space-y-2">
         <li>Covers up to <strong>70%</strong> of project costs</li>
-        <li>Eligible for <strong>Micro</strong> (1-10 FTE) and <strong>Small</strong> (10-49 FTEs) Northern Irish businesses trading for <strong>12+ months</strong></li>
-        <li>Supports technologies such as <em>AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain</em>, and more</li>
+        <li>
+          Eligible for <strong>Micro</strong> (1-10 FTE) and <strong>Small</strong> (10-49 FTEs) Northern Irish businesses
+          trading for <strong>12+ months</strong>
+        </li>
+        <li>
+          Supports technologies such as <em
+            >AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain</em
+          >, and more
+        </li>
       </ul>
 
       <p class="mt-4">
-        <strong>Why this matters:</strong> Most small businesses still struggle with manual processes and legacy systems. DTFF funding lets you implement modern solutions without shouldering the full cost.
+        <strong>Why this matters:</strong> Most small businesses still struggle with manual processes and legacy systems.
+        DTFF funding lets you implement modern solutions without shouldering the full cost.
       </p>
     </Fragment>
   </Content>
@@ -79,8 +90,16 @@ const metadata = {
       { title: 'Repetitive admin', description: 'Repetitive admin consuming staff hours', icon: 'tabler:clock' },
       { title: 'Reporting errors', description: 'Errors in reporting and compliance', icon: 'tabler:file-check' },
       { title: 'Slow decision-making', description: 'Lack of real-time insights', icon: 'tabler:chart-pie' },
-      { title: 'Poor client communication', description: 'Missed follow-ups, forgotten knowledge and delayed responses', icon: 'tabler:message-circle' },
-      { title: 'Lost opportunities', description: 'Manual workflows slow business growth', icon: 'tabler:arrow-up-right' },
+      {
+        title: 'Poor client communication',
+        description: 'Missed follow-ups, forgotten knowledge and delayed responses',
+        icon: 'tabler:message-circle',
+      },
+      {
+        title: 'Lost opportunities',
+        description: 'Manual workflows slow business growth',
+        icon: 'tabler:arrow-up-right',
+      },
       { title: 'Competitive risk', description: 'Competitors adopting tech faster', icon: 'tabler:brand-bitbucket' },
     ]}
   />
@@ -92,13 +111,41 @@ const metadata = {
     title="Our Solution - The Digital Operations Hub"
     subtitle="A £25-28k package built for professional services firms. Measurable outcomes, not shiny toys."
     items={[
-      { title: 'Smart Client Portal', description: 'Secure document sharing, client task tracking, and e-signatures.', icon: 'tabler:folder' },
-      { title: 'Workflow Automation', description: 'Streamline lead → project → invoice processes; save hours per week.', icon: 'tabler:automatic-gearbox' },
-      { title: 'Analytics Dashboard', description: 'Real-time performance tracking for staff, clients, and projects.', icon: 'tabler:chart-line' },
-      { title: 'Integrated CRM', description: 'Custom-built for your firm’s processes, not a generic off-the-shelf tool.', icon: 'tabler:users' },
-      { title: 'AI Document Assistant', description: 'Summarise, flag, and analyse client documents automatically.', icon: 'tabler:robot' },
-      { title: 'Compliance & Audit Automation', description: 'Track GDPR, deadlines and quality control effortlessly.', icon: 'tabler:shield-check' },
-      { title: 'Collaboration Layer', description: 'Multi-user access, messaging and shared workspaces with clients.', icon: 'tabler:message-circle' },
+      {
+        title: 'Smart Client Portal',
+        description: 'Secure document sharing, client task tracking, and e-signatures.',
+        icon: 'tabler:folder',
+      },
+      {
+        title: 'Workflow Automation',
+        description: 'Streamline lead → project → invoice processes; save hours per week.',
+        icon: 'tabler:automatic-gearbox',
+      },
+      {
+        title: 'Analytics Dashboard',
+        description: 'Real-time performance tracking for staff, clients, and projects.',
+        icon: 'tabler:chart-line',
+      },
+      {
+        title: 'Integrated CRM',
+        description: 'Custom-built for your firm’s processes, not a generic off-the-shelf tool.',
+        icon: 'tabler:users',
+      },
+      {
+        title: 'AI Document Assistant',
+        description: 'Summarise, flag, and analyse client documents automatically.',
+        icon: 'tabler:robot',
+      },
+      {
+        title: 'Compliance & Audit Automation',
+        description: 'Track GDPR, deadlines and quality control effortlessly.',
+        icon: 'tabler:shield-check',
+      },
+      {
+        title: 'Collaboration Layer',
+        description: 'Multi-user access, messaging and shared workspaces with clients.',
+        icon: 'tabler:message-circle',
+      },
     ]}
   />
 
@@ -126,7 +173,6 @@ const metadata = {
     ]}
   />
 
-
   <CallToAction
     actions={[
       { variant: 'primary', text: '📅 Book Your Free DTFF Consultation', href: 'https://calendly.com/causewaysoft' },
@@ -134,10 +180,11 @@ const metadata = {
   >
     <Fragment slot="title">Ready to Transform Your Business?</Fragment>
     <Fragment slot="subtitle">
-      The DTFF gives you a fast route to modernise operations — but the deadline is less than <strong>2 weeks away</strong>. Book a free consultation now.
+      The DTFF gives you a fast route to modernise operations — but the deadline is less than <strong
+        >2 weeks away</strong
+      >. Book a free consultation now.
     </Fragment>
   </CallToAction>
-
 
   <!-- MINI CASE -->
   <!-- <Content
@@ -153,22 +200,36 @@ const metadata = {
     }}
   /> -->
 
-
   <!-- HOW IT WORKS (STEPS) -->
   <Steps
     title="How we deliver your Digital Operations Hub"
     items={[
-      { title: 'Assessment & Audit', description: 'We evaluate systems, processes and opportunities.', icon: 'tabler:search' },
-      { title: 'Implementation', description: 'Deploy CRM, portal, dashboard and AI modules.', icon: 'tabler:settings' },
-      { title: 'Training & Adoption', description: 'Ensure staff adoption and measure early wins.', icon: 'tabler:school' },
-      { title: 'Measure ROI', description: 'Track outcomes and iterate for continuous improvement.', icon: 'tabler:trending-up' },
+      {
+        title: 'Assessment & Audit',
+        description: 'We evaluate systems, processes and opportunities.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Implementation',
+        description: 'Deploy CRM, portal, dashboard and AI modules.',
+        icon: 'tabler:settings',
+      },
+      {
+        title: 'Training & Adoption',
+        description: 'Ensure staff adoption and measure early wins.',
+        icon: 'tabler:school',
+      },
+      {
+        title: 'Measure ROI',
+        description: 'Track outcomes and iterate for continuous improvement.',
+        icon: 'tabler:trending-up',
+      },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1522071820081-009f0129c71c?auto=format&fit=crop&w=1200&q=60',
       alt: 'Process steps illustration',
     }}
   />
-
 
   <!-- TAILORED SOLUTIONS FOR SECTORS -->
   <section id="sectors" class="relative py-12">
@@ -212,16 +273,25 @@ const metadata = {
     </div>
   </section>
 
-    <!-- FAQ -->
+  <!-- FAQ -->
   <FAQs
     title="FAQ"
     subtitle="Common questions about DTFF and our packages"
     tagline="Frequently Asked"
     items={[
-      { title: 'Who is eligible?', description: 'Businesses trading 12+ months, 10–249 employees, Northern Ireland-based.' },
+      {
+        title: 'Who is eligible?',
+        description: 'Businesses trading 12+ months, 10–249 employees, Northern Ireland-based.',
+      },
       { title: 'How much funding can I get?', description: '£5,000–£20,000 (up to 70% of project costs).' },
-      { title: 'What technologies are supported?', description: 'AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain, and more.' },
-      { title: 'How fast can the project be delivered?', description: 'Our packages are designed for rapid deployment to meet DTFF timelines.' },
+      {
+        title: 'What technologies are supported?',
+        description: 'AI, IoT, workflow automation, analytics dashboards, AR/VR, robotics, blockchain, and more.',
+      },
+      {
+        title: 'How fast can the project be delivered?',
+        description: 'Our packages are designed for rapid deployment to meet DTFF timelines.',
+      },
     ]}
   />
 
@@ -233,8 +303,8 @@ const metadata = {
   >
     <Fragment slot="title">Secure Your DTFF-Funded Transformation</Fragment>
     <Fragment slot="subtitle">
-      Limited slots available. Deadline: <strong>less than 2 weeks!</strong> Reserve your free consultation and start the application process.
+      Limited slots available. Deadline: <strong>less than 2 weeks!</strong> Reserve your free consultation and start the
+      application process.
     </Fragment>
   </CallToAction>
-
 </Layout>

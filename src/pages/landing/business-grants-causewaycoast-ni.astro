@@ -12,12 +12,9 @@ import Note from '~/components/widgets/Note.astro';
 // const mockupImg = '~/assets/images/labs/happy-hour/breakfast-promotion.png';
 // const appStoreImg = '~/assets/images/app-store.png';
 
-
-const metadata = { 
-  title: 'Secure Your £5k Grant for Business Growth | Causeway Coast & Glens', 
+const metadata = {
+  title: 'Secure Your £5k Grant for Business Growth | Causeway Coast & Glens',
 };
-
-
 ---
 
 <Layout metadata={metadata}>
@@ -39,26 +36,8 @@ const metadata = {
   </Fragment> -->
 
   <!-- Source image: https://www.pexels.com/photo/a-person-using-laptop-with-graph-on-screen-7013100/ -->
-  <Hero2 tagline="Causeway Coast & Glens Businesses" 
-    actions={[
-      {variant:'primary',text:'Get Free Consultation',href:'https://calendly.com/causewaysoft/30min',target:'_blank',icon:'tabler:rocket'},
-      {text:'Learn more',href:'#problem-statement'}
-    ]}
-    image={{ 
-        src: 'https://images.pexels.com/photos/7013100/pexels-photo-7013100.png', 
-        alt: 'Coffee shop setting where a business owner is working on a laptop looking at a web-app showing a dashboard with business metrics' }} 
-    >
-    <Fragment slot="title">£5k Grant to Improve Business Efficiency & Profitability</Fragment>
-    <Fragment slot="subtitle">
-      Use available grant funding to implement practical IT systems that enable 24/7 sales, reduce admin, save time and increase your profitability and your long term growth.
-    </Fragment>
-  </Hero2>
-
-  <!-- Note Widget ******************* -->
-
-  <Note title="Grant deadline:" description=" 5 June 2026, 12:00 — last chance to apply" />
-
-<CallToAction
+  <Hero2
+    tagline="Causeway Coast & Glens Businesses"
     actions={[
       {
         variant: 'primary',
@@ -67,196 +46,24 @@ const metadata = {
         target: '_blank',
         icon: 'tabler:rocket',
       },
+      { text: 'Learn more', href: '#problem-statement' },
     ]}
+    image={{
+      src: 'https://images.pexels.com/photos/7013100/pexels-photo-7013100.png',
+      alt: 'Coffee shop setting where a business owner is working on a laptop looking at a web-app showing a dashboard with business metrics',
+    }}
   >
-    <Fragment slot="title">Book your Free Initial Consultation Now!</Fragment>
-
+    <Fragment slot="title">£5k Grant to Improve Business Efficiency & Profitability</Fragment>
     <Fragment slot="subtitle">
-      Book a free, no-obligation call to discuss:
-
-        <ol class="list-decimal list-inside mt-4 text-lg">
-            <li>Areas where technology could improve efficiency in your business</li>
-            <li>How to secure the £5k grant (deadline: noon, Friday, 5 June 2026)</li>
-        </ol>
+      Use available grant funding to implement practical IT systems that enable 24/7 sales, reduce admin, save time and
+      increase your profitability and your long term growth.
     </Fragment>
-  </CallToAction>
+  </Hero2>
 
-  <!-- **************** Problem Statement **************** -->
-  <Content
-    isReversed
-    id="problem-statement"
-    tagline="Fix Your BUSINESS OPERATIONS Chaos"
-    title="Running a Business Today Means Constant Operational Pressure"
-    subtitle="Does your business struggle with inefficient, manual, and fragmented day-to-day operations? <br/> You're not alone. Many local businesses face these common challenges that quietly drain time, energy, and profits."
-    items={[
-      {
-        title: 'Admin overload',
-        description:
-          'Too much time is lost on repetitive paperwork and manual tasks instead of growing the business.',
-        icon:'tabler:x'
-      },
-      {
-        title: 'Disconnected systems',
-        description:
-          "Spreadsheets, emails, and notes don't connect, causing confusion and missed information.",
-        icon:'tabler:x'
-      },
-      {
-        title: 'Lost time',
-        description:
-          'Small inefficiencies build up daily, quietly draining productivity and focus.',
-        icon:'tabler:x'
-      },
-      {
-        title: 'Scaling problems',
-        description:
-          'As the business grows, inefficient processes become harder to manage and more expensive.',
-        icon:'tabler:x'
-      },
-    ]}
-    image={{
-      src: 'https://images.pexels.com/photos/5163387/pexels-photo-5163387.jpeg?q=80&w=690&auto=format&fit=crop',
-      alt: 'Frustrated business owner surrounded by paperwork and a clock, symbolizing operational chaos',
-      class: 'grayscale hover:grayscale-0 rounded shadow-lg'
-    }}
-  >
-  <!-- Image sources:
-    https://www.pexels.com/photo/man-sitting-by-the-table-and-smoking-a-cigarette-5163387/
-   -->
-    <Fragment slot="content">
-        Fixing these operational gaps is often the difference between  <span class="font-bold">stagnation and profitable growth.</span>
-    </Fragment>
+  <!-- Note Widget ******************* -->
 
-  </Content>
+  <Note title="Grant deadline:" description=" 5 June 2026, 12:00 — last chance to apply" />
 
-  <!-- **************** Solution Statement 
-   
-  Implement Efficient IT Systems to Streamline Operations and Boost Profitability
-  
-  **************** -->
-  <Content
-    isReversed
-    id="solution-statement"
-    tagline="Efficiency & Growth"
-    title="Practical IT Systems for Business Efficiency and Growth"
-    subtitle="With the right software in place, you can automate routine tasks, connect your data, and free up time to focus on growing your business."
-    items={[
-    {
-        title: 'Sell 24/7 with e-commerce',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-    {
-        title: 'Streamline day-to-day operations',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      {
-        title: 'Reduce administrative workload',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      {
-        title: 'Automate repetitive tasks',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      {
-        title: 'Improve customer management',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      {
-        title: 'Save staff time',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      {
-        title: 'Increase productivity',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      {
-        title: 'Improve reporting and decision-making',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      {
-        title: 'Create capacity for growth',
-        description:
-          '',
-        icon:'tabler:check'
-      },
-      
-    ]}
-    image={{
-      src: 'https://images.pexels.com/photos/36729737/pexels-photo-36729737.jpeg?q=80&w=690&auto=format&fit=crop',
-      alt: 'A successful business couple at a coffee shop, smiling and looking at a laptop screen, symbolizing business efficiency and growth',
-      class: 'grayscale hover:grayscale-0 rounded shadow-lg'
-    }}
-  >
-  <!-- Image sources:
-    
-   -->
-    <Fragment slot="content">
-        Transform your operations from a source of stress into a powerful tool for <span class="font-bold">efficiency and profitability.</span>
-    </Fragment>
-
-  </Content>
-
-
-
-  <Features 
-    id="features"
-    tagline="Examples of Eligible Projects" 
-    title="What Can You Use the Grant For"
-    subtitle="The grant can be used for projects that demonstrably lead to increased profitability by enabling your business to significantly boost sales, improve efficiency, or expand into new markets."
-    columns={2}
-    items={[
-      {
-        title:'E-commerce Shops',
-        description:'Sell your products and services online 24/7. Reach more customers, expand your market, and increase sales.',
-        icon:'tabler:shopping-bag'
-      },
-      {
-        title:'Efficiency-Boosting & Workflow optimisation',
-        description:'Custom workflow automation tools, automated lead and client management, client portals for streamlined service delivery, or bespoke data analytics dashboards for strategic decision-making.',
-        icon:'tabler:clock-check'
-      },
-      {
-        title:'Customer enquiry, quotation and booking systems',
-        description:'Free up your time by providing a seamless experience for customers to inquire, schedule and book services.',
-        icon:'tabler:headset'
-      },
-      {
-        title:'Inventory, Supply Chain & Operations Management Systems',
-        description:'Custom inventory/supply chain management systems that significantly reduce operational costs or increase capacity for revenue-generating work.',
-        icon:'tabler:packages'
-      }
-    ]} />
-
-  <Content
-    isReversed
-    id="solution-statement"
-    tagline="Local Support"
-    title="Local Support for Northern Irish Businesses"
-    subtitle="Based in Northern Ireland, we work with businesses across the Causeway Coast & Glens area to identify practical opportunities for business optimisation and digital transformation. <br/><br/> Every recommendation is focused on one objective: <span class='font-bold'><br/>Improving profitability through greater efficiency.</span>"
-    >
-
-  </Content>
-
-
-
-
-    <!-- TODO: Quote / Consultation CallToAction Widget *********** -->
   <CallToAction
     actions={[
       {
@@ -273,20 +80,197 @@ const metadata = {
     <Fragment slot="subtitle">
       Book a free, no-obligation call to discuss:
 
-        <ol class="list-decimal list-inside mt-4 text-lg">
-            <li>Areas where technology could improve efficiency in your business</li>
-            <li>How to secure the £5k grant (deadline: noon, Friday, 5 June 2026)</li>
-        </ol>
+      <ol class="list-decimal list-inside mt-4 text-lg">
+        <li>Areas where technology could improve efficiency in your business</li>
+        <li>How to secure the £5k grant (deadline: noon, Friday, 5 June 2026)</li>
+      </ol>
     </Fragment>
   </CallToAction>
 
+  <!-- **************** Problem Statement **************** -->
+  <Content
+    isReversed
+    id="problem-statement"
+    tagline="Fix Your BUSINESS OPERATIONS Chaos"
+    title="Running a Business Today Means Constant Operational Pressure"
+    subtitle="Does your business struggle with inefficient, manual, and fragmented day-to-day operations? <br/> You're not alone. Many local businesses face these common challenges that quietly drain time, energy, and profits."
+    items={[
+      {
+        title: 'Admin overload',
+        description: 'Too much time is lost on repetitive paperwork and manual tasks instead of growing the business.',
+        icon: 'tabler:x',
+      },
+      {
+        title: 'Disconnected systems',
+        description: "Spreadsheets, emails, and notes don't connect, causing confusion and missed information.",
+        icon: 'tabler:x',
+      },
+      {
+        title: 'Lost time',
+        description: 'Small inefficiencies build up daily, quietly draining productivity and focus.',
+        icon: 'tabler:x',
+      },
+      {
+        title: 'Scaling problems',
+        description: 'As the business grows, inefficient processes become harder to manage and more expensive.',
+        icon: 'tabler:x',
+      },
+    ]}
+    image={{
+      src: 'https://images.pexels.com/photos/5163387/pexels-photo-5163387.jpeg?q=80&w=690&auto=format&fit=crop',
+      alt: 'Frustrated business owner surrounded by paperwork and a clock, symbolizing operational chaos',
+      class: 'grayscale hover:grayscale-0 rounded shadow-lg',
+    }}
+  >
+    <!-- Image sources:
+    https://www.pexels.com/photo/man-sitting-by-the-table-and-smoking-a-cigarette-5163387/
+   -->
+    <Fragment slot="content">
+      Fixing these operational gaps is often the difference between <span class="font-bold"
+        >stagnation and profitable growth.</span
+      >
+    </Fragment>
+  </Content>
+
+  <!-- **************** Solution Statement 
+   
+  Implement Efficient IT Systems to Streamline Operations and Boost Profitability
   
+  **************** -->
+  <Content
+    isReversed
+    id="solution-statement"
+    tagline="Efficiency & Growth"
+    title="Practical IT Systems for Business Efficiency and Growth"
+    subtitle="With the right software in place, you can automate routine tasks, connect your data, and free up time to focus on growing your business."
+    items={[
+      {
+        title: 'Sell 24/7 with e-commerce',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Streamline day-to-day operations',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Reduce administrative workload',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Automate repetitive tasks',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Improve customer management',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Save staff time',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Increase productivity',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Improve reporting and decision-making',
+        description: '',
+        icon: 'tabler:check',
+      },
+      {
+        title: 'Create capacity for growth',
+        description: '',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: 'https://images.pexels.com/photos/36729737/pexels-photo-36729737.jpeg?q=80&w=690&auto=format&fit=crop',
+      alt: 'A successful business couple at a coffee shop, smiling and looking at a laptop screen, symbolizing business efficiency and growth',
+      class: 'grayscale hover:grayscale-0 rounded shadow-lg',
+    }}
+  >
+    <!-- Image sources:
+    
+   -->
+    <Fragment slot="content">
+      Transform your operations from a source of stress into a powerful tool for <span class="font-bold"
+        >efficiency and profitability.</span
+      >
+    </Fragment>
+  </Content>
 
+  <Features
+    id="features"
+    tagline="Examples of Eligible Projects"
+    title="What Can You Use the Grant For"
+    subtitle="The grant can be used for projects that demonstrably lead to increased profitability by enabling your business to significantly boost sales, improve efficiency, or expand into new markets."
+    columns={2}
+    items={[
+      {
+        title: 'E-commerce Shops',
+        description:
+          'Sell your products and services online 24/7. Reach more customers, expand your market, and increase sales.',
+        icon: 'tabler:shopping-bag',
+      },
+      {
+        title: 'Efficiency-Boosting & Workflow optimisation',
+        description:
+          'Custom workflow automation tools, automated lead and client management, client portals for streamlined service delivery, or bespoke data analytics dashboards for strategic decision-making.',
+        icon: 'tabler:clock-check',
+      },
+      {
+        title: 'Customer enquiry, quotation and booking systems',
+        description:
+          'Free up your time by providing a seamless experience for customers to inquire, schedule and book services.',
+        icon: 'tabler:headset',
+      },
+      {
+        title: 'Inventory, Supply Chain & Operations Management Systems',
+        description:
+          'Custom inventory/supply chain management systems that significantly reduce operational costs or increase capacity for revenue-generating work.',
+        icon: 'tabler:packages',
+      },
+    ]}
+  />
 
+  <Content
+    isReversed
+    id="solution-statement"
+    tagline="Local Support"
+    title="Local Support for Northern Irish Businesses"
+    subtitle="Based in Northern Ireland, we work with businesses across the Causeway Coast & Glens area to identify practical opportunities for business optimisation and digital transformation. <br/><br/> Every recommendation is focused on one objective: <span class='font-bold'><br/>Improving profitability through greater efficiency.</span>"
+  />
 
+  <!-- TODO: Quote / Consultation CallToAction Widget *********** -->
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Get Free Consultation',
+        href: 'https://calendly.com/causewaysoft/30min',
+        target: '_blank',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  >
+    <Fragment slot="title">Book your Free Initial Consultation Now!</Fragment>
 
+    <Fragment slot="subtitle">
+      Book a free, no-obligation call to discuss:
 
-
+      <ol class="list-decimal list-inside mt-4 text-lg">
+        <li>Areas where technology could improve efficiency in your business</li>
+        <li>How to secure the £5k grant (deadline: noon, Friday, 5 June 2026)</li>
+      </ol>
+    </Fragment>
+  </CallToAction>
 
   <!-- <FAQs title="Frequently Asked Questions" items={[
     {title:'How quickly can my website be live?',description:'Usually within 5–7 working days once we have your content.',icon:'tabler:chevrons-right'},
@@ -294,13 +278,10 @@ const metadata = {
     {title:'Is hosting included?',description:'Yes, 1 year of hosting is included in all packages.',icon:'tabler:chevrons-right'}
   ]} /> -->
 
-
   <!-- <Steps2 title="Let's Build Your Website" subtitle="Contact us today to get started"
     callToAction={{text:'Request a Quote',href:'#contact'}}
     items={[
       {title:'Email us',description:'contact@webstarter.com',icon:'tabler:mail'},
       {title:'Call us',description:'+44 1234 567890',icon:'tabler:headset'}
     ]} /> -->
-
-
 </Layout>
