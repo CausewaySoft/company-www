@@ -163,7 +163,7 @@ We turn complex products and ideas into clear, credible websites that give custo
       {
         title: 'Growing businesses',
         description:
-`<strong>Your website should keep up with your business.</strong><br/>
+`<strong>Keep up your website with your business.</strong><br/>
 Add the tools your business needs, from bookings and payments to automation, AI and custom integrations.
 <br/><br/>
 <b>Custom functionality · Integrations · Automation · AI · Ongoing development</b>
@@ -259,7 +259,42 @@ export const projectSteps = {
     src: 'https://images.pexels.com/photos/7948055/pexels-photo-7948055.jpeg?q=70&w=690&auto=format&fit=crop',
     alt: '',
   },
-};  
+};
+
+export const whyChooseUs = {
+  title: 'Why build with us?',
+  subtitle: '',
+  items: [
+    {
+      title: 'Design that has a job to do',
+      description:
+        'We don\'t design pages simply because they look nice. Every section should help a visitor understand, trust or act.',
+      icon: 'tabler:layout-dashboard',
+    },
+    {
+      title: 'Performance without compromises',
+      description:
+        'Fast websites are better for users, search engines and conversions. We treat performance as part of the product, not something to fix after launch.',
+      icon: 'tabler:brand-speedtest',
+    },
+    {
+      title: 'Engineering behind the design',
+      description:
+        'You\'re not buying a pretty frontend held together with plugins and hope. We build proper, maintainable software that can grow when your requirements do.',
+      icon: 'tabler:code',
+    },
+    {
+      title: 'One person who understands both sides',
+      description:
+        'You don\'t need to translate your business requirements between a designer, developer, SEO agency and automation specialist. We can handle the whole thing.',
+      icon: 'tabler:user',
+    }
+  ],
+  image: {
+    src: 'https://images.pexels.com/photos/7948055/pexels-photo-7948055.jpeg?q=70&w=690&auto=format&fit=crop', // https://www.pexels.com/photo/colored-pencils-and-a-magnifying-glass-over-documents-with-graphs-7948055/
+    alt: '',
+  },
+};
 
 
 // SEO-Rich Use Case Images & Alt Text Suggestions:
@@ -371,6 +406,25 @@ export const projectSteps = {
     items={projectSteps.items}
     image={projectSteps.image}
   />
+
+   <!--  Why Choose Us -->
+  <Steps
+  isReversed  
+    id="why-choose-us"
+    tagline=""
+    title={whyChooseUs.title}
+    subtitle={whyChooseUs.subtitle}
+    items={whyChooseUs.items}
+    image={whyChooseUs.image}
+  />
+
+      <!-- Why Choose Us -->
+  <Features2
+    title={whyChooseUs.title}
+    subtitle={whyChooseUs.subtitle}
+    columns={4}
+    items={whyChooseUs.items}
+  >
 
 
   <ContactInline
