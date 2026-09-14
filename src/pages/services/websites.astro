@@ -203,10 +203,63 @@ export const valueProposition = {
     // src: 'https://images.pexels.com/photos/39219501/pexels-photo-39219501.jpeg?auto=format&fit=crop&w=1671&q=80',
     // src: 'https://images.pexels.com/photos/18848932/pexels-photo-18848932.jpeg?auto=format&fit=crop&w=1671&q=80',
     // src: 'https://images.pexels.com/photos/8428066/pexels-photo-8428066.jpeg?auto=format&fit=crop&w=1671&q=80',
-    src: 'https://images.pexels.com/photos/36766779/pexels-photo-36766779.jpeg?auto=format&fit=crop&w=1671&q=80',
+    src: 'https://images.pexels.com/photos/36766779/pexels-photo-36766779.jpeg?auto=format&fit=crop&w=1671&q=80', // https://www.pexels.com/photo/professional-businessman-working-in-cafe-36766779/
     alt: '',
   },
 };
+
+export const projectSteps = {
+  title: 'From “just a website” to a system that brings in business.',
+  subtitle: 'Every project starts with one question: <strong> What should this website actually achieve?</strong> Then we work backwards.',
+  items: [
+    {
+      title: 'Step 1: Find the opportunity',
+      description:
+        'We learn about your business, customers and goals and identify where your website can do more.',
+      icon: 'tabler:telescope',
+    },
+    {
+      title: 'Step 2: Plan the experience',
+      description:
+        'We structure the pages, messaging and customer journeys around those goals.',
+      icon: 'tabler:layout-dashboard',
+    },
+    {
+      title: 'Step 3: Design & build',
+      description:
+        'You get a polished, responsive website backed by fast, maintainable code.',
+      icon: 'tabler:code',
+    },
+    {
+      title: 'Step 4: Launch & measure',
+      description:
+        'We test performance, accessibility, SEO foundations and conversion paths before going live.',
+      icon: 'tabler:chart-line',
+    },
+    {
+      title: 'Step 5: Improve',
+      description:
+        'Once the website is working, we can keep optimising it, adding functionality and helping it grow with your business.',
+      icon: 'tabler:rocket',
+    },
+    {
+      title: 'Achieve and Succeed!',
+      icon: 'tabler:trophy',
+      classes: {
+        icon: 'text-amber-600 dark:text-amber-600',
+        title: 'text-amber-600 dark:text-amber-600',
+      },
+    },
+  ],
+  image: {
+    // src: 'https://images.pexels.com/photos/106344/pexels-photo-106344.jpeg?q=70&w=690&auto=format&fit=crop',
+  //  src: 'https://images.pexels.com/photos/6476189/pexels-photo-6476189.jpeg?q=70&w=690&auto=format&fit=crop', // https://www.pexels.com/photo/people-in-the-office-having-a-meeting-6476189/
+  //  src: 'https://images.pexels.com/photos/34069/pexels-photo.jpg?q=70&w=690&auto=format&fit=crop',
+  // src: 'https://images.pexels.com/photos/7693218/pexels-photo-7693218.jpeg?q=70&w=690&auto=format&fit=crop',
+    src: 'https://images.pexels.com/photos/7948055/pexels-photo-7948055.jpeg?q=70&w=690&auto=format&fit=crop',
+    alt: '',
+  },
+};  
 
 
 // SEO-Rich Use Case Images & Alt Text Suggestions:
@@ -308,6 +361,18 @@ export const valueProposition = {
   />
 
 
+
+  <!-- Steps Widget ****************** -->
+  <Steps
+    id="our-process"
+    tagline=""
+    title={projectSteps.title}
+    subtitle={projectSteps.subtitle}
+    items={projectSteps.items}
+    image={projectSteps.image}
+  />
+
+
   <ContactInline
     id="contact"
     tagline="Contact Us"
@@ -371,5 +436,4 @@ export const valueProposition = {
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </BlogLatestPosts>
-
 </Layout>
