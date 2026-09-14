@@ -2,6 +2,7 @@
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
 import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
 import Content from '~/components/widgets/Content.astro';
 import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
@@ -39,6 +40,175 @@ const heroSection = {
   },
 };
 
+export const problemStatement = {
+  title: 'Is your website doing its job?',
+  subtitle: 'Your website is your business card, your shop window and your sales tool. It represents you and your business, and it might be the first thing a potential customer sees.',
+  itemsTitle: 'If your website:',
+  items: [
+    {
+      title: 'takes too long to load',
+      icon: 'tabler:x',
+    },
+    {
+      title: 'looks poor on mobile',
+      icon: 'tabler:x',
+    },
+    {
+      title: "doesn't explain what you actually do",
+      icon: 'tabler:x',
+    },
+    {
+      title: 'hides your phone number or enquiry form',
+      icon: 'tabler:x',
+    },
+    {
+      title: 'makes customers work to find what they need',
+      icon: 'tabler:x',
+    },
+    {
+      title: "looks like it hasn't been updated in years",
+      icon: 'tabler:x',
+    },
+    {
+      title: 'gets visitors but very few enquiries',
+      icon: 'tabler:x',
+    },
+  ],
+  image: {
+    src: 'https://images.pexels.com/photos/4458425/pexels-photo-4458425.jpeg?auto=format&fit=crop&w=1671&q=80',
+    alt: '',
+  },
+};
+
+export const productOfferings = {
+  title: 'What we can do for your website',
+  subtitle: 'Whether you need to improve what you have, build something new or add functionality, we can help.',
+  items:[
+      {
+        title: 'Fix an existing website',
+        description:
+`Already have a website?
+You don't necessarily need a new one.
+We can identify what's holding it back and improve the parts that matter most.
+<br/><br/>
+<b>Performance · Mobile UX · SEO · Conversion · Accessibility</b>
+`,
+        icon: 'tabler:brand-speedtest',
+        callToAction: {
+          variant: 'primary' as const,
+          target: '_blank' as const,
+          text: 'Get a Free Website Check',
+          href: '/free-website-check',
+        },
+      },
+      {
+        title: 'Build a new website',
+        description:
+`Starting from scratch?
+We'll build a fast, modern website around your customers, your brand and your business goals. No bloated templates. No unnecessary complexity.
+<br/><br/>
+<b>Strategy · Copy · Design · Development · SEO · Analytics</b>
+`,
+        icon: 'tabler:browser-check',
+        callToAction: {
+          variant: 'primary' as const,
+          target: '_blank' as const,
+          text: 'Start a Website Project',
+          href: '/start-project?service=website',
+        },
+      },
+      {
+        title: 'Make your website a business tool',
+        description:
+`Need your website to do more? We build the functionality behind it, from booking and payments to client portals, AI assistants and custom integrations.
+<br/><br/>
+<b>Booking · Payments · Lead Capture · Portals · AI · Automation</b>`,
+        icon: 'tabler:mood-dollar',
+        callToAction: {
+          variant: 'primary' as const,
+          target: '_blank' as const,
+          text: 'Discuss Your Requirements',
+          href: '/start-project?service=website',
+        },
+        
+      },
+    ]
+};
+
+
+export const productOfferings2 = {
+  title: 'Websites built around your business',
+  subtitle: 'Whether you\'re a local business, a startup or a growing company, we build websites around what you need to achieve.',
+  items:[
+      {
+        title: 'Local businesses',
+        description:
+`<strong>Turn searches into calls and enquiries.</strong><br/>
+Your customers are already searching. We make it easy for them to find you, trust you and get in touch.
+<br/><br/>
+<b>Local SEO · Click-to-call · Quote forms · Reviews · Mobile-first</b>
+`,
+        icon: 'tabler:map-2',
+      },
+      {
+        title: 'Startups',
+        description:
+`<strong>Explain your idea. Build trust. Get customers.</strong><br/>
+We turn complex products and ideas into clear, credible websites that give customers, partners and investors a reason to take the next step.
+<br/><br/>
+<b>Positioning · Messaging · Conversion · Analytics · Scalable architecture</b>
+`,
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'Growing businesses',
+        description:
+`<strong>Your website should keep up with your business.</strong><br/>
+Add the tools your business needs, from bookings and payments to automation, AI and custom integrations.
+<br/><br/>
+<b>Custom functionality · Integrations · Automation · AI · Ongoing development</b>
+`,
+        icon: 'tabler:building-skyscraper',
+      },
+    ]
+};
+
+export const valueProposition = {
+  title: 'We turn underperforming websites into business assets.',
+  subtitle: 'We combine strategic design, conversion-focused UX and serious technical performance to build websites that do more than look good.',
+  itemsTitle: '',
+  items: [
+    {
+      title: 'Get found ',
+      description: 'A technically strong, SEO-friendly foundation helps search engines understand your business and helps the right customers find you.',
+    },
+    {
+      title: 'Get attention',
+      description: 'Clear messaging and modern design communicate what you offer quickly, build trust and give visitors a reason to stay.',
+    },
+    {
+      title: 'Get enquiries',
+      description: 'Every important page has a purpose and a clear next step, whether that’s calling you, requesting a quote, booking an appointment or buying something.',
+    },
+    {
+      title: 'Stay fast',
+      description: 'We obsess over performance so your website loads quickly on phones, desktops and slower connections.',
+    },
+    {
+      title: 'Keep growing',
+      description: 'Need booking, payments, customer portals, automation, AI or another integration later? We build on a proper technical foundation, so your website doesn’t become a dead end.',
+    },
+  ],
+  image: {
+    // src: 'https://images.pexels.com/photos/39219501/pexels-photo-39219501.jpeg?auto=format&fit=crop&w=1671&q=80',
+    // src: 'https://images.pexels.com/photos/18848932/pexels-photo-18848932.jpeg?auto=format&fit=crop&w=1671&q=80',
+    // src: 'https://images.pexels.com/photos/8428066/pexels-photo-8428066.jpeg?auto=format&fit=crop&w=1671&q=80',
+    src: 'https://images.pexels.com/photos/36766779/pexels-photo-36766779.jpeg?auto=format&fit=crop&w=1671&q=80',
+    alt: '',
+  },
+};
+
+
 // SEO-Rich Use Case Images & Alt Text Suggestions:
 // 	1.	Modern responsive website homepage on desktop and mobile — “Responsive business website displayed on desktop and smartphone screens”
 // 	2.	Website speed optimization dashboard — “Website performance metrics showing fast load times and SEO scores”
@@ -64,8 +234,79 @@ const heroSection = {
     </Fragment>
   </Hero2>
 
+  <!--  Problem Statement -->
+  <Content
+    isReversed
+    subtitle={problemStatement.subtitle}
+    title={problemStatement.title}
+    items={problemStatement.items}
+    itemsTitle={problemStatement.itemsTitle}
+    image={problemStatement.image}
+  >
+    <Fragment slot="content">
+      <p>
+        ...  then your website isn't doing its job.
+        <br/>
+        That's where we come in.
+      </p>
+    </Fragment>
 
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <!--  Value Proposition -->
+  <Content
+    isReversed
+    subtitle={valueProposition.subtitle}
+    title={valueProposition.title}
+    items={valueProposition.items}
+    itemsTitle={valueProposition.itemsTitle}
+    image={valueProposition.image}
+  >
+    <Fragment slot="content">
   
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+    <!-- What we can do for your website -->
+  <Features2
+    title={productOfferings.title}
+    subtitle={productOfferings.subtitle}
+    columns={3}
+    items={productOfferings.items}
+  >
+   <!-- <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment> -->
+
+     <!-- 
+    <Fragment slot="tagline">
+      <p class="text-lg text-gray-600 dark:text-gray-300 text-center max-w-3xl mx-auto mt-0 mb-16">
+        We're software engineers, not just website builders. When off-the-shelf solutions aren't enough, we can build exactly what your business needs.
+      </p>
+    </Fragment> -->
+  </Features2>
+
+  <p class="text-lg text-gray-600 dark:text-gray-300 text-center max-w-3xl mx-auto mt-0 mb-16">
+    <strong>We're software engineers, not just website builders.</strong><br/>
+    When off-the-shelf solutions aren't enough, we can build exactly what your business needs.
+  </p>
+
+
+  <!-- Websites built around your business -->
+  <Features2
+    title={productOfferings2.title}
+    subtitle={productOfferings2.subtitle}
+    columns={3}
+    items={productOfferings2.items}
+  />
+
 
   <ContactInline
     id="contact"
@@ -120,8 +361,7 @@ const heroSection = {
     ]}
   />
 
-  <!-- BlogLatestPost Widget **************** -->
-
+  <!-- BlogLatestPost Widget -->
   <BlogLatestPosts
     id="blog"
     title="Discover the CausewaySoft blog"
@@ -131,4 +371,5 @@ const heroSection = {
       <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
     </Fragment>
   </BlogLatestPosts>
+
 </Layout>
