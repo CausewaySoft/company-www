@@ -1,10 +1,9 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
 import Hero2 from '~/components/widgets/Hero2.astro';
-import Features from '~/components/widgets/Features.astro';
+// import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Content from '~/components/widgets/Content.astro';
-import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
 import FAQs from '~/components/widgets/FAQs.astro';
 import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
 import Steps from '~/components/widgets/Steps.astro';
@@ -280,11 +279,11 @@ export const whyChooseUs = {
     {
       title: 'Engineering behind the design',
       description:
-        'You\'re not buying a pretty frontend held together with plugins and hope. We build proper, maintainable software that can grow when your requirements do.',
+        'You\'re not buying a pretty frontend held together with plugins and workarounds. We build proper, maintainable software that can grow when your requirements do.',
       icon: 'tabler:code',
     },
     {
-      title: 'One person who understands both sides',
+      title: 'One person who understands the whole picture',
       description:
         'You don\'t need to translate your business requirements between a designer, developer, SEO agency and automation specialist. We can handle the whole thing.',
       icon: 'tabler:user',
@@ -296,6 +295,49 @@ export const whyChooseUs = {
   },
 };
 
+
+export const faqSection = {
+  title: 'FAQs',
+  subtitle: '',
+  items: [
+    {
+      title: 'How much does a website cost?',
+      description:
+        'It depends on what you\'re trying to achieve. Straightforward business websites start from <strong>£2,000</strong>, while more involved websites and custom functionality are quoted individually. We\'ll tell you what we recommend and why before any work begins.',
+      icon: 'tabler:chevrons-right',
+    },
+    {
+      title: 'How long does it take?',
+      description:
+        "A straightforward business website can typically be completed in <strong>2-4 weeks</strong>. Larger websites and projects involving custom functionality take longer. You'll have a clear timeline before we start.",
+      icon: 'tabler:chevrons-right',
+    },
+    {
+      title: 'Can you improve my existing website instead of rebuilding it?',
+      description:
+        "Yes. In many cases, improving an existing website is the better option. We'll look at what's currently working, what's not, and whether a rebuild is actually justified.",
+      icon: 'tabler:chevrons-right',
+    },
+    {
+      title: 'Will you guarantee Google rankings?',
+      description:
+        "No honest developer can guarantee a specific Google ranking. We can build a technically strong SEO foundation, improve your sites structure and performance, and make your content easier for search engines to understand.",
+      icon: 'tabler:chevrons-right',
+    },
+    {
+      title: 'Can you write the website content?',
+      description:
+        'Yes. We can help with messaging and copy, so you don\'t have to spend three weeks staring at a blank Google Doc wondering what to write on your About page.',
+      icon: 'tabler:chevrons-right',
+    },
+    {
+      title: 'What happens after launch?',
+      description:
+        'You can manage things yourself, ask us to handle updates, or continue working with us as your website evolves.',
+      icon: 'tabler:chevrons-right',
+    },
+  ],
+};
 
 // SEO-Rich Use Case Images & Alt Text Suggestions:
 // 	1.	Modern responsive website homepage on desktop and mobile — “Responsive business website displayed on desktop and smartphone screens”
@@ -424,8 +466,18 @@ export const whyChooseUs = {
     subtitle={whyChooseUs.subtitle}
     columns={4}
     items={whyChooseUs.items}
-  >
+  />
 
+  <!-- FAQs Widget ******************* -->
+  <FAQs
+    title={faqSection.title}
+    subtitle={faqSection.subtitle}
+    items={faqSection.items}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
+  </FAQs>
 
   <ContactInline
     id="contact"
