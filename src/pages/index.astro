@@ -59,23 +59,47 @@ export const productOfferings2 = {
       description:
         'Fast, modern websites designed to make your business look credible, get found and turn visitors into enquiries, bookings and customers.',
       icon: 'tabler:world-www',
+      callToAction: {
+        variant: 'link',
+        text: 'Explore Website Development',
+        href: '/services/websites',
+        icon: 'tabler:arrow-right',
+      },
     },
     {
       title: 'Web Applications',
       description:
         'Custom platforms, portals and business applications built around the way your business actually works.',
       icon: 'tabler:app-window',
+      callToAction: {
+        variant: 'link',
+        text: 'Explore Web Applications',
+        href: '/services/web-applications',
+        icon: 'tabler:arrow-right',
+      },
     },
     {
       title: 'AI-Powered Solutions',
       description:
         'Practical AI tools that automate work, improve customer experiences and help your team get more done.',
       icon: 'tabler:brain',
+      callToAction: {
+        variant: 'link',
+        text: 'Explore AI Solutions',
+        href: '/services/ai-agents-solutions',
+        icon: 'tabler:arrow-right',
+      },
     },
     {
       title: 'Custom Software',
       description: "When off-the-shelf software doesn't fit, we build the software that does.",
       icon: 'tabler:code',
+      callToAction: {
+        variant: 'link',
+        text: 'Explore Custom Software',
+        href: '/services/custom-software',
+        icon: 'tabler:arrow-right',
+      },
     },
   ],
 };
@@ -270,9 +294,8 @@ export const callToAction = {
     </Fragment>
   </Content>
 
-  <!-- Features Widget 
-    ***************
-    What we build Section.
+  <!--
+    WHAT WE BUILD.
   -->
   <Features2
     id="services"
@@ -282,7 +305,9 @@ export const callToAction = {
     items={productOfferings2.items}
   />
 
-  <!-- Steps Widget ****************** -->
+  <!--
+    OUR PROCESS
+  -->
   <Steps
     id="our-process"
     title={projectSteps.title}
@@ -304,7 +329,7 @@ export const callToAction = {
     items={productOfferings3.items}
   />
 
-    <!--  Value Proposition -->
+  <!--  Value Proposition -->
   <Content
     isReversed
     subtitle={productOfferings4.subtitle}
