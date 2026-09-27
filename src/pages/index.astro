@@ -39,11 +39,23 @@ const heroSection = {
 
 export const problemStatement = {
   tagline: 'Have an idea worth building?',
-  title: "You don't need another agency that disappears behind layers of project managers and meetings.",
-  subtitle: "You need someone who understands what you're trying to achieve, works out what needs to be built, and then builds it properly. That's what CausewaySoft does. \
-    Whether you're launching something new, improving an existing business or replacing a painful manual process, we combine product thinking, design and software engineering to turn ideas into working products.",
-  contentTitle: '',
-  contentItems: [],
+  title: "Whether you're launching something new, improving an existing business or replacing a painful manual process, we combine product thinking, design and engineering to turn ideas into working products.",
+  subtitle: "you",
+  itemsTitle: 'We help you work out what to build, then build it properly.',
+  items: [
+    {
+      title: "Launch something new",
+      description: "Turn an idea into a focused digital product without building unnecessary complexity."
+    },
+    {
+      title: "Improve what already exists",
+      description: "Upgrade an outdated website, application or digital experience around what your business actually needs."
+    },
+    {
+      title: "Replace manual work",
+      description: "Automate repetitive processes and connect disconnected tools with software that works for your team."
+    }
+  ],
   image: {
       src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
     alt: '',
@@ -273,20 +285,24 @@ export const callToAction = {
   <!-- Note Widget ******************* -->
   <Note icon="tabler:bulb" title="Philosophy:" description="Launch faster. Grow stronger. Build legendary." />
 
-  <!-- Content Widget **************** -->
+  <!--
+    Problem Statement \
+    Have an idea worth building?
+  -->
   <Content
     id="scroll"
     isReversed
     title={problemStatement.tagline}
     subtitle={problemStatement.title}
-    items={problemStatement.contentItems}
+    items={problemStatement.items}
+    itemsTitle={problemStatement.itemsTitle}
     image={problemStatement.image}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+      <!-- <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
         {problemStatement.contentTitle}
       </h3>
-      <p>{problemStatement.subtitle}</p>
+      <p>{problemStatement.subtitle}</p> -->
     </Fragment>
 
     <Fragment slot="bg">
@@ -335,10 +351,9 @@ export const callToAction = {
     subtitle={productOfferings4.subtitle}
     title={productOfferings4.title}
     items={productOfferings4.items}
-    image={productOfferings4.image} 
+    image={productOfferings4.image}
   >
     <Fragment slot="content">
-  
     </Fragment>
 
     <Fragment slot="bg">
