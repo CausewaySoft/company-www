@@ -3,303 +3,338 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/HeroFullWidth.astro';
 import Note from '~/components/widgets/Note.astro';
 import Features from '~/components/widgets/Features.astro';
+import Features2 from '~/components/widgets/Features2.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
 import ContactInline from '~/components/widgets/ContactInline.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
   title: 'CausewaySoft - Web-Apps and Mobile Apps Developement Agency in Belfast, Northern Ireland ',
   ignoreTitleTemplate: true,
 };
+
+const heroSection = {
+  tagline: 'Giant Apps for Giant Visionaries',
+  title: 'We build digital products for ambitious businesses.',
+  subtitle: `From high-performance websites to custom web applications, AI-powered tools and business software, we turn ambitious ideas into digital products people can actually use.`,
+  ctaButtonPrimary: {
+    variant: 'primary' as const,
+    target: '_blank' as const,
+    text: 'Start a Project',
+    href: '/#',
+    icon: 'tabler:rocket',
+  },
+  ctaButtonSecondary: {
+    variant: 'secondary' as const,
+    // text: 'View Renovation Projects',
+    text: 'Explore Our Services',
+    href: '#',
+  },
+  image: {
+    src: '~/assets/images/giants-causeway-causewaysoft-herobg.png',
+    alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway',
+  },
+};
+
+export const problemStatement = {
+  tagline: 'Have an idea worth building?',
+  title: "You don't need another agency that disappears behind layers of project managers and meetings.",
+  subtitle: "You need someone who understands what you're trying to achieve, works out what needs to be built, and then builds it properly. That's what CausewaySoft does. \
+    Whether you're launching something new, improving an existing business or replacing a painful manual process, we combine product thinking, design and software engineering to turn ideas into working products.",
+  contentTitle: '',
+  contentItems: [],
+  image: {
+      src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
+    alt: '',
+  },
+};
+
+export const productOfferings2 = {
+  title: 'What we build',
+  subtitle: '',
+  items: [
+    {
+      title: 'Websites',
+      description:
+        'Fast, modern websites designed to make your business look credible, get found and turn visitors into enquiries, bookings and customers.',
+      icon: 'tabler:world-www',
+    },
+    {
+      title: 'Web Applications',
+      description:
+        'Custom platforms, portals and business applications built around the way your business actually works.',
+      icon: 'tabler:app-window',
+    },
+    {
+      title: 'AI-Powered Solutions',
+      description:
+        'Practical AI tools that automate work, improve customer experiences and help your team get more done.',
+      icon: 'tabler:brain',
+    },
+    {
+      title: 'Custom Software',
+      description: "When off-the-shelf software doesn't fit, we build the software that does.",
+      icon: 'tabler:code',
+    },
+  ],
+};
+
+export const projectSteps = {
+  title: 'From idea to working product',
+  subtitle:
+    'You might already have a detailed specification. You might only have a problem that needs solving. Either is fine. We can help you work out what to build, define the right solution, design the experience and turn it into a reliable product.',
+  items: [
+    {
+      title: 'Step 1 — Discover',
+      description: 'Understand the business, the problem and what success looks like.',
+      icon: 'tabler:search',
+    },
+    {
+      title: 'Step 2 — Define',
+      description: 'Turn ideas and requirements into a clear, practical product plan.',
+      icon: 'tabler:clipboard-list',
+    },
+    {
+      title: 'Step 3 — Design',
+      description: 'Create an intuitive experience before writing thousands of lines of code.',
+      icon: 'tabler:palette',
+    },
+    {
+      title: 'Step 4 — Build',
+      description: 'Engineer the product using modern, maintainable technology.',
+      icon: 'tabler:code',
+    },
+    {
+      title: 'Step 5 — Launch & Grow',
+      description: 'Get it into the hands of real users, measure what happens and keep improving it.',
+      icon: 'tabler:rocket',
+    },
+  ],
+  image: {
+    src: 'https://images.unsplash.com/photo-1505576457712-b769c0c0a354?q=70&w=690&auto=format&fit=crop',
+    alt: 'Our App Development Process',
+  },
+};
+
+// section 4,
+export const productOfferings3 = {
+  title: 'Built for ambitious businesses',
+  subtitle: '',
+  items: [
+    {
+      title: 'Startups',
+      description: 'Move from idea to MVP without building a mountain of unnecessary software.',
+      icon: 'tabler:rocket',
+    },
+    {
+      title: 'Small Businesses',
+      description:
+        'Replace outdated websites, manual processes and disconnected tools with software that actually helps the business.',
+      icon: 'tabler:building',
+    },
+    {
+      title: 'Growing Companies',
+      description: 'Build the platforms, integrations and automation you need as the business becomes more complex.',
+      icon: 'tabler:chart-line',
+    },
+  ],
+};
+
+// section 5
+export const productOfferings4 = {
+  title: 'Why CausewaySoft?',
+  subtitle:
+    'Small enough to care. Technical enough to build properly. CausewaySoft is an independent software engineering studio. You work directly with the person designing and building your product.',
+  items: [
+    {
+      title: 'Business first',
+      description:
+        "Technology is only useful when it solves a real problem. We start with what you're trying to achieve, not which framework happens to be fashionable this week.",
+      icon: 'tabler:target',
+    },
+    {
+      title: 'Direct collaboration',
+      description:
+        'No layers of account managers and hand-offs. You work directly with the engineer responsible for your project.',
+      icon: 'tabler:users',
+    },
+    {
+      title: 'Modern engineering',
+      description:
+        'React, TypeScript, Node.js, Astro, AI and other modern technologies are tools, not trophies. We choose what fits the problem.',
+      icon: 'tabler:code',
+    },
+    {
+      title: 'Built to evolve',
+      description:
+        "Your first version shouldn't become your biggest technical headache. We build with the next stage of your business in mind.",
+      icon: 'tabler:code',
+    },
+    {
+      title: 'Quality by default',
+      description:
+        "Fast, accessible, secure and maintainable are not premium add-ons. They're part of building software properly.",
+      icon: 'tabler:check',
+    },
+  ],
+  image: {
+      src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
+    alt: 'CausewaySoft - Why CausewaySoft?',
+  },
+};
+
+// section 6
+export const founderSection = {
+  tagline: 'Meet the person behind CausewaySoft',
+  title: 'Mateusz Krawczyk',
+  subtitle:
+    'Founder & Principal Software Engineer. I started CausewaySoft to help ambitious businesses build better digital products without the layers, overhead and unnecessary complexity of a traditional agency. With 7+ years of experience building web applications and digital products, I work directly with clients from the initial idea through design, development and launch. Based in Northern Ireland. Working with clients internationally.',
+  contentTitle: '',
+  contentItems: [
+    {
+      title: '7+ years',
+      description: 'Software engineering experience',
+    },
+    {
+      title: 'Full-stack',
+      description: 'Complete solution development from concept to launch',
+    },
+    {
+      title: 'Direct',
+      description: 'You work with the person building it.',
+    },
+  ],
+  image: {
+    src: 'https://images.pexels.com/photos/29204802/pexels-photo-29204802.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    alt: '',
+  },
+};
+
+// section 7
+export const callToAction = {
+  tagline: 'From Spark to Stone',
+  title: 'Build piece by piece. Create something bigger.',
+  subtitle:
+    "The Giant's Causeway wasn't built from one enormous piece of stone. It was formed piece by piece, with each part fitting together to create something much bigger. We take the same approach to software.",
+  contentTitle: 'Start with the idea. Build the foundations. Add what matters. Keep improving.',
+  contentItems: [
+    {
+      title:
+        'The result should be more than a collection of features. It should be a product that helps your business move forward.',
+    },
+  ],
+  image: {
+    src: '',
+    alt: '',
+  },
+};
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
-
   <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Contact Us ',
-        href: '#contact',
-        icon: 'tabler:rocket',
-      },
-      { text: 'Learn more', href: '#services' },
-    ]}
-    image={{
-      src: '~/assets/images/giants-causeway-causewaysoft-herobg.png',
-      alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway',
-    }}
+    tagline={heroSection.tagline}
+    actions={[heroSection.ctaButtonPrimary, heroSection.ctaButtonSecondary]}
+    image={heroSection.image}
   >
-    <!-- 
-      image={{ src: '~/assets/images/openart-try7.png', alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway' }}
-      image={{ src: '~/assets/images/giants-causeway-causewaysoft-herobg.png', alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway' }} 
-    -->
     <Fragment slot="title">
-      <span class="text-accent">Giant</span> Apps for Giant<span class="text-accent"> Visionaries</span>
+      {heroSection.title}
     </Fragment>
 
     <Fragment slot="subtitle">
-      <span>
-        At <span class="font-semibold">CausewaySoft</span>, we are not just web developers. We are digital blacksmiths.
-        Builders of dreams. Partners to pioneers. From bold startups to scaling companies, we help visionaries like you
-        shape tomorrow’s web.
-      </span>
+      {heroSection.subtitle}
     </Fragment>
   </Hero>
 
   <!-- Note Widget ******************* -->
-
   <Note icon="tabler:bulb" title="Philosophy:" description="Launch faster. Grow stronger. Build legendary." />
 
-  <!-- Features Widget *************** -->
-
-  <Features
-    id="services"
-    tagline="What We Do"
-    title="Your Idea Deserves More Than Just Code.<br/>It Deserves a Legacy."
-    subtitle="At CausewaySoft, we transform ambitious ideas into powerful digital products — driven by clean code, scalable design, and relentless creativity. We build with the same spirit that raised the basalt columns of the North: purpose, passion, and permanence."
-    items={[
-      {
-        title: 'Minimum Viable Product (MVP)',
-        description:
-          'From your idea to an MVP and full-scale platforms. We engineer dynamic, high-performance apps built to scale.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Digital Transformation',
-        description:
-          'We transform your outdated systems and legacy applications into modern, AI-powered solutions that are driven by data insights.',
-        icon: 'tabler:chart-arrows-vertical',
-      },
-    ]}
-  />
-
-  <Features
-    id="tech-stack"
-    tagline="Our Tech Stack"
-    title="Modern and Powerful Tech Stack for your Ideas."
-    subtitle="We use latest and most reliable technologies to turn visions into reality - from websites and web apps to PWAs, cross-platform apps, and AI solutions. All built to empower your growth, and ensure your products shine and inspire."
-    items={[
-      {
-        title: 'Websites',
-        description:
-          "Beautiful, fast, and optimized sites that don't just look good — they convert, engage, and inspire.",
-        icon: 'tabler:world-www',
-      },
-      {
-        title: 'Web Applications',
-        description: 'From MVP to full-scale platforms, we engineer dynamic, high-performance apps built to scale.',
-        icon: 'tabler:app-window',
-      },
-      {
-        title: 'Progressive Web Apps (PWA)',
-        description: 'Fast, offline-ready, app-like experiences with web reach.',
-        icon: 'tabler:devices-code',
-      },
-      {
-        title: 'Hybrid Apps',
-        description: 'Built once, deployed everywhere. Whether it’s Window, macOS, iOS or Android.',
-        icon: 'tabler:devices-down',
-      },
-      {
-        title: 'Chrome Extensions',
-        description: 'Lightweight, focused tools that supercharge productivity and user engagement.',
-        icon: 'tabler:brand-chrome',
-      },
-      {
-        title: 'AI-Powered Solutions',
-        description:
-          'We infuse AI into your apps to make them smarter, faster, and more intuitive — from chatbots to intelligent automation.',
-        icon: 'tabler:ai',
-      },
-    ]}
-  />
-
   <!-- Content Widget **************** -->
-
   <Content
+    id="scroll"
     isReversed
-    id="about-us"
-    tagline="About Us"
-    title="Why CausewaySoft?"
-    subtitle="Our studio is rooted in Northern Ireland, where the sea meets ancient stone - a place of legends, resilience, and transformation.<br/>Like the Giant's Causeway itself, we stand for bold structure, enduring quality, and awe-inspiring results."
-    items={[
-      {
-        title: 'Startup-First Mindset',
-        description: 'We speak your language. We move fast. We get it done.',
-        icon: 'tabler:flame',
-      },
-      {
-        title: 'End-to-End Craftsmanship',
-        description: "From idea to launch, we're with you every step of the way.",
-        icon: 'tabler:hammer',
-      },
-      {
-        title: 'Global Reach, Local Grit',
-        description: 'Serving clients across the world with the spirit of the North behind us.',
-        icon: 'tabler:world-heart',
-      },
-      {
-        title: 'Modern Tech Stack',
-        description: 'React, Next.js, Node.js, Astro, Tailwind, JavaScript, TypeScript, .NET & beyond.',
-        icon: 'tabler:code',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
-      alt: 'Giants Causeway',
-      class: 'grayscale hover:grayscale-0 rounded shadow-lg',
-    }}
+    title={problemStatement.tagline}
+    subtitle={problemStatement.title}
+    items={problemStatement.contentItems}
+    image={problemStatement.image}
   >
-    <!-- Image sources:
-    https://unsplash.com/@ebommart
-    https://unsplash.com/photos/rock-formations-near-body-of-water-BDwQ7xG6SEc
-    https://unsplash.com/photos/rock-formation-on-body-of-water-eRB0avrALdY
-   -->
-    <Fragment slot="content"
-      >This isn’t just development. It’s <span class="font-bold">foundational work</span> for companies that dare to build
-      differently.</Fragment
-    >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        {problemStatement.contentTitle}
+      </h3>
+      <p>{problemStatement.subtitle}</p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
+    </Fragment>
   </Content>
 
-  <!-- Steps Widget ****************** -->
+  <!-- Features Widget 
+    ***************
+    What we build Section.
+  -->
+  <Features2
+    id="services"
+    columns={4}
+    title={productOfferings2.title}
+    subtitle={productOfferings2.subtitle}
+    items={productOfferings2.items}
+  />
 
+  <!-- Steps Widget ****************** -->
   <Steps
     id="our-process"
-    tagline="Our Process"
-    title="From Spark to Stone.<br/>From Idea to Impact."
-    subtitle="Every great product starts as a bold idea — but it's the process that shapes it into something lasting. At CausewaySoft, we've refined a battle-tested journey that transforms vision into reality. Whether you're launching an MVP or scaling a platform, we guide you through each step with clarity, creativity, and craftsmanship."
-    items={[
-      {
-        title: 'Step 1: <span class="font-medium">Discovery</span>',
-        description:
-          'We begin at the source: your vision. Through deep discovery calls, we listen, question, and uncover the heart of your idea — goals, users, and pain points. No tech talk yet. Just understanding your mission, your market, and what success looks like.',
-        icon: 'tabler:telescope',
-      },
-      {
-        title: 'Step 2: <span class="font-medium">Design</span>',
-        description:
-          'This is where ideas take shape. We craft UI/UX designs that are beautiful, intuitive, and conversion-focused — tailored for your audience and guided by modern design systems. We bring your product to life before writing a single line of code.',
-        icon: 'tabler:paint',
-      },
-      {
-        title: 'Step 3: <span class="font-medium">Develop</span>',
-        description:
-          'Now the real forging begins. Our engineers build fast, scalable, and secure applications using modern technologies like React, Next.js, Astro, Node.js, React Native, and more. Whether it’s a custom website, PWA, mobile app, or AI-powered tool — we write clean code that lasts.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Step 4: <span class="font-medium">Deploy</span>',
-        description:
-          'Launch day is just the beginning. We handle testing, infrastructure, and deployment with care — so your product goes live smoothly, confidently, and ready for scale. Cloud-ready, user-tested, performance-tuned.',
-        icon: 'tabler:cloud-computing',
-      },
-      {
-        title: 'Step 5: <span class="font-medium">Support & Scale</span>',
-        description:
-          "We don't just walk away. We monitor, maintain, improve, and iterate. From post-launch support to new features, scaling infrastructure, or adding AI — we stay by your side as your product grows, adapts, and levels up.",
-        icon: 'tabler:message-chatbot',
-      },
-      {
-        title: 'Achieve and Succeed!',
-        icon: 'tabler:trophy',
-        classes: {
-          icon: 'text-amber-600 dark:text-amber-600',
-          title: 'text-amber-600 dark:text-amber-600',
-        },
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1505576457712-b769c0c0a354?q=70&w=690&auto=format&fit=crop',
-      alt: 'Our App Development Process',
-    }}
-  />
-  <!-- Image source: https://unsplash.com/@batjko -->
-
-  <!-- HighlightedPosts Widget ******* -->
-
-  <!-- 
-  <BlogLatestPosts
-    title="Find out more content in our Blog"
-    information={`The blog is used to display AstroWind documentation.
-                        Each new article will be an important step that you will need to know to be an expert in creating a website using Astro + Tailwind CSS.
-                        Astro is a very interesting technology. Thanks.
-                `}
-  />
- -->
-
-  <!-- FAQs Widget ******************* -->
-
-  <FAQs
-    id="faq"
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into how we build the apps."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'What kind of businesses do you work with?',
-        description:
-          'We partner with ambitious startups, scale-ups, and small to medium-sized companies across the globe. Whether you’re launching your first MVP or reinventing an existing product, we help you turn bold ideas into powerful digital solutions — fast, scalable, and future-ready.',
-      },
-      {
-        title: 'How much does it cost to build a custom web or mobile app?',
-        description:
-          'Every project is different. Costs depend on complexity, features, and timeline. We offer flexible pricing models — from fixed-scope packages to agile sprints. Whether it’s a simple web app or a feature-rich progressive or hybrid mobile app, we tailor solutions to fit your goals and budget.',
-      },
-      {
-        title: 'Do you build AI-powered features into apps and websites?',
-        description:
-          'Yes. We can integrate AI into your custom software — from chatbots and smart recommendations to automation tools and data-driven insights. AI isn’t just a trend — it’s a strategic edge, and we’ll help you use it wisely.',
-      },
-      {
-        title: 'What technologies do you use?',
-        description:
-          'We specialize in modern, battle-tested tech stacks like .NET, PHP Laravel, React, Next.js, Astro, Node.js, React Native, Tailwind CSS, Firebase and more. Our team picks the right tools to match your vision — ensuring performance, security, and long-term maintainability.',
-      },
-      {
-        title: 'Can you build a website or app if I only have an idea?',
-        description:
-          'Absolutely. We work with many non-technical founders. From idea validation and prototyping to design, development, and launch — we guide you every step of the way. You bring the vision. We’ll bring it to life.',
-      },
-      {
-        title: 'Do you offer ongoing support and updates after launch?',
-        description:
-          'Yes. We don’t just build and vanish. We offer ongoing support, maintenance, performance monitoring, and feature updates — so your product stays secure, modern, and competitive. Whether it’s fixing bugs, scaling infrastructure, or adding AI-driven functionality down the line, we’ve got your back.',
-      },
-    ]}
+    title={projectSteps.title}
+    subtitle={projectSteps.subtitle}
+    items={projectSteps.items}
+    image={projectSteps.image}
   />
 
-  <!-- CallToAction Widget *********** -->
 
-  <!--
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Schedule a Discovery Call',
-        href: '',
-        target: '_blank',
-        icon: 'tabler:mail',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      🚀 Launch Your Legend
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      Whether you’re building a unicorn or laying the first stone — we believe in your vision. We’re here to bring it to life with passion, power, and precision.
-      <br/>
-      Let’s build something <span class="font-bold">remarkable<span/> together.
-    </Fragment>
-  </CallToAction>
+  <!-- Features Widget 
+    ***************
+    Who is it for Section.
   -->
+  <Features
+    id="services"
+    columns={3}
+    title={productOfferings3.title}
+    subtitle={productOfferings3.subtitle}
+    items={productOfferings3.items}
+  />
 
-  <!--
-  <CallToAction
+    <!--  Value Proposition -->
+  <Content
+    isReversed
+    subtitle={productOfferings4.subtitle}
+    title={productOfferings4.title}
+    items={productOfferings4.items}
+    image={productOfferings4.image} 
+  >
+    <Fragment slot="content">
+  
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+
+    <!-- Features Widget 
+    ***************
+    Meet the Founder Section.
+  -->
+  <Content
+    id="services2"
+    title={founderSection.title}
+    subtitle={founderSection.subtitle}
+    items={founderSection.contentItems}
+    image={founderSection.image}
+  />
+
+<CallToAction
     actions={[
       {
         variant: 'primary',
@@ -318,7 +353,27 @@ const metadata = {
       No shortcuts. No generic templates. Just bold ideas, solid code, and a process built on trust, grit, and creativity.
     </Fragment>
   </CallToAction>
--->
+
+
+<CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start Your Journey',
+        href: '',
+        target: '_blank',
+        icon: 'tabler:mail',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      {callToAction.title}
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      {callToAction.subtitle}
+    </Fragment>
+  </CallToAction>
 
   <ContactInline
     id="contact"
