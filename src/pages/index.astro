@@ -181,40 +181,42 @@ export const productOfferings3 = {
   ],
 };
 
-// section 5
+// section 5 - About Us
+// subtitle: CausewaySoft is an independent software engineering studio, based in Northern Ireland, working internationally. You work directly with the person designing and building your product.
 export const productOfferings4 = {
   title: 'Why CausewaySoft?',
   subtitle:
-    'Small enough to care. Technical enough to build properly. CausewaySoft is an independent software engineering studio. You work directly with the person designing and building your product.',
+    'Small enough to care. Technical enough to build properly.',
+  contentTitle: 'CausewaySoft is an independent software engineering studio, based in Northern Ireland, working internationally.',
   items: [
     {
       title: 'Business first',
       description:
-        "Technology is only useful when it solves a real problem. We start with what you're trying to achieve, not which framework happens to be fashionable this week.",
+        "We start with the problem and desired outcome, then work backwards to the technology.",
       icon: 'tabler:target',
     },
     {
       title: 'Direct collaboration',
       description:
-        'No layers of account managers and hand-offs. You work directly with the engineer responsible for your project.',
+        'You work directly with the engineer responsible for your project.',
       icon: 'tabler:users',
     },
     {
       title: 'Modern engineering',
       description:
-        'React, TypeScript, Node.js, Astro, AI and other modern technologies are tools, not trophies. We choose what fits the problem.',
+        'We use modern technologies where they make sense, without chasing trends for the sake of it.',
       icon: 'tabler:code',
     },
     {
       title: 'Built to evolve',
       description:
-        "Your first version shouldn't become your biggest technical headache. We build with the next stage of your business in mind.",
+        "Your first release should create a foundation for what's next, not a technical dead end.",
       icon: 'tabler:code',
     },
     {
       title: 'Quality by default',
       description:
-        "Fast, accessible, secure and maintainable are not premium add-ons. They're part of building software properly.",
+        "Performance, accessibility, security and maintainability are part of the build, not expensive extras.",
       icon: 'tabler:check',
     },
   ],
@@ -358,6 +360,11 @@ export const callToAction = {
     image={productOfferings4.image}
   >
     <Fragment slot="content">
+      {productOfferings4.contentTitle && (
+        <h3 class="font-bold tracking-tight dark:text-white sm:text-2xl">
+          {productOfferings4.contentTitle}
+        </h3>
+      )}
     </Fragment>
 
     <Fragment slot="bg">
