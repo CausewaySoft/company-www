@@ -39,25 +39,28 @@ const heroSection = {
 
 export const problemStatement = {
   tagline: 'Have an idea worth building?',
-  title: "Whether you're launching something new, improving an existing business or replacing a painful manual process, we combine product thinking, design and engineering to turn ideas into working products.",
-  subtitle: "you",
+  title:
+    "Whether you're launching something new, improving an existing business or replacing a painful manual process, we combine product thinking, design and engineering to turn ideas into working products.",
+  subtitle: 'you',
   itemsTitle: 'We help you work out what to build, then build it properly.',
   items: [
     {
-      title: "Launch something new",
-      description: "Turn an idea into a focused digital product without building unnecessary complexity."
+      title: 'Launch something new',
+      description: 'Turn an idea into a focused digital product without building unnecessary complexity.',
     },
     {
-      title: "Improve what already exists",
-      description: "Upgrade an outdated website, application or digital experience around what your business actually needs."
+      title: 'Improve what already exists',
+      description:
+        'Upgrade an outdated website, application or digital experience around what your business actually needs.',
     },
     {
-      title: "Replace manual work",
-      description: "Automate repetitive processes and connect disconnected tools with software that works for your team."
-    }
+      title: 'Replace manual work',
+      description:
+        'Automate repetitive processes and connect disconnected tools with software that works for your team.',
+    },
   ],
   image: {
-      src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
     alt: '',
   },
 };
@@ -120,7 +123,7 @@ export const projectSteps = {
   title: 'From idea to working product',
   subtitle:
     'You might already have a detailed specification. You might only have a problem that needs solving. Either is fine. We work with you to define the right solution, design the experience and turn it into a reliable product.',
-    items: [
+  items: [
     {
       title: 'Step 1 — Discover',
       description: 'Understand the business, the problem and what success looks like.',
@@ -185,43 +188,39 @@ export const productOfferings3 = {
 // subtitle: CausewaySoft is an independent software engineering studio, based in Northern Ireland, working internationally. You work directly with the person designing and building your product.
 export const productOfferings4 = {
   title: 'Why CausewaySoft?',
-  subtitle:
-    'Small enough to care. Technical enough to build properly.',
-  contentTitle: 'CausewaySoft is an independent software engineering studio, based in Northern Ireland, working internationally.',
+  subtitle: 'Small enough to care. Technical enough to build properly.',
+  contentTitle:
+    'CausewaySoft is an independent software engineering studio, based in Northern Ireland, working internationally.',
   items: [
     {
       title: 'Business first',
-      description:
-        "We start with the problem and desired outcome, then work backwards to the technology.",
+      description: 'We start with the problem and desired outcome, then work backwards to the technology.',
       icon: 'tabler:target',
     },
     {
       title: 'Direct collaboration',
-      description:
-        'You work directly with the engineer responsible for your project.',
+      description: 'You work directly with the engineer responsible for your project.',
       icon: 'tabler:users',
     },
     {
       title: 'Modern engineering',
-      description:
-        'We use modern technologies where they make sense, without chasing trends for the sake of it.',
+      description: 'We use modern technologies where they make sense, without chasing trends for the sake of it.',
       icon: 'tabler:code',
     },
     {
       title: 'Built to evolve',
-      description:
-        "Your first release should create a foundation for what's next, not a technical dead end.",
+      description: "Your first release should create a foundation for what's next, not a technical dead end.",
       icon: 'tabler:code',
     },
     {
       title: 'Quality by default',
       description:
-        "Performance, accessibility, security and maintainability are part of the build, not expensive extras.",
+        'Performance, accessibility, security and maintainability are part of the build, not expensive extras.',
       icon: 'tabler:check',
     },
   ],
   image: {
-      src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
+    src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
     alt: 'CausewaySoft - Why CausewaySoft?',
   },
 };
@@ -343,7 +342,6 @@ export const callToAction = {
     image={projectSteps.image}
   />
 
-
   <!-- Features Widget 
     ***************
     Who is it for Section.
@@ -390,14 +388,33 @@ export const callToAction = {
     bodyText={founderSection.bodyText}
     columns={3}
     classes={{
-      container: "max-w-5xl",
+      container: 'max-w-5xl',
       items: {
         // panel: ""
-      }
+      },
     }}
   />
 
-  <ContactInline
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Start Your Project',
+        href: '',
+        target: '_blank',
+        icon: 'tabler:rocket',
+      },
+    ]}
+  >
+    <Fragment slot="title"> 🌊 Let's Build Something Enduring </Fragment>
+
+    <Fragment slot="subtitle">
+      Bold ideas, solid code, and a process built on trust, grit, and
+      creativity.
+    </Fragment>
+  </CallToAction>
+
+  <!-- <ContactInline
     id="contact"
     tagline="Contact Us"
     title="Drop us a message today!"
@@ -448,5 +465,5 @@ export const callToAction = {
         icon: 'tabler:brand-linkedin',
       },
     ]}
-  />
+  /> -->
 </Layout>
