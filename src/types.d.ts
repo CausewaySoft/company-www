@@ -257,6 +257,7 @@ export interface Features extends Omit<Headline, 'classes'>, Widget {
   isReversed?: boolean;
   isBeforeContent?: boolean;
   isAfterContent?: boolean;
+  bodyText?: string;
 }
 
 export interface Faqs extends Omit<Headline, 'classes'>, Widget {

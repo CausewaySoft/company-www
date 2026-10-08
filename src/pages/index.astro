@@ -228,11 +228,13 @@ export const productOfferings4 = {
 
 // section 6
 export const founderSection = {
-  tagline: 'Meet the person behind CausewaySoft',
+  tagline: 'Meet the Founder',
   title: 'Mateusz Krawczyk',
   subtitle:
-    'Founder & Principal Software Engineer. I started CausewaySoft to help ambitious businesses build better digital products without the layers, overhead and unnecessary complexity of a traditional agency. With 7+ years of experience building web applications and digital products, I work directly with clients from the initial idea through design, development and launch. Based in Northern Ireland. Working with clients internationally.',
-  contentTitle: '',
+    'As a professional Software Engineer, I started CausewaySoft to pursure what I enjoy doing the most, build great web & digital products without the layers, overhead and unnecessary complexity of a traditional agency.',
+  bodyText: `With 7+ years of experience building web applications and digital products, I work directly with clients from the
+      initial idea through design, development and launch.
+      Based in Belfast, Northern Ireland. Working with clients internationally.`,
   contentItems: [
     {
       title: '7+ years',
@@ -251,7 +253,7 @@ export const founderSection = {
     },
   ],
   image: {
-    src: 'https://images.pexels.com/photos/29204802/pexels-photo-29204802.jpeg?auto=compress&cs=tinysrgb&w=1600&lazy=load',
+    src: 'https://images.pexels.com/photos/29204802/pexels-photo-29204802.jpeg?q=80&w=333&auto=format&fit=crop',
     alt: '',
   },
 };
@@ -363,11 +365,11 @@ export const callToAction = {
     image={productOfferings4.image}
   >
     <Fragment slot="content">
-      {productOfferings4.contentTitle && (
+      <!-- {productOfferings4.contentTitle && (
         <h3 class="font-bold tracking-tight dark:text-white sm:text-2xl">
           {productOfferings4.contentTitle}
         </h3>
-      )}
+      )} -->
     </Fragment>
 
     <Fragment slot="bg">
@@ -380,52 +382,20 @@ export const callToAction = {
   -->
   <Features2
     id="services2"
+    tagline={founderSection.tagline}
     title={founderSection.title}
     subtitle={founderSection.subtitle}
     items={founderSection.contentItems}
     image={founderSection.image}
+    bodyText={founderSection.bodyText}
+    columns={3}
+    classes={{
+      container: "max-w-5xl",
+      items: {
+        // panel: ""
+      }
+    }}
   />
-
-<CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start Your Journey',
-        href: '',
-        target: '_blank',
-        icon: 'tabler:mail',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      🌊 Let’s Build Something Enduring
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      No shortcuts. No generic templates. Just bold ideas, solid code, and a process built on trust, grit, and creativity.
-    </Fragment>
-  </CallToAction>
-
-
-<CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start Your Journey',
-        href: '',
-        target: '_blank',
-        icon: 'tabler:mail',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      {callToAction.title}
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      {callToAction.subtitle}
-    </Fragment>
-  </CallToAction>
 
   <ContactInline
     id="contact"
