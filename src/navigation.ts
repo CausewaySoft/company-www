@@ -5,21 +5,9 @@ export const headerData = {
       href: '/',
     },
     {
-      text: 'About',
-      href: '/#about',
-    },
-    {
-      text: 'Our Process',
-      href: '/#our-process',
-    },
-    {
       text: 'Services',
       href: '/services',
       links: [
-        {
-          text: 'About our Services',
-          href: '/services',
-        },
         {
           text: 'Websites',
           href: '/services/websites',
@@ -28,43 +16,20 @@ export const headerData = {
           text: 'Web Applications',
           href: '/services/web-applications',
         },
-        {
-          text: 'Progressive Web Apps (PWA)',
-          href: '/services/progressive-web-apps',
-        },
-        {
-          text: 'Hybrid Mobile Apps',
-          href: '/services/hybrid-apps',
-        },
-        {
-          text: 'AI-Powered Solutions',
-          href: '/services/ai-agents-solutions',
-        },
-        {
-          text: 'Chrome Extensions',
-          href: '/services/chrome-extensions',
-          icon: 'tabler:brand-chrome',
+       {
+          text: 'View All Services',
+          href: '/services',
         },
       ],
     },
     {
-      text: 'Solutions',
-      href: '/solutions',
-      links: [
-        {
-          text: 'Healthcare',
-          href: '/solutions/healthcare',
-        },
-        {
-          text: 'Professional Services',
-          href: '/solutions/professional-services',
-        },
-      ],
+      text: 'About',
+      href: '/#about',
     },
     {
-      text: 'Blog',
-      href: '/blog',
-    },
+      text: 'Our Process',
+      href: '/#our-process',
+    }
   ],
   actions: [{ text: 'Contact Us', href: '/contact' }],
 };
@@ -75,14 +40,6 @@ export const footerData = {
       title: 'Our Services',
       links: [
         {
-          text: 'About our Services',
-          href: '/services',
-        },
-        {
-          text: 'AI-Powered Solutions',
-          href: '/services/ai-agents-solutions',
-        },
-        {
           text: 'Websites',
           href: '/services/websites',
         },
@@ -90,18 +47,7 @@ export const footerData = {
           text: 'Web Applications',
           href: '/services/web-applications',
         },
-        {
-          text: 'Progressive Web Apps (PWA)',
-          href: '/services/progressive-web-apps',
-        },
-        {
-          text: 'Hybrid Mobile Apps',
-          href: '/services/hybrid-apps',
-        },
-        {
-          text: 'Chrome Extensions',
-          href: '/services/chrome-extensions',
-        },
+
       ],
     },
     {
