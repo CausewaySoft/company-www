@@ -5,8 +5,8 @@ export const headerData = {
       href: '/',
     },
     {
-      text: 'About Us',
-      href: '/#about-us',
+      text: 'About',
+      href: '/#about',
     },
     {
       text: 'Our Process',
@@ -107,7 +107,7 @@ export const footerData = {
     {
       title: 'Company',
       links: [
-        { text: 'About Us', href: '/#about-us' },
+        { text: 'About Us', href: '/#about' },
         { text: 'Our Process', href: '/#our-process' },
         { text: 'FAQ', href: '/#faq' },
         { text: 'Privacy Policy', href: '/privacy' },
