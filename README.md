@@ -20,7 +20,30 @@
 npm run dev
 ```
 
+## Gotchas
+### Taking website screenshots
 
+#### Background info
+The culprit is likely Astro’s animation classes: intersect-quarter, intersect-once, and motion-safe:md:opacity-0. The screenshot captures the page before the reveal animations finish.
+
+#### Fix / Workaround
+Try this in Chrome DevTools → Console:
+```javascript
+document.querySelectorAll('.intersect-once').forEach(el => {
+  el.classList.remove(
+    'motion-safe:md:opacity-0',
+    'motion-safe:md:intersect:animate-fade',
+    'intersect-quarter',
+    'intersect-once',
+    'intercept-no-queue'
+  );
+
+  el.style.setProperty('opacity', '1', 'important');
+  el.style.setProperty('transform', 'none', 'important');
+  el.style.setProperty('animation', 'none', 'important');
+  el.style.setProperty('transition', 'none', 'important');
+});
+```
 
 ### Project structure
 
