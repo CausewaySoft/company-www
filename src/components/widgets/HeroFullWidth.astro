@@ -24,7 +24,8 @@ const {
       {bg ? <Fragment set:html={bg} /> : null}
     </slot>
   </div>
-  <div class="relative max-w-[1920px] mx-auto px-0 overflow-hidden">
+  <!-- <div class="relative max-w-[2560px] mx-auto px-0 overflow-hidden"> -->
+  <div class="relative max-w-[2560px] mx-auto px-0 overflow-hidden">
     <!-- source: https://codepen.io/sarazond/pen/LYGbwj -->
     <div id="stars"></div>
     <div id="stars2"></div>
@@ -80,7 +81,7 @@ const {
         class="intersect-once intercept-no-queue intersect-quarter motion-safe:md:opacity-0 motion-safe:md:intersect:animate-fade"
       >
         {
-          image && (
+          image ? (
             <div class="relative m-auto">
               {typeof image === 'string' ? (
                 <Fragment set:html={image} />
@@ -94,6 +95,11 @@ const {
                   {...image}
                 />
               )}
+            </div>
+          ) : (
+            <div class="relative m-auto min-h-96">
+              {/* Filler div for height when no image */}
+              
             </div>
           )
         }
