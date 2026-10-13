@@ -17,46 +17,47 @@ const metadata = {
 const heroSection = {
   tagline: 'Giant Apps for Giant Visionaries',
   title: 'We build digital products that move businesses forward.',
-  subtitle: `High-performance websites, web applications, AI solutions and custom software for businesses that need more than an off-the-shelf solution.`,
+  subtitle:
+    'High-performance websites, web applications, AI solutions and custom software, built around your business and its goals.',
   ctaButtonPrimary: {
     variant: 'primary' as const,
     target: '_blank' as const,
     text: 'Start a Project',
-    href: '/#',
+    href: '/contact',
     icon: 'tabler:rocket',
   },
   ctaButtonSecondary: {
     variant: 'secondary' as const,
-    // text: 'View Renovation Projects',
     text: 'Explore Our Services',
-    href: '#',
+    href: '/services',
   },
   image: {
     src: '~/assets/images/giants-causeway-causewaysoft-herobg.png',
-    alt: 'CausewaySoft Hero Image - Pencil hand drawn Giants Causeway',
+    alt: 'Hand-drawn illustration of the Giant’s Causeway',
   },
 };
 
 export const problemStatement = {
   tagline: 'Have an idea worth building?',
-  title:
-    "Whether you're launching something new, improving an existing business or replacing a painful manual process, we combine product thinking, design and engineering to turn ideas into working products.",
-  subtitle: 'you',
-  itemsTitle: 'We help you work out what to build, then build it properly.',
+  title: 'From new ideas to better ways of working.',
+  subtitle:
+    'We help you identify the right solution, then design and build software that solves real business problems.',
+  itemsTitle: 'What can we help you achieve?',
   items: [
     {
-      title: 'Launch something new',
-      description: 'Turn an idea into a focused digital product without building unnecessary complexity.',
+      title: 'Launch a new product',
+      description:
+        'Turn your idea into a focused digital product, starting with what matters most.',
     },
     {
-      title: 'Improve what already exists',
+      title: 'Improve your website or software',
       description:
-        'Upgrade an outdated website, application or digital experience around what your business actually needs.',
+        'Modernise outdated digital experiences to better serve your customers and business.',
     },
     {
-      title: 'Replace manual work',
+      title: 'Automate repetitive work',
       description:
-        'Automate repetitive processes and connect disconnected tools with software that works for your team.',
+        'Connect your tools and streamline manual processes so your team can focus on what matters.',
     },
   ],
   image: {
@@ -67,12 +68,13 @@ export const problemStatement = {
 
 export const productOfferings2 = {
   title: 'What we build',
-  subtitle: '',
+  subtitle:
+    'Practical digital solutions designed around your business, your customers and your goals.',
   items: [
     {
-      title: 'Websites',
+      title: 'Business Websites',
       description:
-        'Fast, modern websites designed to make your business look credible, get found and turn visitors into enquiries, bookings and customers.',
+        'Turn more visitors into enquiries and customers with a fast, professional website built to grow your business.',
       icon: 'tabler:world-www',
       callToAction: {
         variant: 'link',
@@ -84,7 +86,7 @@ export const productOfferings2 = {
     {
       title: 'Web Applications',
       description:
-        'Custom platforms, portals and business applications built around the way your business actually works.',
+        'Give your customers and team better ways to work with bespoke platforms, portals and business tools.',
       icon: 'tabler:app-window',
       callToAction: {
         variant: 'link',
@@ -94,9 +96,9 @@ export const productOfferings2 = {
       },
     },
     {
-      title: 'AI-Powered Solutions',
+      title: 'AI Solutions',
       description:
-        'Practical AI tools that automate work, improve customer experiences and help your team get more done.',
+        'Reduce repetitive work and improve customer experiences with practical AI tools built around your needs.',
       icon: 'tabler:brain',
       callToAction: {
         variant: 'link',
@@ -107,7 +109,8 @@ export const productOfferings2 = {
     },
     {
       title: 'Custom Software',
-      description: "When off-the-shelf software doesn't fit, we build the software that does.",
+      description:
+        'When existing tools fall short, get software designed around the way your business actually works.',
       icon: 'tabler:code',
       callToAction: {
         variant: 'link',
@@ -122,31 +125,36 @@ export const productOfferings2 = {
 export const projectSteps = {
   title: 'From idea to working product',
   subtitle:
-    'You might already have a detailed specification. You might only have a problem that needs solving. Either is fine. We work with you to define the right solution, design the experience and turn it into a reliable product.',
+    'Whether you have a detailed specification or just a problem to solve, we help you find the right approach and turn it into a working product.',
   items: [
     {
       title: 'Step 1 — Discover',
-      description: 'Understand the business, the problem and what success looks like.',
+      description:
+        'Define the problem, understand your business and agree on what success looks like.',
       icon: 'tabler:search',
     },
     {
-      title: 'Step 2 — Define',
-      description: 'Turn ideas and requirements into a clear, practical product plan.',
+      title: 'Step 2 — Plan',
+      description:
+        'Prioritise requirements and map out a practical solution, scope and roadmap.',
       icon: 'tabler:clipboard-list',
     },
     {
       title: 'Step 3 — Design',
-      description: 'Create an intuitive experience before writing thousands of lines of code.',
+      description:
+        'Shape the user experience and validate the approach before development begins.',
       icon: 'tabler:palette',
     },
     {
       title: 'Step 4 — Build',
-      description: 'Engineer the product using modern, maintainable technology.',
+      description:
+        'Develop and test your product with a focus on quality, performance and maintainability.',
       icon: 'tabler:code',
     },
     {
-      title: 'Step 5 — Launch & Grow',
-      description: 'Get it into the hands of real users, measure what happens and keep improving it.',
+      title: 'Step 5 — Launch & Improve',
+      description:
+        'Launch your product, learn from real-world use and improve it as your needs evolve.',
       icon: 'tabler:rocket',
       // classes: {
       //   icon: 'text-amber-600 dark:text-amber-600',
@@ -156,118 +164,124 @@ export const projectSteps = {
   ],
   image: {
     src: 'https://images.unsplash.com/photo-1505576457712-b769c0c0a354?q=70&w=690&auto=format&fit=crop',
-    alt: 'Our App Development Process',
+    alt: 'The journey from initial idea to finished software product',
   },
 };
 
-// section 4,
+// Section 4 — Who we help
 export const productOfferings3 = {
-  title: 'Built around where your business is today',
-  subtitle: '',
+  title: 'Built for your stage of growth',
+  subtitle:
+    'Whether you are starting out or scaling up, we build solutions around the challenges you face today.',
   items: [
     {
       title: 'Startups',
-      description: 'Move from idea to MVP without building a mountain of unnecessary software.',
+      description:
+        'Validate your idea and launch an MVP without wasting time or budget on unnecessary features.',
       icon: 'tabler:rocket',
     },
     {
       title: 'Small Businesses',
       description:
-        'Replace outdated websites, manual processes and disconnected tools with software that actually helps the business.',
+        'Attract more customers with a better website and save time by streamlining everyday work.',
       icon: 'tabler:building',
     },
     {
       title: 'Growing Companies',
-      description: 'Build the platforms, integrations and automation you need as the business becomes more complex.',
+      description:
+        'Connect systems, automate processes and build platforms that support your next stage of growth.',
       icon: 'tabler:chart-line',
     },
   ],
 };
 
-// section 5 - About Us
-// subtitle: CausewaySoft is an independent software engineering studio, based in Northern Ireland, working internationally. You work directly with the person designing and building your product.
+// Section 5 — Why CausewaySoft?
 export const productOfferings4 = {
   title: 'Why CausewaySoft?',
-  subtitle: 'Small enough to care. Technical enough to build properly.',
+  subtitle: 'Senior engineering. Direct collaboration. No unnecessary layers.',
   contentTitle:
-    'CausewaySoft is an independent software engineering studio, based in Northern Ireland, working internationally.',
+    'An independent software engineering studio based in Northern Ireland, working with clients internationally.',
   items: [
     {
-      title: 'Business first',
-      description: 'We start with the problem and desired outcome, then work backwards to the technology.',
+      title: 'Business-first thinking',
+      description:
+        'We start with your goals and challenges, then choose the right solution.',
       icon: 'tabler:target',
     },
     {
       title: 'Direct collaboration',
-      description: 'You work directly with the engineer responsible for your project.',
+      description:
+        'Work directly with the engineer designing and building your product.',
       icon: 'tabler:users',
     },
     {
-      title: 'Modern engineering',
-      description: 'We use modern technologies where they make sense, without chasing trends for the sake of it.',
-      icon: 'tabler:code',
-    },
-    {
-      title: 'Built to evolve',
-      description: "Your first release should create a foundation for what's next, not a technical dead end.",
-      icon: 'tabler:code',
-    },
-    {
-      title: 'Quality by default',
+      title: 'Practical technology',
       description:
-        'Performance, accessibility, security and maintainability are part of the build, not expensive extras.',
+        'We choose proven, modern tools that fit your project rather than chasing trends.',
+      icon: 'tabler:code',
+    },
+    {
+      title: 'Room to grow',
+      description:
+        'Build a solid foundation that can evolve as your business and requirements change.',
+      icon: 'tabler:trending-up',
+    },
+    {
+      title: 'Quality built in',
+      description:
+        'Performance, accessibility, security and maintainability are considered from the start.',
       icon: 'tabler:check',
     },
   ],
   image: {
     src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
-    alt: 'CausewaySoft - Why CausewaySoft?',
+    alt: 'The Giant’s Causeway, reflecting our Northern Ireland roots',
   },
 };
 
-// section 6
+// Section 6 — Meet the founder
 export const founderSection = {
   tagline: 'Meet the Founder',
   title: 'Mateusz Krawczyk',
   subtitle:
-    'As a professional Software Engineer, I started CausewaySoft to pursure what I enjoy doing the most, build great web & digital products without the layers, overhead and unnecessary complexity of a traditional agency.',
-  bodyText: `With 7+ years of experience building web applications and digital products, I work directly with clients from the
-      initial idea through design, development and launch.
-      Based in Belfast, Northern Ireland. Working with clients internationally.`,
+    'I founded CausewaySoft to do what I enjoy most: designing and building useful digital products, working directly with clients from the first idea to the finished solution.',
+  bodyText: `With 7+ years of professional software engineering experience, I help businesses turn ideas into reliable web applications and digital products.
+
+Based in Belfast, Northern Ireland, I work directly with clients locally and internationally.`,
   contentItems: [
     {
       title: '7+ years',
-      description: 'Software Engineering experience',
+      description: 'Professional software engineering experience',
       icon: 'tabler:school',
     },
     {
-      title: 'Full-stack',
-      description: 'Complete solution development from concept to launch',
+      title: 'Full-stack engineering',
+      description: 'From user interfaces to backend systems',
       icon: 'tabler:devices-heart',
     },
     {
-      title: 'Direct Collaboration',
-      description: 'You work with the person building it.',
+      title: 'Direct collaboration',
+      description: 'One-to-one communication throughout your project',
       icon: 'tabler:heart-handshake',
     },
   ],
   image: {
     src: 'https://images.pexels.com/photos/29204802/pexels-photo-29204802.jpeg?q=80&w=333&auto=format&fit=crop',
-    alt: '',
+    alt: 'Mateusz Krawczyk, founder of CausewaySoft',
   },
 };
 
-// section 7
+// Section 7 — Final call to action
 export const callToAction = {
   tagline: 'From Spark to Stone',
-  title: 'Build piece by piece. Create something bigger.',
+  title: 'Start with an idea. Build something lasting.',
   subtitle:
-    "The Giant's Causeway wasn't built from one enormous piece of stone. It was formed piece by piece, with each part fitting together to create something much bigger. We take the same approach to software.",
-  contentTitle: 'Start with the idea. Build the foundations. Add what matters. Keep improving.',
+    'Great products are built piece by piece. We help you lay the right foundations, focus on what matters and create something your business can build on.',
+  contentTitle: 'Have an idea? Let’s work out how to make it happen.',
   contentItems: [
     {
       title:
-        'The result should be more than a collection of features. It should be a product that helps your business move forward.',
+        'Tell me what you want to achieve. We’ll explore the problem, identify the right approach and map out the next steps.',
     },
   ],
   image: {
@@ -275,6 +289,7 @@ export const callToAction = {
     alt: '',
   },
 };
+
 ---
 
 <Layout metadata={metadata}>
@@ -395,6 +410,11 @@ export const callToAction = {
       },
     }}
   />
+
+  <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-sm font-medium leading-none px-2 py-1 rounded">
+<svg class="w-3.5 h-3.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
+2 mins ago
+</span>
 
   <CallToAction
     actions={[
