@@ -6,7 +6,6 @@ import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
-import ContactInline from '~/components/widgets/ContactInline.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
@@ -242,7 +241,7 @@ export const productOfferings4 = {
 // Section 6 — Meet the founder
 export const founderSection = {
   tagline: 'Meet the Founder',
-  title: 'Mateusz Krawczyk',
+  title: 'Mateusz Cichy',
   subtitle:
     'I founded CausewaySoft to do what I enjoy most: designing and building useful digital products, working directly with clients from the first idea to the finished solution.',
   bodyText: `With 7+ years of professional software engineering experience, I help businesses turn ideas into reliable web applications and digital products.
@@ -250,8 +249,8 @@ export const founderSection = {
 Based in Belfast, Northern Ireland, I work directly with clients locally and internationally.`,
   contentItems: [
     {
-      title: '7+ years',
-      description: 'Professional software engineering experience',
+      title: 'MEng Computer Science',
+      description: "Queen's University Belfast",
       icon: 'tabler:school',
     },
     {
@@ -266,8 +265,8 @@ Based in Belfast, Northern Ireland, I work directly with clients locally and int
     },
   ],
   image: {
-    src: 'https://images.pexels.com/photos/29204802/pexels-photo-29204802.jpeg?q=80&w=333&auto=format&fit=crop',
-    alt: 'Mateusz Krawczyk, founder of CausewaySoft',
+    src: '~/assets/images/causewaysoft-founder-pic.jpg',
+    alt: 'Picture of the CausewaySoft founder',
   },
 };
 
@@ -410,18 +409,12 @@ export const callToAction = {
     }}
   />
 
-  <span class="inline-flex items-center bg-brand-softer border border-brand-subtle text-fg-brand-strong text-sm font-medium leading-none px-2 py-1 rounded">
-<svg class="w-3.5 h-3.5 me-1.5" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" fill="none" viewBox="0 0 24 24"><path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z"/></svg>
-2 mins ago
-</span>
-
   <CallToAction
     actions={[
       {
         variant: 'primary',
         text: 'Start Your Project',
-        href: '',
-        target: '_blank',
+        href: '/contact',
         icon: 'tabler:rocket',
       },
     ]}
