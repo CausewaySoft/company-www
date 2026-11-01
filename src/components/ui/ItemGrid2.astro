@@ -62,6 +62,8 @@ const {
             <p class={twMerge('text-muted mt-2', descriptionClass, itemClasses?.description)} set:html={description} />
           )}
           {callToAction && (
+            // Spacer elements to push the button to the bottom of the panel
+            <div class="mt-auto"></div>
             <div class="mt-4">
               <Button {...callToAction} />
             </div>

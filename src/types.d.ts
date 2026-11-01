@@ -257,6 +257,7 @@ export interface Features extends Omit<Headline, 'classes'>, Widget {
   isReversed?: boolean;
   isBeforeContent?: boolean;
   isAfterContent?: boolean;
+  bodyText?: string;
 }
 
 export interface Faqs extends Omit<Headline, 'classes'>, Widget {
@@ -278,6 +279,7 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
   image?: string | unknown;
   video?: string | unknown;
   items?: Array<Item>;
+  itemsTitle?: string;
   columns?: number;
   isReversed?: boolean;
   isAfterContent?: boolean;
