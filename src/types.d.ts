@@ -287,3 +287,20 @@ export interface Content extends Omit<Headline, 'classes'>, Widget {
 }
 
 export interface Contact extends Omit<Headline, 'classes'>, Form, Widget {}
+
+export interface Project {
+  title?: string;
+  description?: string;
+  image?: string | Image;
+  tags?: Array<string>;
+  href?: string;
+  linkText?: string;
+  /** A measurable outcome shown with a trend icon, e.g. "+38 % conversions". */
+  result?: string;
+}
+
+export interface Projects extends Omit<Headline, 'classes'>, Widget {
+  items?: Array<Project>;
+  columns?: number;
+  callToAction?: CallToAction;
+}
