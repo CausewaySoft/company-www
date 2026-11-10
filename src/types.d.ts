@@ -297,6 +297,7 @@ export interface Project {
   linkText?: string;
   /** A measurable outcome shown with a trend icon, e.g. "+38 % conversions". */
   result?: string;
+  resultIcon?: string;
 }
 
 export interface Projects extends Omit<Headline, 'classes'>, Widget {
