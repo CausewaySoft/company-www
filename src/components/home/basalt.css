@@ -16,6 +16,7 @@ html:root {
   --bs-signal: #d4511c; /* one loud colour */
   --bs-signal-ink: #0e0f10;
   --bs-drawing-opacity: 1;
+  --bs-cover-shadow: rgb(18 19 20 / 0.12);
 
   --bs-font-display: 'Archivo Variable', 'Arial Narrow', sans-serif;
   --bs-font-text: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
@@ -36,6 +37,7 @@ html.dark {
   --bs-signal: #e8622c;
   --bs-signal-ink: #0e0f10;
   --bs-drawing-opacity: 0.82;
+  --bs-cover-shadow: rgb(0 0 0 / 0.55);
 
   --aw-color-bg-page: var(--bs-bg);
 }
@@ -93,7 +95,18 @@ html:root ::selection {
 }
 
 .bs-section {
+  position: relative;
+  z-index: 1;
   padding-block: clamp(72px, 10vw, 144px);
+  /* Opaque, so sections slide over the pinned hero drawing */
+  background: var(--bs-bg);
+}
+
+/* The first section to cover the drawing gets a soft leading edge */
+[data-hero-ground] + .bs-section {
+  box-shadow:
+    0 -1px 0 var(--bs-rule),
+    0 -32px 64px -24px var(--bs-cover-shadow);
 }
 
 /* Keep anchor targets clear of the sticky header */

@@ -42,9 +42,14 @@ const { services: _services } = Astro.props;
       </div>
     </div>
   </div>
+</section>
 
-  <figure class="hero__ground">
-    <div class="hero__drawing">
+<!--
+  The drawing sits outside the hero section so it can stay pinned for the
+  whole page: the sections after it are opaque and scroll over it.
+-->
+<figure class="hero__ground" data-hero-ground>
+  <div class="hero__drawing">
       <Image
         src={causewayDrawing}
         alt="Charcoal drawing of the basalt columns of the Giant’s Causeway"
@@ -59,13 +64,13 @@ const { services: _services } = Astro.props;
       <span>Giant’s Causeway, Co. Antrim<span class="hero__caption-detail"> · charcoal study</span></span>
       <span class="hero__coords">55.2408° N, 6.5116° W</span>
     </figcaption>
-  </figure>
-</section>
+</figure>
 
 <style>
+  /* Hero text stays above the pinned drawing and scrolls away normally */
   .hero {
     position: relative;
-    overflow: hidden;
+    z-index: 1;
   }
 
   /* Content sits above the drawing, which slides up underneath it */
@@ -112,7 +117,15 @@ const { services: _services } = Astro.props;
   /* Drawing: mirrored so the cliff stands on the right */
   .hero__ground {
     position: relative;
+    z-index: 0;
     margin-top: 12px;
+  }
+
+  /* Pinned where it first appears; the script measures that position.
+     Without JS the drawing simply scrolls with the page. */
+  .hero__ground.is-pinned {
+    position: sticky;
+    top: var(--ground-top, 0px);
   }
 
   .hero__drawing img {
@@ -214,3 +227,37 @@ const { services: _services } = Astro.props;
     }
   }
 </style>
+
+<script>
+  // Pin the drawing at the spot where it first renders, so the page
+  // scrolls over it. Measured on load and resize only, no scroll handler.
+  function initHeroGround() {
+    const ground = document.querySelector<HTMLElement>('[data-hero-ground]');
+    if (!ground) return;
+
+    const ac = new AbortController();
+    document.addEventListener('astro:before-swap', () => ac.abort(), { once: true });
+
+    const pin = () => {
+      ground.classList.remove('is-pinned');
+      const naturalTop = ground.getBoundingClientRect().top + window.scrollY;
+      // Never pin lower than half the drawing's height above the fold
+      const maxTop = window.innerHeight - ground.offsetHeight * 0.5;
+      ground.style.setProperty('--ground-top', `${Math.max(0, Math.min(naturalTop, maxTop))}px`);
+      ground.classList.add('is-pinned');
+    };
+
+    pin();
+    let raf = 0;
+    window.addEventListener(
+      'resize',
+      () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(pin);
+      },
+      { signal: ac.signal }
+    );
+  }
+
+  document.addEventListener('astro:page-load', initHeroGround);
+</script>
