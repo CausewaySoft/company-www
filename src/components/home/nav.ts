@@ -14,12 +14,20 @@ export const serviceLinks = [
   { text: 'All services', href: '/services' },
 ];
 
-// Header: Services · Work · About (Guides joins as 04 once the first guide is live)
+// Header: 01 Services · 02 Work · 03 About · Contact, plus the button.
+// Numbers follow the home-page sections; Contact is a page, so it's unnumbered.
+// (Guides joins as 04 once the first guide is live.)
+export const contactNavItem = { text: 'Contact', href: '/contact', plain: true };
+
 export const innerNavItems = [
   { text: 'Services', href: '/#services', links: serviceLinks },
   { text: 'Work', href: '/#work' },
   { text: 'About', href: '/#about' },
+  contactNavItem,
 ];
+
+// The header button: the main action, the project wizard
+export const headerCta = { text: 'Start a project', href: '/contact?type=project' };
 
 export const footerLinks = [
   { text: 'LinkedIn', href: linkedInHref, external: true },

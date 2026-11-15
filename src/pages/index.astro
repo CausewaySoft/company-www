@@ -18,7 +18,7 @@ import ServiceIndex from '~/components/home/ServiceIndex.astro';
 import ColumnSteps from '~/components/home/ColumnSteps.astro';
 import Founder from '~/components/home/Founder.astro';
 import ClosingCta from '~/components/home/ClosingCta.astro';
-import { serviceLinks } from '~/components/home/nav';
+import { serviceLinks, headerCta, contactNavItem } from '~/components/home/nav';
 
 import portfolioImg_BibleQuest from '~/assets/images/portfolio/biblequest-pwa-app.png';
 import portfolioImg_Renovations from '~/assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
@@ -53,6 +53,7 @@ const navItems = [
   { text: 'Services', href: '#services', section: 'services', links: serviceLinks },
   { text: 'Work', href: '#work', section: 'work' },
   { text: 'About', href: '#about', section: 'about' },
+  contactNavItem,
 ];
 
 const footerLinks = [
@@ -133,7 +134,7 @@ const founder = {
   <BasaltHeader
     slot="header"
     items={navItems}
-    cta={{ text: 'Contact', href: '/contact' }}
+    cta={headerCta}
     bookingHref={bookingHref}
   />
   <div class="bs">
