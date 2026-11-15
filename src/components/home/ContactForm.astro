@@ -2,10 +2,11 @@
 /**
  * Basalt contact form.
  *
- * Posts to /forms/contact.php (fields: name, email, subject, message;
- * name/email/message are required server-side; the reply is JSON).
- * Uses its own id so the legacy #contact-form handler in BasicScripts
- * doesn't also submit it.
+ * Submits through the site's shared enquiry path (`sendEnquiry`, i.e.
+ * window.causewaySoftSendEnquiry in BasicScripts) to /forms/contact.php.
+ * Fields: name, email, subject, message; name/email/message are required.
+ * Its id differs from the legacy #contact-form so the legacy handler
+ * doesn't attach a second listener to it.
  */
 ---
 
@@ -165,6 +166,8 @@
 </style>
 
 <script>
+  import { sendEnquiry } from './enquiry';
+
   function initContactForm() {
     const form = document.querySelector<HTMLFormElement>('[data-bs-contact-form]');
     if (!form || form.dataset.ready) return;
@@ -181,31 +184,27 @@
       buttonText.textContent = sending ? 'Sending…' : (button.dataset.label ?? 'Send message');
     };
 
+    let busy = false;
+
     form.addEventListener('submit', async (event) => {
       event.preventDefault();
-      if (!form.reportValidity()) return;
+      if (busy || !form.reportValidity()) return;
 
+      busy = true;
       if (ok) ok.hidden = true;
       if (err) err.hidden = true;
       setSending(true);
 
       try {
-        const response = await fetch(form.action, {
-          method: 'POST',
-          headers: { 'X-Requested-With': 'XMLHttpRequest' },
-          body: new FormData(form),
-        });
-        if (!response.ok) throw new Error(`HTTP ${response.status}`);
-        // contact.php replies with JSON; anything else (e.g. the raw PHP file
-        // served by a dev server) means the message was not sent
-        const result = await response.json().catch(() => null);
-        if (result?.status !== 'success') throw new Error(result?.message ?? 'Unexpected response');
+        // Same submission path as every other form on the site
+        await sendEnquiry(form);
         form.reset();
         if (ok) ok.hidden = false;
       } catch (error) {
         console.error('Contact form error:', error);
         if (err) err.hidden = false;
       } finally {
+        busy = false;
         setSending(false);
       }
     });

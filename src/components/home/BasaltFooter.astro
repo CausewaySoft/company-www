@@ -16,9 +16,11 @@ interface FooterLink {
 export interface Props {
   links: FooterLink[];
   services?: FooterLink[];
+  /** General contact CTA; project enquiries use "Start a project" elsewhere */
+  cta?: FooterLink;
 }
 
-const { links, services } = Astro.props;
+const { links, services, cta = { text: 'Get in touch', href: '/contact' } } = Astro.props;
 const year = new Date().getFullYear();
 ---
 
@@ -38,6 +40,7 @@ const year = new Date().getFullYear();
         <span class="bsf__word">CausewaySoft</span>
       </a>
       <p class="bsf__tagline bs-display">Giant apps for giant visionaries.</p>
+      <a class="bsf__cta bs-link" href={cta.href}>{cta.text} <span aria-hidden="true">→</span></a>
     </div>
 
     {
@@ -94,8 +97,13 @@ const year = new Date().getFullYear();
   }
 
   .bsf__logo,
-  .bsf__tagline {
+  .bsf__tagline,
+  .bsf__cta {
     grid-column: 1 / -1;
+  }
+
+  .bsf__cta {
+    justify-self: start;
   }
 
   .bsf__logo {
@@ -192,6 +200,14 @@ const year = new Date().getFullYear();
   @media (min-width: 1024px) {
     .bsf__tagline {
       grid-column: 1 / span 7;
+    }
+
+    /* Text column, on the tagline's last line */
+    .bsf__cta {
+      grid-column: 9 / -1;
+      grid-row: 2;
+      align-self: end;
+      padding-bottom: 0.5em;
     }
   }
 </style>
