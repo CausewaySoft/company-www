@@ -18,6 +18,7 @@ import ServiceIndex from '~/components/home/ServiceIndex.astro';
 import ColumnSteps from '~/components/home/ColumnSteps.astro';
 import Founder from '~/components/home/Founder.astro';
 import ClosingCta from '~/components/home/ClosingCta.astro';
+import { serviceLinks } from '~/components/home/nav';
 
 import portfolioImg_BibleQuest from '~/assets/images/portfolio/biblequest-pwa-app.png';
 import portfolioImg_Renovations from '~/assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
@@ -27,50 +28,31 @@ const metadata = {
   ignoreTitleTemplate: true,
 };
 
+// The two services (see docs/services-restructure-plan.md)
 const services = [
   {
-    title: 'Business websites',
+    title: 'Websites',
     description:
-      'Turn more visitors into enquiries and customers with a fast, professional website built to grow your business.',
+      'Turn more visitors into enquiries and customers with a fast, persuasive website built to grow your business.',
     href: '/services/websites',
+    sections: ['Business websites', 'E-commerce', 'AI-enhanced websites'],
   },
   {
-    title: 'Web applications',
+    title: 'Web applications & custom software',
     description:
-      'Give your customers and team better ways to work with bespoke platforms, portals and business tools.',
+      'Build a digital product, or improve how your business operates with software built around the way it actually works.',
     href: '/services/web-applications',
-  },
-  {
-    title: 'AI solutions',
-    description:
-      'Reduce repetitive work and improve customer experiences with practical AI tools built around your needs.',
-    href: '/services/ai-agents-solutions',
-  },
-  {
-    title: 'Custom software',
-    description:
-      'When existing tools fall short, get software designed around the way your business actually works.',
-    href: '/services/custom-software',
+    sections: ['Business applications', 'SaaS & MVPs', 'PWAs', 'AI features', 'Automation'],
   },
 ];
 
 const bookingHref = 'https://calendly.com/causewaysoft';
 
+// Same items as inner pages, but as in-page anchors with section tracking
 const navItems = [
-  {
-    text: 'Services',
-    href: '#services',
-    section: 'services',
-    links: [
-      { text: 'Websites', href: '/services/websites' },
-      { text: 'Web applications', href: '/services/web-applications' },
-      { text: 'AI solutions', href: '/services/ai-agents-solutions' },
-      { text: 'All services', href: '/services' },
-    ],
-  },
+  { text: 'Services', href: '#services', section: 'services', links: serviceLinks },
   { text: 'Work', href: '#work', section: 'work' },
   { text: 'About', href: '#about', section: 'about' },
-  { text: 'Process', href: '#our-process', section: 'our-process' },
 ];
 
 const footerLinks = [

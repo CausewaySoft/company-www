@@ -5,25 +5,28 @@ export interface Service {
   title: string;
   description: string;
   href: string;
+  /** What's inside the service, shown as a mono line */
+  sections?: string[];
 }
 
 export interface Props {
   id?: string;
   services: Service[];
+  title?: string;
+  lede?: string;
 }
 
-const { id = 'services', services } = Astro.props;
+const {
+  id = 'services',
+  services,
+  title = 'Two things, done properly.',
+  lede = 'Websites that win you business, and custom software that builds a product or improves how your business operates. AI and automation are part of both.',
+} = Astro.props;
 ---
 
 <section class="services bs-section" id={id} aria-labelledby={`${id}-title`}>
   <div class="bs-wrap">
-    <SectionHead
-      id={`${id}-title`}
-      index="01"
-      label="What we build"
-      title="Four ways to move a business forward."
-      lede="Practical digital solutions designed around your business, your customers and your goals."
-    />
+    <SectionHead id={`${id}-title`} index="01" label="What we build" title={title} lede={lede} />
 
     <ol class="svc">
       {
@@ -32,7 +35,10 @@ const { id = 'services', services } = Astro.props;
             <a class="svc__row bs-grid" href={s.href}>
               <span class="svc__num bs-mono">{String(i + 1).padStart(2, '0')}</span>
               <span class="svc__title bs-display">{s.title}</span>
-              <span class="svc__desc">{s.description}</span>
+              <span class="svc__desc">
+                {s.description}
+                {s.sections?.length && <span class="svc__sections bs-mono">{s.sections.join(' · ')}</span>}
+              </span>
               <span class="svc__arrow" aria-hidden="true">
                 →
               </span>
@@ -97,6 +103,15 @@ const { id = 'services', services } = Astro.props;
     font-size: 16px;
     line-height: 1.55;
     max-width: 30em;
+  }
+
+  .svc__sections {
+    display: block;
+    margin-top: 12px;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    color: var(--bs-text);
   }
 
   .svc__arrow {
