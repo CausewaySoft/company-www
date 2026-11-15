@@ -19,6 +19,7 @@ import SelfAudit from '~/components/home/SelfAudit.astro';
 import WorkIndex from '~/components/home/WorkIndex.astro';
 import ColumnSteps from '~/components/home/ColumnSteps.astro';
 import ClosingCta from '~/components/home/ClosingCta.astro';
+import FaqList from '~/components/home/FaqList.astro';
 import { bookingHref, reviewCallHref, innerNavItems, footerLinks, serviceLinks } from '~/components/home/nav';
 
 import portfolioImg_Renovations from '~/assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
@@ -218,15 +219,6 @@ const faqs = [
   },
 ];
 
-const faqSchema = {
-  '@context': 'https://schema.org',
-  '@type': 'FAQPage',
-  mainEntity: faqs.map(({ q, a }) => ({
-    '@type': 'Question',
-    name: q,
-    acceptedAnswer: { '@type': 'Answer', text: a },
-  })),
-};
 ---
 
 <Layout metadata={metadata}>
@@ -419,18 +411,8 @@ const faqSchema = {
           title="The things people ask first."
           lede="Price, timing and what happens after launch. Anything else, just ask."
         />
-        <div class="faq section-body">
-          {
-            faqs.map((f, i) => (
-              <details class="faq__item" open={i < 2}>
-                <summary class="faq__q">
-                  <span class="bs-display">{f.q}</span>
-                  <span class="faq__icon" aria-hidden="true" />
-                </summary>
-                <p class="faq__a">{f.a}</p>
-              </details>
-            ))
-          }
+        <div class="section-body">
+          <FaqList items={faqs} />
         </div>
       </div>
     </section>
@@ -440,8 +422,6 @@ const faqSchema = {
 
   <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />
 </Layout>
-
-<script is:inline type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 <style>
   .section-body {
@@ -682,76 +662,6 @@ const faqSchema = {
     font-size: 16px;
     line-height: 1.6;
     max-width: 34em;
-  }
-
-  /* FAQs */
-  .faq {
-    border-top: 1px solid var(--bs-rule);
-  }
-
-  .faq__item {
-    border-bottom: 1px solid var(--bs-rule);
-  }
-
-  .faq__q {
-    display: flex;
-    justify-content: space-between;
-    align-items: baseline;
-    gap: 24px;
-    padding-block: 22px;
-    cursor: pointer;
-    list-style: none;
-    font-size: clamp(24px, 2.4vw, 34px);
-    line-height: 1.1;
-    color: var(--bs-ink);
-  }
-
-  .faq__q::-webkit-details-marker {
-    display: none;
-  }
-
-  .faq__q:focus-visible {
-    outline: 2px solid var(--bs-signal);
-    outline-offset: 4px;
-  }
-
-  /* Plus that turns into a minus */
-  .faq__icon {
-    position: relative;
-    flex: none;
-    width: 16px;
-    height: 16px;
-  }
-
-  .faq__icon::before,
-  .faq__icon::after {
-    content: '';
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 7px;
-    height: 2px;
-    background: currentColor;
-    transition: transform 0.3s var(--bs-ease);
-  }
-
-  .faq__icon::after {
-    transform: rotate(90deg);
-  }
-
-  .faq__item[open] .faq__icon::after {
-    transform: rotate(0deg);
-  }
-
-  .faq__item[open] .faq__icon {
-    color: var(--bs-signal);
-  }
-
-  .faq__a {
-    padding-bottom: 26px;
-    font-size: 17px;
-    line-height: 1.65;
-    max-width: 40em;
   }
 
   @media (min-width: 900px) {
