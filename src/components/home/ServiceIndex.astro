@@ -110,13 +110,17 @@ const { id = 'services', services } = Astro.props;
     .svc__title {
       grid-column: 2 / span 6;
     }
+    /* Text column: same edge as the section ledes and project text */
     .svc__desc {
-      grid-column: 8 / span 4;
+      grid-column: 9 / -1;
+      padding-right: 56px;
     }
     .svc__arrow {
       display: block;
-      grid-column: 12;
-      justify-self: end;
+      position: absolute;
+      right: 0;
+      top: 50%;
+      margin-top: -0.6em;
       font-size: 28px;
       color: var(--bs-ink);
       transition:
