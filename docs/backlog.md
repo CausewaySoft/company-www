@@ -30,7 +30,9 @@ the two service pages. They're the honest home for subjects like AI and
 - **Business Automation:** what to automate first. Fold in the Northern
   Ireland digital transformation grants here (schemes fund exactly this work),
   building on the existing grants landing page and the "up to £20,000" blog
-  post.
+  post. There's also draft copy on DTFF funding for clinics ("may cover up to
+  70%") in the deleted healthcare industry page; recover it with
+  `git show 17f13a9:src/pages/solutions/healthcare/website-copy.md`.
 
 ### Open question: how to set it up
 
