@@ -15,12 +15,14 @@ export interface Props {
 
 const { responseTime } = Astro.props;
 
+// Mirrors the two services' sections (docs/services-restructure-plan.md).
+// `key` is what ?service= preselects.
 const projectTypes = [
   { value: 'Business website', desc: 'A site that wins enquiries', key: 'website' },
-  { value: 'Web application', desc: 'Portals, platforms and tools', key: 'web-app' },
-  { value: 'AI-powered solution', desc: 'Automation and assistants', key: 'ai' },
-  { value: 'Browser extension', desc: 'Chrome and Edge add-ons', key: 'extension' },
-  { value: 'Custom software', desc: 'Built around how you work', key: 'custom' },
+  { value: 'E-commerce', desc: 'Sell or take bookings online', key: 'ecommerce' },
+  { value: 'Business application', desc: 'Portals, tools and systems', key: 'web-app' },
+  { value: 'SaaS or MVP', desc: 'A new digital product', key: 'saas' },
+  { value: 'AI-powered solution', desc: 'Assistants and automation', key: 'ai' },
   { value: 'Something else', desc: 'Tell me in the next step', key: 'other' },
   { value: 'Not sure yet', desc: 'We’ll work it out together', key: 'unsure' },
 ];
@@ -590,13 +592,18 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
   const SERVICE_ALIASES: Record<string, string> = {
     website: 'website',
     websites: 'website',
+    ecommerce: 'ecommerce',
+    'e-commerce': 'ecommerce',
+    shop: 'ecommerce',
     'web-app': 'web-app',
     'web-application': 'web-app',
     'web-applications': 'web-app',
+    'business-app': 'web-app',
+    automation: 'web-app',
+    custom: 'web-app', // older links used "custom" for business software
+    saas: 'saas',
+    mvp: 'saas',
     ai: 'ai',
-    extension: 'extension',
-    'chrome-extension': 'extension',
-    custom: 'custom',
   };
 
   function initWizard() {

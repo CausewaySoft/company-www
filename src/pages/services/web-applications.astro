@@ -32,9 +32,11 @@ const metadata = {
     'Build a digital product or improve how your business operates: business applications, SaaS and MVPs, progressive web apps, AI features and automation, from an independent studio in Belfast.',
 };
 
-// Wizard links (service keys are refined in phase 4 of the restructure plan)
-const productHref = '/contact?type=project&service=web-app';
-const operationsHref = '/contact?type=project&service=custom';
+// Wizard links: each route preselects its option; the page-level CTAs serve
+// both audiences, so they don't preselect either
+const projectHref = '/contact?type=project';
+const productHref = '/contact?type=project&service=saas';
+const operationsHref = '/contact?type=project&service=web-app';
 
 const routes = [
   {
@@ -214,7 +216,7 @@ const faqs = [
             built by the engineer you talk to.
           </p>
           <div class="ahero__actions">
-            <a class="bs-btn" href={productHref}>Start a project <span class="bs-arrow" aria-hidden="true">→</span></a>
+            <a class="bs-btn" href={projectHref}>Start a project <span class="bs-arrow" aria-hidden="true">→</span></a>
             <a class="bs-link" href="#what-we-build">See what we build</a>
           </div>
         </div>
@@ -325,7 +327,7 @@ const faqs = [
       </div>
     </section>
 
-    <ClosingCta bookingHref={bookingHref} index="07" projectHref={productHref} />
+    <ClosingCta bookingHref={bookingHref} index="07" projectHref={projectHref} />
   </div>
 
   <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />

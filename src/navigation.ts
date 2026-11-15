@@ -1,9 +1,6 @@
 export const headerData = {
+  // Matches the Basalt header: Services · Work · About (see docs/services-restructure-plan.md)
   links: [
-    {
-      text: 'Home',
-      href: '/',
-    },
     {
       text: 'Services',
       href: '/services',
@@ -13,23 +10,23 @@ export const headerData = {
           href: '/services/websites',
         },
         {
-          text: 'Web Applications',
+          text: 'Web Applications & Custom Software',
           href: '/services/web-applications',
         },
-       {
-          text: 'View All Services',
+        {
+          text: 'All Services',
           href: '/services',
         },
       ],
     },
     {
+      text: 'Work',
+      href: '/#work',
+    },
+    {
       text: 'About',
       href: '/#about',
     },
-    {
-      text: 'Our Process',
-      href: '/#our-process',
-    }
   ],
   actions: [{ text: 'Contact', href: '/contact' }],
 };
@@ -44,10 +41,9 @@ export const footerData = {
           href: '/services/websites',
         },
         {
-          text: 'Web Applications',
+          text: 'Web Applications & Custom Software',
           href: '/services/web-applications',
         },
-
       ],
     },
     {
@@ -55,7 +51,6 @@ export const footerData = {
       links: [
         { text: 'About Us', href: '/#about' },
         { text: 'Our Process', href: '/#our-process' },
-        { text: 'FAQ', href: '/#faq' },
         { text: 'Privacy Policy', href: '/privacy' },
         { text: 'Terms of Service', href: '/terms' },
       ],
