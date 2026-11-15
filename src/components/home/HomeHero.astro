@@ -1,0 +1,209 @@
+---
+import { Image } from 'astro:assets';
+import causewayDrawing from '~/assets/images/giants-causeway-causewaysoft-herobg.png';
+
+export interface Props {
+  services: { title: string; href: string }[];
+}
+
+const { services } = Astro.props;
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="bs-wrap">
+    <div class="hero__top bs-grid">
+      <p class="bs-mono hero__meta">Independent software studio · Belfast, Northern Ireland</p>
+      <p class="bs-mono hero__meta hero__meta--right">Giant apps for giant visionaries</p>
+    </div>
+
+    <div class="hero__main bs-grid">
+      <h1 id="hero-title" class="hero__title bs-display">
+        Software,<br />
+        built like<br />
+        the Giant's Causeway<span class="hero__stop">.</span>
+      </h1>
+
+      <!-- <nav class="hero__index" aria-label="Services">
+        <ol>
+          {
+            services.map((s, i) => (
+              <li>
+                <a href={s.href}>
+                  <span class="bs-mono">{String(i + 1).padStart(2, '0')}</span>
+                  <span>{s.title}</span>
+                </a>
+              </li>
+            ))
+          }
+        </ol>
+      </nav> -->
+    </div>
+
+    <div class="hero__foot bs-grid">
+      <p class="hero__lede bs-lede">
+        We design and engineer websites, web applications, AI tools and custom software: precise, modular and built to
+        last.
+      </p>
+
+      <div class="hero__actions">
+        <a class="bs-btn" href="/contact">Start a project <span class="bs-arrow" aria-hidden="true">→</span></a>
+        <a class="bs-link" href="#work">See the work</a>
+      </div>
+    </div>
+  </div>
+
+  <figure class="hero__ground">
+    <Image
+      src={causewayDrawing}
+      alt="Charcoal drawing of the basalt columns of the Giant’s Causeway"
+      widths={[768, 1436]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <figcaption class="bs-mono bs-wrap">
+      <span>55.2408° N, 6.5116° W</span>
+      <span>Giant’s Causeway, Co. Antrim · charcoal study</span>
+    </figcaption>
+  </figure>
+</section>
+
+<style>
+  .hero {
+    position: relative;
+    padding-top: clamp(32px, 6vw, 72px);
+    overflow: hidden;
+  }
+
+  .hero__top {
+    row-gap: 4px;
+  }
+
+  .hero__meta {
+    grid-column: 1 / -1;
+  }
+
+  .hero__meta--right {
+    color: var(--bs-signal);
+  }
+
+  .hero__main {
+    margin-top: clamp(32px, 4.5vw, 64px);
+    row-gap: 40px;
+    align-items: end;
+  }
+
+  .hero__title {
+    grid-column: 1 / -1;
+    font-size: clamp(60px, 10vw, 148px);
+    line-height: 0.86;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+    max-width: none;
+    text-wrap: initial;
+  }
+
+  .hero__stop {
+    color: var(--bs-signal);
+  }
+
+  .hero__foot {
+    margin-top: clamp(32px, 4vw, 56px);
+    row-gap: 28px;
+    align-items: center;
+  }
+
+  .hero__lede,
+  .hero__actions,
+  .hero__index {
+    grid-column: 1 / -1;
+  }
+
+  /* On small screens the services section follows soon; keep the CTA high */
+  .hero__index {
+    display: none;
+    padding-bottom: 0.6vw;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+  }
+
+  .hero__index ol {
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .hero__index li {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .hero__index a {
+    display: flex;
+    gap: 16px;
+    align-items: baseline;
+    padding: 10px 0;
+    color: var(--bs-ink);
+    font-size: 15px;
+    transition: color 0.2s var(--bs-ease);
+  }
+
+  .hero__index a:hover {
+    color: var(--bs-signal);
+  }
+
+  .hero__ground {
+    position: relative;
+    margin-top: clamp(24px, 4vw, 48px);
+  }
+
+  .hero__ground img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: var(--bs-drawing-opacity);
+    -webkit-mask-image: linear-gradient(to bottom, #000 70%, transparent);
+    mask-image: linear-gradient(to bottom, #000 70%, transparent);
+  }
+
+  .hero__ground figcaption {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    text-align: right;
+    gap: 2px;
+  }
+
+  @media (min-width: 640px) {
+    .hero__meta {
+      grid-column: 1 / span 7;
+    }
+    .hero__meta--right {
+      grid-column: 8 / -1;
+      text-align: right;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__title {
+      grid-column: 1 / span 9;
+    }
+    .hero__index {
+      display: block;
+      grid-column: 10 / -1;
+    }
+    .hero__lede {
+      grid-column: 1 / span 5;
+    }
+    .hero__actions {
+      grid-column: 7 / -1;
+    }
+  }
+</style>

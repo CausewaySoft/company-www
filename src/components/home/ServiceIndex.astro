@@ -1,0 +1,131 @@
+---
+import SectionHead from './SectionHead.astro';
+
+export interface Service {
+  title: string;
+  description: string;
+  href: string;
+}
+
+export interface Props {
+  id?: string;
+  services: Service[];
+}
+
+const { id = 'services', services } = Astro.props;
+---
+
+<section class="services bs-section" id={id} aria-labelledby={`${id}-title`}>
+  <div class="bs-wrap">
+    <SectionHead
+      id={`${id}-title`}
+      index="02"
+      label="What we build"
+      title="Four ways to move a business forward."
+      lede="Practical digital solutions designed around your business, your customers and your goals."
+    />
+
+    <ol class="svc">
+      {
+        services.map((s, i) => (
+          <li data-reveal>
+            <a class="svc__row bs-grid" href={s.href}>
+              <span class="svc__num bs-mono">{String(i + 1).padStart(2, '0')}</span>
+              <span class="svc__title bs-display">{s.title}</span>
+              <span class="svc__desc">{s.description}</span>
+              <span class="svc__arrow" aria-hidden="true">
+                →
+              </span>
+            </a>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .svc {
+    margin-top: clamp(48px, 7vw, 96px);
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .svc__row {
+    position: relative;
+    padding-block: clamp(24px, 3vw, 40px);
+    border-top: 1px solid var(--bs-rule);
+    row-gap: 12px;
+    align-items: baseline;
+    color: var(--bs-text);
+  }
+
+  /* Signal rule that draws across on hover/focus */
+  .svc__row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 2px;
+    background: var(--bs-signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--bs-ease);
+  }
+
+  .svc__row:hover::before,
+  .svc__row:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  .svc__num {
+    grid-column: 1 / span 2;
+  }
+
+  .svc__title {
+    grid-column: 3 / -1;
+    font-size: clamp(36px, 5.2vw, 76px);
+    transition: transform 0.6s var(--bs-ease);
+  }
+
+  .svc__row:hover .svc__title {
+    transform: translateX(8px);
+  }
+
+  .svc__desc {
+    grid-column: 3 / -1;
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 30em;
+  }
+
+  .svc__arrow {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .svc__num {
+      grid-column: 1 / span 1;
+    }
+    .svc__title {
+      grid-column: 2 / span 6;
+    }
+    .svc__desc {
+      grid-column: 8 / span 4;
+    }
+    .svc__arrow {
+      display: block;
+      grid-column: 12;
+      justify-self: end;
+      font-size: 28px;
+      color: var(--bs-ink);
+      transition:
+        transform 0.6s var(--bs-ease),
+        color 0.3s;
+    }
+    .svc__row:hover .svc__arrow {
+      transform: translateX(6px);
+      color: var(--bs-signal);
+    }
+  }
+</style>

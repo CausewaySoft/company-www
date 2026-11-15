@@ -1,0 +1,144 @@
+---
+import { Image } from 'astro:assets';
+import portrait from '~/assets/images/causewaysoft-founder-pic.jpg';
+import SectionHead from './SectionHead.astro';
+
+export interface Props {
+  id?: string;
+  name: string;
+  role: string;
+  quote: string;
+  body: string[];
+  facts: { label: string; value: string }[];
+}
+
+const { id = 'about', name, role, quote, body, facts } = Astro.props;
+---
+
+<section class="founder bs-section" id={id} aria-labelledby={`${id}-title`}>
+  <div class="bs-wrap">
+    <SectionHead
+      id={`${id}-title`}
+      index="04"
+      label="Who you’ll work with"
+      title="Senior engineering. No unnecessary layers."
+    />
+
+    <div class="founder__grid bs-grid" data-reveal>
+      <figure class="founder__figure">
+        <Image src={portrait} alt={`Portrait of ${name}, founder of CausewaySoft`} widths={[333]} sizes="333px" />
+        <figcaption class="bs-mono">
+          <span class="founder__name">{name}</span>
+          <span>{role}</span>
+        </figcaption>
+      </figure>
+
+      <div class="founder__text">
+        <blockquote class="founder__quote bs-display">
+          <p>“{quote}”</p>
+        </blockquote>
+
+        {body.map((para) => <p class="founder__body">{para}</p>)}
+
+        <dl class="founder__facts">
+          {
+            facts.map((f) => (
+              <div>
+                <dt class="bs-mono">{f.label}</dt>
+                <dd>{f.value}</dd>
+              </div>
+            ))
+          }
+        </dl>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .founder__grid {
+    margin-top: clamp(48px, 7vw, 96px);
+    row-gap: 40px;
+  }
+
+  .founder__figure,
+  .founder__text {
+    grid-column: 1 / -1;
+  }
+
+  .founder__figure {
+    max-width: 333px;
+  }
+
+  .founder__figure img {
+    display: block;
+    width: 100%;
+    height: auto;
+    filter: grayscale(1) contrast(1.08);
+    /* Slanted top: the profile of a basalt column */
+    clip-path: polygon(0 7%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .founder__figure figcaption {
+    margin-top: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    border-top: 1px solid var(--bs-rule);
+    padding-top: 10px;
+  }
+
+  .founder__name {
+    color: var(--bs-ink);
+  }
+
+  .founder__quote {
+    font-size: clamp(26px, 2.5vw, 38px);
+    line-height: 1.08;
+    font-weight: 600;
+    font-stretch: 85%;
+    max-width: 26ch;
+  }
+
+  .founder__body {
+    margin-top: 24px;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 36em;
+  }
+
+  .founder__facts {
+    margin-top: 40px;
+    border-top: 1px solid var(--bs-rule);
+    max-width: 44em;
+  }
+
+  .founder__facts > div {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 4px;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .founder__facts dd {
+    color: var(--bs-ink);
+    font-size: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .founder__facts > div {
+      grid-template-columns: 10em 1fr;
+      gap: 24px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .founder__figure {
+      grid-column: 1 / span 4;
+    }
+    .founder__text {
+      grid-column: 6 / -1;
+    }
+  }
+</style>

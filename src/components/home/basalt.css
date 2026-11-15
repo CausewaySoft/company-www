@@ -1,0 +1,188 @@
+/*
+ * Basalt: visual system for the redesigned home page.
+ * See docs/design-review-claude-opus5.5.md.
+ *
+ * Only pages that import this file get it, so other pages keep the
+ * existing theme until they are redesigned.
+ */
+
+html:root {
+  --bs-bg: #f3f0ea; /* limestone */
+  --bs-surface: #e8e4dc;
+  --bs-rule: #cfc9bf;
+  --bs-ink: #121314; /* headings */
+  --bs-text: #2a2c2e;
+  --bs-muted: #5c6063;
+  --bs-signal: #d4511c; /* one loud colour */
+  --bs-signal-ink: #0e0f10;
+  --bs-drawing-opacity: 1;
+
+  --bs-font-display: 'Archivo Variable', 'Arial Narrow', sans-serif;
+  --bs-font-text: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
+  --bs-font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
+  --bs-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+
+  /* Align the shared header/footer with the page */
+  --aw-color-bg-page: var(--bs-bg);
+}
+
+html.dark {
+  --bs-bg: #0e0f10; /* basalt */
+  --bs-surface: #17191b;
+  --bs-rule: #2a2d31;
+  --bs-ink: #f3f0ea;
+  --bs-text: #cfcbc4;
+  --bs-muted: #92969a;
+  --bs-signal: #e8622c;
+  --bs-signal-ink: #0e0f10;
+  --bs-drawing-opacity: 0.82;
+
+  --aw-color-bg-page: var(--bs-bg);
+}
+
+html:root ::selection {
+  background: var(--bs-signal);
+  color: var(--bs-signal-ink);
+}
+
+/* ---------- Primitives ---------- */
+
+.bs {
+  color: var(--bs-text);
+  font-family: var(--bs-font-text);
+  letter-spacing: -0.006em;
+}
+
+.bs-wrap {
+  max-width: 1320px;
+  margin-inline: auto;
+  padding-inline: clamp(16px, 4vw, 48px);
+}
+
+.bs-grid {
+  display: grid;
+  grid-template-columns: repeat(12, minmax(0, 1fr));
+  column-gap: clamp(16px, 2vw, 32px);
+}
+
+.bs-display {
+  font-family: var(--bs-font-display);
+  font-stretch: 72%;
+  font-weight: 760;
+  line-height: 0.92;
+  letter-spacing: -0.012em;
+  color: var(--bs-ink);
+  text-wrap: balance;
+}
+
+.bs-mono {
+  font-family: var(--bs-font-mono);
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bs-muted);
+}
+
+.bs-lede {
+  font-size: clamp(18px, 1.4vw, 21px);
+  line-height: 1.5;
+  max-width: 34em;
+  color: var(--bs-text);
+}
+
+.bs-section {
+  padding-block: clamp(72px, 10vw, 144px);
+}
+
+/* Keep anchor targets clear of the sticky header */
+.bs [id] {
+  scroll-margin-top: 96px;
+}
+
+/* ---------- Actions ---------- */
+
+.bs-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75em;
+  padding: 1em 1.4em;
+  background: var(--bs-signal);
+  color: var(--bs-signal-ink);
+  font-family: var(--bs-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  border-radius: 0;
+  transition:
+    background-color 0.25s var(--bs-ease),
+    transform 0.25s var(--bs-ease);
+}
+
+.bs-btn:hover {
+  background: var(--bs-ink);
+  color: var(--bs-bg);
+}
+
+.bs-btn:active {
+  transform: translateY(1px);
+}
+
+.bs-btn .bs-arrow {
+  transition: transform 0.25s var(--bs-ease);
+}
+
+.bs-btn:hover .bs-arrow {
+  transform: translateX(3px);
+}
+
+.bs-link {
+  font-family: var(--bs-font-mono);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--bs-ink);
+  text-decoration: underline;
+  text-decoration-color: var(--bs-rule);
+  text-underline-offset: 0.45em;
+  text-decoration-thickness: 1px;
+  transition: text-decoration-color 0.25s var(--bs-ease);
+}
+
+.bs-link:hover {
+  text-decoration-color: var(--bs-signal);
+}
+
+.bs :focus-visible {
+  outline: 2px solid var(--bs-signal);
+  outline-offset: 4px;
+}
+
+/* ---------- Reveal (progressive enhancement) ----------
+ * Content is visible by default. The script only adds .bs-js after
+ * marking anything already on screen as revealed, so nothing is ever
+ * hidden without JS or above the fold.
+ */
+
+[data-reveal] {
+  transition:
+    opacity 0.8s var(--bs-ease),
+    transform 0.8s var(--bs-ease);
+}
+
+.bs-js [data-reveal]:not(.is-in) {
+  opacity: 0;
+  transform: translateY(16px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal],
+  .bs-js [data-reveal]:not(.is-in) {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
