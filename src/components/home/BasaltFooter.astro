@@ -38,10 +38,6 @@ const year = new Date().getFullYear();
         <span class="bsf__word">CausewaySoft</span>
       </a>
       <p class="bsf__tagline bs-display">Giant apps for giant visionaries.</p>
-      <p class="bsf__about">
-        An independent software engineering studio in Belfast, building web and mobile products for ambitious,
-        forward-thinking businesses.
-      </p>
     </div>
 
     {
@@ -98,8 +94,7 @@ const year = new Date().getFullYear();
   }
 
   .bsf__logo,
-  .bsf__tagline,
-  .bsf__about {
+  .bsf__tagline {
     grid-column: 1 / -1;
   }
 
@@ -130,13 +125,6 @@ const year = new Date().getFullYear();
     margin-top: 8px;
     font-size: clamp(40px, 5vw, 72px);
     max-width: 12ch;
-  }
-
-  .bsf__about {
-    font-size: 15px;
-    line-height: 1.6;
-    max-width: 30em;
-    color: var(--bs-muted);
   }
 
   /* Optional inline services row */
@@ -204,10 +192,6 @@ const year = new Date().getFullYear();
   @media (min-width: 1024px) {
     .bsf__tagline {
       grid-column: 1 / span 7;
-    }
-    .bsf__about {
-      grid-column: 9 / -1;
-      padding-bottom: 6px;
     }
   }
 </style>
