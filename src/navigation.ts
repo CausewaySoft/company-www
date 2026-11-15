@@ -1,5 +1,6 @@
 export const headerData = {
-  // Matches the Basalt header: Services · Work · About (see docs/services-restructure-plan.md)
+  // Matches the Basalt header: Services · Work · About · Contact, plus the
+  // "Start a project" button (see src/components/home/nav.ts)
   links: [
     {
       text: 'Services',
@@ -27,8 +28,12 @@ export const headerData = {
       text: 'About',
       href: '/#about',
     },
+    {
+      text: 'Contact',
+      href: '/contact',
+    },
   ],
-  actions: [{ text: 'Contact', href: '/contact' }],
+  actions: [{ text: 'Start a project', href: '/contact?type=project' }],
 };
 
 export const footerData = {

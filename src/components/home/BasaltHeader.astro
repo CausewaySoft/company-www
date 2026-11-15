@@ -22,6 +22,8 @@ export interface NavItem {
   /** In-page section id that marks this item as current while in view */
   section?: string;
   links?: SubLink[];
+  /** Unnumbered and set apart (e.g. Contact: a page, not a home-page section) */
+  plain?: boolean;
 }
 
 export interface Props {
@@ -32,6 +34,8 @@ export interface Props {
 
 const { items, cta, bookingHref } = Astro.props;
 const pad = (i: number) => String(i + 1).padStart(2, '0');
+// Numbers follow the home-page sections, so plain items don't take one
+const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).filter((x) => !x.plain).length)));
 ---
 
 <header class="bsh" id="bs-header" data-scrolled="false">
@@ -53,11 +57,13 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
       <ol class="bsh__list">
         {
           items.map((item, i) => (
-            <li class:list={['bsh__item', { 'bsh__item--sub': item.links?.length }]}>
-              <a class="bsh__link" href={item.href} data-section={item.section}>
-                <span class="bsh__num" aria-hidden="true">
-                  {pad(i)}
-                </span>
+            <li class:list={['bsh__item', { 'bsh__item--sub': item.links?.length, 'bsh__item--plain': item.plain }]}>
+              <a class="bsh__link" href={item.href} data-section={item.section} data-page>
+                {numbers[i] && (
+                  <span class="bsh__num" aria-hidden="true">
+                    {numbers[i]}
+                  </span>
+                )}
                 {item.text}
               </a>
               {item.links?.length && (
@@ -80,7 +86,7 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
         <Icon name="tabler:sun" class="bsh__sun" />
         <Icon name="tabler:moon" class="bsh__moon" />
       </button>
-      <a class="bsh__cta" href={cta.href}>{cta.text} <span aria-hidden="true">→</span></a>
+      <a class="bsh__cta" href={cta.href} data-page>{cta.text} <span aria-hidden="true">→</span></a>
       <button
         type="button"
         class="bsh__menu-btn"
@@ -100,8 +106,8 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
         {
           items.map((item, i) => (
             <li>
-              <a class="bsm__link" href={item.href}>
-                <span class="bs-mono">{pad(i)}</span>
+              <a class="bsm__link" href={item.href} data-page>
+                <span class="bs-mono">{numbers[i]}</span>
                 <span class="bsm__text">{item.text}</span>
               </a>
               {item.links?.length && (
@@ -119,7 +125,7 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
       </ol>
 
       <div class="bsm__foot">
-        <a class="bs-btn bsm__cta" href={cta.href}>
+        <a class="bs-btn bsm__cta" href={cta.href} data-page>
           {cta.text} <span class="bs-arrow" aria-hidden="true">→</span>
         </a>
         <a class="bs-link" href={bookingHref} target="_blank" rel="noopener">
@@ -240,13 +246,33 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
   }
 
   .bsh__link:hover::after,
-  .bsh__link[aria-current='true']::after {
+  .bsh__link[aria-current]::after {
     transform: scaleX(1);
   }
 
   .bsh__link:hover .bsh__num,
-  .bsh__link[aria-current='true'] .bsh__num {
+  .bsh__link[aria-current] .bsh__num {
     color: var(--bs-signal);
+  }
+
+  /* Unnumbered item (Contact), set apart from the numbered sections */
+  .bsh__item--plain {
+    margin-left: 8px;
+    padding-left: 8px;
+    border-left: 1px solid var(--bs-rule);
+  }
+
+  /* Current page: the button fills in */
+  .bsh__cta[aria-current='page'] {
+    background: var(--bs-ink);
+    color: var(--bs-bg);
+  }
+
+  .bsm__link[aria-current='page'] .bsm__text {
+    text-decoration: underline;
+    text-decoration-color: var(--bs-signal);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.12em;
   }
 
   /* Services dropdown: square panel, hairline, no blur or shadow */
@@ -411,6 +437,12 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
     padding-block: 18px;
   }
 
+  /* Fixed number column, so unnumbered items (Contact) still line up */
+  .bsm__link .bs-mono {
+    flex: none;
+    min-width: 2.2em;
+  }
+
   .bsm__text {
     font-family: var(--bs-font-display);
     font-stretch: 72%;
@@ -565,6 +597,17 @@ const pad = (i: number) => String(i + 1).padStart(2, '0');
       },
       { signal }
     );
+
+    // Mark links to the page you're on. /contact and /contact?type=project
+    // are different pages here (general contact vs project wizard).
+    const here = new URL(location.href);
+    const typeOf = (u: URL) => u.searchParams.get('type') ?? '';
+    const trim = (path: string) => path.replace(/\/$/, '') || '/';
+    header.querySelectorAll<HTMLAnchorElement>('[data-page]').forEach((a) => {
+      const target = new URL(a.getAttribute('href') ?? '', here);
+      const current = !target.hash && trim(target.pathname) === trim(here.pathname) && typeOf(target) === typeOf(here);
+      if (current) a.setAttribute('aria-current', 'page');
+    });
 
     // Mark the nav item whose section is in view
     const links = [...header.querySelectorAll<HTMLAnchorElement>('.bsh__link[data-section]')];

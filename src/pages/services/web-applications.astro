@@ -22,7 +22,7 @@ import ColumnSteps from '~/components/home/ColumnSteps.astro';
 import ClosingCta from '~/components/home/ClosingCta.astro';
 import FaqList from '~/components/home/FaqList.astro';
 import OfferRows from '~/components/home/OfferRows.astro';
-import { bookingHref, innerNavItems, footerLinks, serviceLinks } from '~/components/home/nav';
+import { bookingHref, innerNavItems, footerLinks, serviceLinks, headerCta } from '~/components/home/nav';
 
 import portfolioImg_BibleQuest from '~/assets/images/portfolio/biblequest-pwa-app.png';
 
@@ -196,7 +196,7 @@ const faqs = [
 ---
 
 <Layout metadata={metadata}>
-  <BasaltHeader slot="header" items={innerNavItems} cta={{ text: 'Contact', href: '/contact' }} bookingHref={bookingHref} />
+  <BasaltHeader slot="header" items={innerNavItems} cta={headerCta} bookingHref={bookingHref} />
 
   <div class="bs">
     <!-- Hero -->

@@ -15,7 +15,7 @@ import BasaltFooter from '~/components/home/BasaltFooter.astro';
 import SectionHead from '~/components/home/SectionHead.astro';
 import ContactForm from '~/components/home/ContactForm.astro';
 import ProjectWizard from '~/components/home/ProjectWizard.astro';
-import { bookingHref, linkedInHref, innerNavItems as navItems, footerLinks, serviceLinks } from '~/components/home/nav';
+import { bookingHref, linkedInHref, innerNavItems as navItems, footerLinks, serviceLinks, headerCta } from '~/components/home/nav';
 
 /**
  * Two experiences on one page:
@@ -52,7 +52,7 @@ const nextSteps = [
 ---
 
 <Layout metadata={metadata}>
-  <BasaltHeader slot="header" items={navItems} cta={{ text: 'Contact', href: '/contact' }} bookingHref={bookingHref} />
+  <BasaltHeader slot="header" items={navItems} cta={headerCta} bookingHref={bookingHref} />
 
   <div class="bs contact" id="contact-mode" data-mode="contact">
     <!-- Pick the experience before first paint, so nothing flashes -->

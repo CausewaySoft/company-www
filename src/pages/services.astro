@@ -16,7 +16,7 @@ import '~/components/home/basalt.css';
 import BasaltHeader from '~/components/home/BasaltHeader.astro';
 import BasaltFooter from '~/components/home/BasaltFooter.astro';
 import ClosingCta from '~/components/home/ClosingCta.astro';
-import { bookingHref, innerNavItems, footerLinks } from '~/components/home/nav';
+import { bookingHref, innerNavItems, footerLinks, headerCta } from '~/components/home/nav';
 
 const metadata = {
   title: 'Services: Websites, Web Applications & Custom Software',
@@ -63,7 +63,7 @@ const footerServices = [
 ---
 
 <Layout metadata={metadata}>
-  <BasaltHeader slot="header" items={innerNavItems} cta={{ text: 'Contact', href: '/contact' }} bookingHref={bookingHref} />
+  <BasaltHeader slot="header" items={innerNavItems} cta={headerCta} bookingHref={bookingHref} />
 
   <div class="bs">
     <!-- Intro -->
