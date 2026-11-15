@@ -20,6 +20,7 @@ import WorkIndex from '~/components/home/WorkIndex.astro';
 import ColumnSteps from '~/components/home/ColumnSteps.astro';
 import ClosingCta from '~/components/home/ClosingCta.astro';
 import FaqList from '~/components/home/FaqList.astro';
+import OfferRows from '~/components/home/OfferRows.astro';
 import { bookingHref, reviewCallHref, innerNavItems, footerLinks, serviceLinks } from '~/components/home/nav';
 
 import portfolioImg_Renovations from '~/assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
@@ -122,27 +123,34 @@ const projects = [
   },
 ];
 
-const audiences = [
+// The three kinds of website (sections with anchors, see the restructure plan).
+// Business websites absorbs the old "Who it's for" audiences.
+const kinds = [
   {
-    label: 'Local businesses',
-    title: 'Turn searches into calls and enquiries.',
+    id: 'business-websites',
+    title: 'Business websites',
+    audience: 'Local businesses, startups, growing companies',
     description:
-      'Your customers are already searching. We make it easy for them to find you, trust you and get in touch.',
-    tags: ['Local SEO', 'Click-to-call', 'Quote forms', 'Reviews', 'Mobile-first'],
+      'Websites that explain what you do, build trust fast and make getting in touch effortless. For local firms turning searches into calls, startups making a new idea clear, and growing businesses that have outgrown their first site.',
+    examples: ['Local SEO', 'Click-to-call', 'Quote & booking forms', 'Reviews', 'Analytics'],
+    proof: { text: 'See Causeway Renovations', href: '#work' },
   },
   {
-    label: 'Startups',
-    title: 'Explain your idea. Build trust. Get customers.',
+    id: 'ecommerce',
+    title: 'E-commerce',
+    audience: 'Businesses selling online',
     description:
-      'We turn complex products and ideas into clear, credible websites that give customers, partners and investors a reason to take the next step.',
-    tags: ['Positioning', 'Messaging', 'Conversion', 'Analytics', 'Scalable architecture'],
+      'Online selling that fits how you actually sell: a carefully presented catalogue, bookings and deposits, or products that need a quote rather than just a basket. Secure payments and order handling that connect to the tools you already use.',
+    examples: ['Product catalogues', 'Secure payments', 'Bookings & deposits', 'Order emails', 'Integrations'],
   },
   {
-    label: 'Growing businesses',
-    title: 'Keep your website in step with your business.',
+    id: 'ai',
+    title: 'AI-enhanced websites',
+    audience: 'Any website',
     description:
-      'Add the tools your business needs, from bookings and payments to automation, AI and custom integrations.',
-    tags: ['Custom functionality', 'Integrations', 'Automation', 'AI', 'Ongoing development'],
+      'Websites that AI assistants can read, understand and recommend, plus practical AI where it helps visitors: answering common questions, qualifying enquiries and getting leads to you faster.',
+    examples: ['AI-readable structure', 'Enquiry assistants', 'Lead qualification', 'Automatic follow-ups'],
+    proof: { text: 'Causeway Renovations is built for AI agents', href: '#work' },
   },
 ];
 
@@ -300,12 +308,28 @@ const faqs = [
       </div>
     </section>
 
-    <!-- 03 Offers -->
+    <!-- 03 What we build -->
+    <section class="bs-section" id="what-we-build" aria-labelledby="kinds-title">
+      <div class="bs-wrap">
+        <SectionHead
+          id="kinds-title"
+          index="03"
+          label="What we build"
+          title="Three kinds of website, each built to do a job."
+          lede="Whether you’re a local business, a startup or a growing company, we build around what your website needs to achieve."
+        />
+        <div class="section-body">
+          <OfferRows items={kinds} />
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 Offers -->
     <section class="bs-section" id="offers" aria-labelledby="offers-title">
       <div class="bs-wrap">
         <SectionHead
           id="offers-title"
-          index="03"
+          index="04"
           label="Three ways in"
           title="What we can do for your website."
           lede="Improve what you have, build something new, or make it do more."
@@ -340,39 +364,14 @@ const faqs = [
       </div>
     </section>
 
-    <!-- 04 Proof -->
+    <!-- 05 Proof -->
     <WorkIndex
       projects={projects}
-      index="04"
+      index="05"
       label="Recent website"
       title="Built for a real business."
       lede="A renovation company’s website, designed to bring in enquiries and ready for AI agents to use."
     />
-
-    <!-- 05 Who it's for -->
-    <section class="bs-section" id="audiences" aria-labelledby="audiences-title">
-      <div class="bs-wrap">
-        <SectionHead
-          id="audiences-title"
-          index="05"
-          label="Who it’s for"
-          title="Websites built around your business."
-          lede="Whether you’re a local business, a startup or a growing company, we build around what you need to achieve."
-        />
-        <ul class="trio section-body">
-          {
-            audiences.map((a) => (
-              <li class="trio__item" data-reveal>
-                <p class="bs-mono trio__label">{a.label}</p>
-                <h3 class="trio__title bs-display">{a.title}</h3>
-                <p class="trio__desc">{a.description}</p>
-                <p class="trio__tags bs-mono">{a.tags.join(' · ')}</p>
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </section>
 
     <!-- 06 Process -->
     <ColumnSteps
@@ -595,41 +594,6 @@ const faqs = [
     max-width: 34em;
   }
 
-  /* Audiences */
-  .trio {
-    display: grid;
-    gap: 0;
-    border-top: 1px solid var(--bs-rule);
-  }
-
-  .trio__item {
-    display: grid;
-    align-content: start;
-    gap: 12px;
-    padding-block: 28px 32px;
-    border-bottom: 1px solid var(--bs-rule);
-  }
-
-  .trio__label {
-    color: var(--bs-ink);
-  }
-
-  .trio__title {
-    font-size: clamp(28px, 2.4vw, 36px);
-    line-height: 1.02;
-  }
-
-  .trio__desc {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-
-  .trio__tags {
-    text-transform: none;
-    letter-spacing: 0.04em;
-    font-size: 13px;
-  }
-
   /* Why us */
   .quad {
     display: grid;
@@ -694,16 +658,6 @@ const faqs = [
     .offer {
       border-bottom: 0;
       padding-bottom: 32px;
-    }
-
-    .trio {
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      column-gap: clamp(16px, 2vw, 32px);
-      border-bottom: 1px solid var(--bs-rule);
-    }
-
-    .trio__item {
-      border-bottom: 0;
     }
 
     .quad {
