@@ -161,7 +161,8 @@ const { services: _services } = Astro.props;
     flex-wrap: wrap;
     gap: 4px 20px;
     margin-top: -12px;
-    padding-bottom: 8px;
+    /* Room for the next section's feathered edge, so the caption stays crisp */
+    padding-bottom: var(--bs-feather);
   }
 
   .hero__fig {
