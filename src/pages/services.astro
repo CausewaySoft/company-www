@@ -1,434 +1,284 @@
 ---
-import Content from '~/components/widgets/Content.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Hero from '~/components/widgets/Hero.astro';
+/**
+ * Services: a short router page, not a catalogue.
+ * Plan: docs/services-restructure-plan.md (phase 3)
+ *
+ * Two services, each listing its sections as anchor links. AI and
+ * automation are part of both rather than a service of their own.
+ */
 import Layout from '~/layouts/PageLayout.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import Features3 from '~/components/widgets/Features3.astro';
-import ContactInline from '~/components/widgets/ContactInline.astro';
+
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '~/components/home/basalt.css';
+
+import BasaltHeader from '~/components/home/BasaltHeader.astro';
+import BasaltFooter from '~/components/home/BasaltFooter.astro';
+import ClosingCta from '~/components/home/ClosingCta.astro';
+import { bookingHref, innerNavItems, footerLinks } from '~/components/home/nav';
 
 const metadata = {
-  title: 'Custom Software Development Services',
+  title: 'Services: Websites, Web Applications & Custom Software',
+  description:
+    'Two services from an independent studio in Belfast: websites that win you business, and web applications and custom software that build a product or improve how your business operates.',
 };
+
+const services = [
+  {
+    index: '01',
+    title: 'Websites',
+    promise: 'Win more enquiries, bookings and customers.',
+    description:
+      'Fast, persuasive websites for local businesses, startups and growing companies, whether you need a new site or want to fix the one you have.',
+    href: '/services/websites',
+    sections: [
+      { text: 'Business websites', href: '/services/websites#business-websites' },
+      { text: 'E-commerce', href: '/services/websites#ecommerce' },
+      { text: 'AI-enhanced websites', href: '/services/websites#ai' },
+    ],
+  },
+  {
+    index: '02',
+    title: 'Web Applications & Custom Software',
+    promise: 'Build a digital product. Improve how your business operates.',
+    description:
+      'Custom software that runs in the browser, from a founder’s first MVP to the portals, tools and automation an established business runs on.',
+    href: '/services/web-applications',
+    sections: [
+      { text: 'Business applications', href: '/services/web-applications#business-applications' },
+      { text: 'SaaS & MVP development', href: '/services/web-applications#saas-mvp' },
+      { text: 'Progressive Web Apps', href: '/services/web-applications#pwa' },
+      { text: 'AI-powered features', href: '/services/web-applications#ai' },
+      { text: 'Business automation', href: '/services/web-applications#automation' },
+    ],
+  },
+];
+
+// The other services' links for the footer row, minus "All services" (we're on it)
+const footerServices = [
+  { text: 'Websites', href: '/services/websites' },
+  { text: 'Web applications', href: '/services/web-applications' },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- Hero Widget ******************* -->
+  <BasaltHeader slot="header" items={innerNavItems} cta={{ text: 'Contact', href: '/contact' }} bookingHref={bookingHref} />
 
-  <Hero
-    tagline="From Tides to Triumph"
-    title="Transform Your Business with the Power of Digital"
-    subtitle="We partner with ambitious entrepreneurs, daring startups, and forward-thinking companies to reinvent their business models from the ground up. By fusing cutting-edge technology — AI agents, intelligent automation, predictive analytics, and next-generation workflows — with strategic insight, we don't just help you keep pace with change; we set you leagues ahead of it."
-    actions={[{ variant: 'primary', text: 'Start exploring', icon: 'tabler:rocket', href: '#core-services' }]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-      alt: 'We offer Digital Services across Northern Ireland',
-      class: 'grayscale hover:grayscale-0 rounded shadow-lg',
-    }}
-  />
+  <div class="bs">
+    <!-- Intro -->
+    <section class="sintro" aria-labelledby="services-title">
+      <div class="bs-wrap">
+        <div class="sintro__meta bs-mono">
+          <p>Services · Belfast, Northern Ireland</p>
+          <p>Two services, one engineer</p>
+        </div>
+        <h1 id="services-title" class="sintro__title bs-display">
+          Websites and software, built properly<span class="sintro__stop">.</span>
+        </h1>
+        <p class="sintro__lede bs-lede">
+          Two things, done well: websites that win you business, and custom software that builds a product or improves
+          how your business operates. AI and automation are part of both, where they genuinely help.
+        </p>
+      </div>
+    </section>
 
-  <Features2
-    tagline="Your Vision, Our Journey"
-    title="Custom Software Engineering for bold Startups, forward-thinking Entrepreneurs, and growing Businesses"
-    subtitle="Some ventures need a spark. Others demand a voyage. At CausewaySoft, we shape our engagement to match your ambition — from lightning-fast product launches to full-scale transformations that reforge the way you do business."
-    items={[
-      {
-        title: 'Strategic Partnership',
-        description:
-          'Like the stones of the Causeway, strong relationships are built piece by piece. We work as an extension of your team — not just delivering code, but helping shape your roadmap, refine your ideas, and make decisions that will carry your business into the future.',
-        icon: 'tabler:heart-handshake',
-      },
-      {
-        title: 'Digital Business Transformation',
-        description:
-          'For companies ready to evolve, we go beyond development. We reimagine your workflows, integrate AI and automation, and create systems that turn complexity into clarity — ensuring your business doesn’t just survive the next wave of change, but commands it.',
-        icon: 'tabler:transaction-dollar',
-      },
-      {
-        title: 'From Idea to Impact: Fast, Goal-Driven MVP Launch',
-        description:
-          'When speed matters, we deliver. Using lean methods and rapid iteration, we get your Minimum Viable Product into the hands of users fast — so you can test, learn, and grow without wasting a single tide.',
-        icon: 'tabler:trophy',
-      },
-    ]}
-  />
+    <!-- The two services -->
+    <section class="sroutes" aria-label="Our services">
+      <div class="bs-wrap">
+        <ol class="svc2">
+          {
+            services.map((s) => (
+              <li class="svc2__item bs-grid">
+                <div class="svc2__head">
+                  <p class="bs-mono svc2__index">
+                    <span>{s.index}</span> — Service
+                  </p>
+                  <h2 class="svc2__title bs-display">
+                    <a href={s.href}>{s.title}</a>
+                  </h2>
+                  <p class="svc2__promise">{s.promise}</p>
+                </div>
+                <div class="svc2__body">
+                  <p class="svc2__desc">{s.description}</p>
+                  <ul class="svc2__links" aria-label={`${s.title}: sections`}>
+                    {s.sections.map((sec) => (
+                      <li>
+                        <a href={sec.href}>
+                          {sec.text} <span aria-hidden="true">→</span>
+                        </a>
+                      </li>
+                    ))}
+                  </ul>
+                  <a class="bs-link svc2__cta" href={s.href}>
+                    Explore {s.title.split(' &')[0].toLowerCase()} <span aria-hidden="true">→</span>
+                  </a>
+                </div>
+              </li>
+            ))
+          }
+        </ol>
 
-  <Features2
-    id="core-services"
-    tagline="Explore Our Core Services"
-    title="Bring your ideas to life with our services."
-    subtitle="From the spirit of the Giant's Causeway, we forge digital experiences that blend heritage, ambition, and cutting-edge technology. Whether you're launching your first product or transforming your business, our services are built to help visionaries succeed."
-    columns={3}
-    items={[
-      {
-        title: 'AI-Powered Solutions',
-        description:
-          'From chatbots and intelligent automation to predictive analytics — we build AI into your apps to make them smarter, faster, and more intuitive.',
-        icon: 'tabler:ai',
-        callToAction: {
-          variant: 'link',
-          text: 'Learn more ...',
-          href: '/services/ai-agents-solutions',
-          target: '_blank',
-        },
-      },
-      {
-        title: 'Websites',
-        description:
-          'From sleek portfolio sites to high-converting business platforms, we build websites that are great looking, extremely fast, and strategically designed to grow your brand. Each site is optimized for performance, SEO, and user experience — and can be paired with AI-powered chat agents to turn visitors into leads, bookings, and loyal customers.',
-        icon: 'tabler:world-www',
-        callToAction: {
-          variant: 'link',
-          text: 'Learn more ...',
-          href: '/services/websites',
-          target: '_blank',
-        },
-      },
-      {
-        title: 'Web Applications',
-        description:
-          'From MVP to full-scale platforms, we engineer dynamic, high-performance web apps that scale with your ambition — clean code, solid architecture, and endless potential.',
-        icon: 'tabler:app-window',
-        link: '/services/web-applications',
-        callToAction: {
-          variant: 'link',
-          text: 'Learn more ...',
-          href: '/services/web-applications',
-          target: '_blank',
-        },
-      },
-      {
-        title: 'Progressive Web Apps (PWAs)',
-        description:
-          'Blending the best of web and native, our PWAs are lightning-fast, offline-ready, and immersive — giving users an app-like experience without the app store friction.',
-        icon: 'tabler:rocket',
-        callToAction: {
-          variant: 'link',
-          text: 'Learn more ...',
-          href: '/services/progressive-web-apps',
-          target: '_blank',
-        },
-      },
-      {
-        title: 'Hybrid Mobile Apps',
-        description:
-          'One build, many platforms. With React Native and modern stacks, we deliver cross-platform apps that feel native, run fast, and keep costs lean.',
-        icon: 'tabler:device-mobile-star',
-        callToAction: {
-          variant: 'link',
-          text: 'Learn more ...',
-          href: '/services/hybrid-apps',
-          target: '_blank',
-        },
-      },
-      {
-        title: 'Chrome Extensions',
-        description:
-          'Compact yet powerful tools that integrate seamlessly with browsers, improving productivity and engagement for your users.',
-        icon: 'tabler:brand-chrome',
-        callToAction: {
-          variant: 'link',
-          text: 'Learn more ...',
-          href: '/services/chrome-extensions',
-          target: '_blank',
-        },
-      },
-      // {
-      //   title: "NI Cloud-Hosted GPT Models",
-      //   description: "Enterprise-grade GPT chatbots hosted securely in Northern Ireland. Tailored to your needs, protected by local compliance, and ready to transform how your business communicates.",
-      //   icon: 'tabler:cloud'
-      // }
-    ]}
-  />
+        <p class="sroutes__note">
+          <span class="bs-mono">Not sure which?</span>
+          Tell us what you’re trying to achieve and we’ll recommend the right approach.
+          <a href="/contact?type=project">Start a project <span aria-hidden="true">→</span></a>
+        </p>
+      </div>
+    </section>
 
-  <!-- Content Widget 
-        image source: https://unsplash.com/photos/men-sitting-in-front-of-their-laptop-computer-MChSQHxGZrQ
+    <ClosingCta bookingHref={bookingHref} index="03" />
+  </div>
 
-  **************** -->
-
-  <Content
-    isReversed
-    tagline="Why Choose Our Software Development Services"
-    title="CausewaySoft Stands Above the Rest"
-    subtitle="Most agencies will build you what you ask for. We go further. Like the builders of the Giant's Causeway, we craft with purpose, precision, and a vision for the ages. Where others deliver a product, we deliver a launchpad for your ambitions. We don't just write code - we help you write your legacy."
-    items={[
-      {
-        title: 'Vision-First Approach',
-        description: 'We align our work with your long-term goals, not just the immediate brief.',
-        icon: 'tabler:eye',
-      },
-      {
-        title: 'Mythic Inspiration',
-        description: "Our roots in the Giant's Causeway fuel a mindset where challenges become stepping stones.",
-        icon: 'tabler:mountain',
-      },
-      {
-        title: 'Fewer Projects, More Focus',
-        description: 'We take on fewer clients so we can give each project the attention it deserves.',
-        icon: 'tabler:focus',
-      },
-      {
-        title: 'Seamless Collaboration',
-        description: 'Clear, frequent communication with transparency at every step.',
-        icon: 'tabler:arrows-right-left',
-      },
-      {
-        title: 'Proven Results',
-        description: 'A track record of delivering products that perform, scale, and impress.',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?auto=format&fit=crop&w=870&q=80',
-      alt: 'Features Image',
-    }}
-  />
-
-  <!-- Content Widget
-    image source: https://unsplash.com/photos/boy-in-front-of-computer-monitor-vJP-wZ6hGBg
-
-  **************** -->
-
-  <Content
-    isAfterContent
-    tagline="What We Provide in Every Service"
-    title="Excellence in Every Build"
-    items={[
-      {
-        title: 'Excellence in Engineering',
-        description: 'Clean, maintainable, high-performance code.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Optimized for Success',
-        description: 'SEO-friendly, fast-loading, and responsive on all devices.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'Attention to Detail',
-        description: 'Every interaction, animation, and micro-feature is considered.',
-        icon: 'tabler:details',
-      },
-      {
-        title: 'Security & Privacy',
-        description: 'Built with modern security best practices from day one.',
-        icon: 'tabler:lock',
-      },
-      {
-        title: 'Scalability',
-        description: 'Architecture designed to grow with your business.',
-        icon: 'tabler:arrows-up-right',
-      },
-      {
-        title: 'Post-Launch Support',
-        description: 'We’re with you beyond deployment to keep everything running flawlessly.',
-        icon: 'tabler:lifebuoy',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1536148935331-408321065b18?auto=format&fit=crop&w=774&q=80',
-      alt: 'Image showing a Software Engineer using high quality tools.',
-    }}
-  />
-
-  <!-- Content Widget 
-
-    image credit: https://unsplash.com/photos/a-laptop-computer-sitting-on-top-of-a-desk-nBXwqxjDa5c
-
-  **************** -->
-  <Content
-    isAfterContent
-    tagline="Our Tech Stack"
-    title="Modern Tools for Legendary Results"
-    items={[
-      {
-        title: 'Frontend',
-        description: 'Vue, React, Next.js, Astro, Tailwind CSS, HTML5, CSS3, JavaScript (ES6+), TypeScript',
-        icon: 'tabler:layout',
-      },
-      {
-        title: 'Backend',
-        description: 'C# .NET, TypeScript, Node.js, Express, Python, PostgreSQL, MongoDB, GraphQL',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Mobile & Cross-Platform',
-        description: 'React Native, Progressive Web Apps (PWA)',
-        icon: 'tabler:device-mobile',
-      },
-      {
-        title: 'AI & Automation',
-        description: 'OpenAI GPT integration, custom AI agents, workflow automation',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: '3rd Party Integrations',
-        description: 'Shopify API, Zappier, Wordpress API',
-        icon: 'tabler:play-card-3',
-      },
-      {
-        title: 'Hosting & Infrastructure',
-        description: 'EU/UK-based servers, NI-hosted GPT models, AWS, Vercel, DigitalOcean',
-        icon: 'tabler:cloud',
-      },
-      {
-        title: 'DevOps & CI/CD',
-        description: 'GitHub Actions, Docker, Kubernetes (on request)',
-        icon: 'tabler:settings',
-      },
-      { title: 'Project Management', description: 'Git, Agile, Scrum, MS Dev Ops, Jirra', icon: 'tabler:calendar' },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1692106979244-a2ac98253f6b??q=70&w=690&auto=format&fit=crop',
-      alt: 'Image of a MacBook laptop with Visual Studio Code opened, presenting moder software engineering tools being used.',
-    }}
-  />
-
-  <!-- Features3 Widget 
-     
-    '6 Reasons why Us'
-    
-    ************** -->
-
-  <Features3
-    tagline="6 Reasons why"
-    title="We are your #1 Custom Software Development Agency"
-    subtitle="At CausewaySoft, we believe your software should be as unique as your business. That’s why we combine custom-built solutions, direct collaboration, and full-spectrum expertise to deliver results that fit perfectly — and last. With competitive rates, modern scalable tech, and clear communication every step of the way, we make your vision a reality without compromise."
-    columns={3}
-    isBeforeContent={true}
-    items={[
-      {
-        title: 'Truly Bespoke Development',
-        description:
-          'We design and build every project from the ground up, avoiding cookie-cutter templates and focusing on your exact requirements.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Direct Access to the Developer',
-        description:
-          'You work with the person actually writing your code, which means faster communication, fewer misunderstandings, and more flexibility.',
-        icon: 'tabler:user-code',
-      },
-      {
-        title: 'Full-Service Expertise',
-        description:
-          "We handle the entire process — UI/UX, backend, mobile, DevOps, and even product management — so you don't need multiple vendors.",
-        icon: 'tabler:layers-intersect',
-      },
-      {
-        title: 'High Quality at Competitive Rates',
-        description:
-          'We are a lean, independent setup keeps overhead low, allowing you to get premium quality without enterprise-level pricing.',
-        icon: 'tabler:currency-pound',
-      },
-      {
-        title: 'Long-Term Scalability',
-        description: 'We use modern, maintainable frameworks so your website or app can grow with your business.',
-        icon: 'tabler:arrows-diagonal',
-      },
-      {
-        title: 'Transparent Communication',
-        description:
-          "We maintain open, honest, and regular communication throughout the project, so you're always informed and in control.",
-        icon: 'tabler:messages',
-      },
-    ]}
-  />
-
-  <FAQs
-    id="faq"
-    title="Frequently Asked Questions"
-    subtitle="Dive into the following questions to gain insights into how we build the apps."
-    tagline="FAQs"
-    classes={{ container: 'max-w-6xl' }}
-    items={[
-      {
-        title: 'How long does it take to build a custom web or mobile app?',
-        description:
-          'Timelines vary depending on complexity, but MVPs typically launch within 6–12 weeks, with larger projects taking longer. We focus on rapid iteration without sacrificing quality.',
-        icon: 'tabler:calendar',
-      },
-      {
-        title: 'What’s included in your post-launch support?',
-        description:
-          'We offer maintenance, updates, bug fixes, and performance monitoring to ensure your product runs smoothly long after launch.',
-        icon: 'tabler:tool',
-      },
-      {
-        title: 'Do you work with international clients?',
-        description:
-          'Yes — while based in Northern Ireland, we work with ambitious clients across the UK, EU, USA, and beyond.',
-        icon: 'tabler:world',
-      },
-      {
-        title: 'Can you integrate AI into my app or website?',
-        description:
-          'Absolutely. We specialize in integrating AI chatbots, automation tools, and AI-driven analytics to give you a competitive edge.',
-        icon: 'tabler:robot',
-      },
-      {
-        title: 'How much does a custom software project cost?',
-        description:
-          'Costs depend on scope, features, and timelines. We offer transparent, milestone-based pricing so you know exactly what you’re paying for.',
-        icon: 'tabler:currency-pound',
-      },
-      {
-        title: 'What industries do you serve?',
-        description:
-          'We work with startups, entrepreneurs, and SMEs across sectors — from e-commerce and SaaS to local service businesses and enterprise solutions.',
-        icon: 'tabler:building',
-      },
-    ]}
-  />
-
-  <ContactInline
-    id="contact"
-    tagline="Contact Us"
-    title="Let us help you Excel your Business using Custom Software Solutions"
-    subtitle="Send us an email or Book a FREE Discovery Call to begin your journey."
-    formInputs={[
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-        placeholder: 'Where shall our reply find you?',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-      placeholder: 'Tell us your challenges, dreams, or sparks',
-    }}
-    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours."
-    button="Send Your Message"
-    items={[
-      {
-        description: 'Book a Discovery Call',
-        classes: {
-          container: 'd-flex content-center	',
-          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading',
-        },
-        href: 'https://calendly.com/causewaysoft',
-        target: '_blank',
-        icon: 'tabler:calendar',
-      },
-      {
-        title: 'Email us',
-        classes: { ctaLinks: 'emailLink' },
-        href: '/',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Call us',
-        href: '/',
-        classes: { ctaLinks: 'phoneLink' },
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Follow us',
-        description: '@causewaysoft',
-        href: 'https://www.linkedin.com/company/causewaysoft',
-        icon: 'tabler:brand-linkedin',
-      },
-    ]}
-  />
+  <BasaltFooter slot="footer" links={footerLinks} services={footerServices} />
 </Layout>
+
+<style>
+  /* Intro */
+  .sintro {
+    padding-top: clamp(28px, 4.5vw, 56px);
+    padding-bottom: clamp(48px, 6vw, 88px);
+  }
+
+  .sintro__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  .sintro__title {
+    margin-top: clamp(36px, 5vw, 72px);
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+    max-width: 13ch;
+  }
+
+  .sintro__stop {
+    color: var(--bs-signal);
+  }
+
+  .sintro__lede {
+    margin-top: clamp(24px, 3vw, 36px);
+  }
+
+  /* The two services */
+  .sroutes {
+    position: relative;
+    z-index: 1;
+    background: var(--bs-bg);
+    padding-bottom: clamp(72px, 10vw, 144px);
+  }
+
+  .svc2 {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .svc2__item {
+    padding-block: clamp(32px, 4vw, 56px);
+    border-top: 1px solid var(--bs-rule);
+    row-gap: 28px;
+    align-items: start;
+  }
+
+  .svc2__head,
+  .svc2__body {
+    grid-column: 1 / -1;
+  }
+
+  .svc2__index span {
+    color: var(--bs-ink);
+  }
+
+  .svc2__title {
+    margin-top: 14px;
+    font-size: clamp(40px, 5vw, 76px);
+    line-height: 0.95;
+  }
+
+  .svc2__title a {
+    color: var(--bs-ink);
+    background-image: linear-gradient(var(--bs-signal), var(--bs-signal));
+    background-size: 0 2px;
+    background-position: 0 100%;
+    background-repeat: no-repeat;
+    transition: background-size 0.5s var(--bs-ease);
+  }
+
+  .svc2__title a:hover,
+  .svc2__title a:focus-visible {
+    background-size: 100% 2px;
+  }
+
+  .svc2__promise {
+    margin-top: 16px;
+    font-size: clamp(18px, 1.5vw, 21px);
+    line-height: 1.45;
+    color: var(--bs-ink);
+    max-width: 26em;
+  }
+
+  .svc2__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 34em;
+  }
+
+  .svc2__links {
+    margin-top: 20px;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .svc2__links li {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .svc2__links a {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 11px;
+    font-size: 15px;
+    color: var(--bs-ink);
+    transition: color 0.2s var(--bs-ease);
+  }
+
+  .svc2__links a:hover {
+    color: var(--bs-signal);
+  }
+
+  .svc2__cta {
+    display: inline-block;
+    margin-top: 24px;
+  }
+
+  .sroutes__note {
+    margin-top: 32px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px 14px;
+    font-size: 16px;
+    line-height: 1.55;
+  }
+
+  .sroutes__note a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-signal);
+    text-underline-offset: 0.3em;
+  }
+
+  @media (min-width: 900px) {
+    .svc2__head {
+      grid-column: 1 / span 7;
+    }
+
+    .svc2__body {
+      grid-column: 9 / -1;
+      padding-top: 30px;
+    }
+  }
+</style>
