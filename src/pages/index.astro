@@ -1,524 +1,202 @@
 ---
+/**
+ * Home page: "Basalt" redesign.
+ * Art direction: docs/design-review-claude-opus5.5.md
+ */
 import Layout from '~/layouts/PageLayout.astro';
-import Hero from '~/components/widgets/HeroFullWidth.astro';
-import Note from '~/components/widgets/Note.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import Content from '~/components/widgets/Content.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Projects from '~/components/widgets/Projects.astro';
 
-import portfolioImg_BibleQuest from '../assets/images/portfolio/biblequest-pwa-app.png';
-import renovationImage from '../assets/images/portfolio/causewayrenovations-website.png';
-import renovationImage2 from '../assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '~/components/home/basalt.css';
+
+import BasaltHeader from '~/components/home/BasaltHeader.astro';
+import BasaltFooter from '~/components/home/BasaltFooter.astro';
+import HomeHero from '~/components/home/HomeHero.astro';
+import WorkIndex from '~/components/home/WorkIndex.astro';
+import ServiceIndex from '~/components/home/ServiceIndex.astro';
+import ColumnSteps from '~/components/home/ColumnSteps.astro';
+import Founder from '~/components/home/Founder.astro';
+import ClosingCta from '~/components/home/ClosingCta.astro';
+
+import portfolioImg_BibleQuest from '~/assets/images/portfolio/biblequest-pwa-app.png';
+import portfolioImg_Renovations from '~/assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
 
 const metadata = {
-  title: 'CausewaySoft - Web-Apps and Mobile Apps Developement Agency in Belfast, Northern Ireland ',
+  title: 'CausewaySoft: Web App and Mobile App Development Agency in Belfast, Northern Ireland',
   ignoreTitleTemplate: true,
 };
 
-const heroSection = {
-  tagline: 'Giant Apps for Giant Visionaries',
-  title: 'We build digital products that move businesses forward.',
-  subtitle:
-    'High-performance websites, web applications, AI solutions and custom software, built around your business and its goals.',
-  ctaButtonPrimary: {
-    variant: 'primary' as const,
-    target: '_blank' as const,
-    text: 'Start a Project',
-    href: '/contact',
-    icon: 'tabler:rocket',
+const services = [
+  {
+    title: 'Business websites',
+    description:
+      'Turn more visitors into enquiries and customers with a fast, professional website built to grow your business.',
+    href: '/services/websites',
   },
-  ctaButtonSecondary: {
-    variant: 'secondary' as const,
-    text: 'Explore Our Services',
-    href: '/services',
+  {
+    title: 'Web applications',
+    description:
+      'Give your customers and team better ways to work with bespoke platforms, portals and business tools.',
+    href: '/services/web-applications',
   },
-  image: {
-    src: '~/assets/images/giants-causeway-causewaysoft-herobg.png',
-    alt: 'Hand-drawn illustration of the Giant’s Causeway',
+  {
+    title: 'AI solutions',
+    description:
+      'Reduce repetitive work and improve customer experiences with practical AI tools built around your needs.',
+    href: '/services/ai-agents-solutions',
   },
-};
-
-export const problemStatement = {
-  tagline: 'Have an idea worth building?',
-  title: 'From new ideas to better ways of working.',
-  subtitle:
-    'We help you identify the right solution, then design and build software that solves real business problems.',
-  itemsTitle: 'What can we help you achieve?',
-  items: [
-    {
-      title: 'Launch a new product',
-      description:
-        'Turn your idea into a focused digital product, starting with what matters most.',
-    },
-    {
-      title: 'Improve your website or software',
-      description:
-        'Modernise outdated digital experiences to better serve your customers and business.',
-    },
-    {
-      title: 'Automate repetitive work',
-      description:
-        'Connect your tools and streamline manual processes so your team can focus on what matters.',
-    },
-  ],
-  image: {
-    src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
-    alt: '',
+  {
+    title: 'Custom software',
+    description:
+      'When existing tools fall short, get software designed around the way your business actually works.',
+    href: '/services/custom-software',
   },
-};
+];
 
-export const productOfferings2 = {
-  title: 'What we build',
-  subtitle:
-    'Practical digital solutions designed around your business, your customers and your goals.',
-  items: [
-    {
-      title: 'Business Websites',
-      description:
-        'Turn more visitors into enquiries and customers with a fast, professional website built to grow your business.',
-      icon: 'tabler:world-www',
-      callToAction: {
-        variant: 'link',
-        text: 'Explore Website Development',
-        href: '/services/websites',
-        icon: 'tabler:arrow-right',
-      },
-    },
-    {
-      title: 'Web Applications',
-      description:
-        'Give your customers and team better ways to work with bespoke platforms, portals and business tools.',
-      icon: 'tabler:app-window',
-      callToAction: {
-        variant: 'link',
-        text: 'Explore Web Applications',
-        href: '/services/web-applications',
-        icon: 'tabler:arrow-right',
-      },
-    },
-    {
-      title: 'AI Solutions',
-      description:
-        'Reduce repetitive work and improve customer experiences with practical AI tools built around your needs.',
-      icon: 'tabler:brain',
-      callToAction: {
-        variant: 'link',
-        text: 'Explore AI Solutions',
-        href: '/services/ai-agents-solutions',
-        icon: 'tabler:arrow-right',
-      },
-    },
-    {
-      title: 'Custom Software',
-      description:
-        'When existing tools fall short, get software designed around the way your business actually works.',
-      icon: 'tabler:code',
-      callToAction: {
-        variant: 'link',
-        text: 'Explore Custom Software',
-        href: '/services/custom-software',
-        icon: 'tabler:arrow-right',
-      },
-    },
-  ],
-};
+const bookingHref = 'https://calendly.com/causewaysoft';
 
-export const projectSteps = {
-  title: 'From idea to working product',
-  subtitle:
-    'Whether you have a detailed specification or just a problem to solve, we help you find the right approach and turn it into a working product.',
-  items: [
-    {
-      title: 'Step 1 — Discover',
-      description:
-        'Define the problem, understand your business and agree on what success looks like.',
-      icon: 'tabler:search',
-    },
-    {
-      title: 'Step 2 — Plan',
-      description:
-        'Prioritise requirements and map out a practical solution, scope and roadmap.',
-      icon: 'tabler:clipboard-list',
-    },
-    {
-      title: 'Step 3 — Design',
-      description:
-        'Shape the user experience and validate the approach before development begins.',
-      icon: 'tabler:palette',
-    },
-    {
-      title: 'Step 4 — Build',
-      description:
-        'Develop and test your product with a focus on quality, performance and maintainability.',
-      icon: 'tabler:code',
-    },
-    {
-      title: 'Step 5 — Launch & Improve',
-      description:
-        'Launch your product, learn from real-world use and improve it as your needs evolve.',
-      icon: 'tabler:rocket',
-      // classes: {
-      //   icon: 'text-amber-600 dark:text-amber-600',
-      //   title: 'text-amber-600 dark:text-amber-600',
-      // },
-    },
-  ],
-  image: {
-    src: 'https://images.unsplash.com/photo-1505576457712-b769c0c0a354?q=70&w=690&auto=format&fit=crop',
-    alt: 'The journey from initial idea to finished software product',
+const navItems = [
+  { text: 'Work', href: '#work', section: 'work' },
+  {
+    text: 'Services',
+    href: '#services',
+    section: 'services',
+    links: [
+      { text: 'Websites', href: '/services/websites' },
+      { text: 'Web applications', href: '/services/web-applications' },
+      { text: 'AI solutions', href: '/services/ai-agents-solutions' },
+      { text: 'All services', href: '/services' },
+    ],
   },
-};
+  { text: 'Process', href: '#our-process', section: 'our-process' },
+  { text: 'About', href: '#about', section: 'about' },
+];
 
-// Section 4 — Who we help
-export const productOfferings3 = {
-  title: 'Built for your stage of growth',
-  subtitle:
-    'Whether you are starting out or scaling up, we build solutions around the challenges you face today.',
-  items: [
-    {
-      title: 'Startups',
-      description:
-        'Validate your idea and launch an MVP without wasting time or budget on unnecessary features.',
-      icon: 'tabler:rocket',
-    },
-    {
-      title: 'Small Businesses',
-      description:
-        'Attract more customers with a better website and save time by streamlining everyday work.',
-      icon: 'tabler:building',
-    },
-    {
-      title: 'Growing Companies',
-      description:
-        'Connect systems, automate processes and build platforms that support your next stage of growth.',
-      icon: 'tabler:chart-line',
-    },
-  ],
-};
+const footerLinks = [
+  { text: 'LinkedIn', href: 'https://www.linkedin.com/company/causewaysoft', external: true },
+  { text: 'Privacy', href: '/privacy' },
+  { text: 'Terms', href: '/terms' },
+];
 
-// Section 5 — Why CausewaySoft?
-export const productOfferings4 = {
-  title: 'Why CausewaySoft?',
-  subtitle: 'Senior engineering. Direct collaboration. No unnecessary layers.',
-  contentTitle:
-    'An independent software engineering studio based in Northern Ireland, working with clients internationally.',
-  items: [
-    {
-      title: 'Business-first thinking',
-      description:
-        'We start with your goals and challenges, then choose the right solution.',
-      icon: 'tabler:target',
-    },
-    {
-      title: 'Direct collaboration',
-      description:
-        'Work directly with the engineer designing and building your product.',
-      icon: 'tabler:users',
-    },
-    {
-      title: 'Practical technology',
-      description:
-        'We choose proven, modern tools that fit your project rather than chasing trends.',
-      icon: 'tabler:code',
-    },
-    {
-      title: 'Room to grow',
-      description:
-        'Build a solid foundation that can evolve as your business and requirements change.',
-      icon: 'tabler:trending-up',
-    },
-    {
-      title: 'Quality built in',
-      description:
-        'Performance, accessibility, security and maintainability are considered from the start.',
-      icon: 'tabler:check',
-    },
-  ],
-  image: {
-    src: 'https://images.unsplash.com/photo-1517070277245-d8e0a45c2495?q=80&w=690&auto=format&fit=crop',
-    alt: 'The Giant’s Causeway, reflecting our Northern Ireland roots',
+const projects = [
+  {
+    title: 'BibleQuest',
+    kind: 'Progressive web app',
+    description:
+      'Offline-first progressive web app for exploring Scripture, memorising Bible verses and tracking learning progress.',
+    outcome: 'Fully functional with no internet connection.',
+    tags: ['PWA', 'Desktop', 'Mobile', 'Offline-first'],
+    href: 'https://biblequest.causewaysoft.com/',
+    linkLabel: 'Open the app',
+    image: { src: portfolioImg_BibleQuest, alt: 'Three iPhones showing the BibleQuest app' },
   },
-};
+  {
+    title: 'Causeway Renovations',
+    kind: 'Business website',
+    description: 'A modern website for a house renovation company, with AI-powered business interactions.',
+    outcome: 'Website built for AI-agent interactions.',
+    tags: ['Business website', 'Lead generation', 'AI-agentic'],
+    href: 'https://causewayrenovations.co.uk',
+    linkLabel: 'Visit the site',
+    image: {
+      src: portfolioImg_Renovations,
+      alt: 'The Causeway Renovations website on an iPhone and a MacBook',
+    },
+  },
+];
 
-// Section 6 — Meet the founder
-export const founderSection = {
-  tagline: 'Meet the Founder',
-  title: 'Mateusz Cichy',
-  subtitle:
+const steps = [
+  {
+    title: 'Discover',
+    description: 'Define the problem, understand your business and agree on what success looks like.',
+  },
+  {
+    title: 'Plan',
+    description: 'Prioritise requirements and map out a practical solution, scope and roadmap.',
+  },
+  {
+    title: 'Design',
+    description: 'Shape the user experience and validate the approach before development begins.',
+  },
+  {
+    title: 'Build',
+    description: 'Develop and test your product with a focus on quality, performance and maintainability.',
+  },
+  {
+    title: 'Launch & improve',
+    description: 'Launch your product, learn from real-world use and improve it as your needs evolve.',
+  },
+];
+
+const founder = {
+  name: 'Mateusz Cichy',
+  role: 'Founder & software engineer',
+  quote:
     'I founded CausewaySoft to do what I enjoy most: designing and building useful digital products, working directly with clients from the first idea to the finished solution.',
-  bodyText: `With 7+ years of professional software engineering experience, I help businesses turn ideas into reliable web applications and digital products.
-
-Based in Belfast, Northern Ireland, I work directly with clients locally and internationally.`,
-  contentItems: [
-    {
-      title: 'MEng Computer Science',
-      description: "Queen's University Belfast",
-      icon: 'tabler:school',
-    },
-    {
-      title: 'Full-stack engineering',
-      description: 'From user interfaces to backend systems',
-      icon: 'tabler:devices-heart',
-    },
-    {
-      title: 'Direct collaboration',
-      description: 'One-to-one communication throughout your project',
-      icon: 'tabler:heart-handshake',
-    },
+  body: [
+    'With 7+ years of professional software engineering experience, I help businesses turn ideas into reliable web applications and digital products. You work directly with the engineer designing and building your product, with no account managers in between.',
   ],
-  image: {
-    src: '~/assets/images/causewaysoft-founder-pic.jpg',
-    alt: 'Picture of the CausewaySoft founder',
-  },
-};
-
-// Section 7 — Final call to action
-export const callToAction = {
-  tagline: 'From Spark to Stone',
-  title: 'Start with an idea. Build something lasting.',
-  subtitle:
-    'Great products are built piece by piece. We help you lay the right foundations, focus on what matters and create something your business can build on.',
-  contentTitle: 'Have an idea? Let’s work out how to make it happen.',
-  contentItems: [
-    {
-      title:
-        'Tell me what you want to achieve. We’ll explore the problem, identify the right approach and map out the next steps.',
-    },
+  facts: [
+    { label: 'Education', value: 'MEng Computer Science, Queen’s University Belfast' },
+    { label: 'Experience', value: '7+ years, full-stack: from user interfaces to backend systems' },
+    { label: 'Approach', value: 'Business-first thinking, proven technology, quality built in' },
+    { label: 'Based', value: 'Belfast, Northern Ireland, working locally and internationally' },
   ],
-  image: {
-    src: '',
-    alt: '',
-  },
 };
-
 ---
 
 <Layout metadata={metadata}>
-  <Hero
-    tagline={heroSection.tagline}
-    actions={[heroSection.ctaButtonPrimary, heroSection.ctaButtonSecondary]}
-  >
-    <Fragment slot="title">
-      {heroSection.title}
-    </Fragment>
-
-    <Fragment slot="subtitle">
-      {heroSection.subtitle}
-    </Fragment>
-  </Hero>
-
-  <!-- Brand Statement -->
-  <Note title="Launch faster. Grow stronger. Build legendary." />
-
-
-  <!-- Projects Widget -->
-  <Projects
-    id="work"
-    tagline="Portfolio"
-    title="Recent work"
-    subtitle="Thoughtful design, creative problem-solving, and purposeful engineering."
-    items={[
-      {
-        title: 'BibleQuest',
-        description: 'Offline-first progressive web app for exploring Scripture, memorising Bible verses, and tracking learning progress.',
-        image: {
-          src: portfolioImg_BibleQuest,
-          alt: 'Three iPhones showcasing the BibleQuest app',
-        },
-        tags: ['PWA', 'Desktop', 'Mobile', 'Offline-first'],
-        result: 'Fully functional with no internet connection.',
-        resultIcon: 'tabler:wifi-off',
-        href: 'https://biblequest.causewaysoft.com/',
-      },
-      {
-        title: 'Causeway Renovations',
-        description:
-          'Modern website for a house renovation company, and AI-powered business interactions.',
-        image: {
-          src: renovationImage2,
-          alt: 'An iPhone and Macbook with CausewayRenovations loaded on thier screens.',
-        },
-        tags: ['Business Website', 'Lead Generation', 'AI-Agentic'],
-        result: 'Website built for AI-agent interactions.',
-        resultIcon: 'tabler:input-ai',
-        href: 'https://causewayrenovations.co.uk',
-      },
-    ]}
+  <BasaltHeader
+    slot="header"
+    items={navItems}
+    cta={{ text: 'Start a project', href: '/contact' }}
+    bookingHref={bookingHref}
   />
-
-
-  <!--
-    Problem Statement \
-    Have an idea worth building?
-  -->
-  <Content
-    id="scroll"
-    isReversed
-    title={problemStatement.tagline}
-    subtitle={problemStatement.title}
-    items={problemStatement.items}
-    itemsTitle={problemStatement.itemsTitle}
-    image={problemStatement.image}
-  >
-    <Fragment slot="content">
-      <!-- <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
-        {problemStatement.contentTitle}
-      </h3>
-      <p>{problemStatement.subtitle}</p> -->
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!--
-    WHAT WE BUILD.
-  -->
-  <Features2
-    id="services"
-    columns={4}
-    title={productOfferings2.title}
-    subtitle={productOfferings2.subtitle}
-    items={productOfferings2.items}
-  />
-
-  <!--
-    OUR PROCESS
-  -->
-  <Steps
-    id="our-process"
-    title={projectSteps.title}
-    subtitle={projectSteps.subtitle}
-    items={projectSteps.items}
-    image={projectSteps.image}
-  />
-
-  <!-- Features Widget 
-    ***************
-    Who is it for Section.
-  -->
-  <Features
-    id="services"
-    columns={3}
-    title={productOfferings3.title}
-    subtitle={productOfferings3.subtitle}
-    items={productOfferings3.items}
-  />
-
-  <!--  Value Proposition -->
-  <Content
-    isReversed
-    id="about"
-    subtitle={productOfferings4.subtitle}
-    title={productOfferings4.title}
-    items={productOfferings4.items}
-    image={productOfferings4.image}
-  >
-    <Fragment slot="content">
-      <!-- {productOfferings4.contentTitle && (
-        <h3 class="font-bold tracking-tight dark:text-white sm:text-2xl">
-          {productOfferings4.contentTitle}
-        </h3>
-      )} -->
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-white dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <!--
-    Meet the Founder Section.
-  -->
-  <Features2
-    id="services2"
-    tagline={founderSection.tagline}
-    title={founderSection.title}
-    subtitle={founderSection.subtitle}
-    items={founderSection.contentItems}
-    image={founderSection.image}
-    bodyText={founderSection.bodyText}
-    columns={3}
-    classes={{
-      container: 'max-w-5xl',
-      items: {
-        // panel: ""
-      },
-    }}
-  />
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start Your Project',
-        href: '/contact',
-        icon: 'tabler:rocket',
-      },
-    ]}
-  >
-    <Fragment slot="title"> 🌊 Let's Build Something Enduring </Fragment>
-
-    <Fragment slot="subtitle">
-      Bold ideas, solid code, and a process built on trust, grit, and
-      creativity.
-    </Fragment>
-  </CallToAction>
-
-  <!-- <ContactInline
-    id="contact"
-    tagline="Contact Us"
-    title="Drop us a message today!"
-    subtitle="Send us an email or Book a FREE Discovery Call to begin your journey."
-    formInputs={[
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-        placeholder: 'Where shall our reply find you?',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-      placeholder: 'Tell us your challenges, dreams, or sparks',
-    }}
-    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours."
-    button="Send Your Message"
-    items={[
-      {
-        description: 'Book a Discovery Call',
-        classes: {
-          container: 'd-flex content-center	',
-          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading',
-        },
-        href: 'https://calendly.com/causewaysoft',
-        target: '_blank',
-        icon: 'tabler:calendar',
-      },
-      {
-        title: 'Email us',
-        description: 'anti-spam protection, please enable javascript...',
-        classes: { ctaLinks: 'emailLink' },
-        href: '/',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Call us',
-        description: 'anti-spam protection, please enable javascript...',
-        href: '/',
-        classes: { ctaLinks: 'phoneLink' },
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Follow us',
-        description: '@causewaysoft',
-        href: 'https://www.linkedin.com/company/causewaysoft',
-        icon: 'tabler:brand-linkedin',
-      },
-    ]}
-  /> -->
+  <div class="bs">
+    <HomeHero services={services.map(({ title, href }) => ({ title, href }))} />
+    <WorkIndex projects={projects} />
+    <ServiceIndex services={services} />
+    <ColumnSteps steps={steps} />
+    <Founder {...founder} />
+    <ClosingCta bookingHref={bookingHref} />
+  </div>
+  <BasaltFooter slot="footer" links={footerLinks} />
 </Layout>
+
+<script>
+  // Progressive reveal: content is visible by default. Anything already on
+  // screen is marked revealed *before* .bs-js is added, so nothing above the
+  // fold is ever hidden.
+  function initReveal() {
+    const els = document.querySelectorAll<HTMLElement>('[data-reveal]:not(.is-in)');
+    if (!els.length) return;
+
+    const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (reduced || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-in'));
+      return;
+    }
+
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-in');
+            io.unobserve(entry.target);
+          }
+        });
+      },
+      { rootMargin: '0px 0px -12% 0px' }
+    );
+
+    els.forEach((el) => {
+      if (el.getBoundingClientRect().top < window.innerHeight) el.classList.add('is-in');
+      else io.observe(el);
+    });
+
+    document.documentElement.classList.add('bs-js');
+  }
+
+  document.addEventListener('astro:page-load', initReveal);
+</script>

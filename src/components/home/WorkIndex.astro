@@ -1,0 +1,170 @@
+---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
+import SectionHead from './SectionHead.astro';
+
+export interface Project {
+  title: string;
+  kind: string;
+  description: string;
+  outcome: string;
+  tags: string[];
+  href: string;
+  linkLabel: string;
+  image: { src: ImageMetadata; alt: string };
+}
+
+export interface Props {
+  id?: string;
+  projects: Project[];
+}
+
+const { id = 'work', projects } = Astro.props;
+---
+
+<section class="work bs-section" id={id} aria-labelledby={`${id}-title`}>
+  <div class="bs-wrap">
+    <SectionHead
+      id={`${id}-title`}
+      index="01"
+      label="Selected work"
+      title="Built, shipped and in use."
+      lede="Thoughtful design, creative problem-solving and purposeful engineering, in products people rely on every day."
+    />
+
+    <ol class="work__list">
+      {
+        projects.map((p, i) => (
+          <li class:list={['work__item bs-grid', { 'work__item--flip': i % 2 === 1 }]} data-reveal>
+            <a class="work__media" href={p.href} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
+              <Image
+                src={p.image.src}
+                alt={p.image.alt}
+                widths={[640, 960, 1280]}
+                sizes="(min-width: 1024px) 58vw, 100vw"
+              />
+            </a>
+            <div class="work__text">
+              <p class="bs-mono">
+                <span class="work__num">{String(i + 1).padStart(2, '0')}</span> / {p.kind}
+              </p>
+              <h3 class="work__title bs-display">{p.title}</h3>
+              <p class="work__desc">{p.description}</p>
+              <dl class="work__facts">
+                <div>
+                  <dt class="bs-mono">Outcome</dt>
+                  <dd>{p.outcome}</dd>
+                </div>
+                <div>
+                  <dt class="bs-mono">Scope</dt>
+                  <dd class="work__tags">{p.tags.join(' · ')}</dd>
+                </div>
+              </dl>
+              <a class="bs-link" href={p.href} target="_blank" rel="noopener">
+                {p.linkLabel} <span aria-hidden="true">↗</span>
+                <span class="sr-only">(opens in a new tab)</span>
+              </a>
+            </div>
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+</section>
+
+<style>
+  .work__list {
+    margin-top: clamp(48px, 7vw, 96px);
+  }
+
+  .work__item {
+    row-gap: 28px;
+    padding-block: clamp(32px, 5vw, 64px);
+    border-top: 1px solid var(--bs-rule);
+    align-items: center;
+  }
+
+  .work__media,
+  .work__text {
+    grid-column: 1 / -1;
+  }
+
+  .work__media {
+    display: block;
+    overflow: hidden;
+    background: var(--bs-surface);
+  }
+
+  .work__media img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+    transition: transform 0.9s var(--bs-ease);
+  }
+
+  .work__item:hover .work__media img {
+    transform: scale(1.025);
+  }
+
+  .work__num {
+    color: var(--bs-ink);
+  }
+
+  .work__title {
+    margin-top: 16px;
+    font-size: clamp(40px, 4.6vw, 68px);
+  }
+
+  .work__desc {
+    margin-top: 20px;
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 36em;
+  }
+
+  .work__facts {
+    margin-block: 28px 32px;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .work__facts > div {
+    display: grid;
+    grid-template-columns: 7.5em 1fr;
+    gap: 16px;
+    padding-block: 12px;
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .work__facts dt {
+    padding-top: 2px;
+  }
+
+  .work__facts dd {
+    color: var(--bs-ink);
+    font-size: 15px;
+  }
+
+  .work__tags {
+    font-family: var(--bs-font-mono);
+    font-size: 13px !important;
+  }
+
+  @media (min-width: 1024px) {
+    .work__media {
+      grid-column: 1 / span 7;
+    }
+    .work__text {
+      grid-column: 9 / -1;
+    }
+    .work__item--flip .work__media {
+      grid-column: 6 / -1;
+      grid-row: 1;
+    }
+    .work__item--flip .work__text {
+      grid-column: 1 / span 4;
+      grid-row: 1;
+    }
+  }
+</style>

@@ -1,0 +1,594 @@
+---
+/**
+ * Header for the Basalt home page.
+ *
+ * Replaces the shared template header on this page only: left-aligned,
+ * mono-indexed navigation, a square outline CTA, no glass or pills, and an
+ * editorial full-screen menu on small screens. It uses its own id and
+ * script, so the shared header logic in BasicScripts doesn't touch it.
+ * The theme toggle keeps `data-aw-toggle-color-scheme` so it reuses the
+ * site-wide theme switch.
+ */
+import { Icon } from 'astro-icon/components';
+
+interface SubLink {
+  text: string;
+  href: string;
+}
+
+export interface NavItem {
+  text: string;
+  href: string;
+  /** In-page section id that marks this item as current while in view */
+  section?: string;
+  links?: SubLink[];
+}
+
+export interface Props {
+  items: NavItem[];
+  cta: { text: string; href: string };
+  bookingHref: string;
+}
+
+const { items, cta, bookingHref } = Astro.props;
+const pad = (i: number) => String(i + 1).padStart(2, '0');
+---
+
+<header class="bsh" id="bs-header" data-scrolled="false">
+  <div class="bsh__bar bs-wrap">
+    <a class="bsh__brand" href="/" aria-label="CausewaySoft, home">
+      <svg class="bsh__mark" viewBox="0 0 110.46 96.471" aria-hidden="true">
+        <path
+          d="M265.875-657.46c7.858,15.2-14.5-27.784-14.5-27.784L277.2-730.056h51.814l25.815,44.8-25.845,44.669H277.119s49.592-84.768,41.205-70.58"
+          transform="translate(-247.871 733.556)"
+          fill="none"
+          stroke="currentColor"
+          stroke-linejoin="round"
+          stroke-width="7"></path>
+      </svg>
+      <span class="bsh__word">CausewaySoft</span>
+    </a>
+
+    <nav class="bsh__nav" aria-label="Main navigation">
+      <ol class="bsh__list">
+        {
+          items.map((item, i) => (
+            <li class:list={['bsh__item', { 'bsh__item--sub': item.links?.length }]}>
+              <a class="bsh__link" href={item.href} data-section={item.section}>
+                <span class="bsh__num" aria-hidden="true">
+                  {pad(i)}
+                </span>
+                {item.text}
+              </a>
+              {item.links?.length && (
+                <ul class="bsh__sub">
+                  {item.links.map((l) => (
+                    <li>
+                      <a href={l.href}>{l.text}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+    </nav>
+
+    <div class="bsh__tools">
+      <button type="button" class="bsh__icon" aria-label="Switch between dark and light mode" data-aw-toggle-color-scheme>
+        <Icon name="tabler:sun" class="bsh__sun" />
+        <Icon name="tabler:moon" class="bsh__moon" />
+      </button>
+      <a class="bsh__cta" href={cta.href}>{cta.text} <span aria-hidden="true">→</span></a>
+      <button
+        type="button"
+        class="bsh__menu-btn"
+        aria-expanded="false"
+        aria-controls="bs-menu"
+        data-bs-menu-toggle
+      >
+        <span class="bsh__menu-open">Menu</span>
+        <span class="bsh__menu-close">Close</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="bsm" id="bs-menu" hidden>
+    <div class="bs-wrap bsm__inner">
+      <ol class="bsm__list">
+        {
+          items.map((item, i) => (
+            <li>
+              <a class="bsm__link" href={item.href}>
+                <span class="bs-mono">{pad(i)}</span>
+                <span class="bsm__text">{item.text}</span>
+              </a>
+              {item.links?.length && (
+                <ul class="bsm__sub">
+                  {item.links.map((l) => (
+                    <li>
+                      <a href={l.href}>{l.text}</a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </li>
+          ))
+        }
+      </ol>
+
+      <div class="bsm__foot">
+        <a class="bs-btn bsm__cta" href={cta.href}>
+          {cta.text} <span class="bs-arrow" aria-hidden="true">→</span>
+        </a>
+        <a class="bs-link" href={bookingHref} target="_blank" rel="noopener">
+          Book a free discovery call <span aria-hidden="true">↗</span>
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+        <p class="bs-mono">Belfast, Northern Ireland</p>
+      </div>
+    </div>
+  </div>
+</header>
+
+<style>
+  .bsh {
+    position: sticky;
+    top: 0;
+    z-index: 40;
+    color: var(--bs-ink);
+    font-family: var(--bs-font-text);
+    background: transparent;
+    border-bottom: 1px solid transparent;
+    transition:
+      background-color 0.3s var(--bs-ease),
+      border-color 0.3s var(--bs-ease);
+  }
+
+  .bsh[data-scrolled='true'],
+  .bsh[data-open='true'] {
+    background: var(--bs-bg);
+    border-bottom-color: var(--bs-rule);
+  }
+
+  .bsh__bar {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    height: 72px;
+    transition: height 0.3s var(--bs-ease);
+  }
+
+  .bsh[data-scrolled='true'] .bsh__bar {
+    height: 60px;
+  }
+
+  /* Brand */
+  .bsh__brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    color: var(--bs-ink);
+    margin-right: auto;
+  }
+
+  .bsh__mark {
+    width: 30px;
+    height: auto;
+    transition: transform 0.6s var(--bs-ease);
+  }
+
+  .bsh__brand:hover .bsh__mark {
+    transform: rotate(-60deg);
+  }
+
+  .bsh__word {
+    font-family: var(--bs-font-display);
+    font-stretch: 75%;
+    font-weight: 800;
+    font-size: 22px;
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    line-height: 1;
+  }
+
+  /* Desktop navigation */
+  .bsh__nav {
+    display: none;
+  }
+
+  .bsh__list {
+    display: flex;
+    gap: 4px;
+  }
+
+  .bsh__item {
+    position: relative;
+  }
+
+  .bsh__link {
+    position: relative;
+    display: inline-flex;
+    align-items: baseline;
+    gap: 6px;
+    padding: 10px 12px;
+    font-family: var(--bs-font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bs-ink);
+  }
+
+  .bsh__num {
+    color: var(--bs-muted);
+    transition: color 0.2s;
+  }
+
+  .bsh__link::after {
+    content: '';
+    position: absolute;
+    left: 12px;
+    right: 12px;
+    bottom: 4px;
+    height: 1px;
+    background: var(--bs-signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.4s var(--bs-ease);
+  }
+
+  .bsh__link:hover::after,
+  .bsh__link[aria-current='true']::after {
+    transform: scaleX(1);
+  }
+
+  .bsh__link:hover .bsh__num,
+  .bsh__link[aria-current='true'] .bsh__num {
+    color: var(--bs-signal);
+  }
+
+  /* Services dropdown: square panel, hairline, no blur or shadow */
+  .bsh__sub {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 230px;
+    padding: 6px 0;
+    background: var(--bs-bg);
+    border: 1px solid var(--bs-rule);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-4px);
+    transition:
+      opacity 0.2s var(--bs-ease),
+      transform 0.2s var(--bs-ease),
+      visibility 0.2s;
+  }
+
+  .bsh__item--sub:hover .bsh__sub,
+  .bsh__item--sub:focus-within .bsh__sub {
+    opacity: 1;
+    visibility: visible;
+    transform: none;
+  }
+
+  .bsh__sub a {
+    display: block;
+    padding: 10px 16px;
+    font-size: 14px;
+    color: var(--bs-text);
+    transition:
+      color 0.2s,
+      background-color 0.2s;
+  }
+
+  .bsh__sub a:hover {
+    color: var(--bs-ink);
+    background: var(--bs-surface);
+  }
+
+  /* Tools */
+  .bsh__tools {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .bsh__icon {
+    display: inline-grid;
+    place-items: center;
+    width: 40px;
+    height: 40px;
+    color: var(--bs-ink);
+    border: 1px solid transparent;
+    transition: border-color 0.2s;
+  }
+
+  .bsh__icon:hover {
+    border-color: var(--bs-rule);
+  }
+
+  .bsh__icon :global(svg) {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Show the mode you'd switch to */
+  .bsh__sun {
+    display: none;
+  }
+
+  :global(html.dark) .bsh__sun {
+    display: block;
+  }
+
+  :global(html.dark) .bsh__moon {
+    display: none;
+  }
+
+  .bsh__cta {
+    display: none;
+    align-items: center;
+    gap: 10px;
+    height: 40px;
+    padding: 0 16px;
+    border: 1px solid var(--bs-ink);
+    font-family: var(--bs-font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bs-ink);
+    transition:
+      background-color 0.25s var(--bs-ease),
+      color 0.25s var(--bs-ease);
+  }
+
+  .bsh__cta:hover {
+    background: var(--bs-ink);
+    color: var(--bs-bg);
+  }
+
+  .bsh__menu-btn {
+    height: 40px;
+    padding: 0 4px 0 12px;
+    font-family: var(--bs-font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bs-ink);
+  }
+
+  .bsh__menu-close,
+  .bsh[data-open='true'] .bsh__menu-open {
+    display: none;
+  }
+
+  .bsh[data-open='true'] .bsh__menu-close {
+    display: inline;
+  }
+
+  .bsh :focus-visible {
+    outline: 2px solid var(--bs-signal);
+    outline-offset: 2px;
+  }
+
+  /* Small-screen menu */
+  .bsm {
+    position: fixed;
+    inset: 72px 0 0 0;
+    overflow-y: auto;
+    background: var(--bs-bg);
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .bsh[data-scrolled='true'] .bsm {
+    top: 60px;
+  }
+
+  .bsm[hidden] {
+    display: none;
+  }
+
+  .bsm__inner {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    padding-block: 16px 32px;
+  }
+
+  .bsm__list > li {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .bsm__link {
+    display: flex;
+    align-items: baseline;
+    gap: 16px;
+    padding-block: 18px;
+  }
+
+  .bsm__text {
+    font-family: var(--bs-font-display);
+    font-stretch: 72%;
+    font-weight: 760;
+    font-size: 44px;
+    line-height: 0.95;
+    color: var(--bs-ink);
+  }
+
+  .bsm__sub {
+    display: grid;
+    gap: 2px;
+    padding: 0 0 18px 36px;
+  }
+
+  .bsm__sub a {
+    display: block;
+    padding-block: 6px;
+    font-size: 16px;
+    color: var(--bs-text);
+  }
+
+  .bsm__foot {
+    margin-top: auto;
+    padding-top: 40px;
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .bsm__cta {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  /* Staggered entrance for the menu items */
+  .bsh[data-open='true'] .bsm__list > li {
+    animation: bsm-in 0.5s var(--bs-ease) both;
+  }
+
+  .bsh[data-open='true'] .bsm__list > li:nth-child(2) {
+    animation-delay: 40ms;
+  }
+  .bsh[data-open='true'] .bsm__list > li:nth-child(3) {
+    animation-delay: 80ms;
+  }
+  .bsh[data-open='true'] .bsm__list > li:nth-child(4) {
+    animation-delay: 120ms;
+  }
+
+  @keyframes bsm-in {
+    from {
+      opacity: 0;
+      transform: translateY(12px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  @media (min-width: 600px) {
+    .bsh__cta {
+      display: inline-flex;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .bsh__nav {
+      display: block;
+    }
+    .bsh__menu-btn,
+    .bsm {
+      display: none !important;
+    }
+    .bsh__tools {
+      margin-left: 16px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bsh,
+    .bsh__bar,
+    .bsh__mark,
+    .bsh__link::after,
+    .bsh__sub {
+      transition: none;
+    }
+    .bsh[data-open='true'] .bsm__list > li {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  function initBasaltHeader() {
+    const header = document.getElementById('bs-header');
+    if (!header || header.dataset.ready) return;
+    header.dataset.ready = 'true';
+
+    const toggle = header.querySelector<HTMLButtonElement>('[data-bs-menu-toggle]');
+    const menu = header.querySelector<HTMLElement>('#bs-menu');
+
+    // Window/document listeners are removed when the page is swapped out
+    const ac = new AbortController();
+    const { signal } = ac;
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        ac.abort();
+        io?.disconnect();
+        document.body.style.overflow = '';
+      },
+      { once: true }
+    );
+
+    // Solid background and hairline once the page scrolls
+    const onScroll = () => {
+      header.dataset.scrolled = String(window.scrollY > 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true, signal });
+
+    // Small-screen menu
+    const setOpen = (open: boolean) => {
+      if (!toggle || !menu) return;
+      header.dataset.open = String(open);
+      toggle.setAttribute('aria-expanded', String(open));
+      menu.hidden = !open;
+      document.body.style.overflow = open ? 'hidden' : '';
+      if (open) menu.querySelector<HTMLElement>('a')?.focus();
+    };
+
+    toggle?.addEventListener('click', () => setOpen(toggle.getAttribute('aria-expanded') !== 'true'));
+    menu?.addEventListener('click', (e) => {
+      if ((e.target as HTMLElement).closest('a')) setOpen(false);
+    });
+    document.addEventListener(
+      'keydown',
+      (e) => {
+        if (e.key === 'Escape' && header.dataset.open === 'true') {
+          setOpen(false);
+          toggle?.focus();
+        }
+      },
+      { signal }
+    );
+    window.matchMedia('(min-width: 1024px)').addEventListener(
+      'change',
+      (mq) => {
+        if (mq.matches) setOpen(false);
+      },
+      { signal }
+    );
+
+    // Mark the nav item whose section is in view
+    const links = [...header.querySelectorAll<HTMLAnchorElement>('.bsh__link[data-section]')];
+    const sections = links
+      .map((link) => document.getElementById(link.dataset.section!))
+      .filter((s): s is HTMLElement => Boolean(s));
+
+    let io: IntersectionObserver | undefined;
+    if (sections.length && 'IntersectionObserver' in window) {
+      io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            links.forEach((link) => {
+              if (link.dataset.section === entry.target.id) link.setAttribute('aria-current', 'true');
+              else link.removeAttribute('aria-current');
+            });
+          });
+        },
+        { rootMargin: '-45% 0px -50% 0px' }
+      );
+      sections.forEach((s) => io!.observe(s));
+    }
+  }
+
+  document.addEventListener('astro:page-load', initBasaltHeader);
+</script>
