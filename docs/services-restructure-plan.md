@@ -1,6 +1,7 @@
 # Services restructure plan
 
-**Status:** Planned, not started
+**Status:** Phases 1–5 done in code (Nov 2026). Remaining: configure the
+server redirects (rules below). Guides are on the backlog.
 **Branch:** `feature/site-redesign`
 **Date:** 2026-11-15
 
@@ -235,6 +236,47 @@ meta refreshes, not true 301s.)
 
 Then delete the retired `.astro` files, including the industry pages under
 `src/pages/solutions/` (decided: delete them).
+
+### Server redirect rules (copy-ready)
+
+The pages above are deleted from the site (phase 5). Use whichever matches
+the server. Each rule matches the URL with or without a trailing slash and
+keeps the `#section` fragment in the target.
+
+**Apache** (`.htaccess` in the site root, or the vhost config; needs
+`mod_rewrite`):
+
+```apache
+# Retired service and industry pages (services restructure, Nov 2026)
+RewriteEngine On
+RewriteRule ^services/progressive-web-apps/?$ /services/web-applications#pwa [NE,R=301,L]
+RewriteRule ^services/ai-agents-solutions/?$ /services/web-applications#ai [NE,R=301,L]
+RewriteRule ^services/hybrid-apps/?$ /services [R=301,L]
+RewriteRule ^services/chrome-extensions/?$ /services [R=301,L]
+RewriteRule ^services/websites-old/?$ /services/websites [R=301,L]
+RewriteRule ^solutions(/.*)?$ /services [R=301,L]
+```
+
+`NE` stops Apache from encoding `#` as `%23`. The last rule covers `/solutions`,
+both industry pages and the draft `/solutions/healthcare/website-copy`.
+
+**nginx** (inside the `server` block):
+
+```nginx
+# Retired service and industry pages (services restructure, Nov 2026)
+location ~ ^/services/progressive-web-apps/?$ { return 301 /services/web-applications#pwa; }
+location ~ ^/services/ai-agents-solutions/?$  { return 301 /services/web-applications#ai; }
+location ~ ^/services/hybrid-apps/?$          { return 301 /services; }
+location ~ ^/services/chrome-extensions/?$    { return 301 /services; }
+location ~ ^/services/websites-old/?$         { return 301 /services/websites; }
+location ~ ^/solutions(/.*)?$                 { return 301 /services; }
+```
+
+**Check after deploying** (each should print `301` and the new location):
+
+```bash
+for p in /services/progressive-web-apps /services/ai-agents-solutions /services/hybrid-apps /services/chrome-extensions /services/websites-old /solutions /solutions/healthcare /solutions/professional-services; do curl -s -o /dev/null -w "%{http_code} $p -> %{redirect_url}\n" "https://causewaysoft.com$p"; done
+```
 
 ### Links to update before deleting
 
