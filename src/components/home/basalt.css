@@ -16,7 +16,7 @@ html:root {
   --bs-signal: #d4511c; /* one loud colour */
   --bs-signal-ink: #0e0f10;
   --bs-drawing-opacity: 1;
-  --bs-cover-shadow: rgb(18 19 20 / 0.12);
+  --bs-feather: clamp(96px, 11vw, 168px);
 
   --bs-font-display: 'Archivo Variable', 'Arial Narrow', sans-serif;
   --bs-font-text: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
@@ -37,7 +37,6 @@ html.dark {
   --bs-signal: #e8622c;
   --bs-signal-ink: #0e0f10;
   --bs-drawing-opacity: 0.82;
-  --bs-cover-shadow: rgb(0 0 0 / 0.55);
 
   --aw-color-bg-page: var(--bs-bg);
 }
@@ -102,11 +101,26 @@ html:root ::selection {
   background: var(--bs-bg);
 }
 
-/* The first section to cover the drawing gets a soft leading edge */
-[data-hero-ground] + .bs-section {
-  box-shadow:
-    0 -1px 0 var(--bs-rule),
-    0 -32px 64px -24px var(--bs-cover-shadow);
+/* The first section to cover the drawing has a feathered leading edge,
+   so the drawing dissolves into the page like charcoal into paper */
+/* (a hoisted <script> may sit between the drawing and the section) */
+:is([data-hero-ground] + .bs-section, [data-hero-ground] + script + .bs-section)::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  /* overlap by 1px so no sub-pixel seam shows at the section edge */
+  bottom: calc(100% - 1px);
+  height: var(--bs-feather);
+  /* eased stops avoid visible banding over the charcoal */
+  background: linear-gradient(
+    to bottom,
+    color-mix(in srgb, var(--bs-bg) 0%, transparent),
+    color-mix(in srgb, var(--bs-bg) 35%, transparent) 35%,
+    color-mix(in srgb, var(--bs-bg) 75%, transparent) 65%,
+    var(--bs-bg)
+  );
+  pointer-events: none;
 }
 
 /* Keep anchor targets clear of the sticky header */
