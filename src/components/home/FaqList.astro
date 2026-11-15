@@ -1,0 +1,110 @@
+---
+/**
+ * FAQ accordion for Basalt pages: native <details>, so it's keyboard and
+ * screen-reader friendly without JS. Also outputs FAQPage structured data.
+ */
+export interface Props {
+  items: { q: string; a: string }[];
+  /** How many questions start open */
+  open?: number;
+}
+
+const { items, open = 2 } = Astro.props;
+
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: items.map(({ q, a }) => ({
+    '@type': 'Question',
+    name: q,
+    acceptedAnswer: { '@type': 'Answer', text: a },
+  })),
+};
+---
+
+<div class="faq">
+  {
+    items.map((f, i) => (
+      <details class="faq__item" open={i < open}>
+        <summary class="faq__q">
+          <span class="bs-display">{f.q}</span>
+          <span class="faq__icon" aria-hidden="true" />
+        </summary>
+        <p class="faq__a">{f.a}</p>
+      </details>
+    ))
+  }
+</div>
+
+<script is:inline type="application/ld+json" set:html={JSON.stringify(schema)} />
+
+<style>
+  .faq {
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .faq__item {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .faq__q {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 24px;
+    padding-block: 22px;
+    cursor: pointer;
+    list-style: none;
+    font-size: clamp(24px, 2.4vw, 34px);
+    line-height: 1.1;
+    color: var(--bs-ink);
+  }
+
+  .faq__q::-webkit-details-marker {
+    display: none;
+  }
+
+  .faq__q:focus-visible {
+    outline: 2px solid var(--bs-signal);
+    outline-offset: 4px;
+  }
+
+  /* Plus that turns into a minus */
+  .faq__icon {
+    position: relative;
+    flex: none;
+    width: 16px;
+    height: 16px;
+  }
+
+  .faq__icon::before,
+  .faq__icon::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 7px;
+    height: 2px;
+    background: currentColor;
+    transition: transform 0.3s var(--bs-ease);
+  }
+
+  .faq__icon::after {
+    transform: rotate(90deg);
+  }
+
+  .faq__item[open] .faq__icon::after {
+    transform: rotate(0deg);
+  }
+
+  .faq__item[open] .faq__icon {
+    color: var(--bs-signal);
+  }
+
+  .faq__a {
+    padding-bottom: 26px;
+    font-size: 17px;
+    line-height: 1.65;
+    max-width: 40em;
+  }
+</style>
