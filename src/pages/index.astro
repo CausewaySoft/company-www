@@ -9,6 +9,10 @@ import Content from '~/components/widgets/Content.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Projects from '~/components/widgets/Projects.astro';
 
+import portfolioImg_BibleQuest from '../assets/images/portfolio/biblequest-pwa-app.png';
+import renovationImage from '../assets/images/portfolio/causewayrenovations-website.png';
+import renovationImage2 from '../assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
+
 const metadata = {
   title: 'CausewaySoft - Web-Apps and Mobile Apps Developement Agency in Belfast, Northern Ireland ',
   ignoreTitleTemplate: true,
@@ -310,45 +314,37 @@ export const callToAction = {
   <Note title="Launch faster. Grow stronger. Build legendary." />
 
 
-
-  <!-- Projects Widget *************** -->
-
+  <!-- Projects Widget -->
   <Projects
     id="work"
-    tagline="Case studies"
+    tagline="Portfolio"
     title="Recent work"
-    subtitle="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi sagittis, quam nec venenatis lobortis, mi risus tempus nulla."
+    subtitle="Thoughtful design, creative problem-solving, and purposeful engineering."
     items={[
       {
-        title: 'SaaS marketing site',
-        description: 'Nam malesuada urna in enim imperdiet tincidunt. Phasellus non tincidunt nisi, at elementum mi.',
+        title: 'BibleQuest',
+        description: 'Offline-first progressive web app for exploring Scripture, memorising Bible verses, and tracking learning progress.',
         image: {
-          src: 'https://images.unsplash.com/photo-1519389950473-47ba0277781c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1740&q=80',
-          alt: 'People working on laptops',
+          src: portfolioImg_BibleQuest,
+          alt: 'Three iPhones showcasing the BibleQuest app',
         },
-        tags: ['SaaS', 'Landing pages'],
-        result: '+38 % demo requests',
+        tags: ['PWA', 'Desktop', 'Mobile', 'Offline-first'],
+        result: 'Fully functional with no internet connection.',
+        resultIcon: 'tabler:wifi-off',
+        href: 'https://biblequest.causewaysoft.com/',
       },
       {
-        title: 'Website relaunch',
+        title: 'Causeway Renovations',
         description:
-          'House Renovation company.',
+          'Modern website for a house renovation company, and AI-powered business interactions.',
         image: {
-          src: 'https://images.unsplash.com/photo-1486406146926-c627a92ad1ab?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-          alt: 'Modern office building',
+          src: renovationImage2,
+          alt: 'An iPhone and Macbook with CausewayRenovations loaded on thier screens.',
         },
-        tags: ['Small Business', 'Blog'],
-        result: 'Lighthouse 100 across the board',
-      },
-      {
-        title: 'Founder portfolio',
-        description: 'Phasellus lacinia cursus velit, eu malesuada magna pretium eu. Etiam aliquet tellus purus.',
-        image: {
-          src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1200&q=80',
-          alt: 'A laptop with analytics on a desk',
-        },
-        tags: ['Personal', 'Portfolio'],
-        result: 'Live in one afternoon',
+        tags: ['Business Website', 'Lead Generation', 'AI-Agentic'],
+        result: 'Website built for AI-agent interactions.',
+        resultIcon: 'tabler:input-ai',
+        href: 'https://causewayrenovations.co.uk',
       },
     ]}
   />
