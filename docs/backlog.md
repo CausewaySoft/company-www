@@ -5,6 +5,79 @@ but not scheduled. Newest first.
 
 ---
 
+## "Free website check": a possible lead-generating product
+
+**Status:** Idea, undecided whether it's worth doing
+**Area:** Websites service page (`src/pages/services/websites.astro`), possibly
+a new page or a mode of the project wizard on `/contact`
+**Added:** 2026-11-15
+
+### The idea
+
+Offer small businesses a free check of their existing website: what's slowing
+it down, what's hurting enquiries, and what to fix first. It fits the Websites
+page's promise ("If your website is slow, outdated… we'll find out why and fix
+it") and gives owners of an existing site a low-commitment first step.
+
+### Current state
+
+The Websites page used to link two "Get a Free Website Check" buttons to
+`/free-website-check`, a page that never existed. They now point elsewhere:
+- Hero: **"Start a Website Project"** → `/contact?type=project&service=website`
+  (the project wizard, with "Business website" preselected).
+- "Fix an existing website" card: **"Book a Free Review Call"** → the existing
+  30-minute Calendly booking, which keeps the "free check" spirit using
+  something already offered.
+
+### Why it could be worth it
+
+- **A natural first step for the main audience.** Most small-business buyers
+  already have a website; "is mine any good?" is an easier question to act on
+  than "start a project".
+- **It shows expertise instead of claiming it.** A useful report demonstrates
+  the engineering-led approach the site talks about.
+- **It qualifies leads.** The check shows whether there's real work to do
+  before anyone commits to a call or proposal.
+
+### Why it might not be
+
+- **Time cost.** Every check is unpaid work; popular free offers can eat a
+  week.
+- **It attracts price-shoppers and tyre-kickers** as well as real prospects.
+- **Free tools already exist.** Google PageSpeed Insights gives a score for
+  free (the old footer even linked to it). The check must go well beyond a
+  score, e.g. clear priorities and business impact, or it isn't worth having.
+- **"Free" can undercut a premium position** if it looks like a sales gimmick.
+
+### Options
+
+1. **Keep the free review call (current).** No new build; the call is the
+   check. Lowest effort, and it's already live.
+2. **Manual mini-audit, limited.** A short form (URL + what the site should
+   achieve), then a personal reply, e.g. a 5-minute screen recording with the
+   top three fixes. Cap it (e.g. five a month) to protect time; easy to stop.
+3. **Automated report.** Run PageSpeed Insights and a few checks of our own
+   (mobile, meta tags, contact paths) and email a branded summary. Scales, but
+   needs building and maintaining, and risks feeling generic.
+4. **Paid audit, credited against a project.** A fixed-price audit (e.g. a few
+   hundred pounds) refunded as credit if they go ahead. Filters out
+   tyre-kickers and values the work properly.
+
+**Suggested path:** stay with option 1 for now. If review calls show real
+demand, trial option 2 with a monthly cap before considering 3 or 4.
+
+### To do when this is picked up
+
+- [ ] Decide whether to offer a check at all, and which option.
+- [ ] If option 2 or 3: add a "Website check" entry point, either a small page
+      or a `?type=website-check` mode on `/contact` that submits through the
+      existing `/forms/contact.php` path (don't add a second form backend).
+- [ ] Write what the check covers and what people receive, and by when.
+- [ ] Update the Websites page CTAs to point at it.
+- [ ] Track how many checks turn into projects, to see if it pays off.
+
+---
+
 ## Hero "Fig. 01" Easter egg: a hidden reward behind the Causeway coordinates
 
 **Status:** Idea, not started

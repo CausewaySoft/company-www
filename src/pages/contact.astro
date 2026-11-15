@@ -14,11 +14,22 @@ import BasaltHeader from '~/components/home/BasaltHeader.astro';
 import BasaltFooter from '~/components/home/BasaltFooter.astro';
 import SectionHead from '~/components/home/SectionHead.astro';
 import ContactForm from '~/components/home/ContactForm.astro';
+import ProjectWizard from '~/components/home/ProjectWizard.astro';
+
+/**
+ * Two experiences on one page:
+ *   /contact               general contact (the simple contact form)
+ *   /contact?type=project  project discovery wizard
+ * The query parameter picks the initial one (see the inline script below).
+ */
+
+// Keep in line with the real reply workflow; used across both experiences
+const responseTime = 'within one business day';
 
 const metadata = {
   title: 'Contact',
   description:
-    'Tell us what you are building. Websites, web applications, AI solutions and custom software from an independent studio in Belfast, Northern Ireland.',
+    'Get in touch or start a project: websites, web applications, AI solutions and custom software from an independent studio in Belfast, Northern Ireland.',
 };
 
 const bookingHref = 'https://calendly.com/causewaysoft';
@@ -43,7 +54,7 @@ const navItems = [
 const nextSteps = [
   {
     title: 'We reply',
-    description: 'Within one business day, from the engineer who would build it. No sales team, no autoresponder.',
+    description: `A personal reply ${responseTime}, from the engineer who would build it. No sales team, no autoresponder.`,
   },
   {
     title: 'A short call',
@@ -70,32 +81,65 @@ const footerServices = [
 ---
 
 <Layout metadata={metadata}>
-  <BasaltHeader slot="header" items={navItems} cta={{ text: 'Start a project', href: '#start' }} bookingHref={bookingHref} />
+  <BasaltHeader slot="header" items={navItems} cta={{ text: 'Contact', href: '/contact' }} bookingHref={bookingHref} />
 
-  <div class="bs">
+  <div class="bs contact" id="contact-mode" data-mode="contact">
+    <!-- Pick the experience before first paint, so nothing flashes -->
+    <script is:inline>
+      (function () {
+        if (new URLSearchParams(location.search).get('type') === 'project') {
+          document.getElementById('contact-mode').dataset.mode = 'project';
+          document.title = 'Start a project — CausewaySoft';
+        }
+      })();
+    </script>
+
     <!-- Intro -->
     <section class="intro" aria-labelledby="contact-title">
       <div class="bs-wrap">
         <div class="intro__meta bs-mono">
           <p>Contact · Belfast, Northern Ireland</p>
-          <p>Replies within one business day</p>
+          <p>Replies {responseTime}</p>
         </div>
-        <h1 id="contact-title" class="intro__title bs-display">
-          Tell us what you’re building<span class="intro__stop">.</span>
-        </h1>
-        <p class="intro__lede bs-lede">
-          An idea, a website that isn’t working, or a process that should be automated. Write a few lines and you’ll hear
-          back from Mateusz, the engineer who would build it.
-        </p>
+
+        <div class="only-contact">
+          <h1 id="contact-title" class="intro__title bs-display">
+            Get in touch<span class="intro__stop">.</span>
+          </h1>
+          <p class="intro__lede bs-lede">
+            A question, an idea or a quick hello. Send a message and you’ll hear back from Mateusz, the engineer who would
+            build it.
+          </p>
+          <p class="intro__switch">
+            Starting a new project? <a href="/contact?type=project">Use the project planner <span aria-hidden="true">→</span></a>
+          </p>
+        </div>
+
+        <div class="only-project">
+          <h1 class="intro__title bs-display">
+            Let’s plan your project<span class="intro__stop">.</span>
+          </h1>
+          <p class="intro__lede bs-lede">
+            Four short steps, about two minutes. I’ll read every answer myself and reply with honest next steps.
+          </p>
+          <p class="intro__switch">
+            Just have a question? <a href="/contact">Send a quick message instead <span aria-hidden="true">→</span></a>
+          </p>
+        </div>
       </div>
     </section>
 
-    <!-- Form and other ways to get in touch -->
-    <section class="start" id="start" aria-label="Contact form">
+    <!-- The form for this experience, and other ways to get in touch -->
+    <section class="start" id="start" aria-label="Get in touch">
       <div class="bs-wrap">
         <div class="bs-grid start__grid">
         <div class="start__form">
-          <ContactForm />
+          <div class="only-contact">
+            <ContactForm />
+          </div>
+          <div class="only-project">
+            <ProjectWizard responseTime={responseTime} />
+          </div>
         </div>
 
         <aside class="start__aside" aria-labelledby="other-ways">
@@ -170,6 +214,12 @@ const footerServices = [
 </Layout>
 
 <style>
+  /* One page, two experiences: ?type=project switches data-mode */
+  .contact[data-mode='contact'] .only-project,
+  .contact[data-mode='project'] .only-contact {
+    display: none;
+  }
+
   /* Intro */
   .intro {
     padding-top: clamp(28px, 4.5vw, 56px);
@@ -198,6 +248,24 @@ const footerServices = [
 
   .intro__lede {
     margin-top: clamp(24px, 3vw, 40px);
+  }
+
+  .intro__switch {
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--bs-muted);
+  }
+
+  .intro__switch a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-rule);
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .intro__switch a:hover {
+    text-decoration-color: var(--bs-signal);
   }
 
   /* Form and aside */

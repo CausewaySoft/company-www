@@ -1,0 +1,764 @@
+---
+/**
+ * Project discovery wizard (/contact?type=project).
+ *
+ * Four short steps in one <form>. Hidden steps keep their values, so going
+ * Back preserves everything. On the last step it submits through the site's
+ * shared enquiry path (`sendEnquiry` → /forms/contact.php), the same one the
+ * general contact form uses. contact.php adds the optional project fields to
+ * the email.
+ */
+export interface Props {
+  /** e.g. "within one business day"; keep in line with the real workflow */
+  responseTime: string;
+}
+
+const { responseTime } = Astro.props;
+
+const projectTypes = [
+  { value: 'Business website', desc: 'A site that wins enquiries', key: 'website' },
+  { value: 'Web application', desc: 'Portals, platforms and tools', key: 'web-app' },
+  { value: 'AI-powered solution', desc: 'Automation and assistants', key: 'ai' },
+  { value: 'Browser extension', desc: 'Chrome and Edge add-ons', key: 'extension' },
+  { value: 'Custom software', desc: 'Built around how you work', key: 'custom' },
+  { value: 'Something else', desc: 'Tell me in the next step', key: 'other' },
+  { value: 'Not sure yet', desc: 'We’ll work it out together', key: 'unsure' },
+];
+
+const budgets = ['Under £1,000', '£1,000–£3,000', '£3,000–£5,000', '£5,000–£10,000', '£10,000+', 'Not sure yet'];
+const starts = ['As soon as possible', 'Within 1–3 months', 'Within 3–6 months', 'Just exploring / no fixed timeline'];
+const existing = ['Yes', 'No', 'Not applicable'];
+
+const steps = ['What you’re building', 'Your idea', 'Project details', 'Your details'];
+---
+
+<div class="pw" data-bs-wizard>
+  <form class="pw__form" id="bs-project-form" action="/forms/contact.php" method="post" novalidate data-bs-wizard-form>
+    <input type="hidden" name="enquiry_type" value="Project" />
+    <input type="hidden" name="subject" value="Project enquiry" data-bs-subject />
+
+    <div class="pw__progress">
+      <p class="bs-mono pw__progress-label" aria-live="polite">
+        <span data-bs-progress>Step 1 of {steps.length}</span>
+        <span class="pw__progress-name" data-bs-progress-name>{steps[0]}</span>
+      </p>
+      <ol class="pw__bar" aria-hidden="true">
+        {steps.map((_, i) => <li class:list={['pw__seg', { 'is-current': i === 0 }]} data-bs-seg />)}
+      </ol>
+    </div>
+
+    <!-- Step 1 -->
+    <fieldset class="pw__step" data-bs-step aria-describedby="pw-err-1">
+      <legend class="pw__q bs-display" tabindex="-1">What are you looking to build?</legend>
+      <p class="pw__hint">Choose the closest fit. You can change it later.</p>
+      <div class="pw__cards">
+        {
+          projectTypes.map((t) => (
+            <label class="pw__card">
+              <input type="radio" name="project_type" value={t.value} data-key={t.key} required />
+              <span class="pw__card-body">
+                <span class="pw__card-title">{t.value}</span>
+                <span class="pw__card-desc">{t.desc}</span>
+              </span>
+            </label>
+          ))
+        }
+      </div>
+      <p class="pw__error" id="pw-err-1" role="alert" data-bs-error hidden></p>
+    </fieldset>
+
+    <!-- Step 2 -->
+    <fieldset class="pw__step" data-bs-step hidden>
+      <legend class="pw__q bs-display" tabindex="-1">Tell me a little about your idea.</legend>
+      <label class="pw__hint" for="pw-message">
+        What are you trying to achieve, what problem are you solving, or what would you like to create?
+      </label>
+      <textarea
+        class="pw__input pw__textarea"
+        id="pw-message"
+        name="message"
+        rows="7"
+        required
+        aria-describedby="pw-err-2"
+        data-error="Tell me a little about your idea to continue."></textarea>
+      <p class="pw__error" id="pw-err-2" role="alert" data-bs-error hidden></p>
+    </fieldset>
+
+    <!-- Step 3 -->
+    <fieldset class="pw__step" data-bs-step hidden>
+      <legend class="pw__q bs-display" tabindex="-1">A few project details.</legend>
+      <p class="pw__hint">All optional. Skip anything you’re not sure about.</p>
+
+      <fieldset class="pw__group">
+        <legend class="bs-mono pw__label">Approximate budget</legend>
+        <div class="pw__chips">
+          {
+            budgets.map((b) => (
+              <label class="pw__chip">
+                <input type="radio" name="budget" value={b} />
+                <span>{b}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="pw__group">
+        <legend class="bs-mono pw__label">When are you looking to start?</legend>
+        <div class="pw__chips">
+          {
+            starts.map((s) => (
+              <label class="pw__chip">
+                <input type="radio" name="start" value={s} />
+                <span>{s}</span>
+              </label>
+            ))
+          }
+        </div>
+      </fieldset>
+
+      <fieldset class="pw__group">
+        <legend class="bs-mono pw__label">Do you already have a website or application?</legend>
+        <div class="pw__chips">
+          {
+            existing.map((e) => (
+              <label class="pw__chip">
+                <input type="radio" name="has_existing" value={e} data-bs-existing />
+                <span>{e}</span>
+              </label>
+            ))
+          }
+        </div>
+        <div class="pw__field pw__url" data-bs-url hidden>
+          <label class="bs-mono pw__label" for="pw-url">Its address (optional)</label>
+          <input
+            class="pw__input"
+            id="pw-url"
+            name="existing_url"
+            type="text"
+            inputmode="url"
+            autocomplete="url"
+            placeholder="example.com"
+            disabled
+          />
+        </div>
+      </fieldset>
+    </fieldset>
+
+    <!-- Step 4 -->
+    <fieldset class="pw__step" data-bs-step hidden>
+      <legend class="pw__q bs-display" tabindex="-1">Your details.</legend>
+      <p class="pw__hint">So I know who to reply to.</p>
+      <div class="pw__row">
+        <div class="pw__field">
+          <label class="bs-mono pw__label" for="pw-name">Name</label>
+          <input
+            class="pw__input"
+            id="pw-name"
+            name="name"
+            type="text"
+            autocomplete="name"
+            required
+            aria-describedby="pw-err-4"
+            data-error="Please add your name."
+          />
+        </div>
+        <div class="pw__field">
+          <label class="bs-mono pw__label" for="pw-email">Email</label>
+          <input
+            class="pw__input"
+            id="pw-email"
+            name="email"
+            type="email"
+            autocomplete="email"
+            required
+            aria-describedby="pw-err-4"
+            data-error="Please enter a valid email address."
+          />
+        </div>
+      </div>
+      <div class="pw__field">
+        <label class="bs-mono pw__label" for="pw-company">Company / organisation (optional)</label>
+        <input class="pw__input" id="pw-company" name="company" type="text" autocomplete="organization" />
+      </div>
+      <p class="pw__privacy">
+        Your details are only used to reply to this enquiry. See our <a href="/privacy">privacy policy</a>.
+      </p>
+      <p class="pw__error" id="pw-err-4" role="alert" data-bs-error hidden></p>
+    </fieldset>
+
+    <div class="pw__nav">
+      <button type="submit" class="bs-btn" data-bs-next>
+        <span data-bs-next-text>Continue</span> <span class="bs-arrow" aria-hidden="true">→</span>
+      </button>
+      <button type="button" class="pw__back" data-bs-back hidden>← Back</button>
+    </div>
+
+    <p class="pw__error pw__send-error" role="alert" data-bs-send-error hidden>
+      Something went wrong sending your enquiry. Your answers are still here, so please try again, or email
+      <a class="emailLink" href="mailto:">our studio address</a>.
+    </p>
+  </form>
+
+  <div class="pw__done" data-bs-done hidden tabindex="-1">
+    <p class="bs-mono pw__done-label">Enquiry received</p>
+    <p class="pw__done-title bs-display">Thanks! Your project enquiry has been received.</p>
+    <p class="pw__done-text">I’ll personally review your requirements and get back to you {responseTime}.</p>
+  </div>
+</div>
+
+<style>
+  .pw__form {
+    display: grid;
+    gap: 32px;
+  }
+
+  .pw__form[hidden] {
+    display: none;
+  }
+
+  /* Progress */
+  .pw__progress-label {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 16px;
+    margin-bottom: 12px;
+  }
+
+  .pw__progress-label [data-bs-progress] {
+    color: var(--bs-ink);
+  }
+
+  .pw__bar {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 6px;
+  }
+
+  .pw__seg {
+    height: 3px;
+    background: var(--bs-rule);
+    transition: background-color 0.4s var(--bs-ease);
+  }
+
+  .pw__seg.is-done {
+    background: var(--bs-ink);
+  }
+
+  .pw__seg.is-current {
+    background: var(--bs-signal);
+  }
+
+  /* Steps */
+  .pw__step {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+
+  .pw__step[hidden] {
+    display: none;
+  }
+
+  .pw__step.is-entering {
+    animation: pw-in 0.35s var(--bs-ease) both;
+  }
+
+  @keyframes pw-in {
+    from {
+      opacity: 0;
+      transform: translateY(8px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .pw__q {
+    padding: 0;
+    font-size: clamp(32px, 3.4vw, 48px);
+    line-height: 1;
+  }
+
+  .pw__q:focus {
+    outline: none;
+  }
+
+  .pw__hint {
+    display: block;
+    margin-top: 12px;
+    margin-bottom: 28px;
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--bs-muted);
+    max-width: 36em;
+  }
+
+  /* Project type cards */
+  .pw__cards {
+    display: grid;
+    gap: 10px;
+  }
+
+  .pw__card input,
+  .pw__chip input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  .pw__card-body {
+    position: relative;
+    display: grid;
+    gap: 4px;
+    height: 100%;
+    padding: 18px 44px 18px 18px;
+    border: 1px solid var(--bs-rule);
+    cursor: pointer;
+    transition:
+      border-color 0.2s var(--bs-ease),
+      background-color 0.2s var(--bs-ease);
+  }
+
+  /* Square marker: empty, then filled signal when chosen */
+  .pw__card-body::after {
+    content: '';
+    position: absolute;
+    top: 20px;
+    right: 18px;
+    width: 12px;
+    height: 12px;
+    border: 1px solid var(--bs-rule);
+    transition:
+      background-color 0.2s var(--bs-ease),
+      border-color 0.2s var(--bs-ease);
+  }
+
+  .pw__card-title {
+    font-family: var(--bs-font-display);
+    font-stretch: 75%;
+    font-weight: 760;
+    font-size: 24px;
+    line-height: 1.05;
+    color: var(--bs-ink);
+  }
+
+  .pw__card-desc {
+    font-size: 14px;
+    color: var(--bs-muted);
+  }
+
+  .pw__card:hover .pw__card-body {
+    border-color: var(--bs-ink);
+  }
+
+  .pw__card input:checked + .pw__card-body {
+    border-color: var(--bs-ink);
+    background: var(--bs-surface);
+  }
+
+  .pw__card input:checked + .pw__card-body::after {
+    background: var(--bs-signal);
+    border-color: var(--bs-signal);
+  }
+
+  .pw__card input:focus-visible + .pw__card-body,
+  .pw__chip input:focus-visible + span {
+    outline: 2px solid var(--bs-signal);
+    outline-offset: 2px;
+  }
+
+  /* Step 3 groups and chips */
+  .pw__group {
+    border: 0;
+    padding: 0;
+    margin: 0 0 28px;
+    min-width: 0;
+  }
+
+  .pw__label {
+    display: block;
+    padding: 0;
+    margin-bottom: 10px;
+  }
+
+  .pw__chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .pw__chip span {
+    display: inline-block;
+    padding: 9px 14px;
+    border: 1px solid var(--bs-rule);
+    font-size: 15px;
+    color: var(--bs-text);
+    cursor: pointer;
+    transition:
+      border-color 0.2s var(--bs-ease),
+      background-color 0.2s var(--bs-ease),
+      color 0.2s var(--bs-ease);
+  }
+
+  .pw__chip:hover span {
+    border-color: var(--bs-ink);
+    color: var(--bs-ink);
+  }
+
+  .pw__chip input:checked + span {
+    background: var(--bs-ink);
+    border-color: var(--bs-ink);
+    color: var(--bs-bg);
+  }
+
+  .pw__url {
+    margin-top: 20px;
+    max-width: 28rem;
+  }
+
+  .pw__url[hidden] {
+    display: none;
+  }
+
+  /* Text fields: underline only, like the contact form */
+  .pw__row {
+    display: grid;
+    gap: 28px;
+    margin-bottom: 28px;
+  }
+
+  .pw__input {
+    display: block;
+    width: 100%;
+    padding: 10px 0 12px;
+    border: 0;
+    border-bottom: 1px solid var(--bs-rule);
+    border-radius: 0;
+    background: transparent;
+    color: var(--bs-ink);
+    font: inherit;
+    font-size: 18px;
+    line-height: 1.5;
+    transition: border-color 0.2s var(--bs-ease);
+  }
+
+  .pw__textarea {
+    resize: vertical;
+    min-height: 10em;
+  }
+
+  .pw__input::placeholder {
+    color: var(--bs-muted);
+  }
+
+  .pw__input:focus {
+    outline: none;
+    border-bottom-color: var(--bs-signal);
+  }
+
+  .pw__input[aria-invalid='true'] {
+    border-bottom-color: var(--bs-signal);
+  }
+
+  .pw__privacy {
+    margin-top: 24px;
+    font-size: 14px;
+    color: var(--bs-muted);
+  }
+
+  .pw__privacy a,
+  .pw__error a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-signal);
+    text-underline-offset: 0.3em;
+  }
+
+  /* Errors */
+  .pw__error {
+    margin-top: 16px;
+    padding-left: 12px;
+    border-left: 2px solid var(--bs-signal);
+    font-size: 15px;
+    line-height: 1.5;
+    color: var(--bs-ink);
+  }
+
+  .pw__error[hidden] {
+    display: none;
+  }
+
+  .pw__send-error {
+    margin-top: 0;
+  }
+
+  /* Navigation */
+  .pw__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+    padding-top: 24px;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .pw__nav .bs-btn[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .pw__back {
+    font-family: var(--bs-font-mono);
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--bs-muted);
+    transition: color 0.2s;
+  }
+
+  .pw__back:hover {
+    color: var(--bs-ink);
+  }
+
+  .pw__back[hidden] {
+    display: none;
+  }
+
+  .pw :focus-visible {
+    outline: 2px solid var(--bs-signal);
+    outline-offset: 3px;
+  }
+
+  /* Done */
+  .pw__done {
+    padding-top: 24px;
+    border-top: 2px solid var(--bs-ink);
+  }
+
+  .pw__done[hidden] {
+    display: none;
+  }
+
+  .pw__done:focus {
+    outline: none;
+  }
+
+  .pw__done-title {
+    margin-top: 16px;
+    font-size: clamp(32px, 3.4vw, 48px);
+    line-height: 1;
+  }
+
+  .pw__done-text {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 34em;
+  }
+
+  @media (min-width: 640px) {
+    .pw__cards {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    /* An odd last card spans the row */
+    .pw__card:last-child:nth-child(odd) {
+      grid-column: 1 / -1;
+    }
+
+    .pw__row {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .pw__step.is-entering {
+      animation: none;
+    }
+  }
+</style>
+
+<script>
+  import { sendEnquiry } from './enquiry';
+
+  // Service keys accepted in ?service= to preselect step 1
+  const SERVICE_ALIASES: Record<string, string> = {
+    website: 'website',
+    websites: 'website',
+    'web-app': 'web-app',
+    'web-application': 'web-app',
+    'web-applications': 'web-app',
+    ai: 'ai',
+    extension: 'extension',
+    'chrome-extension': 'extension',
+    custom: 'custom',
+  };
+
+  function initWizard() {
+    const root = document.querySelector<HTMLElement>('[data-bs-wizard]');
+    const form = root?.querySelector<HTMLFormElement>('[data-bs-wizard-form]');
+    if (!root || !form || form.dataset.ready) return;
+    form.dataset.ready = 'true';
+
+    const steps = [...form.querySelectorAll<HTMLFieldSetElement>('[data-bs-step]')];
+    const segs = [...form.querySelectorAll<HTMLElement>('[data-bs-seg]')];
+    const names = ['What you’re building', 'Your idea', 'Project details', 'Your details'];
+    const progress = form.querySelector<HTMLElement>('[data-bs-progress]')!;
+    const progressName = form.querySelector<HTMLElement>('[data-bs-progress-name]')!;
+    const next = form.querySelector<HTMLButtonElement>('[data-bs-next]')!;
+    const nextText = form.querySelector<HTMLElement>('[data-bs-next-text]')!;
+    const back = form.querySelector<HTMLButtonElement>('[data-bs-back]')!;
+    const sendError = form.querySelector<HTMLElement>('[data-bs-send-error]')!;
+    const subject = form.querySelector<HTMLInputElement>('[data-bs-subject]')!;
+    const urlWrap = form.querySelector<HTMLElement>('[data-bs-url]')!;
+    const urlInput = urlWrap.querySelector<HTMLInputElement>('input')!;
+    const done = root.querySelector<HTMLElement>('[data-bs-done]')!;
+    const last = steps.length - 1;
+
+    let current = 0;
+    let busy = false;
+
+    const show = (index: number, focus = true) => {
+      current = index;
+      steps.forEach((step, i) => {
+        step.hidden = i !== index;
+        step.classList.toggle('is-entering', i === index);
+      });
+      segs.forEach((seg, i) => {
+        seg.classList.toggle('is-done', i < index);
+        seg.classList.toggle('is-current', i === index);
+      });
+      progress.textContent = `Step ${index + 1} of ${steps.length}`;
+      progressName.textContent = names[index] ?? '';
+      back.hidden = index === 0;
+      nextText.textContent = index === last ? 'Send enquiry' : 'Continue';
+      sendError.hidden = true;
+      if (focus) steps[index].querySelector<HTMLElement>('legend')?.focus();
+    };
+
+    const clearErrors = (step: HTMLElement) => {
+      step.querySelectorAll<HTMLElement>('[data-bs-error]').forEach((e) => (e.hidden = true));
+      step.querySelectorAll('[aria-invalid]').forEach((e) => e.removeAttribute('aria-invalid'));
+    };
+
+    const requiredIn = (index: number) => {
+      const fields = [...steps[index].querySelectorAll<HTMLInputElement | HTMLTextAreaElement>('[required]')];
+      const radios = fields.filter((el) => el.type === 'radio') as HTMLInputElement[];
+      const radioMissing = radios.length > 0 && !radios.some((r) => r.checked);
+      const invalid = fields.filter((el) => el.type !== 'radio' && (!el.value.trim() || !el.checkValidity()));
+      return { radios, radioMissing, invalid };
+    };
+
+    const isStepValid = (index: number) => {
+      const { radioMissing, invalid } = requiredIn(index);
+      return !radioMissing && invalid.length === 0;
+    };
+
+    // Shows the step's errors; returns true when its required fields are filled in
+    const validate = (index: number): boolean => {
+      const step = steps[index];
+      clearErrors(step);
+      const error = step.querySelector<HTMLElement>('[data-bs-error]');
+      const { radios, radioMissing, invalid } = requiredIn(index);
+
+      if (radioMissing) {
+        if (error) {
+          error.textContent = 'Choose what you’re looking to build to continue.';
+          error.hidden = false;
+        }
+        radios[0].focus();
+        return false;
+      }
+
+      if (invalid.length) {
+        invalid.forEach((el) => el.setAttribute('aria-invalid', 'true'));
+        if (error) {
+          error.textContent = invalid.map((el) => el.dataset.error).filter(Boolean).join(' ');
+          error.hidden = false;
+        }
+        invalid[0].focus();
+        return false;
+      }
+      return true;
+    };
+
+    // Clear a step's error as soon as the user fixes things
+    form.addEventListener('input', (event) => {
+      const step = (event.target as HTMLElement).closest<HTMLElement>('[data-bs-step]');
+      if (step) clearErrors(step);
+    });
+
+    // Reveal the URL field only when they already have a site or app
+    form.addEventListener('change', (event) => {
+      const target = event.target as HTMLInputElement;
+      if (target.name === 'has_existing') {
+        const yes = target.value === 'Yes';
+        urlWrap.hidden = !yes;
+        urlInput.disabled = !yes; // disabled fields aren't submitted
+      }
+    });
+
+    back.addEventListener('click', () => {
+      if (current > 0) show(current - 1);
+    });
+
+    // Enter / Continue / Send all arrive here
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (busy) return;
+
+      if (current < last) {
+        if (validate(current)) show(current + 1);
+        return;
+      }
+
+      // Final step: re-check every step and jump back to the first gap
+      const firstGap = steps.findIndex((_, i) => !isStepValid(i));
+      if (firstGap !== -1) {
+        if (firstGap !== current) show(firstGap, false);
+        validate(firstGap);
+        return;
+      }
+
+      const type = form.querySelector<HTMLInputElement>('input[name="project_type"]:checked')?.value;
+      subject.value = type ? `Project enquiry: ${type}` : 'Project enquiry';
+
+      busy = true;
+      next.disabled = true;
+      back.disabled = true;
+      nextText.textContent = 'Sending…';
+      sendError.hidden = true;
+
+      try {
+        await sendEnquiry(form);
+        form.hidden = true;
+        done.hidden = false;
+        done.focus();
+      } catch (error) {
+        console.error('Project enquiry error:', error);
+        sendError.hidden = false;
+      } finally {
+        busy = false;
+        next.disabled = false;
+        back.disabled = false;
+        if (!form.hidden) nextText.textContent = 'Send enquiry';
+      }
+    });
+
+    // Optional preselect from service pages: /contact?type=project&service=website
+    const service = SERVICE_ALIASES[new URLSearchParams(location.search).get('service') ?? ''];
+    if (service) {
+      const option = form.querySelector<HTMLInputElement>(`input[name="project_type"][data-key="${service}"]`);
+      if (option) option.checked = true;
+    }
+
+    show(0, false);
+  }
+
+  document.addEventListener('astro:page-load', initWizard);
+</script>

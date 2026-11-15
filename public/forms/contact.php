@@ -47,6 +47,26 @@ $contact->subject    = $subject;
 
 $contact->add_message($name,    'From');
 $contact->add_message($email,   'Email');
+
+// Optional fields sent by the project enquiry wizard (/contact?type=project).
+// General contact forms don't send these, so their emails are unchanged.
+$optional_fields = [
+  'enquiry_type' => 'Enquiry type',
+  'company'      => 'Company / organisation',
+  'project_type' => 'Looking to build',
+  'budget'       => 'Approximate budget',
+  'start'        => 'Looking to start',
+  'has_existing' => 'Existing website or app',
+  'existing_url' => 'Existing URL',
+];
+
+foreach ($optional_fields as $field => $label) {
+  $value = isset($_POST[$field]) ? sanitize_input($_POST[$field]) : '';
+  if ($value !== '') {
+    $contact->add_message($value, $label);
+  }
+}
+
 $contact->add_message($message, 'Message', 10);
 
 // Send and respond with JSON
