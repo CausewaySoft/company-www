@@ -60,9 +60,17 @@ const { services: _services } = Astro.props;
       />
     </div>
     <figcaption class="bs-wrap bs-mono">
-      <span class="hero__fig">Fig. 01</span>
+      <span>Fig. 01</span>
       <span>Giant’s Causeway, Co. Antrim<span class="hero__caption-detail"> · charcoal study</span></span>
-      <span class="hero__coords">55.2408° N, 6.5116° W</span>
+      <a
+        class="hero__coords"
+        href="https://www.google.com/maps?q=55.2408,-6.5116"
+        target="_blank"
+        rel="noopener"
+        aria-label="55.2408° N, 6.5116° W: the Giant’s Causeway on Google Maps (opens in a new tab)"
+      >
+        55.2408° N, 6.5116° W
+      </a>
     </figcaption>
 </figure>
 
@@ -160,17 +168,29 @@ const { services: _services } = Astro.props;
     display: flex;
     flex-wrap: wrap;
     gap: 4px 20px;
-    margin-top: -12px;
+    margin-top: 12px;
+    /* Decorative: a step quieter than the hero eyebrow */
+    font-size: 11px;
+    color: var(--bs-muted);
     /* Room for the next section's feathered edge, so the caption stays crisp */
     padding-bottom: var(--bs-feather);
   }
 
-  .hero__fig {
-    color: var(--bs-ink);
-  }
-
   .hero__coords {
     margin-left: auto;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.35em;
+    transition:
+      color 0.2s var(--bs-ease),
+      text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .hero__coords:hover,
+  .hero__coords:focus-visible {
+    color: var(--bs-ink);
+    text-decoration-color: var(--bs-signal);
   }
 
   /* Small screens: crop in on the cliff so the drawing still registers,
