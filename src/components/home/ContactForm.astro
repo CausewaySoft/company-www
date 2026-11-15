@@ -1,0 +1,215 @@
+---
+/**
+ * Basalt contact form.
+ *
+ * Posts to /forms/contact.php (fields: name, email, subject, message;
+ * name/email/message are required server-side; the reply is JSON).
+ * Uses its own id so the legacy #contact-form handler in BasicScripts
+ * doesn't also submit it.
+ */
+---
+
+<form class="cf" id="bs-contact-form" action="/forms/contact.php" method="post" data-bs-contact-form>
+  <!-- Email subject for the studio inbox -->
+  <input type="hidden" name="subject" value="New enquiry from causewaysoft.com" />
+
+  <div class="cf__row">
+    <div class="cf__field">
+      <label class="bs-mono cf__label" for="cf-name">Your name</label>
+      <input id="cf-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="cf__field">
+      <label class="bs-mono cf__label" for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" autocomplete="email" required />
+    </div>
+  </div>
+
+  <div class="cf__field">
+    <label class="bs-mono cf__label" for="cf-message">Your message</label>
+    <textarea id="cf-message" name="message" rows="6" required></textarea>
+  </div>
+
+  <div class="cf__submit">
+    <button class="bs-btn" type="submit" data-label="Send message">
+      <span data-bs-btn-text>Send message</span> <span class="bs-arrow" aria-hidden="true">→</span>
+    </button>
+    <p class="cf__note">
+      We only use your details to reply. See our <a href="/privacy">privacy policy</a>.
+    </p>
+  </div>
+
+  <div class="cf__status" role="status" aria-live="polite">
+    <p class="cf__msg cf__msg--ok" hidden data-bs-ok>
+      <span class="bs-mono">Sent</span>
+      <span>Thank you. Your message is on its way, and you'll hear back within one business day.</span>
+    </p>
+    <p class="cf__msg cf__msg--err" hidden data-bs-err>
+      <span class="bs-mono">Not sent</span>
+      <span>
+        Something went wrong sending your message. Please try again, or email us directly at
+        <a class="emailLink" href="mailto:">our studio address</a>.
+      </span>
+    </p>
+  </div>
+</form>
+
+<style>
+  .cf {
+    display: grid;
+    gap: 36px;
+  }
+
+  .cf__label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  /* Fields: underline only */
+  .cf__row {
+    display: grid;
+    gap: 36px;
+  }
+
+  .cf__field input,
+  .cf__field textarea {
+    display: block;
+    width: 100%;
+    padding: 10px 0 12px;
+    border: 0;
+    border-bottom: 1px solid var(--bs-rule);
+    border-radius: 0;
+    background: transparent;
+    color: var(--bs-ink);
+    font: inherit;
+    font-size: 18px;
+    line-height: 1.5;
+    transition: border-color 0.2s var(--bs-ease);
+  }
+
+  .cf__field textarea {
+    resize: vertical;
+    min-height: 9em;
+  }
+
+  .cf__field input:focus,
+  .cf__field textarea:focus {
+    outline: none;
+    border-bottom-color: var(--bs-signal);
+  }
+
+  .cf__field input:user-invalid,
+  .cf__field textarea:user-invalid {
+    border-bottom-color: var(--bs-signal);
+  }
+
+  .cf__submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+  }
+
+  .cf__submit .bs-btn[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .cf__note {
+    font-size: 14px;
+    color: var(--bs-muted);
+  }
+
+  .cf__note a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-rule);
+    text-underline-offset: 0.3em;
+  }
+
+  .cf__note a:hover {
+    text-decoration-color: var(--bs-signal);
+  }
+
+  /* Status messages */
+  .cf__msg {
+    display: grid;
+    gap: 6px;
+    padding: 16px 0 0;
+    border-top: 2px solid var(--bs-ink);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--bs-ink);
+  }
+
+  .cf__msg[hidden] {
+    display: none;
+  }
+
+  .cf__msg--err {
+    border-top-color: var(--bs-signal);
+  }
+
+  .cf__msg a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-signal);
+    text-underline-offset: 0.3em;
+  }
+
+  @media (min-width: 640px) {
+    .cf__row {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+</style>
+
+<script>
+  function initContactForm() {
+    const form = document.querySelector<HTMLFormElement>('[data-bs-contact-form]');
+    if (!form || form.dataset.ready) return;
+    form.dataset.ready = 'true';
+
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const buttonText = form.querySelector<HTMLElement>('[data-bs-btn-text]');
+    const ok = form.querySelector<HTMLElement>('[data-bs-ok]');
+    const err = form.querySelector<HTMLElement>('[data-bs-err]');
+
+    const setSending = (sending: boolean) => {
+      if (!button || !buttonText) return;
+      button.disabled = sending;
+      buttonText.textContent = sending ? 'Sending…' : (button.dataset.label ?? 'Send message');
+    };
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (!form.reportValidity()) return;
+
+      if (ok) ok.hidden = true;
+      if (err) err.hidden = true;
+      setSending(true);
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          headers: { 'X-Requested-With': 'XMLHttpRequest' },
+          body: new FormData(form),
+        });
+        if (!response.ok) throw new Error(`HTTP ${response.status}`);
+        // contact.php replies with JSON; anything else (e.g. the raw PHP file
+        // served by a dev server) means the message was not sent
+        const result = await response.json().catch(() => null);
+        if (result?.status !== 'success') throw new Error(result?.message ?? 'Unexpected response');
+        form.reset();
+        if (ok) ok.hidden = false;
+      } catch (error) {
+        console.error('Contact form error:', error);
+        if (err) err.hidden = false;
+      } finally {
+        setSending(false);
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initContactForm);
+</script>
