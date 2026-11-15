@@ -57,7 +57,6 @@ const services = [
 const bookingHref = 'https://calendly.com/causewaysoft';
 
 const navItems = [
-  { text: 'Work', href: '#work', section: 'work' },
   {
     text: 'Services',
     href: '#services',
@@ -69,8 +68,9 @@ const navItems = [
       { text: 'All services', href: '/services' },
     ],
   },
-  { text: 'Process', href: '#our-process', section: 'our-process' },
+  { text: 'Work', href: '#work', section: 'work' },
   { text: 'About', href: '#about', section: 'about' },
+  { text: 'Process', href: '#our-process', section: 'our-process' },
 ];
 
 const footerLinks = [
@@ -79,18 +79,8 @@ const footerLinks = [
   { text: 'Terms', href: '/terms' },
 ];
 
+// Client work first: the most relevant proof for most buyers
 const projects = [
-  {
-    title: 'BibleQuest',
-    kind: 'Progressive web app',
-    description:
-      'Offline-first progressive web app for exploring Scripture, memorising Bible verses and tracking learning progress.',
-    outcome: 'Fully functional with no internet connection.',
-    tags: ['PWA', 'Desktop', 'Mobile', 'Offline-first'],
-    href: 'https://biblequest.causewaysoft.com/',
-    linkLabel: 'Open the app',
-    image: { src: portfolioImg_BibleQuest, alt: 'Three iPhones showing the BibleQuest app' },
-  },
   {
     title: 'Causeway Renovations',
     kind: 'Business website',
@@ -103,6 +93,17 @@ const projects = [
       src: portfolioImg_Renovations,
       alt: 'The Causeway Renovations website on an iPhone and a MacBook',
     },
+  },
+  {
+    title: 'BibleQuest',
+    kind: 'Progressive web app',
+    description:
+      'Offline-first progressive web app for exploring Scripture, memorising Bible verses and tracking learning progress.',
+    outcome: 'Fully functional with no internet connection.',
+    tags: ['PWA', 'Desktop', 'Mobile', 'Offline-first'],
+    href: 'https://biblequest.causewaysoft.com/',
+    linkLabel: 'Open the app',
+    image: { src: portfolioImg_BibleQuest, alt: 'Three iPhones showing the BibleQuest app' },
   },
 ];
 
@@ -155,10 +156,10 @@ const founder = {
   />
   <div class="bs">
     <HomeHero services={services.map(({ title, href }) => ({ title, href }))} />
-    <WorkIndex projects={projects} />
     <ServiceIndex services={services} />
-    <ColumnSteps steps={steps} />
+    <WorkIndex projects={projects} />
     <Founder {...founder} />
+    <ColumnSteps steps={steps} />
     <ClosingCta bookingHref={bookingHref} />
   </div>
   <BasaltFooter slot="footer" links={footerLinks} />
