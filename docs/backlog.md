@@ -5,6 +5,60 @@ but not scheduled. Newest first.
 
 ---
 
+## Guides section
+
+**Status:** Agreed in the site structure, not started; setup undecided
+**Area:** New `/guides` section; links from the service pages and nav
+**Added:** 2026-11-15
+**Related:** `docs/services-restructure-plan.md` (site structure)
+
+### The idea
+
+Educational guides that capture search demand for broad and trendy topics
+without pretending to be services. Each one links into the relevant section of
+the two service pages. They're the honest home for subjects like AI and
+"digital transformation", which were previously posing as services.
+
+### The four guides
+
+- **AI for Small Businesses:** what's realistic, rough costs, where to start.
+  Links to `/services/websites#ai` and `/services/web-applications#ai`.
+- **Web Apps vs Websites:** helps unsure visitors choose. Links to both service
+  pages; `/services` and the wizard's "Not sure yet" can point here.
+- **Progressive Web Apps:** "do you need the App Store?" Links to
+  `/services/web-applications#pwa`.
+- **Business Automation:** what to automate first. Fold in the Northern
+  Ireland digital transformation grants here (schemes fund exactly this work),
+  building on the existing grants landing page and the "up to £20,000" blog
+  post.
+
+### Open question: how to set it up
+
+- **Option A, a separate `guides` content collection:** its own URL structure
+  (`/guides/<slug>`), its own fields (e.g. related service section, reading
+  time), and a clean separation from news-style blog posts.
+- **Option B, a "guide" category in the existing blog:** less setup and reuses
+  the blog templates as they are, but guides end up under blog URLs and mixed
+  in with posts.
+
+Either way guides are written in Markdown, not hand-built pages, and the index
+and article templates get the Basalt design. Leaning towards A, because guides
+are evergreen reference material and blog posts are dated news; decide when
+this is picked up.
+
+### To do when this is picked up
+
+- [ ] Decide option A or B.
+- [ ] Build the `/guides` index (title, one-line summary, reading time) and the
+      article template in the Basalt style.
+- [ ] Write and publish the guides one at a time; well-written beats all four
+      at once.
+- [ ] When the first guide is live: add **Guides** to the header nav as 04
+      (`src/components/home/nav.ts` and `src/pages/index.astro`), and link it
+      from `/services` and the related service sections.
+
+---
+
 ## "Free website check": a possible lead-generating product
 
 **Status:** Idea, undecided whether it's worth doing
