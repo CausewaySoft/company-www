@@ -1,0 +1,228 @@
+---
+/**
+ * Website self-check: visitors tick the problems that sound familiar and a
+ * counter responds. Native checkboxes, so it works with keyboard and screen
+ * readers; without JS it's simply a checklist.
+ */
+export interface Props {
+  intro: string;
+  items: string[];
+  reviewHref: string;
+  projectHref: string;
+}
+
+const { intro, items, reviewHref, projectHref } = Astro.props;
+const total = items.length;
+---
+
+<div class="audit bs-grid" data-bs-audit data-total={total}>
+  <fieldset class="audit__checks">
+    <legend class="bs-mono audit__intro">{intro}</legend>
+    <ul class="audit__list">
+      {
+        items.map((item, i) => (
+          <li>
+            <label class="audit__row">
+              <input type="checkbox" />
+              <span class="audit__box" aria-hidden="true" />
+              <span class="bs-mono audit__num">{String(i + 1).padStart(2, '0')}</span>
+              <span class="audit__text">{item}</span>
+            </label>
+          </li>
+        ))
+      }
+    </ul>
+  </fieldset>
+
+  <div class="audit__result">
+    <p class="audit__score bs-display" aria-hidden="true">
+      <span data-bs-score>0</span><span class="audit__of">/{total}</span>
+    </p>
+    <p class="audit__msg" aria-live="polite" data-bs-msg>Tick any that sound familiar.</p>
+    <div class="audit__actions" data-bs-actions hidden>
+      <a class="bs-btn" href={reviewHref} target="_blank" rel="noopener">
+        Book a free review call <span class="bs-arrow" aria-hidden="true">↗</span>
+        <span class="sr-only">(opens in a new tab)</span>
+      </a>
+      <a class="bs-link" href={projectHref}>Start a website project</a>
+    </div>
+  </div>
+</div>
+
+<style>
+  .audit {
+    row-gap: 40px;
+    align-items: start;
+  }
+
+  .audit__checks,
+  .audit__result {
+    grid-column: 1 / -1;
+  }
+
+  .audit__checks {
+    border: 0;
+    padding: 0;
+    margin: 0;
+    min-width: 0;
+  }
+
+  .audit__intro {
+    padding: 0;
+    margin-bottom: 12px;
+  }
+
+  .audit__list {
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .audit__row {
+    display: grid;
+    grid-template-columns: 22px 2.5rem 1fr;
+    align-items: baseline;
+    gap: 14px;
+    padding-block: 16px;
+    border-bottom: 1px solid var(--bs-rule);
+    cursor: pointer;
+    transition: background-color 0.2s var(--bs-ease);
+  }
+
+  .audit__row input {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  /* Square box that fills with signal orange when ticked */
+  .audit__box {
+    position: relative;
+    top: 3px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid var(--bs-muted);
+    transition:
+      background-color 0.2s var(--bs-ease),
+      border-color 0.2s var(--bs-ease);
+  }
+
+  .audit__box::after {
+    content: '';
+    position: absolute;
+    left: 5px;
+    top: 1px;
+    width: 5px;
+    height: 10px;
+    border: solid var(--bs-signal-ink);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+  }
+
+  .audit__row input:checked ~ .audit__box {
+    background: var(--bs-signal);
+    border-color: var(--bs-signal);
+  }
+
+  .audit__row input:checked ~ .audit__box::after {
+    opacity: 1;
+  }
+
+  .audit__row input:focus-visible ~ .audit__box {
+    outline: 2px solid var(--bs-signal);
+    outline-offset: 3px;
+  }
+
+  .audit__row:hover .audit__box {
+    border-color: var(--bs-ink);
+  }
+
+  .audit__text {
+    font-size: clamp(18px, 1.6vw, 22px);
+    line-height: 1.35;
+    color: var(--bs-text);
+    transition: color 0.2s var(--bs-ease);
+  }
+
+  .audit__row input:checked ~ .audit__text {
+    color: var(--bs-ink);
+  }
+
+  /* Result */
+  .audit__score {
+    font-size: clamp(72px, 9vw, 132px);
+    line-height: 0.85;
+    font-weight: 800;
+    font-stretch: 68%;
+  }
+
+  .audit__of {
+    color: var(--bs-muted);
+  }
+
+  .audit__msg {
+    margin-top: 16px;
+    font-size: 17px;
+    line-height: 1.55;
+    max-width: 26em;
+    min-height: 3.2em;
+  }
+
+  .audit__actions {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+  }
+
+  .audit__actions[hidden] {
+    display: none;
+  }
+
+  @media (min-width: 900px) {
+    .audit__checks {
+      grid-column: 1 / span 7;
+    }
+
+    .audit__result {
+      grid-column: 9 / -1;
+      position: sticky;
+      top: 120px;
+    }
+  }
+</style>
+
+<script>
+  const MESSAGES: [number, string][] = [
+    [0, 'Tick any that sound familiar.'],
+    [1, 'A fixable leak. Small, targeted changes here can bring in noticeably more enquiries.'],
+    [3, 'Your website is probably costing you enquiries. The good news: every one of these can be fixed.'],
+    [5, 'Your website is working against you. It may be time to rebuild it properly, around what it needs to achieve.'],
+  ];
+
+  function initAudit() {
+    document.querySelectorAll<HTMLElement>('[data-bs-audit]').forEach((audit) => {
+      if (audit.dataset.ready) return;
+      audit.dataset.ready = 'true';
+
+      const score = audit.querySelector<HTMLElement>('[data-bs-score]')!;
+      const msg = audit.querySelector<HTMLElement>('[data-bs-msg]')!;
+      const actions = audit.querySelector<HTMLElement>('[data-bs-actions]')!;
+      const boxes = [...audit.querySelectorAll<HTMLInputElement>('input[type="checkbox"]')];
+      const total = boxes.length;
+
+      const update = () => {
+        const count = boxes.filter((b) => b.checked).length;
+        score.textContent = String(count);
+        const text = [...MESSAGES].reverse().find(([min]) => count >= min)?.[1] ?? '';
+        msg.textContent = count ? `${count} of ${total}. ${text}` : text;
+        actions.hidden = count === 0;
+      };
+
+      audit.addEventListener('change', update);
+      update();
+    });
+  }
+
+  document.addEventListener('astro:page-load', initAudit);
+</script>
