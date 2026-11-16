@@ -25,8 +25,18 @@ export interface Props {
     </div>
 
     <h1 id="hero-title" class="hero__title bs-display">
-      <!-- To-do: first span should be highlighted to text-select css colour, and also animated: text (in this case: 'Software') is typed with a midly-awkward-fast pacing, also append '...'. then it pauses for x seconds and then typing continues, the text is being delted with a human speed continously hitting the backspace key, then once all cleared, the user starts typing again, but this time another word - chose from this list 'software', 'websites', 'apps', 'e-commerce', 'progressive web-apps'. Also there should be another animation which happens during the 3s pause when the user stoppes typing.    -->
-      <span class="hero__line">Software,</span>
+      <!--
+        First line is "typed": highlighted in the selection colour, then the
+        script types a word plus "...", pauses (caret blinks, dots ripple),
+        backspaces it and types the next. Screen readers and no-JS visitors
+        get the static "Software,".
+      -->
+      <span class="hero__line hero__type" data-hero-type>
+        <span class="sr-only">Software,</span>
+        <span class="hero__typed" aria-hidden="true"
+          ><span class="hero__word">Software,</span><span class="hero__dots"></span></span
+        ><span class="hero__caret" aria-hidden="true"></span>
+      </span>
       <span class="hero__line">built like the</span>
       <span class="hero__line">Giant’s Causeway<span class="hero__stop">.</span></span>
     </h1>
@@ -115,6 +125,79 @@ export interface Props {
 
   .hero__stop {
     color: var(--bs-signal);
+  }
+
+  /* Typed first line: always its own line, never wraps, so the headline
+     never changes height while words come and go */
+  .hero__type {
+    display: block;
+    white-space: nowrap;
+  }
+
+  /* Looks like selected text, in the site's ::selection colours */
+  .hero__typed {
+    background: var(--bs-signal);
+    color: var(--bs-signal-ink);
+    -webkit-box-decoration-break: clone;
+    box-decoration-break: clone;
+  }
+
+  .hero__typed:has(.hero__word:empty):has(.hero__dots:empty) {
+    background: none;
+  }
+
+  /* Caret only once the script runs; solid while typing, blinks when idle */
+  .hero__caret {
+    display: none;
+    width: 0.06em;
+    height: 0.78em;
+    margin-left: 0.05em;
+    background: currentColor;
+    vertical-align: -0.04em;
+  }
+
+  .hero__type[data-state] .hero__caret {
+    display: inline-block;
+  }
+
+  .hero__type[data-state='waiting'] .hero__caret {
+    animation: hero-caret 1s steps(1) infinite;
+  }
+
+  /* The pause: the three dots ripple like someone thinking */
+  .hero__dots span {
+    display: inline-block;
+  }
+
+  .hero__type[data-state='waiting'] .hero__dots span {
+    animation: hero-dot 1.2s var(--bs-ease) infinite;
+  }
+
+  .hero__type[data-state='waiting'] .hero__dots span:nth-child(2) {
+    animation-delay: 0.15s;
+  }
+
+  .hero__type[data-state='waiting'] .hero__dots span:nth-child(3) {
+    animation-delay: 0.3s;
+  }
+
+  @keyframes hero-caret {
+    50% {
+      opacity: 0;
+    }
+  }
+
+  @keyframes hero-dot {
+    0%,
+    60%,
+    100% {
+      opacity: 1;
+      transform: none;
+    }
+    30% {
+      opacity: 0.35;
+      transform: translateY(-0.12em);
+    }
   }
 
   .hero__foot {
@@ -289,4 +372,107 @@ export interface Props {
   }
 
   document.addEventListener('astro:page-load', initHeroGround);
+
+  // Typed first line of the headline. Keeps "Software," on screen at load
+  // (no blank headline), backspaces the comma, types "...", pauses, then
+  // deletes and types the next word, forever. Skips words that won't fit
+  // on one line at the current width. Off for reduced motion.
+  const WORDS = ['Software', 'Websites', 'Apps', 'E-commerce', 'Progressive web-apps'];
+  const PAUSE_MS = 3000;
+
+  function initHeroType() {
+    const root = document.querySelector<HTMLElement>('[data-hero-type]');
+    if (!root || root.dataset.ready) return;
+    root.dataset.ready = 'true';
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+    const word = root.querySelector<HTMLElement>('.hero__word');
+    const dots = root.querySelector<HTMLElement>('.hero__dots');
+    const title = root.closest('h1');
+    if (!word || !dots || !title) return;
+
+    let stopped = false;
+    let timer = 0;
+    document.addEventListener(
+      'astro:before-swap',
+      () => {
+        stopped = true;
+        clearTimeout(timer);
+      },
+      { once: true }
+    );
+
+    const rand = (min: number, max: number) => min + Math.random() * (max - min);
+    const wait = (ms: number) =>
+      new Promise<void>((resolve, reject) => {
+        timer = window.setTimeout(() => (stopped ? reject(new Error('stopped')) : resolve()), ms);
+      });
+
+    // Fast but uneven, with the odd hesitation
+    const keystroke = () => rand(55, 140) + (Math.random() < 0.12 ? rand(180, 380) : 0);
+    // Steady, human backspacing
+    const backstroke = () => rand(70, 105);
+
+    // Hidden copy of the line, to check a word fits before typing it
+    const measure = document.createElement('span');
+    measure.className = 'hero__typed';
+    measure.setAttribute('aria-hidden', 'true');
+    measure.style.cssText = 'position:absolute;visibility:hidden;white-space:nowrap;left:0;top:0';
+    title.style.position = 'relative';
+    title.append(measure);
+    const fits = (w: string) => {
+      measure.textContent = `${w}...`;
+      return measure.getBoundingClientRect().width <= title.clientWidth * 0.96;
+    };
+
+    const typeWord = async (text: string) => {
+      for (const ch of text) {
+        word.textContent += ch;
+        await wait(keystroke());
+      }
+    };
+    const typeDots = async () => {
+      for (let i = 0; i < 3; i++) {
+        const dot = document.createElement('span');
+        dot.textContent = '.';
+        dots.append(dot);
+        await wait(rand(110, 200));
+      }
+    };
+    const backspace = async (chars: number) => {
+      for (let i = 0; i < chars; i++) {
+        if (dots.lastChild) dots.lastChild.remove();
+        else word.textContent = (word.textContent ?? '').slice(0, -1);
+        await wait(backstroke());
+      }
+    };
+    const clearAll = () => backspace(dots.childElementCount + (word.textContent ?? '').length);
+
+    const run = async () => {
+      root.dataset.state = 'typing';
+      let current = 'Software';
+      await wait(900);
+      await backspace(1); // the comma
+      await wait(rand(150, 260));
+
+      for (;;) {
+        await typeDots();
+        root.dataset.state = 'waiting';
+        await wait(PAUSE_MS);
+        root.dataset.state = 'typing';
+        await clearAll();
+        await wait(rand(450, 700));
+
+        const options = WORDS.filter((w) => w !== current && fits(w));
+        current = options[Math.floor(Math.random() * options.length)] ?? 'Software';
+        await typeWord(current);
+      }
+    };
+
+    run().catch(() => {
+      /* stopped on page swap */
+    });
+  }
+
+  document.addEventListener('astro:page-load', initHeroType);
 </script>
