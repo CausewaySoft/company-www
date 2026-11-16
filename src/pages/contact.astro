@@ -96,6 +96,13 @@ const nextSteps = [
           <p class="intro__switch">
             Just have a question? <a href="/contact">Send a quick message instead <span aria-hidden="true">→</span></a>
           </p>
+          <p class="intro__switch">
+            Rather talk it through?
+            <a href={bookingHref} target="_blank" rel="noopener">
+              Book a free 30-minute call <span aria-hidden="true">↗</span>
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          </p>
         </div>
       </div>
     </section>
@@ -113,7 +120,8 @@ const nextSteps = [
           </div>
         </div>
 
-        <aside class="start__aside" aria-labelledby="other-ways">
+        <!-- Contact directory: plain contact journey only; the planner stays focused -->
+        <aside class="start__aside only-contact" aria-labelledby="other-ways">
           <h2 id="other-ways" class="bs-mono start__aside-title">Prefer something else?</h2>
           <dl class="start__spec">
             <div>
@@ -227,7 +235,13 @@ const nextSteps = [
     color: var(--bs-muted);
   }
 
+  .intro__switch + .intro__switch {
+    margin-top: 4px;
+  }
+
   .intro__switch a {
+    /* Wrap as a whole link, never leaving the arrow on its own line */
+    white-space: nowrap;
     color: var(--bs-ink);
     text-decoration: underline;
     text-decoration-color: var(--bs-rule);
