@@ -21,7 +21,14 @@ import ColumnSteps from '~/components/home/ColumnSteps.astro';
 import ClosingCta from '~/components/home/ClosingCta.astro';
 import FaqList from '~/components/home/FaqList.astro';
 import OfferRows from '~/components/home/OfferRows.astro';
-import { bookingHref, reviewCallHref, innerNavItems, footerLinks, serviceLinks, headerCta } from '~/components/home/nav';
+import {
+  bookingHref,
+  reviewCallHref,
+  innerNavItems,
+  footerLinks,
+  serviceLinks,
+  headerCta,
+} from '~/components/home/nav';
 
 import portfolioImg_Renovations from '~/assets/images/portfolio/causewayrenovations-website-laptop-iphone.png';
 
@@ -67,7 +74,8 @@ const outcomes = [
   },
   {
     title: 'Stay fast',
-    description: 'We obsess over performance, so your website loads quickly on phones, desktops and slower connections.',
+    description:
+      'We obsess over performance, so your website loads quickly on phones, desktops and slower connections.',
   },
   {
     title: 'Keep growing',
@@ -226,7 +234,6 @@ const faqs = [
     a: 'You can manage things yourself, ask us to handle updates, or keep working with us as your website evolves.',
   },
 ];
-
 ---
 
 <Layout metadata={metadata}>
@@ -250,7 +257,9 @@ const faqs = [
               slow, outdated, hard to use or simply not bringing in enough business, we’ll find out why and fix it.
             </p>
             <div class="whero__actions">
-              <a class="bs-btn" href={projectHref}>Start a website project <span class="bs-arrow" aria-hidden="true">→</span></a>
+              <a class="bs-btn" href={projectHref}
+                >Start a website project <span class="bs-arrow" aria-hidden="true">→</span></a
+              >
               <a class="bs-link" href="#work">See a recent website</a>
             </div>
           </div>
@@ -350,7 +359,10 @@ const faqs = [
                   href={o.cta.href}
                   {...(o.cta.external ? { target: '_blank', rel: 'noopener' } : {})}
                 >
-                  {o.cta.text} <span class="bs-arrow" aria-hidden="true">{o.cta.external ? '↗' : '→'}</span>
+                  {o.cta.text}{' '}
+                  <span class="bs-arrow" aria-hidden="true">
+                    {o.cta.external ? '↗' : '→'}
+                  </span>
                   {o.cta.external && <span class="sr-only">(opens in a new tab)</span>}
                 </a>
               </li>
@@ -359,7 +371,9 @@ const faqs = [
         </ol>
         <div class="statement" data-reveal>
           <p class="statement__line bs-display">We’re software engineers, not just website builders.</p>
-          <p class="statement__sub">When off-the-shelf solutions aren’t enough, we build exactly what your business needs.</p>
+          <p class="statement__sub">
+            When off-the-shelf solutions aren’t enough, we build exactly what your business needs.
+          </p>
         </div>
       </div>
     </section>
@@ -385,7 +399,12 @@ const faqs = [
     <!-- 07 Why us -->
     <section class="bs-section" id="why" aria-labelledby="why-title">
       <div class="bs-wrap">
-        <SectionHead id="why-title" index="07" label="Why build with us" title="Design with a job. Engineering behind it." />
+        <SectionHead
+          id="why-title"
+          index="07"
+          label="Why build with us"
+          title="Design with a job. Engineering behind it."
+        />
         <ul class="quad section-body">
           {
             reasons.map((r, i) => (

@@ -52,23 +52,23 @@ can link straight to it.
 
 ## URLs and anchors
 
-| Item | URL |
-|---|---|
-| Services (router) | `/services` |
-| Websites | `/services/websites` |
-| ↳ Business websites | `/services/websites#business-websites` |
-| ↳ E-commerce | `/services/websites#ecommerce` |
-| ↳ AI-enhanced websites | `/services/websites#ai` |
-| Web Applications & Custom Software | `/services/web-applications` |
-| ↳ Business applications | `/services/web-applications#business-applications` |
-| ↳ SaaS & MVP development | `/services/web-applications#saas-mvp` |
-| ↳ Progressive Web Apps | `/services/web-applications#pwa` |
-| ↳ AI-powered features | `/services/web-applications#ai` |
-| ↳ Business automation | `/services/web-applications#automation` |
-| Work | `/#work` for now (own page once there are 4+ case studies) |
-| About | `/#about` for now (own page later if needed) |
-| Guides | `/guides` (index) and `/guides/<slug>`: later, see backlog |
-| Contact | `/contact` (and `/contact?type=project`) |
+| Item                               | URL                                                        |
+| ---------------------------------- | ---------------------------------------------------------- |
+| Services (router)                  | `/services`                                                |
+| Websites                           | `/services/websites`                                       |
+| ↳ Business websites                | `/services/websites#business-websites`                     |
+| ↳ E-commerce                       | `/services/websites#ecommerce`                             |
+| ↳ AI-enhanced websites             | `/services/websites#ai`                                    |
+| Web Applications & Custom Software | `/services/web-applications`                               |
+| ↳ Business applications            | `/services/web-applications#business-applications`         |
+| ↳ SaaS & MVP development           | `/services/web-applications#saas-mvp`                      |
+| ↳ Progressive Web Apps             | `/services/web-applications#pwa`                           |
+| ↳ AI-powered features              | `/services/web-applications#ai`                            |
+| ↳ Business automation              | `/services/web-applications#automation`                    |
+| Work                               | `/#work` for now (own page once there are 4+ case studies) |
+| About                              | `/#about` for now (own page later if needed)               |
+| Guides                             | `/guides` (index) and `/guides/<slug>`: later, see backlog |
+| Contact                            | `/contact` (and `/contact?type=project`)                   |
 
 Keeping `/services/web-applications` as the URL is recommended: it's
 established, and the page title can still say "Web Applications & Custom
@@ -95,12 +95,12 @@ Software".
 
 The page must **not** read as an offer only for startups building SaaS products.
 
-| | Entrepreneurs | Established businesses |
-|---|---|---|
-| **Goal** | Build a digital product | Improve how the business operates |
-| **Sections that speak to them** | SaaS & MVP development, Progressive Web Apps | Business applications, Business automation |
-| **Shared** | AI-powered features, PWAs (e.g. a field team app) | |
-| **Proof** | BibleQuest | *(none yet: add a case study when available)* |
+|                                 | Entrepreneurs                                     | Established businesses                        |
+| ------------------------------- | ------------------------------------------------- | --------------------------------------------- |
+| **Goal**                        | Build a digital product                           | Improve how the business operates             |
+| **Sections that speak to them** | SaaS & MVP development, Progressive Web Apps      | Business applications, Business automation    |
+| **Shared**                      | AI-powered features, PWAs (e.g. a field team app) |                                               |
+| **Proof**                       | BibleQuest                                        | _(none yet: add a case study when available)_ |
 
 **Lead line:** "Build a digital product. Improve how your business operates."
 
@@ -119,7 +119,7 @@ patterns).
 
 - **Hero:** "Build a digital product. Improve how your business operates."
   CTA: Start a project → `/contact?type=project&service=web-app`.
-- **01 Two ways in:** *Build a product* | *Improve operations*. Two equal
+- **01 Two ways in:** _Build a product_ | _Improve operations_. Two equal
   columns, each listing its sections as anchor links.
 - **02 Business applications** `#business-applications`: portals, internal
   tools, booking and job systems, replacing spreadsheets, integrations.
@@ -150,6 +150,7 @@ back up.
 ### 2. `/services/websites`: add the three named sections
 
 The page already has a Basalt redesign. Changes:
+
 - Add **Business websites** `#business-websites`, **E-commerce** `#ecommerce`
   and **AI-enhanced websites** `#ai` as named sections. They fit naturally as
   the "what kind of website" layer next to the existing "Three ways in" (fix /
@@ -184,11 +185,13 @@ plan (index page, the four guides, the setup question) lives in
 **Header (Basalt pages), now:** Services ▾ (Websites, Web Applications & Custom
 Software, All services) · Work · About · **Contact** (CTA), numbered 01
 Services, 02 Work, 03 About.
+
 - "Process" leaves the nav (it's still a section on the home page), so the nav
   matches the agreed structure.
 - **When the first guide is published:** add Guides as 04.
 
 **Files:**
+
 - `src/components/home/nav.ts`: `serviceLinks` and `innerNavItems` (contact
   page, Websites page, Basalt footer services row).
 - `src/pages/index.astro`: `navItems` and the "What we build" `services` list.
@@ -204,6 +207,7 @@ the **two services**, each listing its sections. Remove the link to
 ### 7. Project wizard (`src/components/home/ProjectWizard.astro`)
 
 Align step 1 with the structure:
+
 - Business website · E-commerce · Web application / business software ·
   SaaS or MVP · AI-powered solution · Something else · Not sure yet.
 - Remove "Browser extension". Keep "AI-powered solution": it describes what
@@ -213,16 +217,16 @@ Align step 1 with the structure:
 
 ## Retiring pages and redirects
 
-| Old URL | Redirect to |
-|---|---|
-| `/services/progressive-web-apps` | `/services/web-applications#pwa` |
-| `/services/ai-agents-solutions` | `/services/web-applications#ai` |
-| `/services/hybrid-apps` | `/services` |
-| `/services/chrome-extensions` | `/services` |
-| `/services/websites-old` | `/services/websites` |
-| `/solutions` | `/services` |
-| `/solutions/healthcare` | `/services` |
-| `/solutions/professional-services` | `/services` |
+| Old URL                            | Redirect to                      |
+| ---------------------------------- | -------------------------------- |
+| `/services/progressive-web-apps`   | `/services/web-applications#pwa` |
+| `/services/ai-agents-solutions`    | `/services/web-applications#ai`  |
+| `/services/hybrid-apps`            | `/services`                      |
+| `/services/chrome-extensions`      | `/services`                      |
+| `/services/websites-old`           | `/services/websites`             |
+| `/solutions`                       | `/services`                      |
+| `/solutions/healthcare`            | `/services`                      |
+| `/solutions/professional-services` | `/services`                      |
 
 Permanent (301) redirects keep search rankings and backlinks. Note that the
 `#anchor` part is honoured by browsers after the redirect but ignored by search

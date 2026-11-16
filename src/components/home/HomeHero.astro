@@ -10,12 +10,11 @@
 import { Image } from 'astro:assets';
 import causewayDrawing from '~/assets/images/giants-causeway-causewaysoft-herobg.png';
 
+// `services` is still accepted (but not rendered) so the services index can
+// return without touching the page (see git history).
 export interface Props {
   services: { title: string; href: string }[];
 }
-
-// `services` is kept so the services index can return (see git history).
-const { services: _services } = Astro.props;
 ---
 
 <section class="hero" aria-labelledby="hero-title">
@@ -37,7 +36,9 @@ const { services: _services } = Astro.props;
         last.
       </p>
       <div class="hero__actions">
-        <a class="bs-btn" href="/contact?type=project">Start a project <span class="bs-arrow" aria-hidden="true">→</span></a>
+        <a class="bs-btn" href="/contact?type=project"
+          >Start a project <span class="bs-arrow" aria-hidden="true">→</span></a
+        >
         <a class="bs-link" href="#work">See the work</a>
       </div>
     </div>
@@ -50,33 +51,33 @@ const { services: _services } = Astro.props;
 -->
 <figure class="hero__ground" data-hero-ground>
   <div class="hero__drawing">
-      <Image
-        src={causewayDrawing}
-        alt="Charcoal drawing of the basalt columns of the Giant’s Causeway"
-        widths={[768, 1436]}
-        sizes="100vw"
-        loading="eager"
-        fetchpriority="high"
-      />
-    </div>
-    <figcaption class="bs-wrap bs-mono">
-      <span>Fig. 01</span>
-      <span>Giant’s Causeway, Co. Antrim<span class="hero__caption-detail"> · charcoal study</span></span>
-      
-      <!--
+    <Image
+      src={causewayDrawing}
+      alt="Charcoal drawing of the basalt columns of the Giant’s Causeway"
+      widths={[768, 1436]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <figcaption class="bs-wrap bs-mono">
+    <span>Fig. 01</span>
+    <span>Giant’s Causeway, Co. Antrim<span class="hero__caption-detail"> · charcoal study</span></span>
+
+    <!--
       TODO:
       1. can we replace that a.href link to google maps and instead of coordinates use google plus code?: 6FQQ+JR Bushmills -->
 
-      <a
-        class="hero__coords"
-        href="https://www.google.com/maps/place/Giant's+Causeway+Viewpoint/@55.2408,-6.5141749,1156m/data=!3m1!1e3!4m12!1m5!3m4!2zNTXCsDE0JzI2LjkiTiA2wrAzMCc0MS44Ilc!8m2!3d55.2408056!4d-6.5116111!3m5!1s0x4860299016f13455:0xbe35bf015dee5303!8m2!3d55.2391073!4d-6.5104552!16s%2Fg%2F11l5h7vsls"
-        target="_blank"
-        rel="noopener"
-        aria-label="55.2408° N, 6.5116° W: the Giant’s Causeway on Google Maps (opens in a new tab)"
-      >
-        55.2408° N, 6.5116° W
-      </a>
-    </figcaption>
+    <a
+      class="hero__coords"
+      href="https://www.google.com/maps/place/Giant's+Causeway+Viewpoint/@55.2408,-6.5141749,1156m/data=!3m1!1e3!4m12!1m5!3m4!2zNTXCsDE0JzI2LjkiTiA2wrAzMCc0MS44Ilc!8m2!3d55.2408056!4d-6.5116111!3m5!1s0x4860299016f13455:0xbe35bf015dee5303!8m2!3d55.2391073!4d-6.5104552!16s%2Fg%2F11l5h7vsls"
+      target="_blank"
+      rel="noopener"
+      aria-label="55.2408° N, 6.5116° W: the Giant’s Causeway on Google Maps (opens in a new tab)"
+    >
+      55.2408° N, 6.5116° W
+    </a>
+  </figcaption>
 </figure>
 
 <style>

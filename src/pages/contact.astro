@@ -15,7 +15,14 @@ import BasaltFooter from '~/components/home/BasaltFooter.astro';
 import SectionHead from '~/components/home/SectionHead.astro';
 import ContactForm from '~/components/home/ContactForm.astro';
 import ProjectWizard from '~/components/home/ProjectWizard.astro';
-import { bookingHref, linkedInHref, innerNavItems as navItems, footerLinks, serviceLinks, headerCta } from '~/components/home/nav';
+import {
+  bookingHref,
+  linkedInHref,
+  innerNavItems as navItems,
+  footerLinks,
+  serviceLinks,
+  headerCta,
+} from '~/components/home/nav';
 
 /**
  * Two experiences on one page:
@@ -33,7 +40,6 @@ const metadata = {
     'Get in touch or start a project: websites, web applications, AI solutions and custom software from an independent studio in Belfast, Northern Ireland.',
 };
 
-
 const nextSteps = [
   {
     title: 'We reply',
@@ -41,14 +47,14 @@ const nextSteps = [
   },
   {
     title: 'A short call',
-    description: 'A free 30-minute conversation to understand the goal, the people it serves and what success looks like.',
+    description:
+      'A free 30-minute conversation to understand the goal, the people it serves and what success looks like.',
   },
   {
     title: 'A clear proposal',
     description: 'Scope, timeline and price in writing, with a recommendation and the reasoning behind it.',
   },
 ];
-
 ---
 
 <Layout metadata={metadata}>
@@ -78,11 +84,13 @@ const nextSteps = [
             Get in touch<span class="intro__stop">.</span>
           </h1>
           <p class="intro__lede bs-lede">
-            A question, an idea or a quick hello. Send a message and you’ll hear back from Mateusz, the engineer who would
-            build it.
+            A question, an idea or a quick hello. Send a message and you’ll hear back from Mateusz, the engineer who
+            would build it.
           </p>
           <p class="intro__switch">
-            Starting a new project? <a href="/contact?type=project">Use the project planner <span aria-hidden="true">→</span></a>
+            Starting a new project? <a href="/contact?type=project"
+              >Use the project planner <span aria-hidden="true">→</span></a
+            >
           </p>
         </div>
 
@@ -111,55 +119,55 @@ const nextSteps = [
     <section class="start" id="start" aria-label="Get in touch">
       <div class="bs-wrap">
         <div class="bs-grid start__grid">
-        <div class="start__form">
-          <div class="only-contact">
-            <ContactForm />
+          <div class="start__form">
+            <div class="only-contact">
+              <ContactForm />
+            </div>
+            <div class="only-project">
+              <ProjectWizard responseTime={responseTime} />
+            </div>
           </div>
-          <div class="only-project">
-            <ProjectWizard responseTime={responseTime} />
-          </div>
-        </div>
 
-        <!-- Contact directory: plain contact journey only; the planner stays focused -->
-        <aside class="start__aside only-contact" aria-labelledby="other-ways">
-          <h2 id="other-ways" class="bs-mono start__aside-title">Prefer something else?</h2>
-          <dl class="start__spec">
-            <div>
-              <dt class="bs-mono">Call</dt>
-              <dd>
-                <a href={bookingHref} target="_blank" rel="noopener">
-                  Book a free 30-minute call <span aria-hidden="true">↗</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt class="bs-mono">Email</dt>
-              <dd><a class="emailLink" href="mailto:">Shown when JavaScript is on</a></dd>
-            </div>
-            <div>
-              <dt class="bs-mono">Phone</dt>
-              <dd><a class="phoneLink" href="tel:">Shown when JavaScript is on</a></dd>
-            </div>
-            <div>
-              <dt class="bs-mono">LinkedIn</dt>
-              <dd>
-                <a href={linkedInHref} target="_blank" rel="noopener">
-                  @causewaysoft <span aria-hidden="true">↗</span>
-                  <span class="sr-only">(opens in a new tab)</span>
-                </a>
-              </dd>
-            </div>
-            <div>
-              <dt class="bs-mono">Studio</dt>
-              <dd>Belfast, Northern Ireland</dd>
-            </div>
-            <div>
-              <dt class="bs-mono">Hours</dt>
-              <dd>Monday to Friday, UK time</dd>
-            </div>
-          </dl>
-        </aside>
+          <!-- Contact directory: plain contact journey only; the planner stays focused -->
+          <aside class="start__aside only-contact" aria-labelledby="other-ways">
+            <h2 id="other-ways" class="bs-mono start__aside-title">Prefer something else?</h2>
+            <dl class="start__spec">
+              <div>
+                <dt class="bs-mono">Call</dt>
+                <dd>
+                  <a href={bookingHref} target="_blank" rel="noopener">
+                    Book a free 30-minute call <span aria-hidden="true">↗</span>
+                    <span class="sr-only">(opens in a new tab)</span>
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Email</dt>
+                <dd><a class="emailLink" href="mailto:">Shown when JavaScript is on</a></dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Phone</dt>
+                <dd><a class="phoneLink" href="tel:">Shown when JavaScript is on</a></dd>
+              </div>
+              <div>
+                <dt class="bs-mono">LinkedIn</dt>
+                <dd>
+                  <a href={linkedInHref} target="_blank" rel="noopener">
+                    @causewaysoft <span aria-hidden="true">↗</span>
+                    <span class="sr-only">(opens in a new tab)</span>
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Studio</dt>
+                <dd>Belfast, Northern Ireland</dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Hours</dt>
+                <dd>Monday to Friday, UK time</dd>
+              </div>
+            </dl>
+          </aside>
         </div>
       </div>
     </section>

@@ -131,12 +131,7 @@ const founder = {
 ---
 
 <Layout metadata={metadata}>
-  <BasaltHeader
-    slot="header"
-    items={navItems}
-    cta={headerCta}
-    bookingHref={bookingHref}
-  />
+  <BasaltHeader slot="header" items={navItems} cta={headerCta} bookingHref={bookingHref} />
   <div class="bs">
     <HomeHero services={services.map(({ title, href }) => ({ title, href }))} />
     <ServiceIndex services={services} />

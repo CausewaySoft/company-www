@@ -51,7 +51,6 @@ export const toUiAmount = (amount: number) => {
   return value;
 };
 
-
 /** Grid column classes for the `columns` prop shared by several widgets. */
 export const getColumnsClass = (columns?: number, fallback = ''): string =>
   columns === 4

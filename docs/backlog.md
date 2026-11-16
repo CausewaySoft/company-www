@@ -16,14 +16,14 @@ but not scheduled. Newest first.
 The services restructure removed these pages. Each should permanently (301)
 redirect to its replacement:
 
-| Old URL | Redirect to |
-| --- | --- |
-| `/services/progressive-web-apps` | `/services/web-applications#pwa` |
-| `/services/ai-agents-solutions` | `/services/web-applications#ai` |
-| `/services/hybrid-apps` | `/services` |
-| `/services/chrome-extensions` | `/services` |
-| `/services/websites-old` | `/services/websites` |
-| `/solutions` and everything under it | `/services` |
+| Old URL                              | Redirect to                      |
+| ------------------------------------ | -------------------------------- |
+| `/services/progressive-web-apps`     | `/services/web-applications#pwa` |
+| `/services/ai-agents-solutions`      | `/services/web-applications#ai`  |
+| `/services/hybrid-apps`              | `/services`                      |
+| `/services/chrome-extensions`        | `/services`                      |
+| `/services/websites-old`             | `/services/websites`             |
+| `/solutions` and everything under it | `/services`                      |
 
 Copy-ready Apache and nginx rules, and the `curl` checks to run afterwards,
 are in `docs/services-restructure-plan.md` ("Server redirect rules").
@@ -83,7 +83,7 @@ The founder section on the home page (`/#about`) was made larger on
 
 ### Privacy reasoning (agreed)
 
-- A small file mainly stops *quality* reuse (print, convincing fake
+- A small file mainly stops _quality_ reuse (print, convincing fake
   profiles, high-detail face models). It doesn't stop recognition or
   training: face recognition works on faces around 100px across, and the
   333px photo was already larger than that.
@@ -143,14 +143,14 @@ The founder section on the home page (`/#about`) was made larger on
     job is to feel quiet and confident: a real person, a clear quote, plain
     facts. A quote overlapping the photo works against that calm.
 - **Where it would fit:** a future dedicated About page, where the founder
-  *is* the subject. There, a large photo-led layout makes sense.
+  _is_ the subject. There, a large photo-led layout makes sense.
 
 ### Related idea: a charcoal portrait
 
 A charcoal drawing of Mateusz, in the same style as the Giant's Causeway hero
 drawing. On-brand, can be any size, and useless as face data for scraping or
 deepfakes. Not chosen for the home page, because a real photo builds more
-trust there. Could work on a future About page *alongside* the photo (for
+trust there. Could work on a future About page _alongside_ the photo (for
 example with option B), not instead of it.
 
 ---
@@ -208,7 +208,7 @@ widgets still use.
 ### Why
 
 - **There's currently no cookie consent.** Google Analytics 4 loads in
-  production without asking. UK rules (PECR) require consent *before*
+  production without asking. UK rules (PECR) require consent _before_
   non-essential cookies such as analytics are set, and the privacy policy says
   analytics run on "your consent, given through your cookie choices", which
   the site doesn't offer yet.
@@ -226,6 +226,7 @@ A banner announcing there are no cookies is still a banner: visitors are tired
 of them and dismiss them unread, it adds a click and visual noise to every
 first visit, and it suggests there's something to agree to. Instead, say it
 quietly:
+
 - one mono line in the footer's bottom row, e.g. **"No cookies. No
   tracking."**, linking to `/privacy`;
 - a clear statement in the privacy policy.
@@ -233,6 +234,7 @@ quietly:
 ### Would the site really be cookie-free?
 
 From the code, yes, once GA is gone:
+
 - fonts are self-hosted (`@fontsource`), so no Google Fonts requests;
 - the contact form and project wizard post with `fetch`, no cookies;
 - Calendly is a plain link, not an embed, so it sets no cookies on our site;
@@ -344,6 +346,7 @@ it") and gives owners of an existing site a low-commitment first step.
 
 The Websites page used to link two "Get a Free Website Check" buttons to
 `/free-website-check`, a page that never existed. They now point elsewhere:
+
 - Hero: **"Start a Website Project"** → `/contact?type=project&service=website`
   (the project wizard, with "Business website" preselected).
 - "Fix an existing website" card: **"Book a Free Review Call"** → the existing
@@ -438,10 +441,12 @@ Create our own custom map with our own pin, title, description, photos and
 links. It's a separate, shareable map, not a listing on Google Maps itself, so
 it's allowed. The pin could say "You found it. Fig. 01, the Giant's Causeway"
 with the hidden reward.
+
 - Downsides: My Maps looks dated, and we get no data on who found it.
 
 **Option 2: our own "Fig. 01" page (recommended)**
 Link the coordinates to a hidden page on our own site, e.g. `/fig-01`, with:
+
 - the full charcoal drawing, and who drew it and when (if known);
 - a short story of why the studio is named after the Causeway: the basalt
   columns, Finn McCool, precision and modularity;

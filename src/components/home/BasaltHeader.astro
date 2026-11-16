@@ -82,18 +82,17 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     </nav>
 
     <div class="bsh__tools">
-      <button type="button" class="bsh__icon" aria-label="Switch between dark and light mode" data-aw-toggle-color-scheme>
+      <button
+        type="button"
+        class="bsh__icon"
+        aria-label="Switch between dark and light mode"
+        data-aw-toggle-color-scheme
+      >
         <Icon name="tabler:sun" class="bsh__sun" />
         <Icon name="tabler:moon" class="bsh__moon" />
       </button>
       <a class="bsh__cta" href={cta.href} data-page>{cta.text} <span aria-hidden="true">→</span></a>
-      <button
-        type="button"
-        class="bsh__menu-btn"
-        aria-expanded="false"
-        aria-controls="bs-menu"
-        data-bs-menu-toggle
-      >
+      <button type="button" class="bsh__menu-btn" aria-expanded="false" aria-controls="bs-menu" data-bs-menu-toggle>
         <span class="bsh__menu-open">Menu</span>
         <span class="bsh__menu-close">Close</span>
       </button>
@@ -126,7 +125,8 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
 
       <div class="bsm__foot">
         <a class="bs-btn bsm__cta" href={cta.href} data-page>
-          {cta.text} <span class="bs-arrow" aria-hidden="true">→</span>
+          {cta.text}
+          <span class="bs-arrow" aria-hidden="true">→</span>
         </a>
         <a class="bs-link" href={bookingHref} target="_blank" rel="noopener">
           Book a free discovery call <span aria-hidden="true">↗</span>

@@ -35,7 +35,20 @@
   /* Reading text stays on the measure; code, tables and media don't */
   .ab__body
     :global(
-      :is(p:not(:has(> img, > iframe, > video)), ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, div[class*='border-l-4'])
+      :is(
+        p:not(:has(> img, > iframe, > video)),
+        ul,
+        ol,
+        dl,
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6,
+        blockquote,
+        div[class*='border-l-4']
+      )
     ) {
     max-width: var(--ab-measure);
   }

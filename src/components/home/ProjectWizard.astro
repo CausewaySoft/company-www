@@ -191,7 +191,8 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
 
     <div class="pw__nav">
       <button type="submit" class="bs-btn" data-bs-next>
-        <span data-bs-next-text>Continue</span> <span class="bs-arrow" aria-hidden="true">→</span>
+        <span data-bs-next-text>Continue</span>
+        <span class="bs-arrow" aria-hidden="true">→</span>
       </button>
       <button type="button" class="pw__back" data-bs-back hidden>← Back</button>
     </div>
@@ -682,7 +683,10 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
       if (invalid.length) {
         invalid.forEach((el) => el.setAttribute('aria-invalid', 'true'));
         if (error) {
-          error.textContent = invalid.map((el) => el.dataset.error).filter(Boolean).join(' ');
+          error.textContent = invalid
+            .map((el) => el.dataset.error)
+            .filter(Boolean)
+            .join(' ');
           error.hidden = false;
         }
         invalid[0].focus();
