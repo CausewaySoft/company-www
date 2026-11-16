@@ -1,0 +1,294 @@
+---
+/**
+ * Basalt layout for a single blog post. The post content (Markdown/MDX)
+ * goes in the default slot and is rendered through ArticleBody.
+ */
+import type { ImageMetadata } from 'astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import './basalt.css';
+
+import Image from '~/components/common/Image.astro';
+import BasaltHeader from './BasaltHeader.astro';
+import BasaltFooter from './BasaltFooter.astro';
+import ArticleBody from './ArticleBody.astro';
+import PostList from './PostList.astro';
+import ClosingCta from './ClosingCta.astro';
+import { bookingHref, innerNavItems, footerLinks, serviceLinks, headerCta } from './nav';
+import { getBlogPermalink, getPermalink } from '~/utils/permalinks';
+import { getFormattedDate } from '~/utils/utils';
+import type { MetaData, Post } from '~/types';
+
+export interface Props {
+  metadata: MetaData;
+  post: Post;
+  image?: ImageMetadata | string;
+  url: string | URL;
+  related: Post[];
+}
+
+const { metadata, post, image, url, related } = Astro.props;
+
+const shareUrl = encodeURIComponent(String(url));
+const shareText = encodeURIComponent(post.title);
+const share = [
+  { text: 'LinkedIn', href: `https://www.linkedin.com/sharing/share-offsite/?url=${shareUrl}` },
+  { text: 'X', href: `https://twitter.com/intent/tweet?url=${shareUrl}&text=${shareText}` },
+  { text: 'Email', href: `mailto:?subject=${shareText}&body=${shareUrl}`, internal: true },
+];
+---
+
+<Layout metadata={metadata}>
+  <BasaltHeader slot="header" items={innerNavItems} cta={headerCta} bookingHref={bookingHref} />
+
+  <div class="bs">
+    <article class="post" aria-labelledby="post-title">
+      <div class="bs-wrap">
+        <!-- Header -->
+        <header class="post__head">
+          <div class="post__meta bs-mono">
+            <p>
+              <a href={getBlogPermalink()}>Blog</a>
+              {
+                post.category && (
+                  <>
+                    {' · '}
+                    <a href={getPermalink(post.category.slug, 'category')}>{post.category.title}</a>
+                  </>
+                )
+              }
+            </p>
+            <a href={getBlogPermalink()}>← All posts</a>
+          </div>
+
+          <h1 id="post-title" class="post__title bs-display">{post.title}</h1>
+          {post.excerpt && <p class="post__lede bs-lede">{post.excerpt}</p>}
+
+          <p class="post__byline bs-mono">
+            <time datetime={post.publishDate.toISOString()}>{getFormattedDate(post.publishDate)}</time>
+            {post.author && <span>{post.author}</span>}
+            {post.readingTime && <span>{post.readingTime} min read</span>}
+          </p>
+        </header>
+
+        {
+          image && (
+            <figure class="post__figure">
+              <Image
+                src={image}
+                alt={post.excerpt || post.title}
+                layout="fullWidth"
+                widths={[640, 1024, 1440]}
+                sizes="(min-width: 1320px) 1224px, 100vw"
+                loading="eager"
+                decoding="async"
+              />
+            </figure>
+          )
+        }
+
+        <!-- Body -->
+        <div class="post__body">
+          <ArticleBody tocLabel="In this post">
+            <slot />
+          </ArticleBody>
+        </div>
+
+        <!-- Tags and sharing, aligned with the text -->
+        <footer class="post__foot bs-grid">
+          <div class="post__foot-inner">
+            {
+              post.tags?.length ? (
+                <div class="post__tags">
+                  <p class="bs-mono">Tags</p>
+                  <ul>
+                    {post.tags.map((tag) => (
+                      <li>
+                        <a href={getPermalink(tag.slug, 'tag')}>{tag.title}</a>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : null
+            }
+            <div class="post__share">
+              <p class="bs-mono">Share</p>
+              <ul>
+                {
+                  share.map((s) => (
+                    <li>
+                      <a href={s.href} {...(s.internal ? {} : { target: '_blank', rel: 'noopener' })}>
+                        {s.text}
+                        {!s.internal && (
+                          <>
+                            <span aria-hidden="true"> ↗</span>
+                            <span class="sr-only">(opens in a new tab)</span>
+                          </>
+                        )}
+                      </a>
+                    </li>
+                  ))
+                }
+              </ul>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </article>
+
+    {
+      related.length > 0 && (
+        <section class="bs-section post-related" aria-labelledby="related-title">
+          <div class="bs-wrap">
+            <div class="post-related__head">
+              <h2 id="related-title" class="bs-mono">More from the blog</h2>
+              <a class="bs-mono" href={getBlogPermalink()}>
+                All posts <span aria-hidden="true">→</span>
+              </a>
+            </div>
+            <PostList posts={related} compact />
+          </div>
+        </section>
+      )
+    }
+
+    <ClosingCta bookingHref={bookingHref} index="" />
+  </div>
+
+  <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />
+</Layout>
+
+<style>
+  .post {
+    padding-top: clamp(28px, 4.5vw, 56px);
+    padding-bottom: clamp(48px, 6vw, 88px);
+  }
+
+  .post__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  .post__meta a {
+    color: var(--bs-ink);
+    transition: color 0.2s;
+  }
+
+  .post__meta a:hover {
+    color: var(--bs-signal);
+  }
+
+  .post__title {
+    margin-top: clamp(36px, 5vw, 72px);
+    font-size: clamp(42px, 5.6vw, 88px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+    max-width: 20ch;
+    text-wrap: balance;
+  }
+
+  .post__lede {
+    margin-top: clamp(20px, 2.5vw, 32px);
+  }
+
+  .post__byline {
+    margin-top: 24px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+  }
+
+  .post__byline time {
+    color: var(--bs-ink);
+  }
+
+  .post__figure {
+    margin-top: clamp(36px, 4.5vw, 64px);
+    background: var(--bs-surface);
+  }
+
+  .post__figure :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    max-height: 72vh;
+    object-fit: cover;
+  }
+
+  .post__body {
+    margin-top: clamp(40px, 5vw, 72px);
+  }
+
+  /* Tags and share sit under the article text */
+  .post__foot {
+    margin-top: 48px;
+  }
+
+  .post__foot-inner {
+    grid-column: 1 / -1;
+    display: grid;
+    gap: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--bs-rule);
+    max-width: 42em;
+  }
+
+  .post__tags ul,
+  .post__share ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px 18px;
+    margin-top: 8px;
+  }
+
+  .post__foot a {
+    font-size: 15px;
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-rule);
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .post__foot a:hover {
+    text-decoration-color: var(--bs-signal);
+  }
+
+  /* Related posts */
+  .post-related__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  .post-related__head h2 {
+    color: var(--bs-ink);
+  }
+
+  .post-related__head a {
+    color: var(--bs-ink);
+  }
+
+  .post-related__head a:hover {
+    color: var(--bs-signal);
+  }
+
+  @media (min-width: 900px) {
+    .post__lede {
+      max-width: 36em;
+    }
+
+    .post__foot-inner {
+      grid-column: 5 / span 7;
+    }
+  }
+</style>

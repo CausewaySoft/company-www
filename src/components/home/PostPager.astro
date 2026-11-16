@@ -1,0 +1,51 @@
+---
+/** Newer/older pagination for the Basalt blog list pages. */
+import { getPermalink } from '~/utils/permalinks';
+
+export interface Props {
+  prevUrl?: string;
+  nextUrl?: string;
+}
+
+const { prevUrl, nextUrl } = Astro.props;
+---
+
+{
+  (prevUrl || nextUrl) && (
+    <nav class="pager bs-mono" aria-label="More posts">
+      {prevUrl ? (
+        <a href={getPermalink(prevUrl)}>
+          <span aria-hidden="true">←</span> Newer posts
+        </a>
+      ) : (
+        <span />
+      )}
+      {nextUrl && (
+        <a href={getPermalink(nextUrl)}>
+          Older posts <span aria-hidden="true">→</span>
+        </a>
+      )}
+    </nav>
+  )
+}
+
+<style>
+  .pager {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 32px;
+  }
+
+  .pager a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-rule);
+    text-underline-offset: 0.45em;
+    transition: text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .pager a:hover {
+    text-decoration-color: var(--bs-signal);
+  }
+</style>
