@@ -5,6 +5,49 @@ but not scheduled. Newest first.
 
 ---
 
+## Delete the old blog components
+
+**Status:** Ready to do, not started
+**Area:** `src/components/blog/`, `src/components/widgets/Blog*.astro`,
+`src/components/common/SocialShare.astro`, `BasicScripts.astro`
+**Added:** 2026-11-16
+
+### Why
+
+The blog index, category, tag and post pages now use the Basalt components
+(`BlogListPage`, `BlogPostPage`, `PostList`, `PostPager`, `ArticleBody` in
+`src/components/home/`). The old AstroWind blog components are no longer
+rendered anywhere. Keeping them adds dead code and makes it unclear which
+components are current.
+
+### What's unused (checked 2026-11-16)
+
+Nothing imports these any more, except each other:
+
+- `src/components/blog/`: `SinglePost`, `List`, `ListItem`, `Tags`,
+  `Pagination`, `RelatedPosts`, `ToBlogLink`, `Headline`, `Grid`, `GridItem`
+- `src/components/widgets/BlogHighlightedPosts.astro` (only used by
+  `RelatedPosts`)
+- `src/components/widgets/BlogLatestPosts.astro` (only a commented-out import
+  in `src/pages/landing/business-grants-causewaycoast-ni.astro`)
+- `src/components/common/SocialShare.astro` (only used by `SinglePost`) and its
+  `[data-aw-social-share]` click handler in
+  `src/components/common/BasicScripts.astro`
+
+Not to be confused with `src/components/ui/Headline.astro`, which the old
+widgets still use.
+
+### To do when this is picked up
+
+- [ ] Re-check nothing imports them (search for each name; the old landing
+      and widget pages may have changed).
+- [ ] Delete the files above, the commented-out `BlogLatestPosts` import in the
+      grants landing page, and the social-share handler in `BasicScripts.astro`.
+- [ ] Run the type check and build, and check `/blog`, a category page, a tag
+      page and a post.
+
+---
+
 ## Remove Google Analytics and go cookie-free
 
 **Status:** Agreed in principle, not started
