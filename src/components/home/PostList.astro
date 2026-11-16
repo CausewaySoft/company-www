@@ -1,12 +1,17 @@
 ---
 /**
- * Typographic list of blog posts (blog index, categories, tags, related
- * posts). Date on the left, title on the page's left edge, excerpt in the
- * text column, like the home page's services list.
+ * List of blog posts (blog index, categories, tags, related posts), laid
+ * out as an editorial index: date on the left, then the title, category,
+ * excerpt and "Read" stacked together, and the cover on its own in the text
+ * column. On small screens the cover comes first. Covers share one 16:10
+ * crop so different image styles still read as a set.
  */
+import type { ImageMetadata } from 'astro';
+import Image from '~/components/common/Image.astro';
 import type { Post } from '~/types';
 import { getPermalink } from '~/utils/permalinks';
 import { getFormattedDate } from '~/utils/utils';
+import { findImage } from '~/utils/images';
 
 export interface Props {
   posts: Post[];
@@ -15,19 +20,39 @@ export interface Props {
 }
 
 const { posts, compact = false } = Astro.props;
+
+// Resolve local (~/assets/...) and remote cover images, as the post page does
+const items = await Promise.all(
+  posts.map(async (post) => ({
+    post,
+    image: (await findImage(post.image)) as ImageMetadata | string | undefined,
+  }))
+);
 ---
 
 <ol class:list={['pl', { 'pl--compact': compact }]}>
   {
-    posts.map((post) => (
+    items.map(({ post, image }) => (
       <li>
         <a class="pl__row bs-grid" href={getPermalink(post.permalink, 'post')}>
+          {image && (
+            <span class="pl__thumb">
+              {/* Decorative: the link already reads out the post title */}
+              <Image
+                src={image}
+                alt=""
+                layout="cover"
+                widths={[400, 640, 800]}
+                sizes="(min-width: 900px) 30vw, 100vw"
+              />
+            </span>
+          )}
           <span class="pl__meta bs-mono">
             <time datetime={post.publishDate.toISOString()}>{getFormattedDate(post.publishDate)}</time>
             {post.readingTime && <span>{post.readingTime} min read</span>}
           </span>
-          <span class="pl__title bs-display">{post.title}</span>
-          <span class="pl__side">
+          <span class="pl__main">
+            <span class="pl__title bs-display">{post.title}</span>
             {post.category && <span class="pl__category bs-mono">{post.category.title}</span>}
             {post.excerpt && <span class="pl__excerpt">{post.excerpt}</span>}
             <span class="pl__read bs-mono">
@@ -50,8 +75,31 @@ const { posts, compact = false } = Astro.props;
     padding-block: clamp(24px, 3vw, 40px);
     border-top: 1px solid var(--bs-rule);
     row-gap: 12px;
-    align-items: baseline;
+    align-items: start;
     color: var(--bs-text);
+  }
+
+  /* Cover: one 16:10 crop for every post, hairline frame, square corners */
+  .pl__thumb {
+    grid-column: 1 / -1;
+    display: block;
+    overflow: hidden;
+    background: var(--bs-surface);
+    border: 1px solid var(--bs-rule);
+    margin-bottom: 8px;
+  }
+
+  .pl__thumb :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16 / 10;
+    object-fit: cover;
+    transition: transform 0.9s var(--bs-ease);
+  }
+
+  .pl__row:hover .pl__thumb :global(img) {
+    transform: scale(1.03);
   }
 
   /* Signal rule that draws across on hover/focus */
@@ -79,8 +127,7 @@ const { posts, compact = false } = Astro.props;
   }
 
   .pl__meta,
-  .pl__title,
-  .pl__side {
+  .pl__main {
     grid-column: 1 / -1;
   }
 
@@ -105,9 +152,15 @@ const { posts, compact = false } = Astro.props;
     font-size: clamp(24px, 2.4vw, 34px);
   }
 
-  .pl__side {
+  /* Title, category, excerpt and Read read as one unit */
+  .pl__main {
     display: grid;
-    gap: 10px;
+    justify-items: start;
+    gap: 12px;
+  }
+
+  .pl__title {
+    margin-bottom: 4px;
   }
 
   .pl__category {
@@ -130,17 +183,22 @@ const { posts, compact = false } = Astro.props;
   }
 
   @media (min-width: 900px) {
+    /* Date | title and text | cover on its own in the text column */
+    .pl__thumb {
+      grid-column: 9 / -1;
+      grid-row: 1;
+      margin-bottom: 0;
+    }
+
     .pl__meta {
       grid-column: 1 / span 2;
+      grid-row: 1;
       flex-direction: column;
     }
 
-    .pl__title {
+    .pl__main {
       grid-column: 3 / span 5;
-    }
-
-    .pl__side {
-      grid-column: 9 / -1;
+      grid-row: 1;
     }
   }
 </style>
