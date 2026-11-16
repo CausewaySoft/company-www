@@ -201,7 +201,8 @@ const html = (await Astro.slots.render('default')).replace(/<h2([^>]*)>([\s\S]*?
     color: var(--bs-text);
   }
 
-  .legal__body :global(p + p) {
+  .legal__body :global(p + p),
+  .legal__body :global(ul + p) {
     margin-top: 14px;
   }
 
@@ -225,6 +226,17 @@ const html = (await Astro.slots.render('default')).replace(/<h2([^>]*)>([\s\S]*?
     width: 6px;
     height: 6px;
     background: var(--bs-signal);
+  }
+
+  .legal__body :global(strong) {
+    color: var(--bs-ink);
+    font-weight: 600;
+  }
+
+  .legal__body :global(code) {
+    font-family: var(--bs-font-mono);
+    font-size: 0.85em;
+    color: var(--bs-ink);
   }
 
   .legal__body :global(a) {
