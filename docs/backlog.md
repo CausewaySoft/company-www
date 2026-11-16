@@ -5,6 +5,58 @@ but not scheduled. Newest first.
 
 ---
 
+## Set up the 301 redirects for the retired pages
+
+**Status:** Deferred by Mateusz; to do soon after the redesign goes live
+**Area:** web server config (`.htaccess` or nginx), not this repo
+**Added:** 2026-11-16
+
+### What
+
+The services restructure removed these pages. Each should permanently (301)
+redirect to its replacement:
+
+| Old URL | Redirect to |
+| --- | --- |
+| `/services/progressive-web-apps` | `/services/web-applications#pwa` |
+| `/services/ai-agents-solutions` | `/services/web-applications#ai` |
+| `/services/hybrid-apps` | `/services` |
+| `/services/chrome-extensions` | `/services` |
+| `/services/websites-old` | `/services/websites` |
+| `/solutions` and everything under it | `/services` |
+
+Copy-ready Apache and nginx rules, and the `curl` checks to run afterwards,
+are in `docs/services-restructure-plan.md` ("Server redirect rules").
+
+### Why it can wait (and why not forever)
+
+The site has almost no visitors yet, so no real people will hit the old
+URLs. Until the redirects exist:
+
+- **Google Search Console** reports the old URLs as "Not found (404)" under
+  Pages. That doesn't harm the rest of the site; Google drops 404s from its
+  index after re-crawling them a few times.
+- **Any link to an old page lands on the 404 page.** That includes Google
+  results that haven't been refreshed yet, and links you may have shared
+  yourself: LinkedIn posts, a Google Business Profile, directories, email
+  signatures, proposals.
+- **Whatever small ranking signal those pages earned is lost** instead of
+  passed to the new pages. Small for a new site, but free to keep.
+
+The longer it waits, the more the old URLs fall out of Google on their own,
+and the less the redirects are worth. So it's low risk to do it later, but
+best done within a few weeks of the release.
+
+### To do
+
+1. Add the rules from `docs/services-restructure-plan.md` to the server.
+2. Run the `curl -sI` checks from the same doc; each should print `301` and
+   the new location.
+3. In Search Console, use URL Inspection on one old URL to confirm Google
+   sees the redirect.
+
+---
+
 ## Founder photo: sharper source, then decide on size
 
 **Status:** Waiting on a new photo export from Mateusz, then review
