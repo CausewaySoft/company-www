@@ -5,6 +5,78 @@ but not scheduled. Newest first.
 
 ---
 
+## Remove Google Analytics and go cookie-free
+
+**Status:** Agreed in principle, not started
+**Area:** `src/components/common/Analytics.astro` (Google Analytics 4,
+`PUBLIC_GOOGLE_ANALYTICS_ID`), `src/pages/privacy.astro`, the Basalt footer
+**Added:** 2026-11-16
+
+### Why
+
+- **There's currently no cookie consent.** Google Analytics 4 loads in
+  production without asking. UK rules (PECR) require consent *before*
+  non-essential cookies such as analytics are set, and the privacy policy says
+  analytics run on "your consent, given through your cookie choices", which
+  the site doesn't offer yet.
+- **Removing GA removes the need for any consent banner.** With no
+  non-essential cookies there's nothing to consent to. That's simpler and more
+  honest than building a consent banner.
+- **It fits the brand.** An independent, engineering-led studio that doesn't
+  track its visitors, and a fast site with no third-party scripts.
+- **The privacy policy gets simpler.** The Google sharing, US transfers,
+  cookie duration and analytics-consent parts shrink or disappear.
+
+### Decided against: a "No cookies were used" banner
+
+A banner announcing there are no cookies is still a banner: visitors are tired
+of them and dismiss them unread, it adds a click and visual noise to every
+first visit, and it suggests there's something to agree to. Instead, say it
+quietly:
+- one mono line in the footer's bottom row, e.g. **"No cookies. No
+  tracking."**, linking to `/privacy`;
+- a clear statement in the privacy policy.
+
+### Would the site really be cookie-free?
+
+From the code, yes, once GA is gone:
+- fonts are self-hosted (`@fontsource`), so no Google Fonts requests;
+- the contact form and project wizard post with `fetch`, no cookies;
+- Calendly is a plain link, not an embed, so it sets no cookies on our site;
+- the light/dark toggle uses `localStorage`, not a cookie. A preference the
+  visitor asked for is strictly necessary and needs no consent.
+
+Confirm in the browser after removing GA (Application → Cookies should be
+empty) rather than assuming.
+
+### What we lose, and cookie-free replacements
+
+- **Google Search Console:** search queries, clicks and rankings; nothing
+  added to the site. The most useful data for a site like this anyway.
+- **Server log analytics:** the site is self-hosted, so the web server already
+  logs every request. A tool like **GoAccess** turns those logs into page
+  views, top pages and referrers, with no script and no cookies.
+- **Cookieless analytics** if more detail is wanted later: self-hosted
+  **Umami**, **Plausible** or **Fathom**. These don't set cookies, so they
+  generally don't need a consent banner, but check current ICO guidance for
+  the specific tool first.
+
+### To do when this is picked up
+
+- [ ] Remove the Google Analytics component (`Analytics.astro`, its use in
+      `Layout.astro`) and the `googleAnalytics` settings in `src/config.yaml`.
+- [ ] Remove `PUBLIC_GOOGLE_ANALYTICS_ID` from the production `.env`, so GA
+      can't quietly come back.
+- [ ] Check in the browser that no cookies are set on any page.
+- [ ] Update `src/pages/privacy.astro`: remove the Google Analytics parts
+      (sections 2, 3, 4, 5, 6 and 7 mention it), state that the site uses no
+      cookies and no tracking, and update the "last updated" date.
+- [ ] Add "No cookies. No tracking." to the footer's bottom row, linking to
+      `/privacy`.
+- [ ] Optional: set up GoAccess (or a cookieless tool) on the server.
+
+---
+
 ## Guides section
 
 **Status:** Agreed in the site structure, not started; setup undecided
