@@ -1,0 +1,262 @@
+---
+/**
+ * Long-form body for Basalt pages (blog posts, legal documents).
+ *
+ * The content goes in the default slot (Markdown/MDX output or plain HTML)
+ * and starts on the heading edge. Reading text keeps a comfortable line
+ * length (about 75 characters); code, tables and media use the full grid.
+ * Typography covers everything the posts use: headings, lists, tables,
+ * code, quotes, images, embeds and the old Tailwind callout boxes.
+ */
+---
+
+<div class="ab bs-grid">
+  <div class="ab__body">
+    <slot />
+  </div>
+</div>
+
+<style>
+  .ab__body {
+    grid-column: 1 / -1;
+  }
+
+  /* ---------- Typography ---------- */
+  .ab__body {
+    --ab-size: 17px;
+    /* Reading measure, about 75 characters at the body size */
+    --ab-measure: calc(var(--ab-size) * 42);
+    min-width: 0;
+    font-size: var(--ab-size);
+    line-height: 1.7;
+    color: var(--bs-text);
+  }
+
+  /* Reading text stays on the measure; code, tables and media don't */
+  .ab__body
+    :global(
+      :is(p:not(:has(> img, > iframe, > video)), ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, div[class*='border-l-4'])
+    ) {
+    max-width: var(--ab-measure);
+  }
+
+  .ab__body :global(> * + *),
+  .ab__body :global(section > * + *) {
+    margin-top: 1.1em;
+  }
+
+  .ab__body :global(section + section) {
+    margin-top: 40px;
+  }
+
+  .ab__body :global(h1),
+  .ab__body :global(h2),
+  .ab__body :global(h3),
+  .ab__body :global(h4) {
+    scroll-margin-top: 96px;
+    font-family: var(--bs-font-display);
+    font-stretch: 75%;
+    font-weight: 760;
+    line-height: 1.05;
+    color: var(--bs-ink);
+    text-wrap: balance;
+  }
+
+  .ab__body :global(h1),
+  .ab__body :global(h2) {
+    font-size: clamp(26px, 2.4vw, 34px);
+  }
+
+  .ab__body :global(* + h1),
+  .ab__body :global(* + h2) {
+    margin-top: 1.8em;
+  }
+
+  .ab__body :global(h3) {
+    font-size: clamp(21px, 1.8vw, 24px);
+  }
+
+  .ab__body :global(* + h3) {
+    margin-top: 1.5em;
+  }
+
+  .ab__body :global(h4) {
+    font-size: 19px;
+  }
+
+  .ab__body :global(h2 + *),
+  .ab__body :global(h3 + *),
+  .ab__body :global(h4 + *) {
+    margin-top: 0.6em;
+  }
+
+  .ab__body :global(strong) {
+    color: var(--bs-ink);
+    font-weight: 600;
+  }
+
+  .ab__body :global(a) {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-signal);
+    text-underline-offset: 0.3em;
+    overflow-wrap: anywhere;
+  }
+
+  /* Lists: square bullets, mono numbers */
+  .ab__body :global(ul),
+  .ab__body :global(ol) {
+    display: grid;
+    gap: 8px;
+  }
+
+  .ab__body :global(li) {
+    position: relative;
+    padding-left: 24px;
+  }
+
+  .ab__body :global(ul > li)::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    top: 0.72em;
+    width: 6px;
+    height: 6px;
+    background: var(--bs-signal);
+  }
+
+  .ab__body :global(ol) {
+    counter-reset: ab-ol;
+  }
+
+  .ab__body :global(ol > li) {
+    counter-increment: ab-ol;
+  }
+
+  .ab__body :global(ol > li)::before {
+    content: counter(ab-ol, decimal-leading-zero);
+    position: absolute;
+    left: 0;
+    top: 0.25em;
+    font-family: var(--bs-font-mono);
+    font-size: 12px;
+    color: var(--bs-signal);
+  }
+
+  .ab__body :global(li > ul),
+  .ab__body :global(li > ol) {
+    margin-top: 8px;
+  }
+
+  /* Quotes and rules */
+  .ab__body :global(blockquote) {
+    padding-left: 20px;
+    border-left: 2px solid var(--bs-signal);
+    font-family: var(--bs-font-display);
+    font-stretch: 85%;
+    font-size: 22px;
+    line-height: 1.35;
+    color: var(--bs-ink);
+  }
+
+  .ab__body :global(hr) {
+    border: 0;
+    border-top: 1px solid var(--bs-rule);
+    margin-block: 2.2em;
+  }
+
+  /* Code */
+  .ab__body :global(code) {
+    font-family: var(--bs-font-mono);
+    font-size: 0.85em;
+    color: var(--bs-ink);
+  }
+
+  .ab__body :global(:not(pre) > code) {
+    padding: 0.1em 0.35em;
+    background: var(--bs-surface);
+    border: 1px solid var(--bs-rule);
+  }
+
+  .ab__body :global(pre) {
+    overflow-x: auto;
+    padding: 18px 20px;
+    border: 1px solid var(--bs-rule);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .ab__body :global(pre code) {
+    font-size: inherit;
+    color: inherit;
+  }
+
+  /* Tables: scroll sideways on small screens */
+  .ab__body :global(table) {
+    display: block;
+    overflow-x: auto;
+    border-collapse: collapse;
+    font-size: 15px;
+    line-height: 1.5;
+  }
+
+  .ab__body :global(th),
+  .ab__body :global(td) {
+    padding: 10px 14px 10px 0;
+    border-bottom: 1px solid var(--bs-rule);
+    text-align: left;
+    vertical-align: top;
+  }
+
+  .ab__body :global(th) {
+    font-family: var(--bs-font-mono);
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--bs-muted);
+    border-bottom-color: var(--bs-ink);
+  }
+
+  /* Media */
+  .ab__body :global(img),
+  .ab__body :global(video),
+  .ab__body :global(iframe),
+  .ab__body :global(lite-youtube) {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin-block: 1.6em;
+  }
+
+  .ab__body :global(lite-youtube) {
+    width: 100%;
+  }
+
+  /* Old Tailwind callout boxes inside posts (e.g. bg-blue-50 border-l-4) */
+  .ab__body :global(div[class*='border-l-4']) {
+    padding: 18px 20px !important;
+    background: var(--bs-surface) !important;
+    border: 0 !important;
+    border-left: 2px solid var(--bs-signal) !important;
+    color: var(--bs-text) !important;
+  }
+
+  .ab__body :global(div[class*='border-l-4'] *) {
+    color: inherit !important;
+  }
+
+  .ab__body :global(div[class*='border-l-4'] :is(strong, b, h2, h3, h4)) {
+    color: var(--bs-ink) !important;
+  }
+
+  @media (min-width: 900px) {
+    .ab__body {
+      --ab-size: 19px;
+    }
+
+    .ab__body :global(pre) {
+      font-size: 15px;
+    }
+  }
+</style>

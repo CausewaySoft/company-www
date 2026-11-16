@@ -1,0 +1,210 @@
+---
+/**
+ * Basalt contact form.
+ *
+ * Submits through the site's shared enquiry path (`sendEnquiry`, i.e.
+ * window.causewaySoftSendEnquiry in BasicScripts) to /forms/contact.php.
+ * Fields: name, email, subject, message; name/email/message are required.
+ * Its id differs from the legacy #contact-form so the legacy handler
+ * doesn't attach a second listener to it.
+ */
+---
+
+<form class="cf" id="bs-contact-form" action="/forms/contact.php" method="post" data-bs-contact-form>
+  <!-- Email subject for the studio inbox -->
+  <input type="hidden" name="subject" value="New enquiry from causewaysoft.com" />
+
+  <div class="cf__row">
+    <div class="cf__field">
+      <label class="bs-mono cf__label" for="cf-name">Your name</label>
+      <input id="cf-name" name="name" type="text" autocomplete="name" required />
+    </div>
+    <div class="cf__field">
+      <label class="bs-mono cf__label" for="cf-email">Email</label>
+      <input id="cf-email" name="email" type="email" autocomplete="email" required />
+    </div>
+  </div>
+
+  <div class="cf__field">
+    <label class="bs-mono cf__label" for="cf-message">Your message</label>
+    <textarea id="cf-message" name="message" rows="6" required></textarea>
+  </div>
+
+  <div class="cf__submit">
+    <button class="bs-btn" type="submit" data-label="Send message">
+      <span data-bs-btn-text>Send message</span> <span class="bs-arrow" aria-hidden="true">→</span>
+    </button>
+    <p class="cf__note">
+      We only use your details to reply. See our <a href="/privacy">privacy policy</a>.
+    </p>
+  </div>
+
+  <div class="cf__status" role="status" aria-live="polite">
+    <p class="cf__msg cf__msg--ok" hidden data-bs-ok>
+      <span class="bs-mono">Sent</span>
+      <span>Thank you. Your message is on its way, and you'll hear back within one business day.</span>
+    </p>
+    <p class="cf__msg cf__msg--err" hidden data-bs-err>
+      <span class="bs-mono">Not sent</span>
+      <span>
+        Something went wrong sending your message. Please try again, or email us directly at
+        <a class="emailLink" href="mailto:">our studio address</a>.
+      </span>
+    </p>
+  </div>
+</form>
+
+<style>
+  .cf {
+    display: grid;
+    gap: 36px;
+  }
+
+  .cf__label {
+    display: block;
+    margin-bottom: 10px;
+  }
+
+  /* Fields: one boxed style for every text field */
+  .cf__row {
+    display: grid;
+    gap: 36px;
+  }
+
+  .cf__field input,
+  .cf__field textarea {
+    display: block;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid color-mix(in srgb, var(--bs-muted) 35%, var(--bs-rule));
+    border-radius: 0;
+    background: var(--bs-surface);
+    color: var(--bs-ink);
+    font: inherit;
+    font-size: 18px;
+    line-height: 1.5;
+    transition: border-color 0.2s var(--bs-ease);
+  }
+
+  .cf__field textarea {
+    resize: vertical;
+    min-height: 9em;
+  }
+
+  .cf__field input:focus,
+  .cf__field input:user-invalid,
+  .cf__field textarea:focus,
+  .cf__field textarea:user-invalid {
+    outline: none;
+    border-color: var(--bs-signal);
+  }
+
+  .cf__submit {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 24px;
+  }
+
+  .cf__submit .bs-btn[disabled] {
+    opacity: 0.6;
+    cursor: progress;
+  }
+
+  .cf__note {
+    font-size: 14px;
+    color: var(--bs-muted);
+  }
+
+  .cf__note a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-rule);
+    text-underline-offset: 0.3em;
+  }
+
+  .cf__note a:hover {
+    text-decoration-color: var(--bs-signal);
+  }
+
+  /* Status messages */
+  .cf__msg {
+    display: grid;
+    gap: 6px;
+    padding: 16px 0 0;
+    border-top: 2px solid var(--bs-ink);
+    font-size: 16px;
+    line-height: 1.55;
+    color: var(--bs-ink);
+  }
+
+  .cf__msg[hidden] {
+    display: none;
+  }
+
+  .cf__msg--err {
+    border-top-color: var(--bs-signal);
+  }
+
+  .cf__msg a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-signal);
+    text-underline-offset: 0.3em;
+  }
+
+  @media (min-width: 640px) {
+    .cf__row {
+      grid-template-columns: 1fr 1fr;
+      gap: 32px;
+    }
+  }
+</style>
+
+<script>
+  import { sendEnquiry } from './enquiry';
+
+  function initContactForm() {
+    const form = document.querySelector<HTMLFormElement>('[data-bs-contact-form]');
+    if (!form || form.dataset.ready) return;
+    form.dataset.ready = 'true';
+
+    const button = form.querySelector<HTMLButtonElement>('button[type="submit"]');
+    const buttonText = form.querySelector<HTMLElement>('[data-bs-btn-text]');
+    const ok = form.querySelector<HTMLElement>('[data-bs-ok]');
+    const err = form.querySelector<HTMLElement>('[data-bs-err]');
+
+    const setSending = (sending: boolean) => {
+      if (!button || !buttonText) return;
+      button.disabled = sending;
+      buttonText.textContent = sending ? 'Sending…' : (button.dataset.label ?? 'Send message');
+    };
+
+    let busy = false;
+
+    form.addEventListener('submit', async (event) => {
+      event.preventDefault();
+      if (busy || !form.reportValidity()) return;
+
+      busy = true;
+      if (ok) ok.hidden = true;
+      if (err) err.hidden = true;
+      setSending(true);
+
+      try {
+        // Same submission path as every other form on the site
+        await sendEnquiry(form);
+        form.reset();
+        if (ok) ok.hidden = false;
+      } catch (error) {
+        console.error('Contact form error:', error);
+        if (err) err.hidden = false;
+      } finally {
+        busy = false;
+        setSending(false);
+      }
+    });
+  }
+
+  document.addEventListener('astro:page-load', initContactForm);
+</script>

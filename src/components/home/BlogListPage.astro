@@ -1,0 +1,112 @@
+---
+/**
+ * Basalt layout shared by the blog index, category and tag pages.
+ */
+import Layout from '~/layouts/PageLayout.astro';
+
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import './basalt.css';
+
+import BasaltHeader from './BasaltHeader.astro';
+import BasaltFooter from './BasaltFooter.astro';
+import PostList from './PostList.astro';
+import PostPager from './PostPager.astro';
+import ClosingCta from './ClosingCta.astro';
+import { bookingHref, innerNavItems, footerLinks, serviceLinks, headerCta } from './nav';
+import { getBlogPermalink } from '~/utils/permalinks';
+import type { MetaData, Post } from '~/types';
+
+export interface Props {
+  metadata: MetaData;
+  /** Mono line above the title, e.g. "Blog" or "Category" */
+  label: string;
+  title: string;
+  lede?: string;
+  posts: Post[];
+  prevUrl?: string;
+  nextUrl?: string;
+  /** Show a link back to all posts (category and tag pages) */
+  showAllLink?: boolean;
+}
+
+const { metadata, label, title, lede, posts, prevUrl, nextUrl, showAllLink = false } = Astro.props;
+---
+
+<Layout metadata={metadata}>
+  <BasaltHeader slot="header" items={innerNavItems} cta={headerCta} bookingHref={bookingHref} />
+
+  <div class="bs">
+    <section class="blist" aria-labelledby="blist-title">
+      <div class="bs-wrap">
+        <div class="blist__meta bs-mono">
+          <p>{label}</p>
+          {showAllLink ? <a href={getBlogPermalink()}>← All posts</a> : <p>CausewaySoft · Belfast</p>}
+        </div>
+        <h1 id="blist-title" class="blist__title bs-display">
+          {title}<span class="blist__stop">.</span>
+        </h1>
+        {lede && <p class="blist__lede bs-lede">{lede}</p>}
+
+        <div class="blist__list">
+          {posts.length ? <PostList posts={posts} /> : <p class="blist__empty">No posts here yet.</p>}
+          <PostPager prevUrl={prevUrl} nextUrl={nextUrl} />
+        </div>
+      </div>
+    </section>
+
+    <ClosingCta bookingHref={bookingHref} index="" />
+  </div>
+
+  <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />
+</Layout>
+
+<style>
+  .blist {
+    padding-top: clamp(28px, 4.5vw, 56px);
+    padding-bottom: clamp(72px, 10vw, 144px);
+  }
+
+  .blist__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  .blist__meta a {
+    color: var(--bs-ink);
+  }
+
+  .blist__meta a:hover {
+    color: var(--bs-signal);
+  }
+
+  .blist__title {
+    margin-top: clamp(36px, 5vw, 72px);
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+    max-width: 16ch;
+  }
+
+  .blist__stop {
+    color: var(--bs-signal);
+  }
+
+  .blist__lede {
+    margin-top: clamp(24px, 3vw, 36px);
+  }
+
+  .blist__list {
+    margin-top: clamp(48px, 6vw, 88px);
+  }
+
+  .blist__empty {
+    padding-block: 32px;
+    border-top: 1px solid var(--bs-rule);
+  }
+</style>
