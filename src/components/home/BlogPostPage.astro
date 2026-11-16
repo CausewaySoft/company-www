@@ -92,7 +92,7 @@ const share = [
 
         <!-- Body -->
         <div class="post__body">
-          <ArticleBody tocLabel="In this post">
+          <ArticleBody>
             <slot />
           </ArticleBody>
         </div>
@@ -190,7 +190,8 @@ const share = [
     letter-spacing: -0.02em;
     font-weight: 800;
     font-stretch: 68%;
-    max-width: 20ch;
+    /* About ten columns: most titles fit on two lines */
+    max-width: 27ch;
     text-wrap: balance;
   }
 
@@ -226,7 +227,7 @@ const share = [
     margin-top: clamp(40px, 5vw, 72px);
   }
 
-  /* Tags and share sit under the article text */
+  /* Tags and share sit under the article text, on the same edge */
   .post__foot {
     margin-top: 48px;
   }
@@ -284,11 +285,11 @@ const share = [
 
   @media (min-width: 900px) {
     .post__lede {
-      max-width: 36em;
+      max-width: 40em;
     }
 
     .post__foot-inner {
-      grid-column: 5 / span 7;
+      grid-column: 1 / span 8;
     }
   }
 </style>

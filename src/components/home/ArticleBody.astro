@@ -2,123 +2,42 @@
 /**
  * Long-form body for Basalt pages (blog posts, legal documents).
  *
- * The content goes in the default slot (Markdown/MDX output or plain HTML).
- * Every <h2> gets an id at build time and an entry in the contents list,
- * which sits in the label column and stays in view on desktop. Typography
- * covers everything the posts use: headings, lists, tables, code, quotes,
- * images, embeds and the old Tailwind callout boxes.
+ * The content goes in the default slot (Markdown/MDX output or plain HTML)
+ * and starts on the heading edge. Reading text keeps a comfortable line
+ * length (about 75 characters); code, tables and media use the full grid.
+ * Typography covers everything the posts use: headings, lists, tables,
+ * code, quotes, images, embeds and the old Tailwind callout boxes.
  */
-export interface Props {
-  /** Heading of the contents list */
-  tocLabel?: string;
-}
-
-const { tocLabel = 'On this page' } = Astro.props;
-
-const slugify = (text: string) =>
-  text
-    .toLowerCase()
-    .replace(/&[a-z#0-9]+;/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-const toc: { id: string; text: string }[] = [];
-const used = new Set<string>();
-const html = (await Astro.slots.render('default')).replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/g, (_m, attrs, inner) => {
-  const text = inner.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-  // Keep an id the content already has (e.g. Markdown heading ids)
-  const existing = attrs.match(/\sid="([^"]+)"/)?.[1];
-  const base = existing ?? (slugify(text) || 'section');
-  let id = base;
-  for (let n = 2; used.has(id); n++) id = `${base}-${n}`;
-  used.add(id);
-  toc.push({ id, text });
-  const cleanAttrs = attrs.replace(/\sid="[^"]*"/, '');
-  return `<h2${cleanAttrs} id="${id}">${inner}</h2>`;
-});
 ---
 
 <div class="ab bs-grid">
-  {
-    toc.length > 1 && (
-      <nav class="ab__toc" aria-label={tocLabel}>
-        <details class="ab__toc-box" open>
-          <summary class="bs-mono">{tocLabel}</summary>
-          <ol>
-            {toc.map((item) => (
-              <li>
-                <a href={`#${item.id}`}>{item.text}</a>
-              </li>
-            ))}
-          </ol>
-        </details>
-      </nav>
-    )
-  }
-
   <div class="ab__body">
-    <Fragment set:html={html} />
+    <slot />
   </div>
 </div>
 
 <style>
-  .ab {
-    row-gap: 32px;
-    align-items: start;
-  }
-
-  .ab__toc,
   .ab__body {
     grid-column: 1 / -1;
   }
 
-  /* Contents: collapsible on small screens, always open and sticky on desktop */
-  .ab__toc-box summary {
-    cursor: pointer;
-    list-style: none;
-    padding-block: 4px 12px;
-  }
-
-  .ab__toc-box summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .ab__toc-box summary::after {
-    content: ' +';
-  }
-
-  .ab__toc-box[open] summary::after {
-    content: ' –';
-  }
-
-  .ab__toc ol {
-    border-top: 1px solid var(--bs-rule);
-  }
-
-  .ab__toc li {
-    border-bottom: 1px solid var(--bs-rule);
-  }
-
-  .ab__toc a {
-    display: block;
-    padding-block: 9px;
-    font-size: 14px;
-    line-height: 1.4;
-    color: var(--bs-text);
-    transition: color 0.2s var(--bs-ease);
-  }
-
-  .ab__toc a:hover {
-    color: var(--bs-signal);
-  }
-
   /* ---------- Typography ---------- */
   .ab__body {
-    max-width: 42em;
+    --ab-size: 17px;
+    /* Reading measure, about 75 characters at the body size */
+    --ab-measure: calc(var(--ab-size) * 42);
     min-width: 0;
-    font-size: 17px;
+    font-size: var(--ab-size);
     line-height: 1.7;
     color: var(--bs-text);
+  }
+
+  /* Reading text stays on the measure; code, tables and media don't */
+  .ab__body
+    :global(
+      :is(p:not(:has(> img, > iframe, > video)), ul, ol, dl, h1, h2, h3, h4, h5, h6, blockquote, div[class*='border-l-4'])
+    ) {
+    max-width: var(--ab-measure);
   }
 
   .ab__body :global(> * + *),
@@ -332,23 +251,12 @@ const html = (await Astro.slots.render('default')).replace(/<h2([^>]*)>([\s\S]*?
   }
 
   @media (min-width: 900px) {
-    .ab__toc {
-      grid-column: 1 / span 3;
-      position: sticky;
-      top: 96px;
-    }
-
-    .ab__toc-box summary {
-      pointer-events: none;
-    }
-
-    .ab__toc-box summary::after,
-    .ab__toc-box[open] summary::after {
-      content: none;
-    }
-
     .ab__body {
-      grid-column: 5 / span 7;
+      --ab-size: 19px;
+    }
+
+    .ab__body :global(pre) {
+      font-size: 15px;
     }
   }
 </style>
