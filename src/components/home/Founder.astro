@@ -26,7 +26,12 @@ const { id = 'about', name, role, quote, body, facts } = Astro.props;
 
     <div class="founder__grid bs-grid" data-reveal>
       <figure class="founder__figure">
-        <Image src={portrait} alt={`Portrait of ${name}, founder of CausewaySoft`} widths={[333]} sizes="333px" />
+        <Image
+          src={portrait}
+          alt={`Portrait of ${name}, founder of CausewaySoft`}
+          widths={[480, 720, 960]}
+          sizes="(min-width: 1024px) 480px, min(480px, 100vw)"
+        />
         <figcaption class="bs-mono">
           <span class="founder__name">{name}</span>
           <span>{role}</span>
@@ -66,8 +71,9 @@ const { id = 'about', name, role, quote, body, facts } = Astro.props;
     grid-column: 1 / -1;
   }
 
+  /* Shown up to 480px; the source photo should be ~960px wide for 2x screens */
   .founder__figure {
-    max-width: 333px;
+    max-width: 480px;
   }
 
   .founder__figure img {
@@ -135,10 +141,10 @@ const { id = 'about', name, role, quote, body, facts } = Astro.props;
 
   @media (min-width: 1024px) {
     .founder__figure {
-      grid-column: 1 / span 4;
+      grid-column: 1 / span 5;
     }
     .founder__text {
-      grid-column: 6 / -1;
+      grid-column: 7 / -1;
     }
   }
 </style>
