@@ -16,8 +16,6 @@ metadata:
   canonical: https://causewaysoft.com/blog/calendar-api-example
 ---
 
-# Adding Calendar Events to Your AstroJS Blog
-
 In this tutorial, we'll explore how to create downloadable calendar events for your AstroJS blog using TypeScript API routes. This is perfect for webinars, events, workshops, or any time-sensitive content you want your readers to add to their calendars.
 
 ## What We'll Build
