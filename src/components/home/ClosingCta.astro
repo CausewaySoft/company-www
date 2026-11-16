@@ -12,7 +12,7 @@ const { bookingHref, index = '05', projectHref = '/contact?type=project' } = Ast
 <section class="cta" aria-labelledby="cta-title">
   <div class="bs-wrap">
     <div class="cta__inner" data-reveal>
-      <p class="bs-mono">{index} — Start a project</p>
+      <p class="bs-mono">{index ? `${index} — ` : ''}Start a project</p>
       <h2 id="cta-title" class="cta__title bs-display">
         What are we<br />building<span class="cta__q">?</span>
       </h2>

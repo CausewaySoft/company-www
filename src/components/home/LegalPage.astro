@@ -3,9 +3,8 @@
  * Basalt layout for legal documents (privacy policy, terms).
  *
  * The document goes in the default slot as plain HTML (<section>, <h2>, <p>,
- * <ul>). Each <h2> gets an id at build time and a matching entry in the
- * "On this page" contents, so no JS is needed. The wording itself is left
- * exactly as written.
+ * <ul>). ArticleBody adds the "On this page" contents and the typography.
+ * The wording itself is left exactly as written.
  */
 import Layout from '~/layouts/PageLayout.astro';
 
@@ -16,6 +15,7 @@ import './basalt.css';
 
 import BasaltHeader from './BasaltHeader.astro';
 import BasaltFooter from './BasaltFooter.astro';
+import ArticleBody from './ArticleBody.astro';
 import { bookingHref, innerNavItems, footerLinks, headerCta } from './nav';
 import type { MetaData } from '~/types';
 
@@ -26,26 +26,6 @@ export interface Props {
 }
 
 const { metadata, title, updated } = Astro.props;
-
-// Give every <h2> an id and collect them for the contents list
-const slugify = (text: string) =>
-  text
-    .toLowerCase()
-    .replace(/&[a-z#0-9]+;/g, '')
-    .replace(/[^a-z0-9]+/g, '-')
-    .replace(/^-+|-+$/g, '');
-
-const toc: { id: string; text: string }[] = [];
-const used = new Set<string>();
-const html = (await Astro.slots.render('default')).replace(/<h2([^>]*)>([\s\S]*?)<\/h2>/g, (_m, attrs, inner) => {
-  const text = inner.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim();
-  const base = slugify(text) || 'section';
-  let id = base;
-  for (let n = 2; used.has(id); n++) id = `${base}-${n}`;
-  used.add(id);
-  toc.push({ id, text });
-  return `<h2${attrs} id="${id}">${inner}</h2>`;
-});
 ---
 
 <Layout metadata={metadata}>
@@ -64,25 +44,10 @@ const html = (await Astro.slots.render('default')).replace(/<h2([^>]*)>([\s\S]*?
           </h1>
         </header>
 
-        <div class="legal__grid bs-grid">
-          <nav class="legal__toc" aria-label="On this page">
-            <details class="legal__toc-box" open>
-              <summary class="bs-mono">On this page</summary>
-              <ol>
-                {
-                  toc.map((item) => (
-                    <li>
-                      <a href={`#${item.id}`}>{item.text}</a>
-                    </li>
-                  ))
-                }
-              </ol>
-            </details>
-          </nav>
-
-          <div class="legal__body">
-            <Fragment set:html={html} />
-          </div>
+        <div class="legal__content">
+          <ArticleBody>
+            <slot />
+          </ArticleBody>
         </div>
       </div>
     </article>
@@ -117,160 +82,9 @@ const html = (await Astro.slots.render('default')).replace(/<h2([^>]*)>([\s\S]*?
     color: var(--bs-signal);
   }
 
-  .legal__grid {
+  .legal__content {
     margin-top: clamp(40px, 5vw, 72px);
     padding-top: 20px;
     border-top: 1px solid var(--bs-rule);
-    row-gap: 32px;
-    align-items: start;
-  }
-
-  .legal__toc,
-  .legal__body {
-    grid-column: 1 / -1;
-  }
-
-  /* Contents: collapsible on small screens, sticky alongside on desktop */
-  .legal__toc-box summary {
-    cursor: pointer;
-    list-style: none;
-    padding-block: 4px 12px;
-  }
-
-  .legal__toc-box summary::-webkit-details-marker {
-    display: none;
-  }
-
-  .legal__toc-box summary::after {
-    content: ' +';
-  }
-
-  .legal__toc-box[open] summary::after {
-    content: ' –';
-  }
-
-  .legal__toc ol {
-    border-top: 1px solid var(--bs-rule);
-  }
-
-  .legal__toc li {
-    border-bottom: 1px solid var(--bs-rule);
-  }
-
-  .legal__toc a {
-    display: block;
-    padding-block: 9px;
-    font-size: 14px;
-    line-height: 1.4;
-    color: var(--bs-text);
-    transition: color 0.2s var(--bs-ease);
-  }
-
-  .legal__toc a:hover {
-    color: var(--bs-signal);
-  }
-
-  /* Document typography (the content is plain HTML from the slot) */
-  .legal__body {
-    max-width: 42em;
-  }
-
-  .legal__body :global(section) {
-    scroll-margin-top: 96px;
-  }
-
-  .legal__body :global(section + section) {
-    margin-top: 40px;
-  }
-
-  .legal__body :global(h2) {
-    scroll-margin-top: 96px;
-    font-family: var(--bs-font-display);
-    font-stretch: 75%;
-    font-weight: 760;
-    font-size: clamp(26px, 2.4vw, 34px);
-    line-height: 1.05;
-    color: var(--bs-ink);
-    margin-bottom: 14px;
-  }
-
-  .legal__body :global(p),
-  .legal__body :global(li) {
-    font-size: 17px;
-    line-height: 1.7;
-    color: var(--bs-text);
-  }
-
-  .legal__body :global(p + p),
-  .legal__body :global(ul + p) {
-    margin-top: 14px;
-  }
-
-  .legal__body :global(ul) {
-    margin-top: 12px;
-    display: grid;
-    gap: 8px;
-  }
-
-  .legal__body :global(li) {
-    position: relative;
-    padding-left: 22px;
-  }
-
-  /* Square bullets, like the rest of the system */
-  .legal__body :global(li)::before {
-    content: '';
-    position: absolute;
-    left: 2px;
-    top: 0.72em;
-    width: 6px;
-    height: 6px;
-    background: var(--bs-signal);
-  }
-
-  .legal__body :global(strong) {
-    color: var(--bs-ink);
-    font-weight: 600;
-  }
-
-  .legal__body :global(code) {
-    font-family: var(--bs-font-mono);
-    font-size: 0.85em;
-    color: var(--bs-ink);
-  }
-
-  .legal__body :global(a) {
-    color: var(--bs-ink);
-    text-decoration: underline;
-    text-decoration-color: var(--bs-signal);
-    text-underline-offset: 0.3em;
-    overflow-wrap: anywhere;
-  }
-
-  .legal :focus-visible {
-    outline: 2px solid var(--bs-signal);
-    outline-offset: 3px;
-  }
-
-  @media (min-width: 900px) {
-    .legal__toc {
-      grid-column: 1 / span 3;
-      position: sticky;
-      top: 96px;
-    }
-
-    /* On desktop the contents are always open */
-    .legal__toc-box summary {
-      pointer-events: none;
-    }
-
-    .legal__toc-box summary::after,
-    .legal__toc-box[open] summary::after {
-      content: none;
-    }
-
-    .legal__body {
-      grid-column: 5 / span 7;
-    }
   }
 </style>

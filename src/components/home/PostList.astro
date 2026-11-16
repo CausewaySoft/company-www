@@ -1,0 +1,146 @@
+---
+/**
+ * Typographic list of blog posts (blog index, categories, tags, related
+ * posts). Date on the left, title on the page's left edge, excerpt in the
+ * text column, like the home page's services list.
+ */
+import type { Post } from '~/types';
+import { getPermalink } from '~/utils/permalinks';
+import { getFormattedDate } from '~/utils/utils';
+
+export interface Props {
+  posts: Post[];
+  /** Smaller titles, e.g. for related posts */
+  compact?: boolean;
+}
+
+const { posts, compact = false } = Astro.props;
+---
+
+<ol class:list={['pl', { 'pl--compact': compact }]}>
+  {
+    posts.map((post) => (
+      <li>
+        <a class="pl__row bs-grid" href={getPermalink(post.permalink, 'post')}>
+          <span class="pl__meta bs-mono">
+            <time datetime={post.publishDate.toISOString()}>{getFormattedDate(post.publishDate)}</time>
+            {post.readingTime && <span>{post.readingTime} min read</span>}
+          </span>
+          <span class="pl__title bs-display">{post.title}</span>
+          <span class="pl__side">
+            {post.category && <span class="pl__category bs-mono">{post.category.title}</span>}
+            {post.excerpt && <span class="pl__excerpt">{post.excerpt}</span>}
+            <span class="pl__read bs-mono">
+              Read <span aria-hidden="true">→</span>
+            </span>
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .pl {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .pl__row {
+    position: relative;
+    padding-block: clamp(24px, 3vw, 40px);
+    border-top: 1px solid var(--bs-rule);
+    row-gap: 12px;
+    align-items: baseline;
+    color: var(--bs-text);
+  }
+
+  /* Signal rule that draws across on hover/focus */
+  .pl__row::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: -1px;
+    height: 2px;
+    background: var(--bs-signal);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.6s var(--bs-ease);
+  }
+
+  .pl__row:hover::before,
+  .pl__row:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  .pl__row:focus-visible {
+    outline: 2px solid var(--bs-signal);
+    outline-offset: 4px;
+  }
+
+  .pl__meta,
+  .pl__title,
+  .pl__side {
+    grid-column: 1 / -1;
+  }
+
+  .pl__meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2px 16px;
+  }
+
+  .pl__title {
+    font-size: clamp(30px, 3.4vw, 50px);
+    line-height: 1;
+    text-wrap: balance;
+    transition: transform 0.6s var(--bs-ease);
+  }
+
+  .pl__row:hover .pl__title {
+    transform: translateX(6px);
+  }
+
+  .pl--compact .pl__title {
+    font-size: clamp(24px, 2.4vw, 34px);
+  }
+
+  .pl__side {
+    display: grid;
+    gap: 10px;
+  }
+
+  .pl__category {
+    color: var(--bs-ink);
+  }
+
+  .pl__excerpt {
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 32em;
+  }
+
+  .pl__read {
+    color: var(--bs-ink);
+    transition: color 0.2s;
+  }
+
+  .pl__row:hover .pl__read {
+    color: var(--bs-signal);
+  }
+
+  @media (min-width: 900px) {
+    .pl__meta {
+      grid-column: 1 / span 2;
+      flex-direction: column;
+    }
+
+    .pl__title {
+      grid-column: 3 / span 5;
+    }
+
+    .pl__side {
+      grid-column: 9 / -1;
+    }
+  }
+</style>

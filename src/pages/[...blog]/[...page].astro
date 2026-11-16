@@ -1,12 +1,7 @@
 ---
 import type { InferGetStaticPropsType, GetStaticPaths } from 'astro';
 
-import Layout from '~/layouts/PageLayout.astro';
-import BlogList from '~/components/blog/List.astro';
-import Headline from '~/components/blog/Headline.astro';
-import Pagination from '~/components/blog/Pagination.astro';
-// import PostTags from "~/components/blog/Tags.astro";
-
+import BlogListPage from '~/components/home/BlogListPage.astro';
 import { blogListRobots, getStaticPathsBlogList } from '~/utils/blog';
 
 export const prerender = true;
@@ -20,11 +15,10 @@ type Props = InferGetStaticPropsType<typeof getStaticPaths>;
 const { page } = Astro.props as Props;
 const currentPage = page.currentPage ?? 1;
 
-// const allCategories = await findCategories();
-// const allTags = await findTags();
-
 const metadata = {
   title: `Blog${currentPage > 1 ? ` — Page ${currentPage}` : ''}`,
+  description:
+    'Practical writing from CausewaySoft on websites, software, accessibility and funding for businesses in Northern Ireland and beyond.',
   robots: {
     index: blogListRobots?.index && currentPage === 1,
     follow: blogListRobots?.follow,
@@ -35,18 +29,12 @@ const metadata = {
 };
 ---
 
-<Layout metadata={metadata}>
-  <section class="px-6 sm:px-6 py-12 sm:py-16 lg:py-20 mx-auto max-w-4xl">
-    <Headline
-      subtitle="Stay up to date with business and technology news, practical tutorials, and resources to help you digitally transform your business."
-    >
-      Transform Your Business with the CausewaySoft Blog
-    </Headline>
-    <BlogList posts={page.data} />
-    <Pagination prevUrl={page.url.prev} nextUrl={page.url.next} />
-    <!--
-      <PostTags tags={allCategories} class="mb-2" title="Search by Categories:" isCategory />
-      <PostTags tags={allTags}  title="Search by Tags:" />
-    -->
-  </section>
-</Layout>
+<BlogListPage
+  metadata={metadata}
+  label={`Blog${currentPage > 1 ? ` · Page ${currentPage}` : ''}`}
+  title="Notes from the studio"
+  lede="Practical writing on websites, software, accessibility and funding: what we’ve learned building for businesses in Northern Ireland and beyond."
+  posts={page.data}
+  prevUrl={page.url.prev}
+  nextUrl={page.url.next}
+/>
