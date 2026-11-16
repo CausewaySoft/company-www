@@ -5,6 +5,104 @@ but not scheduled. Newest first.
 
 ---
 
+## Founder photo: sharper source, then decide on size
+
+**Status:** Waiting on a new photo export from Mateusz, then review
+**Area:** `src/components/home/Founder.astro`,
+`src/assets/images/causewaysoft-founder-pic.jpg`
+**Added:** 2026-11-16
+
+### Where things stand
+
+The founder section on the home page (`/#about`) was made larger on
+2026-11-16:
+
+- The photo moved from columns 1–4 (capped at 333 × 416px) to columns 1–5,
+  up to **480 × 600px** at a 1440px window (about 44% wider, roughly twice
+  the area). The text block (quote, story, facts) moved to columns 7–12, so
+  a gap column stays between them.
+- The `<Image>` asks for 480, 720 and 960px versions, so a larger source is
+  picked up automatically with no code change.
+- The current source file is only **333 × 416px**. It was deliberately
+  exported small for privacy (to limit high-quality reuse of the face and
+  reduce its value for AI training). At 480px it's stretched, so it looks
+  soft, and softness takes visual weight away from a photo. This is the
+  main reason the bigger size was barely noticeable.
+
+### Privacy reasoning (agreed)
+
+- A small file mainly stops *quality* reuse (print, convincing fake
+  profiles, high-detail face models). It doesn't stop recognition or
+  training: face recognition works on faces around 100px across, and the
+  333px photo was already larger than that.
+- The site has been public for about a month, so the 333px photo is very
+  likely already in the Internet Archive, Common Crawl and the search
+  engines' image indexes. The face is also public on LinkedIn. Privacy is no
+  longer a strong reason either way; decide on design and trust.
+- A real photo builds trust for a one-person studio: it shows a real,
+  specific person stands behind the work. A drawing would put a stylised
+  layer between Mateusz and the client.
+- Done on the same day to protect against future crawls: `public/robots.txt`
+  now blocks AI training and dataset crawlers from the whole site (the old
+  file listed them without a rule, so it blocked nothing), and every page
+  has `<meta name="robots" content="noai, noimageai">`. AI search assistants
+  that fetch a page when a person asks about it (ChatGPT-User,
+  PerplexityBot, DuckAssistBot) are still allowed, because they cite and
+  link to the site.
+
+### Next step
+
+1. Export the original portrait at **960 × 1200px** (4:5, the same crop as
+   now) and save it over `src/assets/images/causewaysoft-founder-pic.jpg`.
+   That's sharp at 480px on 2x (retina) screens and is the largest version
+   the current layout uses.
+2. Look at the section again with the sharp image before changing the
+   layout. A crisp black-and-white portrait at 480px may be all the presence
+   it needs.
+
+### Option A: six columns, a 50/50 split (if it still feels small)
+
+- Photo in columns 1–6 (about 600 × 750px at 1440px), text in 7–12. About
+  3.2× the original area.
+- The section becomes a portrait next to a story, rather than text with a
+  picture beside it.
+- Matches the rhythm of the Work section above, which already puts a large
+  image next to text at about half and half, so the page reads as one
+  system.
+- Small change (column positions, the `max-width` and the `widths`/`sizes`
+  on the `<Image>`), clear payoff.
+- Needs a **1200 × 1500px** source to be sharp on retina screens. That's
+  larger than the privacy limit chosen earlier, so it's a conscious
+  decision; at 960px it still looks fine on standard screens and only
+  slightly soft on retina ones.
+- **Recommended** if the sharp 480px version still feels weak.
+
+### Option B: photo-led layout (not for the home page; consider for an About page)
+
+- The photo is larger still, with the quote overlapping its edge or set
+  directly beneath it, and the facts moved below. More editorial and
+  striking, but a redesign of the section rather than a size change.
+- **Why not on the home page:**
+  - The home page already has two big image moments: the Giant's Causeway
+    drawing in the hero and the large project images in Work. A third
+    dramatic, photo-led section flattens the hierarchy, because when
+    everything is big, nothing stands out.
+  - The founder section sits just before the closing call to action. Its
+    job is to feel quiet and confident: a real person, a clear quote, plain
+    facts. A quote overlapping the photo works against that calm.
+- **Where it would fit:** a future dedicated About page, where the founder
+  *is* the subject. There, a large photo-led layout makes sense.
+
+### Related idea: a charcoal portrait
+
+A charcoal drawing of Mateusz, in the same style as the Giant's Causeway hero
+drawing. On-brand, can be any size, and useless as face data for scraping or
+deepfakes. Not chosen for the home page, because a real photo builds more
+trust there. Could work on a future About page *alongside* the photo (for
+example with option B), not instead of it.
+
+---
+
 ## Delete the old blog components
 
 **Status:** Ready to do, not started
