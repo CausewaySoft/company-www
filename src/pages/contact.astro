@@ -1,101 +1,377 @@
 ---
+/**
+ * Contact page: Basalt redesign.
+ * Art direction: docs/design-review-claude-opus5.5.md
+ */
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
+
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '~/components/home/basalt.css';
+
+import BasaltHeader from '~/components/home/BasaltHeader.astro';
+import BasaltFooter from '~/components/home/BasaltFooter.astro';
+import SectionHead from '~/components/home/SectionHead.astro';
+import ContactForm from '~/components/home/ContactForm.astro';
+import ProjectWizard from '~/components/home/ProjectWizard.astro';
+import {
+  bookingHref,
+  linkedInHref,
+  innerNavItems as navItems,
+  footerLinks,
+  serviceLinks,
+  headerCta,
+} from '~/components/home/nav';
+
+/**
+ * Two experiences on one page:
+ *   /contact               general contact (the simple contact form)
+ *   /contact?type=project  project discovery wizard
+ * The query parameter picks the initial one (see the inline script below).
+ */
+
+// Keep in line with the real reply workflow; used across both experiences
+const responseTime = 'within one business day';
 
 const metadata = {
   title: 'Contact',
+  description:
+    'Get in touch or start a project: websites, web applications, AI solutions and custom software from an independent studio in Belfast, Northern Ireland.',
 };
+
+const nextSteps = [
+  {
+    title: 'We reply',
+    description: `A personal reply ${responseTime}, from the engineer who would build it. No sales team, no autoresponder.`,
+  },
+  {
+    title: 'A short call',
+    description:
+      'A free 30-minute conversation to understand the goal, the people it serves and what success looks like.',
+  },
+  {
+    title: 'A clear proposal',
+    description: 'Scope, timeline and price in writing, with a recommendation and the reasoning behind it.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <!-- HeroText Widget ******************* -->
+  <BasaltHeader slot="header" items={navItems} cta={headerCta} bookingHref={bookingHref} />
 
-  <HeroText tagline="Contact" title="Let's Connect!" />
+  <div class="bs contact" id="contact-mode" data-mode="contact">
+    <!-- Pick the experience before first paint, so nothing flashes -->
+    <script is:inline>
+      (function () {
+        if (new URLSearchParams(location.search).get('type') === 'project') {
+          document.getElementById('contact-mode').dataset.mode = 'project';
+          document.title = 'Start a project — CausewaySoft';
+        }
+      })();
+    </script>
 
-  <ContactUs
-    id="form"
-    title="Drop us a message today!"
-    subtitle="For quicker answers, explore our FAQs section. You may find the solution you're looking  for right there! If not, our support team is delighted to help you."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Name',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-    }}
-    disclaimer={{
-      label:
-        'By submitting this contact form, you acknowledge and agree to the collection of your personal information.',
-    }}
-    description="Our support team typically responds within 24 business hours."
-  />
+    <!-- Intro -->
+    <section class="intro" aria-labelledby="contact-title">
+      <div class="bs-wrap">
+        <div class="intro__meta bs-mono">
+          <p>Contact · Belfast, Northern Ireland</p>
+          <p>Replies {responseTime}</p>
+        </div>
 
-  <!-- Features2 Widget ************** -->
-<!-- 
-  <Features2
-    title="We are here to help!"
-    items={[
-      {
-        title: 'Phone',
-        description: 'anti-spam protection, please enable javascript...',
-        icon: 'tabler:headset',
-        classes: { ctaLinks: 'phoneLink' },
-        link: '/',
-      },
-      {
-        title: 'Email',
-        description: 'anti-spam protection, please enable javascript...',
-        icon: 'tabler:mail',
-        classes: { ctaLinks: 'emailLink' },
-        link: '/',
-      },
-      {
-        title: 'Book a Meeting',
-        description: 'Schedule a Video-Call consultation with us.',
-        icon: 'tabler:calendar',
-        link: 'https://calendly.com/causewaysoft',
-      },
-    ]}
-  /> -->
-<!-- 
-  <Features2
-    title="We are social! Give us a follow!"
-    columns={4}
-    items={[
-      {
-        title: 'LinkedIn',
-        description: '@causewaysoft',
-        link: 'https://www.linkedin.com/company/causewaysoft',
-        icon: 'tabler:brand-linkedin',
-      },
-      {
-        title: 'Instagram',
-        description: '@causewaysoft',
-        link: 'https://www.instagram.com/causewaysoft',
-        icon: 'tabler:brand-instagram',
-      },
-      {
-        title: 'Facebook',
-        description: '@causewaysoft',
-        link: 'https://www.facebook.com/CausewaySoft',
-        icon: 'tabler:brand-facebook',
-      },
-      {
-        title: 'X',
-        description: '@causewaysoft',
-        link: 'https://x.com/CausewaySoft',
-        icon: 'tabler:brand-x',
-      },
-    ]}
-  /> -->
+        <div class="only-contact">
+          <h1 id="contact-title" class="intro__title bs-display">
+            Get in touch<span class="intro__stop">.</span>
+          </h1>
+          <p class="intro__lede bs-lede">
+            A question, an idea or a quick hello. Send a message and you’ll hear back from Mateusz, the engineer who
+            would build it.
+          </p>
+          <p class="intro__switch">
+            Starting a new project? <a href="/contact?type=project"
+              >Use the project planner <span aria-hidden="true">→</span></a
+            >
+          </p>
+        </div>
+
+        <div class="only-project">
+          <h1 class="intro__title bs-display">
+            Let’s plan your project<span class="intro__stop">.</span>
+          </h1>
+          <p class="intro__lede bs-lede">
+            Four short steps, about two minutes. I’ll read every answer myself and reply with honest next steps.
+          </p>
+          <p class="intro__switch">
+            Just have a question? <a href="/contact">Send a quick message instead <span aria-hidden="true">→</span></a>
+          </p>
+          <p class="intro__switch">
+            Rather talk it through?
+            <a href={bookingHref} target="_blank" rel="noopener">
+              Book a free 30-minute call <span aria-hidden="true">↗</span>
+              <span class="sr-only">(opens in a new tab)</span>
+            </a>
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- The form for this experience, and other ways to get in touch -->
+    <section class="start" id="start" aria-label="Get in touch">
+      <div class="bs-wrap">
+        <div class="bs-grid start__grid">
+          <div class="start__form">
+            <div class="only-contact">
+              <ContactForm />
+            </div>
+            <div class="only-project">
+              <ProjectWizard responseTime={responseTime} />
+            </div>
+          </div>
+
+          <!-- Contact directory: plain contact journey only; the planner stays focused -->
+          <aside class="start__aside only-contact" aria-labelledby="other-ways">
+            <h2 id="other-ways" class="bs-mono start__aside-title">Prefer something else?</h2>
+            <dl class="start__spec">
+              <div>
+                <dt class="bs-mono">Call</dt>
+                <dd>
+                  <a href={bookingHref} target="_blank" rel="noopener">
+                    Book a free 30-minute call <span aria-hidden="true">↗</span>
+                    <span class="sr-only">(opens in a new tab)</span>
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Email</dt>
+                <dd><a class="emailLink" href="mailto:">Shown when JavaScript is on</a></dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Phone</dt>
+                <dd><a class="phoneLink" href="tel:">Shown when JavaScript is on</a></dd>
+              </div>
+              <div>
+                <dt class="bs-mono">LinkedIn</dt>
+                <dd>
+                  <a href={linkedInHref} target="_blank" rel="noopener">
+                    @causewaysoft <span aria-hidden="true">↗</span>
+                    <span class="sr-only">(opens in a new tab)</span>
+                  </a>
+                </dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Studio</dt>
+                <dd>Belfast, Northern Ireland</dd>
+              </div>
+              <div>
+                <dt class="bs-mono">Hours</dt>
+                <dd>Monday to Friday, UK time</dd>
+              </div>
+            </dl>
+          </aside>
+        </div>
+      </div>
+    </section>
+
+    <!-- What happens next -->
+    <section class="next bs-section" aria-labelledby="next-title">
+      <div class="bs-wrap">
+        <SectionHead
+          id="next-title"
+          index="01"
+          label="What happens next"
+          title="No sales team. No pressure."
+          lede="Every enquiry is read and answered by the person who would design and build your project."
+        />
+        <ol class="next__list">
+          {
+            nextSteps.map((step, i) => (
+              <li class="next__item">
+                <span class="bs-mono next__num">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="next__title bs-display">{step.title}</h3>
+                <p class="next__desc">{step.description}</p>
+              </li>
+            ))
+          }
+        </ol>
+      </div>
+    </section>
+  </div>
+
+  <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />
 </Layout>
+
+<style>
+  /* One page, two experiences: ?type=project switches data-mode */
+  .contact[data-mode='contact'] .only-project,
+  .contact[data-mode='project'] .only-contact {
+    display: none;
+  }
+
+  /* Intro */
+  .intro {
+    padding-top: clamp(28px, 4.5vw, 56px);
+  }
+
+  .intro__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  .intro__title {
+    margin-top: clamp(36px, 5vw, 72px);
+    font-size: clamp(52px, 8vw, 120px);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+    max-width: 12ch;
+  }
+
+  .intro__stop {
+    color: var(--bs-signal);
+  }
+
+  .intro__lede {
+    margin-top: clamp(24px, 3vw, 40px);
+  }
+
+  .intro__switch {
+    margin-top: 16px;
+    font-size: 15px;
+    color: var(--bs-muted);
+  }
+
+  .intro__switch + .intro__switch {
+    margin-top: 4px;
+  }
+
+  .intro__switch a {
+    /* Wrap as a whole link, never leaving the arrow on its own line */
+    white-space: nowrap;
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-rule);
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .intro__switch a:hover {
+    text-decoration-color: var(--bs-signal);
+  }
+
+  /* Form and aside */
+  .start {
+    padding-block: clamp(56px, 7vw, 104px) clamp(72px, 10vw, 144px);
+  }
+
+  .start__grid {
+    row-gap: 64px;
+    border-top: 1px solid var(--bs-rule);
+    padding-top: clamp(32px, 4vw, 56px);
+  }
+
+  .start__form,
+  .start__aside {
+    grid-column: 1 / -1;
+  }
+
+  .start__aside-title {
+    margin-bottom: 12px;
+  }
+
+  .start__spec {
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .start__spec > div {
+    display: grid;
+    grid-template-columns: 6.5em 1fr;
+    gap: 16px;
+    align-items: baseline;
+    padding-block: 14px;
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .start__spec dd {
+    font-size: 15px;
+    color: var(--bs-ink);
+    overflow-wrap: anywhere;
+  }
+
+  .start__spec a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-rule);
+    text-underline-offset: 0.3em;
+    transition: text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .start__spec a:hover {
+    text-decoration-color: var(--bs-signal);
+  }
+
+  /* What happens next */
+  .next__list {
+    margin-top: clamp(40px, 5vw, 72px);
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .next__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    column-gap: 16px;
+    row-gap: 8px;
+    padding-block: 24px;
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .next__num {
+    grid-row: 1 / span 2;
+    color: var(--bs-ink);
+    padding-top: 6px;
+  }
+
+  .next__title {
+    font-size: clamp(28px, 2.6vw, 38px);
+    line-height: 1;
+  }
+
+  .next__desc {
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 32em;
+  }
+
+  @media (min-width: 900px) {
+    /* Same two edges as the home page: form on the left, details in the text column */
+    .start__form {
+      grid-column: 1 / span 7;
+    }
+
+    .start__aside {
+      grid-column: 9 / -1;
+    }
+
+    .next__list {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      column-gap: clamp(16px, 2vw, 32px);
+      border-bottom: 1px solid var(--bs-rule);
+    }
+
+    .next__item {
+      grid-template-columns: 1fr;
+      align-content: start;
+      padding-block: 24px 32px;
+      border-bottom: 0;
+    }
+
+    .next__num {
+      grid-row: auto;
+      padding-top: 0;
+    }
+  }
+</style>

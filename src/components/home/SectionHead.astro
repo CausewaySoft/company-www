@@ -1,0 +1,75 @@
+---
+/**
+ * Section opener: a full-width hairline, the mono index label, then the
+ * heading and lede on the page's two shared edges:
+ *   - heading: columns 1–7, the page's left edge (same as the hero
+ *     headline and the work images)
+ *   - lede: columns 9–12, the text column (same as the project text),
+ *     bottom-aligned with the heading
+ * On small screens everything stacks on the left edge.
+ */
+export interface Props {
+  index: string;
+  label: string;
+  title: string;
+  lede?: string;
+  id?: string;
+}
+
+const { index, label, title, lede, id } = Astro.props;
+---
+
+<header class="head bs-grid" data-reveal>
+  <p class="head__label bs-mono">
+    <span class="head__index">{index}</span>
+    <span aria-hidden="true">—</span>
+    {label}
+  </p>
+  <h2 class="head__title bs-display" id={id}>{title}</h2>
+  {lede && <p class="head__lede bs-lede">{lede}</p>}
+</header>
+
+<style>
+  .head {
+    border-top: 1px solid var(--bs-rule);
+    padding-top: 20px;
+    row-gap: 24px;
+  }
+
+  .head__label,
+  .head__title,
+  .head__lede {
+    grid-column: 1 / -1;
+  }
+
+  .head__label {
+    display: flex;
+    gap: 0.6em;
+  }
+
+  .head__index {
+    color: var(--bs-ink);
+  }
+
+  .head__title {
+    margin-top: clamp(8px, 2vw, 24px);
+    font-size: clamp(44px, 6.4vw, 96px);
+  }
+
+  @media (min-width: 900px) {
+    .head {
+      align-items: end;
+    }
+
+    .head__title {
+      grid-column: 1 / span 7;
+    }
+
+    .head__lede {
+      grid-column: 9 / -1;
+      grid-row: 2;
+      /* sit on the heading's last baseline, not its descender box */
+      padding-bottom: 0.4em;
+    }
+  }
+</style>

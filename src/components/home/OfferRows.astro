@@ -1,0 +1,102 @@
+---
+/**
+ * Anchored offer rows for service pages: number and audience, title on the
+ * page's left edge, description and typical examples in the text column.
+ * Each row's `id` is the section anchor (e.g. /services/websites#ecommerce).
+ */
+export interface Offer {
+  id: string;
+  title: string;
+  audience: string;
+  description: string;
+  examples: string[];
+  proof?: { text: string; href: string };
+}
+
+export interface Props {
+  items: Offer[];
+}
+
+const { items } = Astro.props;
+---
+
+<ol class="caps">
+  {
+    items.map((o, i) => (
+      <li class="cap bs-grid" id={o.id} data-reveal>
+        <div class="cap__head">
+          <p class="bs-mono cap__meta">
+            <span class="cap__num">{String(i + 1).padStart(2, '0')}</span> · {o.audience}
+          </p>
+          <h3 class="cap__title bs-display">{o.title}</h3>
+        </div>
+        <div class="cap__body">
+          <p class="cap__desc">{o.description}</p>
+          <p class="cap__tags bs-mono">{o.examples.join(' · ')}</p>
+          {o.proof && (
+            <a class="bs-link cap__proof" href={o.proof.href}>
+              {o.proof.text} <span aria-hidden="true">↓</span>
+            </a>
+          )}
+        </div>
+      </li>
+    ))
+  }
+</ol>
+
+<style>
+  .caps {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .cap {
+    padding-block: clamp(26px, 3vw, 40px);
+    border-top: 1px solid var(--bs-rule);
+    row-gap: 16px;
+    align-items: start;
+    scroll-margin-top: 96px;
+  }
+
+  .cap__head,
+  .cap__body {
+    grid-column: 1 / -1;
+  }
+
+  .cap__num {
+    color: var(--bs-ink);
+  }
+
+  .cap__title {
+    margin-top: 10px;
+    font-size: clamp(34px, 4vw, 58px);
+  }
+
+  .cap__desc {
+    font-size: 17px;
+    line-height: 1.6;
+  }
+
+  .cap__tags {
+    margin-top: 14px;
+    text-transform: none;
+    letter-spacing: 0.04em;
+    font-size: 13px;
+    color: var(--bs-text);
+  }
+
+  .cap__proof {
+    display: inline-block;
+    margin-top: 16px;
+  }
+
+  @media (min-width: 900px) {
+    .cap__head {
+      grid-column: 1 / span 7;
+    }
+
+    .cap__body {
+      grid-column: 9 / -1;
+      padding-top: 26px;
+    }
+  }
+</style>

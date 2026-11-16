@@ -1,24 +1,298 @@
 ---
-import Layout from '~/layouts/Layout.astro';
-import { getHomePermalink } from '~/utils/permalinks';
+/**
+ * 404 page: Basalt redesign.
+ * A row of basalt columns with one missing: the gap is the page that
+ * isn't here. Then the most useful places to go next.
+ */
+import Layout from '~/layouts/PageLayout.astro';
 
-const title = `Error 404`;
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '~/components/home/basalt.css';
+
+import BasaltHeader from '~/components/home/BasaltHeader.astro';
+import BasaltFooter from '~/components/home/BasaltFooter.astro';
+import { bookingHref, innerNavItems, footerLinks, serviceLinks, headerCta } from '~/components/home/nav';
+
+const metadata = {
+  title: 'Page not found',
+  robots: { index: false, follow: true },
+};
+
+// Column heights (%) for the row of stones; null is the missing one
+const stones = [38, 55, 47, 72, null, 64, 86, 58, 74, 100, 82];
+
+const routes = [
+  {
+    title: 'Websites',
+    description: 'Business websites, e-commerce and AI-enhanced websites.',
+    href: '/services/websites',
+  },
+  {
+    title: 'Web applications & custom software',
+    description: 'Business applications, SaaS & MVPs, PWAs, AI features and automation.',
+    href: '/services/web-applications',
+  },
+  {
+    title: 'Recent work',
+    description: 'Products we’ve built that are live and in use.',
+    href: '/#work',
+  },
+  {
+    title: 'Contact',
+    description: 'A question, an idea or a project. We reply within one business day.',
+    href: '/contact',
+  },
+];
 ---
 
-<Layout metadata={{ title }}>
-  <section class="flex items-center h-full p-16">
-    <div class="container flex flex-col items-center justify-center px-5 mx-auto my-8">
-      <div class="max-w-md text-center">
-        <h2 class="mb-8 font-bold text-9xl">
-          <span class="sr-only">Error</span>
-          <span class="text-primary">404</span>
-        </h2>
-        <p class="text-3xl font-semibold md:text-3xl">Sorry, we couldn't find this page.</p>
-        <p class="mt-4 mb-8 text-lg text-muted dark:text-slate-400">
-          But dont worry, you can find plenty of other things on our homepage.
-        </p>
-        <a rel="noopener noreferrer" href={getHomePermalink()} class="btn ml-4">Back to homepage</a>
+<Layout metadata={metadata}>
+  <BasaltHeader slot="header" items={innerNavItems} cta={headerCta} bookingHref={bookingHref} />
+
+  <div class="bs">
+    <section class="nf" aria-labelledby="nf-title">
+      <div class="bs-wrap">
+        <div class="nf__meta bs-mono">
+          <p>Error 404 · Page not found</p>
+          <p>Giant’s Causeway, Co. Antrim</p>
+        </div>
+
+        <!-- The missing column -->
+        <div class="nf__stones" aria-hidden="true">
+          {
+            stones.map((h, i) =>
+              h === null ? (
+                <div class="nf__stone nf__stone--gap">
+                  <span class="bs-mono">404</span>
+                </div>
+              ) : (
+                <div class="nf__stone" style={`--h:${h}%; --i:${i}`} />
+              )
+            )
+          }
+        </div>
+
+        <div class="nf__grid bs-grid">
+          <div class="nf__text">
+            <h1 id="nf-title" class="nf__title bs-display">
+              There’s a gap in the stones<span class="nf__stop">.</span>
+            </h1>
+            <p class="nf__lede bs-lede">
+              The page you were looking for has moved or no longer exists. Everything else is still standing.
+            </p>
+            <p class="nf__note">
+              <span class="bs-mono">Looking for PWAs or AI solutions?</span>
+              <span>
+                They’re now part of
+                <a href="/services/web-applications#pwa">Web applications &amp; custom software</a>.
+              </span>
+            </p>
+            <a class="bs-btn nf__home" href="/"
+              >Back to the homepage <span class="bs-arrow" aria-hidden="true">→</span></a
+            >
+          </div>
+
+          <nav class="nf__routes" aria-label="Where to go next">
+            <p class="bs-mono nf__routes-title">Where to go next</p>
+            <ul>
+              {
+                routes.map((r) => (
+                  <li>
+                    <a href={r.href}>
+                      <span class="nf__route-title bs-display">{r.title}</span>
+                      <span class="nf__route-desc">{r.description}</span>
+                      <span class="nf__route-arrow" aria-hidden="true">
+                        →
+                      </span>
+                    </a>
+                  </li>
+                ))
+              }
+            </ul>
+          </nav>
+        </div>
       </div>
-    </div>
-  </section>
+    </section>
+  </div>
+
+  <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />
 </Layout>
+
+<style>
+  .nf {
+    padding-top: clamp(28px, 4.5vw, 56px);
+    padding-bottom: clamp(72px, 10vw, 144px);
+  }
+
+  .nf__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  /* Row of basalt columns, rising from a shared hairline */
+  .nf__stones {
+    display: grid;
+    grid-template-columns: repeat(11, minmax(0, 1fr));
+    align-items: end;
+    gap: clamp(4px, 0.8vw, 12px);
+    height: clamp(140px, 22vw, 300px);
+    margin-top: clamp(36px, 5vw, 72px);
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .nf__stone {
+    height: var(--h);
+    background: var(--bs-surface);
+    border: 1px solid var(--bs-rule);
+    border-bottom: 0;
+    clip-path: polygon(0 12px, 100% 0, 100% 100%, 0 100%);
+  }
+
+  /* Each stone settles into place; the gap stays put */
+  @media (prefers-reduced-motion: no-preference) {
+    .nf__stone:not(.nf__stone--gap) {
+      transform-origin: bottom;
+      animation: nf-rise 0.9s var(--bs-ease) both;
+      animation-delay: calc(var(--i) * 50ms);
+    }
+  }
+
+  @keyframes nf-rise {
+    from {
+      transform: scaleY(0.2);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  .nf__stone--gap {
+    height: 62%;
+    display: grid;
+    place-items: center;
+    background: transparent;
+    border: 1px dashed var(--bs-signal);
+    border-bottom: 0;
+    clip-path: none;
+  }
+
+  .nf__stone--gap .bs-mono {
+    color: var(--bs-signal);
+    letter-spacing: 0.04em;
+  }
+
+  /* Text and routes */
+  .nf__grid {
+    margin-top: clamp(40px, 5vw, 72px);
+    row-gap: 56px;
+    align-items: start;
+  }
+
+  .nf__text,
+  .nf__routes {
+    grid-column: 1 / -1;
+  }
+
+  .nf__title {
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+    max-width: 12ch;
+  }
+
+  .nf__stop {
+    color: var(--bs-signal);
+  }
+
+  .nf__lede {
+    margin-top: clamp(24px, 3vw, 36px);
+  }
+
+  .nf__note {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 4px 10px;
+    font-size: 15px;
+    color: var(--bs-text);
+  }
+
+  .nf__note a {
+    color: var(--bs-ink);
+    text-decoration: underline;
+    text-decoration-color: var(--bs-signal);
+    text-underline-offset: 0.3em;
+  }
+
+  .nf__home {
+    margin-top: 32px;
+  }
+
+  .nf__routes-title {
+    margin-bottom: 12px;
+  }
+
+  .nf__routes ul {
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .nf__routes li {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .nf__routes a {
+    position: relative;
+    display: grid;
+    gap: 4px;
+    padding: 16px 40px 16px 0;
+    color: var(--bs-text);
+  }
+
+  .nf__route-title {
+    font-size: clamp(24px, 2vw, 30px);
+    line-height: 1.05;
+    transition: color 0.2s var(--bs-ease);
+  }
+
+  .nf__route-desc {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--bs-muted);
+  }
+
+  .nf__route-arrow {
+    position: absolute;
+    right: 0;
+    top: 18px;
+    font-size: 22px;
+    color: var(--bs-ink);
+    transition:
+      transform 0.3s var(--bs-ease),
+      color 0.2s;
+  }
+
+  .nf__routes a:hover .nf__route-title,
+  .nf__routes a:hover .nf__route-arrow {
+    color: var(--bs-signal);
+  }
+
+  .nf__routes a:hover .nf__route-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (min-width: 900px) {
+    .nf__text {
+      grid-column: 1 / span 7;
+    }
+
+    .nf__routes {
+      grid-column: 9 / -1;
+    }
+  }
+</style>

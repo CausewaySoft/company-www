@@ -1,307 +1,513 @@
 ---
+/**
+ * Web Applications & Custom Software: Basalt redesign.
+ * Plan: docs/services-restructure-plan.md (phase 1)
+ *
+ * Speaks to two audiences with equal weight: entrepreneurs building a
+ * digital product, and established businesses improving how they operate.
+ * The five offers are sections with anchors, not separate pages.
+ */
 import Layout from '~/layouts/PageLayout.astro';
-import Hero2 from '~/components/widgets/Hero2.astro';
-import Features from '~/components/widgets/Features.astro';
-import UseCaseItem from '~/components/widgets/UseCaseItem.astro';
-import FAQs from '~/components/widgets/FAQs.astro';
-import BlogLatestPosts from '~/components/widgets/BlogLatestPosts.astro';
-import Steps from '~/components/widgets/Steps.astro';
-import ContactInline from '~/components/widgets/ContactInline.astro';
+
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import '~/components/home/basalt.css';
+
+import BasaltHeader from '~/components/home/BasaltHeader.astro';
+import BasaltFooter from '~/components/home/BasaltFooter.astro';
+import SectionHead from '~/components/home/SectionHead.astro';
+import WorkIndex from '~/components/home/WorkIndex.astro';
+import ColumnSteps from '~/components/home/ColumnSteps.astro';
+import ClosingCta from '~/components/home/ClosingCta.astro';
+import FaqList from '~/components/home/FaqList.astro';
+import OfferRows from '~/components/home/OfferRows.astro';
+import { bookingHref, innerNavItems, footerLinks, serviceLinks, headerCta } from '~/components/home/nav';
+
+import portfolioImg_BibleQuest from '~/assets/images/portfolio/biblequest-pwa-app.png';
 
 const metadata = {
-  title: 'Web Applications | Scalable, High-Performance Platforms',
+  title: 'Web Applications & Custom Software',
   description:
-    'From MVP to enterprise-grade platforms - we design web apps with clean code, solid architecture, and infinite scalability.',
-  // keywords: "web applications, MVP development, scalable platforms, SaaS apps, custom web app development, enterprise web apps, progressive web apps"
+    'Build a digital product or improve how your business operates: business applications, SaaS and MVPs, progressive web apps, AI features and automation, from an independent studio in Belfast.',
 };
+
+// Wizard links: each route preselects its option; the page-level CTAs serve
+// both audiences, so they don't preselect either
+const projectHref = '/contact?type=project';
+const productHref = '/contact?type=project&service=saas';
+const operationsHref = '/contact?type=project&service=web-app';
+
+const routes = [
+  {
+    label: 'For founders and entrepreneurs',
+    title: 'Build a digital product',
+    description:
+      'Turn an idea into working software: start with a focused first version, put it in front of real users, and grow it into a full product.',
+    sections: [
+      { text: 'SaaS & MVP development', href: '#saas-mvp' },
+      { text: 'Progressive Web Apps', href: '#pwa' },
+      { text: 'AI-powered features', href: '#ai' },
+    ],
+    cta: { text: 'Start a product', href: productHref },
+  },
+  {
+    label: 'For established businesses',
+    title: 'Improve how your business operates',
+    description:
+      'Replace spreadsheets, paperwork and repetitive manual steps with software built around how your business actually works.',
+    sections: [
+      { text: 'Business applications', href: '#business-applications' },
+      { text: 'Business automation', href: '#automation' },
+      { text: 'AI-powered features', href: '#ai' },
+    ],
+    cta: { text: 'Improve your operations', href: operationsHref },
+  },
+];
+
+const offers = [
+  {
+    id: 'business-applications',
+    title: 'Business applications',
+    audience: 'Established businesses',
+    description:
+      'Portals, dashboards and internal tools built around how your team works, instead of bending your process to fit off-the-shelf software. One place for the bookings, jobs, clients and paperwork that are scattered today.',
+    examples: ['Client portals', 'Booking & job management', 'Quotes & invoicing', 'Staff dashboards', 'Integrations'],
+  },
+  {
+    id: 'saas-mvp',
+    title: 'SaaS & MVP development',
+    audience: 'Founders',
+    description:
+      'Start with the smallest version that proves the idea, get it in front of real users, then grow it into a full product on foundations that don’t need rewriting.',
+    examples: ['MVPs', 'Subscription products', 'User accounts & billing', 'Admin panels', 'Analytics'],
+  },
+  {
+    id: 'pwa',
+    title: 'Progressive Web Apps',
+    audience: 'Both',
+    description:
+      'Need your customers or your team on their phones? A web app can install like a native app, work offline and update itself, with one codebase for every device and no app store in the way.',
+    examples: ['Installable', 'Works offline', 'One codebase', 'No app store fees', 'Push notifications'],
+    proof: { text: 'See BibleQuest, an offline-first PWA', href: '#work' },
+  },
+  {
+    id: 'ai',
+    title: 'AI-powered features',
+    audience: 'Both',
+    description:
+      'Practical AI inside your software, where it saves real time: assistants that answer from your own information, processing documents and emails, and smarter search.',
+    examples: ['Assistants', 'Document processing', 'Summaries & classification', 'Smart search'],
+  },
+  {
+    id: 'automation',
+    title: 'Business automation',
+    audience: 'Established businesses',
+    description:
+      'Take repetitive work off your team’s plate: retyping data, copying between systems, chasing paperwork and sending routine emails. Connect the tools you already use so information flows on its own.',
+    examples: ['Spreadsheet replacement', 'System integrations', 'Automated workflows', 'Notifications & reports'],
+  },
+];
+
+const projects = [
+  {
+    title: 'BibleQuest',
+    kind: 'Progressive web app',
+    description:
+      'Offline-first progressive web app for exploring Scripture, memorising Bible verses and tracking learning progress.',
+    outcome: 'Fully functional with no internet connection.',
+    tags: ['PWA', 'Desktop', 'Mobile', 'Offline-first'],
+    href: 'https://biblequest.causewaysoft.com/',
+    linkLabel: 'Open the app',
+    image: { src: portfolioImg_BibleQuest, alt: 'Three iPhones showing the BibleQuest app' },
+  },
+];
+
+const principles = [
+  {
+    title: 'Start small, grow safely',
+    description:
+      'A focused first version or a single module first, so you see value early. The structure underneath is planned for what comes next.',
+  },
+  {
+    title: 'Built for your process',
+    description:
+      'Software shaped around how your business or product actually works, not a generic tool you have to work around.',
+  },
+  {
+    title: 'Fast and reliable',
+    description: 'Quick to load, stable under real use and tested before launch, on phones and desktops alike.',
+  },
+  {
+    title: 'Fits what you already use',
+    description: 'Connected to your existing tools, from CRMs and payment providers to email and accounting software.',
+  },
+];
+
+const steps = [
+  {
+    title: 'Discover',
+    description: 'We learn your goals, your users and how things work today, and agree what success looks like.',
+  },
+  {
+    title: 'Plan',
+    description: 'We scope the first version and plan a structure it can grow on, with a written timeline and price.',
+  },
+  {
+    title: 'Build in stages',
+    description:
+      'You see working software early and review it with us as it grows, instead of waiting for a big reveal.',
+  },
+  {
+    title: 'Test & launch',
+    description: 'We test for speed, stability and security, then launch on reliable infrastructure.',
+  },
+  {
+    title: 'Improve',
+    description: 'We add features as your business or product grows, based on how people actually use it.',
+  },
+];
+
+const faqs = [
+  {
+    q: 'How much does a web application cost?',
+    a: 'It depends on what it needs to do. We usually recommend starting with a focused first version, scoped and priced in writing before any work begins, so you know the cost and can grow it from there.',
+  },
+  {
+    q: 'Can I start small and scale later?',
+    a: 'Yes. Starting with a single module or an MVP is often the best way in. We design the foundations so new features can be added without starting again.',
+  },
+  {
+    q: 'Do I need a native app from the app stores?',
+    a: 'Often not. A progressive web app installs on phones, works offline and can send notifications, with one codebase for every device and no app store fees. If you genuinely need native features, we’ll tell you.',
+  },
+  {
+    q: 'Can you connect it to the tools we already use?',
+    a: 'Yes. We regularly integrate with CRMs, payment providers, email, calendars, accounting tools and other systems that have an API.',
+  },
+  {
+    q: 'What technology do you use?',
+    a: 'Proven, modern web technology such as TypeScript, React, Next.js, Astro and Node.js, chosen to suit the project rather than to follow trends.',
+  },
+  {
+    q: 'Do you handle hosting and support after launch?',
+    a: 'Yes. We can set up and look after hosting, monitoring and updates, or deploy to your own infrastructure if you prefer.',
+  },
+];
 ---
 
 <Layout metadata={metadata}>
-  <Hero2
-    tagline="Platforms that grow with your vision"
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Start your web app journey',
-        href: 'https://calendly.com/causewaysoft/30min',
-        icon: 'tabler:calendar',
-        target: '_blank',
-      },
-      { text: 'See our process', href: '#features' },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?q=80&w=2069&auto=format&fit=crop',
-      alt: 'Modern web application interface on laptop and mobile',
-    }}
-  >
-    <Fragment slot="title">
-      Web <span class="text-accent dark:text-white">Applications</span><br />
-      engineered for scale and performance
-    </Fragment>
+  <BasaltHeader slot="header" items={innerNavItems} cta={headerCta} bookingHref={bookingHref} />
 
-    <Fragment slot="subtitle">
-      From MVPs that prove your concept to platforms that serve millions — we craft dynamic apps with clean code, robust
-      architecture, and infinite room to grow.
-    </Fragment>
-  </Hero2>
+  <div class="bs">
+    <!-- Hero -->
+    <section class="ahero" aria-labelledby="apps-title">
+      <div class="bs-wrap">
+        <div class="ahero__meta bs-mono">
+          <p>Web applications & custom software</p>
+          <p>Belfast, Northern Ireland</p>
+        </div>
+        <h1 id="apps-title" class="ahero__title bs-display">
+          <span class="ahero__line">Build a digital product.</span>
+          <span class="ahero__line">Improve how your business operates<span class="ahero__stop">.</span></span>
+        </h1>
+        <div class="ahero__foot bs-grid">
+          <p class="ahero__lede bs-lede">
+            Custom software that runs in the browser, from a first MVP to the systems a business runs on. Designed and
+            built by the engineer you talk to.
+          </p>
+          <div class="ahero__actions">
+            <a class="bs-btn" href={projectHref}>Start a project <span class="bs-arrow" aria-hidden="true">→</span></a>
+            <a class="bs-link" href="#what-we-build">See what we build</a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <Features
-    tagline="Why Our Web Apps Stand Out"
-    id="features"
-    title="Built to last, designed to perform"
-    subtitle="We engineer applications that are a joy to use — and a joy to maintain."
-    columns={2}
-    items={[
-      {
-        title: 'Scalable architecture',
-        description: 'Apps that grow effortlessly — from 100 to 1 million users without re-engineering.',
-        icon: 'tabler:arrows-diagonal',
-      },
-      {
-        title: 'MVP to full-scale',
-        description: 'We launch fast, test fast, and scale fast — so your product meets the market at the right time.',
-        icon: 'tabler:rocket',
-      },
-      {
-        title: 'High performance',
-        description: 'Optimized code, minimal load times, and smooth interactions that keep users engaged.',
-        icon: 'tabler:bolt',
-      },
-      {
-        title: 'Future-ready tech stack',
-        description: 'React, Next.js, Node, and more — modern tools for modern challenges.',
-        icon: 'tabler:code',
-      },
-    ]}
-  />
+    <!-- 01 Two ways in -->
+    <section class="bs-section" id="two-ways" aria-labelledby="two-ways-title">
+      <div class="bs-wrap">
+        <SectionHead
+          id="two-ways-title"
+          index="01"
+          label="Two ways in"
+          title="A new product, or a better way of working."
+          lede="Most projects start from one of two places. Both get the same care and the same engineering."
+        />
+        <ul class="routes section-body">
+          {
+            routes.map((r) => (
+              <li class="route" data-reveal>
+                <p class="bs-mono route__label">{r.label}</p>
+                <h3 class="route__title bs-display">{r.title}</h3>
+                <p class="route__desc">{r.description}</p>
+                <ul class="route__links">
+                  {r.sections.map((s) => (
+                    <li>
+                      <a href={s.href}>
+                        {s.text} <span aria-hidden="true">↓</span>
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+                <a class="bs-link route__cta" href={r.cta.href}>
+                  {r.cta.text} <span aria-hidden="true">→</span>
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
 
-  <!-- https://unsplash.com/photos/laptop-computer-on-glass-top-table-hpjSkU2UYSU -->
-  <UseCaseItem
-    tagline="Local Business Tools"
-    title="Simple, powerful web tools for local impact"
-    items={[
-      {
-        title: 'Description:',
-        description: 'A single dashboard for bookings, invoices, and client management — all accessible from anywhere.',
-      },
-      {
-        title: 'Benefits:',
-        description: `Streamlined admin,
-        Always accessible,
-        Works on all devices,
-        Affordable to maintain`,
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1935&auto=format&fit=crop',
-      alt: 'Web application dashboard for local business bookings and invoices',
-    }}
-  />
+    <!-- 02 What we build -->
+    <section class="bs-section" id="what-we-build" aria-labelledby="what-we-build-title">
+      <div class="bs-wrap">
+        <SectionHead
+          id="what-we-build-title"
+          index="02"
+          label="What we build"
+          title="Five kinds of software, one approach."
+          lede="Each one is built around a real job to be done, for your customers, your team or both."
+        />
+        <div class="section-body">
+          <OfferRows items={offers} />
+        </div>
+      </div>
+    </section>
 
-  <!--
-    Photo source:
-      https://www.pexels.com/photo/close-up-photo-of-programming-of-codes-546819/
-    -->
-  <UseCaseItem
-    tagline="Enterprise Platforms"
-    title="Robust systems for complex operations"
-    isAfterContent={true}
-    items={[
-      {
-        title: 'Description:',
-        description: 'Custom-built platforms for large-scale data management, automation, and collaboration.',
-      },
-      {
-        title: 'Benefits:',
-        description: `Centralized workflows,
-        High security,
-        Scales with business growth,
-        Integrates with existing tools`,
-      },
-    ]}
-    image={{
-      src: 'https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg?q=80&w=1929&auto=format&fit=crop',
-      alt: 'Enterprise-grade web application with secure data dashboard',
-    }}
-  />
+    <!-- 03 Proof -->
+    <WorkIndex
+      projects={projects}
+      index="03"
+      label="Example"
+      title="Offline-first, installable, in use."
+      lede="BibleQuest is a progressive web app: it installs like a native app and keeps working with no internet connection."
+    />
 
-  <UseCaseItem
-    tagline="Startup Launchpads"
-    title="Fast-track your idea to market"
-    items={[
-      {
-        title: 'Description:',
-        description:
-          'MVPs built to validate your vision quickly — with a foundation ready to evolve into a full platform.',
-      },
-      {
-        title: 'Benefits:',
-        description: `Quick validation,
-        Lower initial costs,
-        Built for iteration,
-        Easy to scale`,
-      },
-    ]}
-    image={{
-      src: 'https://images.pexels.com/photos/3183170/pexels-photo-3183170.jpeg?q=80&w=2070&auto=format&fit=crop',
-      alt: 'Startup founders reviewing MVP web application on laptops',
-    }}
-  />
+    <!-- 04 Built to last -->
+    <section class="bs-section" id="built-to-last" aria-labelledby="built-title">
+      <div class="bs-wrap">
+        <SectionHead id="built-title" index="04" label="Built to last" title="Software you can keep building on." />
+        <ul class="quad section-body">
+          {
+            principles.map((p, i) => (
+              <li class="quad__item" data-reveal>
+                <span class="bs-mono quad__num">{String(i + 1).padStart(2, '0')}</span>
+                <h3 class="quad__title bs-display">{p.title}</h3>
+                <p class="quad__desc">{p.description}</p>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
 
-  <Steps
-    id="our-process"
-    tagline="Project Steps"
-    title="Our Web App Development Process"
-    subtitle="Turning your vision into a high-performance reality."
-    items={[
-      {
-        title: 'Step 1: Discovery',
-        description: 'We understand your goals, users, and vision.',
-        icon: 'tabler:search',
-      },
-      {
-        title: 'Step 2: Architecture',
-        description: 'We plan a structure built for performance and scalability.',
-        icon: 'tabler:building-arch',
-      },
-      {
-        title: 'Step 3: Development',
-        description: 'We build clean, maintainable code with future growth in mind.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Step 4: Testing',
-        description: 'Rigorous testing for speed, stability, and security.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'Step 5: Deployment',
-        description: 'Launch on stable, scalable infrastructure.',
-        icon: 'tabler:cloud-upload',
-      },
-      {
-        title: 'Achieve and Succeed!',
-        icon: 'tabler:trophy',
-        classes: { icon: 'text-amber-600', title: 'text-amber-600' },
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1498050108023-c5249f4df085?q=80&w=1929&auto=format&fit=crop',
-      alt: 'Developers collaborating on scalable web application project',
-    }}
-  />
+    <!-- 05 Process -->
+    <ColumnSteps
+      steps={steps}
+      index="05"
+      label="How we work"
+      title="Working software early, then better every week."
+      lede="Whether it’s a new product or a tool for your team, we build in stages you can see and steer."
+    />
 
-  <!-- <Testimonials
-    title="What clients say"
-    testimonials={[
-      {
-        title: 'MVP that got us funded',
-        testimonial: "We went from idea to investor-ready MVP in under 8 weeks — the app looked polished and worked flawlessly.",
-        name: "FlowTrack",
-        job: 'Startup Founder',
-        image: { src: 'https://images.unsplash.com/photo-1520975693419-5f37f5d6c6cc?q=80&w=930&auto=format&fit=crop', alt: 'FlowTrack founder portrait' },
-      },
-      {
-        title: 'Enterprise platform overhaul',
-        testimonial: "Our old system was slow and outdated. The new platform is lightning fast and a joy to use.",
-        name: 'CoreData Systems',
-        job: 'CTO',
-        image: { src: 'https://images.unsplash.com/photo-1549921296-3c9c387ec3db?q=80&w=774&auto=format&fit=crop', alt: 'CTO from CoreData Systems' },
-      },
-    ]}
-    callToAction={{ target: '_blank', text: 'Read more stories...', href: '#', icon: 'tabler:chevron-right' }}
-  /> -->
+    <!-- 06 FAQs -->
+    <section class="bs-section" id="faq" aria-labelledby="faq-title">
+      <div class="bs-wrap">
+        <SectionHead
+          id="faq-title"
+          index="06"
+          label="Questions"
+          title="The things people ask first."
+          lede="Cost, starting small, apps versus web apps. Anything else, just ask."
+        />
+        <div class="section-body">
+          <FaqList items={faqs} />
+        </div>
+      </div>
+    </section>
 
-  <FAQs
-    tagline="FAQ"
-    title="Common questions about web apps"
-    subtitle="We answer what clients ask us most."
-    items={[
-      {
-        title: 'What tech stack do you use?',
-        description: 'React, Next.js, Node.js, Tailwind CSS, and more — depending on your needs.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Can I start small and scale later?',
-        description: 'Yes — we design apps to expand with your business.',
-        icon: 'tabler:arrows-diagonal',
-      },
-      {
-        title: 'Do you handle hosting?',
-        description: 'Yes, we offer secure, high-performance hosting in the EU and UK.',
-        icon: 'tabler:server',
-      },
-      {
-        title: 'Can you integrate with my existing tools?',
-        description: 'Absolutely — we can connect to CRMs, payment gateways, APIs, and more.',
-        icon: 'tabler:plug-connected',
-      },
-    ]}
-  />
+    <ClosingCta bookingHref={bookingHref} index="07" projectHref={projectHref} />
+  </div>
 
-  <ContactInline
-    id="contact"
-    tagline="Contact Us"
-    title="Let us build a Web-App for your Business"
-    subtitle="Send us an email or Book a FREE Discovery Call to begin your journey."
-    formInputs={[
-      {
-        type: 'email',
-        name: 'email',
-        label: 'Email',
-        placeholder: 'Where shall our reply find you?',
-      },
-    ]}
-    textarea={{
-      label: 'Message',
-      placeholder: 'Tell us your challenges, dreams, or sparks',
-    }}
-    description="By submitting this form, you agree to our privacy policy and consent to us using your information to respond to your inquiry. We typically reply within 24 business hours."
-    button="Send Your Message"
-    items={[
-      {
-        description: 'Book a Discovery Call',
-        classes: {
-          container: 'd-flex content-center	',
-          ctaLinks: '!text-current mb-2 text-xl font-semibold font-heading',
-        },
-        href: 'https://calendly.com/causewaysoft',
-        target: '_blank',
-        icon: 'tabler:calendar',
-      },
-      {
-        title: 'Email us',
-        description: 'anti-spam protection, please enable javascript...',
-        classes: { ctaLinks: 'emailLink' },
-        href: '/',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Call us',
-        description: 'anti-spam protection, please enable javascript...',
-        href: '/',
-        classes: { ctaLinks: 'phoneLink' },
-        icon: 'tabler:headset',
-      },
-      {
-        title: 'Follow us',
-        description: '@causewaysoft',
-        href: 'https://www.linkedin.com/company/causewaysoft',
-        icon: 'tabler:brand-linkedin',
-      },
-    ]}
-  />
-
-  <!-- BlogLatestPost Widget **************** -->
-
-  <BlogLatestPosts
-    id="blog"
-    title="Discover the CausewaySoft blog"
-    information={`Get the latest business and technology news, practical tutorials, and resources to help you digitally transform your business.`}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-blue-50 dark:bg-transparent"></div>
-    </Fragment>
-  </BlogLatestPosts>
+  <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />
 </Layout>
+
+<style>
+  .section-body {
+    margin-top: clamp(48px, 7vw, 96px);
+  }
+
+  /* Hero (type-led: the two messages are the hero) */
+  .ahero {
+    padding-top: clamp(28px, 4.5vw, 56px);
+    padding-bottom: clamp(56px, 8vw, 112px);
+  }
+
+  .ahero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  .ahero__title {
+    margin-top: clamp(36px, 5vw, 72px);
+    font-size: clamp(44px, 6vw, 88px);
+    line-height: 0.92;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+  }
+
+  /* Two messages, equal weight: one line each where space allows */
+  .ahero__line {
+    display: block;
+    text-wrap: balance;
+  }
+
+  .ahero__line + .ahero__line {
+    margin-top: 0.08em;
+  }
+
+  .ahero__stop {
+    color: var(--bs-signal);
+  }
+
+  .ahero__foot {
+    margin-top: clamp(28px, 3.5vw, 48px);
+    row-gap: 28px;
+    align-items: end;
+  }
+
+  .ahero__lede,
+  .ahero__actions {
+    grid-column: 1 / -1;
+  }
+
+  .ahero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+  }
+
+  /* Two routes, equal weight */
+  .routes {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .route {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding-block: 28px 36px;
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .route__label {
+    color: var(--bs-ink);
+  }
+
+  .route__title {
+    font-size: clamp(34px, 3.6vw, 54px);
+    line-height: 0.98;
+  }
+
+  .route__desc {
+    font-size: 17px;
+    line-height: 1.6;
+    max-width: 32em;
+  }
+
+  .route__links {
+    margin-top: 8px;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .route__links li {
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .route__links a {
+    display: flex;
+    justify-content: space-between;
+    padding-block: 10px;
+    font-size: 15px;
+    color: var(--bs-ink);
+    transition: color 0.2s var(--bs-ease);
+  }
+
+  .route__links a:hover {
+    color: var(--bs-signal);
+  }
+
+  /* Bottom-aligned, so both routes end on the same line */
+  .route__cta {
+    margin-top: auto;
+    padding-top: 12px;
+    align-self: flex-start;
+  }
+
+  /* Principles */
+  .quad {
+    display: grid;
+    gap: 0;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .quad__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    column-gap: 16px;
+    row-gap: 8px;
+    align-content: start;
+    padding-block: 26px 30px;
+    border-bottom: 1px solid var(--bs-rule);
+  }
+
+  .quad__num {
+    grid-row: 1 / span 2;
+    color: var(--bs-ink);
+    padding-top: 6px;
+  }
+
+  .quad__title {
+    font-size: clamp(26px, 2.2vw, 32px);
+    line-height: 1.02;
+  }
+
+  .quad__desc {
+    font-size: 16px;
+    line-height: 1.6;
+    max-width: 34em;
+  }
+
+  @media (min-width: 900px) {
+    .ahero__lede {
+      grid-column: 1 / span 6;
+    }
+
+    .ahero__actions {
+      grid-column: 9 / -1;
+    }
+
+    .routes {
+      grid-template-columns: 1fr 1fr;
+      column-gap: clamp(16px, 2vw, 32px);
+      border-bottom: 1px solid var(--bs-rule);
+    }
+
+    .route {
+      border-bottom: 0;
+    }
+
+    .quad {
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      column-gap: clamp(16px, 2vw, 32px);
+    }
+  }
+</style>

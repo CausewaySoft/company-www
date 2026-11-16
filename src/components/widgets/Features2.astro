@@ -45,18 +45,16 @@ const {
   }
   {
     bodyText && (
-  <div class="mb-8 md:mx-auto md:mb-12 text-center max-w-3xl">
-    <p class="mt-4 text-muted text-center text-xl my-4 mb-12">
-      {bodyText}
-    </p>
-  </div>
-  )}
+      <div class="mb-8 md:mx-auto md:mb-12 text-center max-w-3xl">
+        <p class="mt-4 text-muted text-center text-xl my-4 mb-12">{bodyText}</p>
+      </div>
+    )
+  }
 
-
-<!-- 
+  <!-- 
   2 Columns Layout - not great, the 1 col looks much better
 -->
-<!--
+  <!--
   <div class="flex flex-col gap-8 md:gap-12 md:flex-row">
     <div class="md:py-4 md:self-center md:basis-1/4">
       {
@@ -89,7 +87,7 @@ Based in Northern Ireland. Working with clients internationally.
   </div>
 -->
 
-    <ItemGrid
+  <ItemGrid
     items={items}
     columns={columns}
     defaultIcon={defaultIcon}
@@ -100,5 +98,4 @@ Based in Northern Ireland. Working with clients internationally.
       ...((classes?.items as Record<string, never>) ?? {}),
     }}
   />
-
 </WidgetWrapper>

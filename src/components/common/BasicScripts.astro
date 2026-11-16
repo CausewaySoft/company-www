@@ -9,6 +9,24 @@ import { UI } from 'astrowind:config';
 
   window.basic_script = true;
 
+  //
+  // Shared enquiry submission: every form on the site posts through this one
+  // function to /forms/contact.php (the legacy #contact-form handler below,
+  // the contact page form and the project wizard). Resolves on a 2xx reply.
+  //
+  window.causewaySoftSendEnquiry = function (form) {
+    return fetch('/forms/contact.php', {
+      method: 'POST',
+      headers: {
+        'X-Requested-With': 'XMLHttpRequest',
+      },
+      body: new FormData(form),
+    }).then((response) => {
+      if (!response.ok) throw new Error('Network response was not ok');
+      return response.text();
+    });
+  };
+
   function applyTheme(theme) {
     if (theme === 'dark') {
       document.documentElement.classList.add('dark');
@@ -180,19 +198,9 @@ import { UI } from 'astrowind:config';
       e.preventDefault(); // prevent default form submission
 
       const form = e.target;
-      const formData = new FormData(form);
 
-      fetch('/forms/contact.php', {
-        method: 'POST',
-        headers: {
-          'X-Requested-With': 'XMLHttpRequest',
-        },
-        body: formData,
-      })
-        .then((response) => {
-          if (!response.ok) throw new Error('Network response was not ok');
-          return response.text(); // or .json() if your PHP returns JSON
-        })
+      window
+        .causewaySoftSendEnquiry(form)
         .then(() => {
           // Optionally check the content of 'data'
           document.getElementById('form-success').style.display = 'flex';

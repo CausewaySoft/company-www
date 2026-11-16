@@ -54,13 +54,7 @@ const {
             </div>
           )
         }
-        {
-          itemsTitle && (
-            <h3 class="text-xl font-bold dark:text-white mb-12">
-              {itemsTitle}
-            </h3>
-          )
-        }
+        {itemsTitle && <h3 class="text-xl font-bold dark:text-white mb-12">{itemsTitle}</h3>}
 
         <ItemGrid
           items={items}

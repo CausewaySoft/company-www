@@ -1,0 +1,290 @@
+---
+/**
+ * Home hero.
+ *
+ * Composition: the headline sits top-left in the drawing's "sky"; the
+ * charcoal Causeway study is mirrored so its basalt cliff rises on the
+ * right and the stones run under the text. Type and stone balance each
+ * other on the diagonal, and the drawing is visible in the first screen.
+ */
+import { Image } from 'astro:assets';
+import causewayDrawing from '~/assets/images/giants-causeway-causewaysoft-herobg.png';
+
+// `services` is still accepted (but not rendered) so the services index can
+// return without touching the page (see git history).
+export interface Props {
+  services: { title: string; href: string }[];
+}
+---
+
+<section class="hero" aria-labelledby="hero-title">
+  <div class="bs-wrap hero__content">
+    <div class="hero__meta bs-mono">
+      <p>Independent software studio · Belfast, Northern Ireland</p>
+      <p class="hero__meta-right">Giant apps for giant visionaries</p>
+    </div>
+
+    <h1 id="hero-title" class="hero__title bs-display">
+      <span class="hero__line">Software,</span>
+      <span class="hero__line">built like the</span>
+      <span class="hero__line">Giant’s Causeway<span class="hero__stop">.</span></span>
+    </h1>
+
+    <div class="hero__foot">
+      <p class="hero__lede bs-lede">
+        We design and engineer websites, web applications, AI tools and custom software: precise, modular and built to
+        last.
+      </p>
+      <div class="hero__actions">
+        <a class="bs-btn" href="/contact?type=project"
+          >Start a project <span class="bs-arrow" aria-hidden="true">→</span></a
+        >
+        <a class="bs-link" href="#work">See the work</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!--
+  The drawing sits outside the hero section so it can stay pinned for the
+  whole page: the sections after it are opaque and scroll over it.
+-->
+<figure class="hero__ground" data-hero-ground>
+  <div class="hero__drawing">
+    <Image
+      src={causewayDrawing}
+      alt="Charcoal drawing of the basalt columns of the Giant’s Causeway"
+      widths={[768, 1436]}
+      sizes="100vw"
+      loading="eager"
+      fetchpriority="high"
+    />
+  </div>
+  <figcaption class="bs-wrap bs-mono">
+    <span>Fig. 01</span>
+    <span>Giant’s Causeway, Co. Antrim<span class="hero__caption-detail"> · charcoal study</span></span>
+
+    <!--
+      TODO:
+      1. can we replace that a.href link to google maps and instead of coordinates use google plus code?: 6FQQ+JR Bushmills -->
+
+    <a
+      class="hero__coords"
+      href="https://www.google.com/maps/place/Giant's+Causeway+Viewpoint/@55.2408,-6.5141749,1156m/data=!3m1!1e3!4m12!1m5!3m4!2zNTXCsDE0JzI2LjkiTiA2wrAzMCc0MS44Ilc!8m2!3d55.2408056!4d-6.5116111!3m5!1s0x4860299016f13455:0xbe35bf015dee5303!8m2!3d55.2391073!4d-6.5104552!16s%2Fg%2F11l5h7vsls"
+      target="_blank"
+      rel="noopener"
+      aria-label="55.2408° N, 6.5116° W: the Giant’s Causeway on Google Maps (opens in a new tab)"
+    >
+      55.2408° N, 6.5116° W
+    </a>
+  </figcaption>
+</figure>
+
+<style>
+  /* Hero text stays above the pinned drawing and scrolls away normally */
+  .hero {
+    position: relative;
+    z-index: 1;
+  }
+
+  /* Content sits above the drawing, which slides up underneath it */
+  .hero__content {
+    position: relative;
+    z-index: 1;
+    padding-top: clamp(28px, 4.5vw, 56px);
+  }
+
+  .hero__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  .hero__title {
+    margin-top: clamp(36px, 5vw, 72px);
+    font-size: clamp(52px, 8.6vw, 132px);
+    line-height: 0.88;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+    text-wrap: balance;
+  }
+
+  .hero__stop {
+    color: var(--bs-signal);
+  }
+
+  .hero__foot {
+    margin-top: clamp(28px, 3.5vw, 48px);
+    display: grid;
+    gap: 28px;
+  }
+
+  .hero__actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px 28px;
+  }
+
+  /* Drawing: mirrored so the cliff stands on the right */
+  .hero__ground {
+    position: relative;
+    z-index: 0;
+    margin-top: 12px;
+  }
+
+  /* Pinned where it first appears; the script measures that position.
+     Without JS the drawing simply scrolls with the page. */
+  .hero__ground.is-pinned {
+    position: sticky;
+    top: var(--ground-top, 0px);
+  }
+
+  .hero__drawing img {
+    display: block;
+    width: 100%;
+    height: auto;
+    transform: scaleX(-1);
+    opacity: var(--bs-drawing-opacity);
+    -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent);
+    mask-image: linear-gradient(to bottom, #000 72%, transparent);
+  }
+
+  /* The ground settles into place on load (CSS only, never hides text) */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero__drawing {
+      animation: hero-rise 1.4s var(--bs-ease) both;
+    }
+  }
+
+  @keyframes hero-rise {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  .hero__ground figcaption {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    margin-top: 12px;
+    /* Decorative: a step quieter than the hero eyebrow */
+    font-size: 11px;
+    color: var(--bs-muted);
+    /* Room for the next section's feathered edge, so the caption stays crisp */
+    padding-bottom: var(--bs-feather);
+  }
+
+  .hero__coords {
+    margin-left: auto;
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.35em;
+    transition:
+      color 0.2s var(--bs-ease),
+      text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .hero__coords:hover,
+  .hero__coords:focus-visible {
+    color: var(--bs-ink);
+    text-decoration-color: var(--bs-signal);
+  }
+
+  /* Small screens: crop in on the cliff so the drawing still registers,
+     and keep the meta and caption to one line each */
+  @media (max-width: 767px) {
+    .hero__meta-right,
+    .hero__caption-detail,
+    .hero__coords {
+      display: none;
+    }
+
+    .hero__drawing {
+      overflow: hidden;
+    }
+
+    .hero__drawing img {
+      width: 175%;
+      max-width: none;
+      margin-left: -75%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .hero__line {
+      display: block;
+    }
+
+    .hero__foot {
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(16px, 2vw, 32px);
+      align-items: end;
+    }
+
+    .hero__lede {
+      grid-column: 1 / span 6;
+    }
+
+    /* Keep actions clear of the cliff, which rises in the last columns */
+    .hero__actions {
+      grid-column: 7 / span 4;
+      justify-content: flex-start;
+    }
+
+    .hero__ground {
+      margin-top: -14vw;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    .hero__lede {
+      grid-column: 1 / span 5;
+    }
+    .hero__actions {
+      grid-column: 6 / span 4;
+    }
+  }
+</style>
+
+<script>
+  // Pin the drawing at the spot where it first renders, so the page
+  // scrolls over it. Measured on load and resize only, no scroll handler.
+  function initHeroGround() {
+    const ground = document.querySelector<HTMLElement>('[data-hero-ground]');
+    if (!ground) return;
+
+    const ac = new AbortController();
+    document.addEventListener('astro:before-swap', () => ac.abort(), { once: true });
+
+    const pin = () => {
+      ground.classList.remove('is-pinned');
+      const naturalTop = ground.getBoundingClientRect().top + window.scrollY;
+      // Never pin lower than half the drawing's height above the fold
+      const maxTop = window.innerHeight - ground.offsetHeight * 0.5;
+      ground.style.setProperty('--ground-top', `${Math.max(0, Math.min(naturalTop, maxTop))}px`);
+      ground.classList.add('is-pinned');
+    };
+
+    pin();
+    let raf = 0;
+    window.addEventListener(
+      'resize',
+      () => {
+        cancelAnimationFrame(raf);
+        raf = requestAnimationFrame(pin);
+      },
+      { signal: ac.signal }
+    );
+  }
+
+  document.addEventListener('astro:page-load', initHeroGround);
+</script>

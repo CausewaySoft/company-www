@@ -1,0 +1,79 @@
+---
+export interface Props {
+  bookingHref: string;
+  index?: string;
+  /** Wizard link; service pages can preselect, e.g. ?service=website */
+  projectHref?: string;
+}
+
+const { bookingHref, index = '05', projectHref = '/contact?type=project' } = Astro.props;
+---
+
+<section class="cta" aria-labelledby="cta-title">
+  <div class="bs-wrap">
+    <div class="cta__inner" data-reveal>
+      <p class="bs-mono">{index ? `${index} — ` : ''}Start a project</p>
+      <h2 id="cta-title" class="cta__title bs-display">
+        What are we<br />building<span class="cta__q">?</span>
+      </h2>
+      <p class="cta__lede bs-lede">
+        Tell us what you want to achieve. We’ll explore the problem, find the right approach and map out the next steps.
+      </p>
+      <div class="cta__actions">
+        <a class="bs-btn" href={projectHref}>Start a project <span class="bs-arrow" aria-hidden="true">→</span></a>
+        <a class="bs-link" href={bookingHref} target="_blank" rel="noopener">
+          Book a free discovery call <span aria-hidden="true">↗</span>
+          <span class="sr-only">(opens in a new tab)</span>
+        </a>
+      </div>
+      <p class="bs-mono cta__note">We typically reply within one business day.</p>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta {
+    position: relative;
+    z-index: 1;
+    padding-block: clamp(96px, 14vw, 200px);
+    background: var(--bs-surface);
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .cta__inner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+  }
+
+  .cta__title {
+    margin-top: 28px;
+    font-size: clamp(56px, 11vw, 168px);
+    line-height: 0.86;
+    font-weight: 800;
+    font-stretch: 68%;
+    letter-spacing: -0.02em;
+  }
+
+  .cta__q {
+    color: var(--bs-signal);
+  }
+
+  .cta__lede {
+    margin-top: 32px;
+  }
+
+  .cta__actions {
+    margin-top: 40px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    gap: 16px 32px;
+  }
+
+  .cta__note {
+    margin-top: 32px;
+  }
+</style>

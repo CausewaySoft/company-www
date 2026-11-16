@@ -1,0 +1,90 @@
+---
+/**
+ * Basalt layout for legal documents (privacy policy, terms).
+ *
+ * The document goes in the default slot as plain HTML (<section>, <h2>, <p>,
+ * <ul>). ArticleBody adds the typography.
+ * The wording itself is left exactly as written.
+ */
+import Layout from '~/layouts/PageLayout.astro';
+
+import '@fontsource-variable/archivo/wdth.css';
+import '@fontsource/ibm-plex-mono/400.css';
+import '@fontsource/ibm-plex-mono/500.css';
+import './basalt.css';
+
+import BasaltHeader from './BasaltHeader.astro';
+import BasaltFooter from './BasaltFooter.astro';
+import ArticleBody from './ArticleBody.astro';
+import { bookingHref, innerNavItems, footerLinks, headerCta } from './nav';
+import type { MetaData } from '~/types';
+
+export interface Props {
+  metadata: MetaData;
+  title: string;
+  updated: string;
+}
+
+const { metadata, title, updated } = Astro.props;
+---
+
+<Layout metadata={metadata}>
+  <BasaltHeader slot="header" items={innerNavItems} cta={headerCta} bookingHref={bookingHref} />
+
+  <div class="bs">
+    <article class="legal" aria-labelledby="legal-title">
+      <div class="bs-wrap">
+        <header class="legal__intro">
+          <div class="legal__meta bs-mono">
+            <p>Legal · CausewaySoft Ltd</p>
+            <p>Last updated: {updated}</p>
+          </div>
+          <h1 id="legal-title" class="legal__title bs-display">
+            {title}<span class="legal__stop">.</span>
+          </h1>
+        </header>
+
+        <div class="legal__content">
+          <ArticleBody>
+            <slot />
+          </ArticleBody>
+        </div>
+      </div>
+    </article>
+  </div>
+
+  <BasaltFooter slot="footer" links={footerLinks} />
+</Layout>
+
+<style>
+  .legal {
+    padding-top: clamp(28px, 4.5vw, 56px);
+    padding-bottom: clamp(72px, 10vw, 144px);
+  }
+
+  .legal__meta {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 4px 24px;
+  }
+
+  .legal__title {
+    margin-top: clamp(36px, 5vw, 72px);
+    font-size: clamp(48px, 7vw, 108px);
+    line-height: 0.9;
+    letter-spacing: -0.02em;
+    font-weight: 800;
+    font-stretch: 68%;
+  }
+
+  .legal__stop {
+    color: var(--bs-signal);
+  }
+
+  .legal__content {
+    margin-top: clamp(40px, 5vw, 72px);
+    padding-top: 20px;
+    border-top: 1px solid var(--bs-rule);
+  }
+</style>
