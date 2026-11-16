@@ -432,14 +432,14 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
     margin-bottom: 28px;
   }
 
+  /* One boxed style for every text field */
   .pw__input {
     display: block;
     width: 100%;
-    padding: 10px 0 12px;
-    border: 0;
-    border-bottom: 1px solid var(--bs-rule);
+    padding: 12px 14px;
+    border: 1px solid color-mix(in srgb, var(--bs-muted) 35%, var(--bs-rule));
     border-radius: 0;
-    background: transparent;
+    background: var(--bs-surface);
     color: var(--bs-ink);
     font: inherit;
     font-size: 18px;
@@ -456,13 +456,10 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
     color: var(--bs-muted);
   }
 
-  .pw__input:focus {
-    outline: none;
-    border-bottom-color: var(--bs-signal);
-  }
-
+  .pw__input:focus,
   .pw__input[aria-invalid='true'] {
-    border-bottom-color: var(--bs-signal);
+    outline: none;
+    border-color: var(--bs-signal);
   }
 
   .pw__privacy {

@@ -65,7 +65,7 @@
     margin-bottom: 10px;
   }
 
-  /* Fields: underline only */
+  /* Fields: one boxed style for every text field */
   .cf__row {
     display: grid;
     gap: 36px;
@@ -75,11 +75,10 @@
   .cf__field textarea {
     display: block;
     width: 100%;
-    padding: 10px 0 12px;
-    border: 0;
-    border-bottom: 1px solid var(--bs-rule);
+    padding: 12px 14px;
+    border: 1px solid color-mix(in srgb, var(--bs-muted) 35%, var(--bs-rule));
     border-radius: 0;
-    background: transparent;
+    background: var(--bs-surface);
     color: var(--bs-ink);
     font: inherit;
     font-size: 18px;
@@ -93,14 +92,11 @@
   }
 
   .cf__field input:focus,
-  .cf__field textarea:focus {
-    outline: none;
-    border-bottom-color: var(--bs-signal);
-  }
-
   .cf__field input:user-invalid,
+  .cf__field textarea:focus,
   .cf__field textarea:user-invalid {
-    border-bottom-color: var(--bs-signal);
+    outline: none;
+    border-color: var(--bs-signal);
   }
 
   .cf__submit {
