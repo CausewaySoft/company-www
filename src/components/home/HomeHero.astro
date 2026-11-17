@@ -28,7 +28,7 @@ export interface Props {
       <!--
         First line is "typed": highlighted in the selection colour, then the
         script types a word plus "...", pauses (caret blinks; on the first pause only, the
-        "Start a project" button gets a highlighter pass),
+        "Start a project" button gets a highlighter stroke, which stays),
         backspaces it and types the next. Screen readers and no-JS visitors
         get the static "Software,".
       -->
@@ -53,9 +53,10 @@ export interface Props {
         <br/>
         Welcome to CausewaySoft! </p>
       <div class="hero__actions">
-        <a class="bs-btn" href="/contact?type=project" data-hero-mark
-          ><span class="hero__mark"><span class="hero__mark-label">Start a project</span></span>
-          <span class="bs-arrow" aria-hidden="true">→</span></a
+        <a class="bs-btn hero__cta" href="/contact?type=project" data-hero-mark
+          ><span class="hero__cta-ink"
+            ><span>Start a project</span> <span class="bs-arrow" aria-hidden="true">→</span></span
+          ></a
         >
         <a class="bs-link" href="#work">See the work</a>
       </div>
@@ -103,6 +104,8 @@ export interface Props {
   .hero {
     position: relative;
     z-index: 1;
+    /* The button's highlighter stroke may reach past the edge on phones */
+    overflow-x: clip;
   }
 
   /* Content sits above the drawing, which slides up underneath it */
@@ -177,97 +180,209 @@ export interface Props {
   }
 
   /*
-   * Highlighter pass over "Start a project", played once, during the
-   * headline's first typing pause: a marker dragged across the words by
-   * hand (a beat to start, uneven ends, a slight tilt, overshooting the
-   * text), held, then wiped off left to right. The button is already the
-   * signal colour, so the marker uses the button's hover pair instead
-   * (ink marker, background-coloured letters). The letters change exactly
-   * where the marker covers them: a moving gradient clipped to the text.
+   * Hero "Start a project": outline button (hero only; .bs-btn stays filled
+   * elsewhere), which gets a highlighter stroke once, during the headline's
+   * first typing pause, and keeps it.
+   *
+   * The stroke is a marker in the selection colours, reaching 33px past
+   * the button's sides and 13px past its top and bottom, dragged across
+   * it by hand: a beat to start, a
+   * slight tilt, a ragged chisel-tip start, wobbling edges and a frayed
+   * end. The outline ring is drawn above it (::after), and the label and
+   * arrow turn selection-ink exactly where the stroke covers them (a
+   * moving gradient clipped to the text, sized to the stroke's box).
+   *
+   * Colours are custom properties so hover can swap them: once marked,
+   * hovering turns the stroke ink and the text background-coloured, like
+   * the filled button's hover.
    */
-  .hero__mark {
+  .bs-btn.hero__cta {
+    --mark-out-x: 33px;
+    --mark-out-y: 13px;
+    --mark-color: var(--bs-signal);
+    --mark-text: var(--bs-signal-ink);
     position: relative;
-    z-index: 0;
+    isolation: isolate;
+    background: transparent;
+    color: var(--bs-ink);
   }
 
-  .hero__mark::before {
+  .bs-btn.hero__cta:hover {
+    background: var(--bs-ink);
+    color: var(--bs-bg);
+    --mark-color: var(--bs-ink);
+    --mark-text: var(--bs-bg);
+  }
+
+  /* Outline ring, above the stroke (same size as the old inset ring) */
+  .hero__cta::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    box-shadow: inset 0 0 0 1px var(--bs-ink);
+    pointer-events: none;
+  }
+
+  /* The stroke */
+  .hero__cta::before {
     content: '';
     position: absolute;
     z-index: -1;
-    inset: -0.2em -0.45em -0.25em -0.35em;
-    background: var(--bs-ink);
-    clip-path: polygon(1.5% 12%, 99% 0, 100% 86%, 0 100%);
+    inset: calc(-1 * var(--mark-out-y)) calc(-1 * var(--mark-out-x));
+    /* Ink pools where the pen lands and lifts (darker ends), with faint
+       streaks along the stroke */
+    background:
+      repeating-linear-gradient(0deg, transparent 0 2px, color-mix(in srgb, var(--mark-text) 4%, transparent) 2px 3px),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--mark-color) 82%, var(--mark-text)) 0,
+        var(--mark-color) 7%,
+        var(--mark-color) 93%,
+        color-mix(in srgb, var(--mark-color) 85%, var(--mark-text)) 100%
+      );
+    /* Hand-drawn outline: ragged, slanted start; wobbling top and bottom;
+       frayed end where the pen lifts */
+    clip-path: polygon(
+      3.5% 15%,
+      6% 7%,
+      11% 4.5%,
+      21% 3.5%,
+      34% 5%,
+      49% 2.5%,
+      63% 4%,
+      78% 2%,
+      91% 3.5%,
+      95% 1%,
+      97.5% 7%,
+      98.6% 18%,
+      99.6% 30%,
+      98.4% 42%,
+      100% 55%,
+      98.8% 68%,
+      99.4% 80%,
+      97.4% 90%,
+      93% 97%,
+      79% 98.5%,
+      64% 96%,
+      49% 99%,
+      35% 96.5%,
+      20% 100%,
+      8% 97.5%,
+      3.5% 92%,
+      1.4% 81%,
+      0.4% 68%,
+      1.6% 55%,
+      0 42%,
+      1.2% 29%
+    );
     transform: rotate(-1.2deg) scaleX(0);
     transform-origin: left center;
     pointer-events: none;
   }
 
-  /* A separate box, so its clipped-text paint sits above the marker */
-  .is-marking .hero__mark-label {
-    background: linear-gradient(90deg, currentColor 0 33.34%, var(--bs-bg) 33.34% 66.67%, currentColor 66.67% 100%);
+  /* Text box stretched (padding, cancelled by margin) to exactly the
+     stroke's box, so its gradient edge tracks the stroke's leading edge */
+  .hero__cta-ink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75em;
+    padding: calc(var(--mark-out-y) + 1em) calc(var(--mark-out-x) + 1.4em);
+    margin: calc(-1 * var(--mark-out-y) - 1em) calc(-1 * var(--mark-out-x) - 1.4em);
+    pointer-events: none;
+  }
+
+  .hero__cta.is-marked::before {
+    transform: rotate(-1.2deg) scaleX(1);
+    animation: hero-mark 0.9s linear both;
+  }
+
+  .hero__cta.is-marked .hero__cta-ink {
+    background: linear-gradient(90deg, currentColor 0 33.34%, var(--mark-text) 33.34% 66.67%, currentColor 66.67% 100%);
     background-size: 300% 100%;
-    background-position: 100% 0;
+    background-position: 50% 0;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    animation: hero-mark-ink var(--mark-ms, 2800ms) linear both;
-  }
-
-  .is-marking .hero__mark::before {
-    animation: hero-mark var(--mark-ms, 2800ms) linear both;
+    animation: hero-mark-ink 0.9s linear both;
   }
 
   @keyframes hero-mark {
     0%,
-    6% {
+    18% {
       transform: rotate(-1.2deg) scaleX(0);
-      transform-origin: left center;
       animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
     }
-    30%,
-    86% {
-      transform: rotate(-1.2deg) scaleX(1);
-      transform-origin: left center;
-    }
-    86.01% {
-      transform-origin: right center;
-      animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.4);
-    }
-    97%,
     100% {
-      transform: rotate(-1.2deg) scaleX(0);
-      transform-origin: right center;
+      transform: rotate(-1.2deg) scaleX(1);
     }
   }
 
   @keyframes hero-mark-ink {
     0%,
-    6% {
+    18% {
       background-position: 100% 0;
       animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
     }
-    30%,
-    86% {
-      background-position: 50% 0;
-      animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.4);
-    }
-    97%,
     100% {
-      background-position: 0 0;
+      background-position: 50% 0;
+    }
+  }
+
+  /* Once the stroke is down (is-done, added on animationend): the outline
+     ring goes, and the label and arrow grow bolder and turn white. The text
+     grows by transform, so the button and the stroke keep their size; the
+     scaled label reaches into the stroke's overhang. */
+  .hero__cta::after {
+    transition: opacity 0.35s var(--bs-ease);
+  }
+
+  .hero__cta-ink {
+    transition: transform 0.35s var(--bs-ease);
+  }
+
+  .hero__cta.is-done {
+    --mark-text: #fff;
+    font-weight: 700;
+  }
+
+  .hero__cta.is-done::after {
+    opacity: 0;
+  }
+
+  .hero__cta.is-done .hero__cta-ink {
+    transform: scale(1.4);
+  }
+
+  .hero__cta.is-done .bs-arrow {
+    transform: scale(1.2);
+  }
+
+  .hero__cta.is-done:hover .bs-arrow {
+    transform: translateX(3px) scale(1.2);
+  }
+
+  /* Reduced motion: the stroke is simply there */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__cta.is-marked::before,
+    .hero__cta.is-marked .hero__cta-ink {
+      animation: none;
     }
   }
 
   .hero__foot {
     margin-top: clamp(28px, 3.5vw, 48px);
     display: grid;
+    /* Room for the stroke above the button when the actions stack */
     gap: 28px;
   }
 
+  /* Gaps leave room for the stroke's overhang (33px sides, 13px top and bottom) */
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 16px 28px;
+    gap: 28px 52px;
   }
 
   /* Drawing: mirrored so the cliff stands on the right */
@@ -441,7 +556,11 @@ export interface Props {
     const root = document.querySelector<HTMLElement>('[data-hero-type]');
     if (!root || root.dataset.ready) return;
     root.dataset.ready = 'true';
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // Reduced motion: no typing, and the button's highlight is just there
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      document.querySelector('[data-hero-mark]')?.classList.add('is-marked', 'is-done');
+      return;
+    }
 
     const word = root.querySelector<HTMLElement>('.hero__word');
     const dots = root.querySelector<HTMLElement>('.hero__dots');
@@ -505,15 +624,16 @@ export interface Props {
     };
     const clearAll = () => backspace(dots.childElementCount + (word.textContent ?? '').length);
 
-    // One highlighter pass over the "Start a project" button, fitted
-    // inside the pause, then the button goes back to plain
+    // Highlighter stroke over the "Start a project" button; it stays
     const button = document.querySelector<HTMLElement>('[data-hero-mark]');
+    // When the stroke has been drawn, drop the outline and set the label bold
+    // and white (is-done)
     const markButton = () => {
       if (!button) return;
-      const ms = Math.max(1200, PAUSE_MS - 200);
-      button.style.setProperty('--mark-ms', `${ms}ms`);
-      button.classList.add('is-marking');
-      window.setTimeout(() => button.classList.remove('is-marking'), ms + 100);
+      button
+        .querySelector('.hero__cta-ink')
+        ?.addEventListener('animationend', () => button.classList.add('is-done'), { once: true });
+      button.classList.add('is-marked');
     };
 
     const run = async () => {
