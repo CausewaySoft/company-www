@@ -29,9 +29,8 @@ export interface Props {
         First line is "typed". "Software," first shows as plain headline text
         for 3s; then a caret appears and backspaces it. From then on each word
         is highlighted in the selection colour: the script types each word of
-        the list in order plus "...", pauses (caret blinks; on the first pause
-        only, the "Start a project" button gets a highlighter stroke, which
-        stays), backspaces it and types the next. It plays once and stops on
+        the list in order plus "...", pauses (caret blinks), backspaces it and
+        types the next. It plays once and stops on
         the last word. Screen readers and no-JS visitors get the static
         "Software,".
       -->
@@ -182,8 +181,8 @@ export interface Props {
 
   /*
    * Hero "Start a project": outline button (hero only; .bs-btn stays filled
-   * elsewhere), which gets a highlighter stroke once, during the headline's
-   * first typing pause, and keeps it.
+   * elsewhere), which gets a highlighter stroke once, 0.33s after the page
+   * loads, and keeps it.
    *
    * The stroke is a marker in the selection colours, reaching 33px past
    * the button's sides and 13px past its top and bottom, dragged across
@@ -581,11 +580,8 @@ export interface Props {
     const root = document.querySelector<HTMLElement>('[data-hero-type]');
     if (!root || root.dataset.ready) return;
     root.dataset.ready = 'true';
-    // Reduced motion: no typing, and the button's highlight is just there
-    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      document.querySelector('[data-hero-mark]')?.classList.add('is-marked', 'is-done');
-      return;
-    }
+    // Reduced motion: no typing
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const word = root.querySelector<HTMLElement>('.hero__word');
     const dots = root.querySelector<HTMLElement>('.hero__dots');
@@ -649,18 +645,6 @@ export interface Props {
     };
     const clearAll = () => backspace(dots.childElementCount + (word.textContent ?? '').length);
 
-    // Highlighter stroke over the "Start a project" button; it stays
-    const button = document.querySelector<HTMLElement>('[data-hero-mark]');
-    // When the stroke has been drawn, drop the outline and set the label bold
-    // and white (is-done)
-    const markButton = () => {
-      if (!button) return;
-      button
-        .querySelector('.hero__cta-ink')
-        ?.addEventListener('animationend', () => button.classList.add('is-done'), { once: true });
-      button.classList.add('is-marked');
-    };
-
     const run = async () => {
       // "Software," reads as part of the plain headline first
       await wait(HOLD_MS);
@@ -678,7 +662,6 @@ export interface Props {
         await typeWord(w);
         await typeDots();
         root.dataset.state = 'waiting';
-        if (i === 0) markButton();
         // Stop on the last word, caret blinking
         if (i === words.length - 1) return;
         await wait(PAUSE_MS);
@@ -694,4 +677,31 @@ export interface Props {
   }
 
   document.addEventListener('astro:page-load', initHeroType);
+
+  // Highlighter stroke over the hero "Start a project" button, drawn once
+  // MARK_DELAY_MS after the page loads; it stays. When the stroke is down
+  // (animationend), the outline goes and the label turns bold and white
+  // (is-done). Reduced motion: the finished state, straight away.
+  const MARK_DELAY_MS = 330;
+
+  function initHeroMark() {
+    const button = document.querySelector<HTMLElement>('[data-hero-mark]');
+    if (!button || button.dataset.ready) return;
+    button.dataset.ready = 'true';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      button.classList.add('is-marked', 'is-done');
+      return;
+    }
+
+    const timer = window.setTimeout(() => {
+      button
+        .querySelector('.hero__cta-ink')
+        ?.addEventListener('animationend', () => button.classList.add('is-done'), { once: true });
+      button.classList.add('is-marked');
+    }, MARK_DELAY_MS);
+    document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true });
+  }
+
+  document.addEventListener('astro:page-load', initHeroMark);
 </script>
