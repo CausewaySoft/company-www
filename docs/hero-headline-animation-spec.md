@@ -57,6 +57,7 @@ const WORDS = ['Web-Sites', 'Web-Apps', 'Giant', 'Dreams'];
 | Action | Timing | Feel |
 |---|---|---|
 | Keystroke | 55–140ms, plus a 180–380ms hesitation on 12% of keys | fast but uneven, human |
+| Hyphen (`-`) | an extra 200–320ms **before** it, and an extra 280–420ms **after** it (on top of the normal keystroke) | the typist stops to find the key, then takes a moment to carry on. Measured: "Web-Sites" 365ms before / 374ms after; "Web-Apps" 414ms / 465ms |
 | Dot | 110–200ms | a little slower, deliberate |
 | Backspace | 70–105ms | steady |
 | Gaps | 350–550ms (caret appears; after "Software..."), 150–260ms (after deleting the comma), 450–700ms (between words) | – |
@@ -84,9 +85,10 @@ All ranges are picked at random each time, so no two runs are identical.
 | ~26.0s | **Dreams...**, caret gone, done |
 
 The opening steps (to 6.4s) are measured. The word timings are the earlier
-measured run shifted by the 1.45s the "Software..." step added.
+measured run shifted by the 1.45s the "Software..." step added. The hyphen
+pauses add roughly another 0.6s for each of "Web-Sites" and "Web-Apps".
 
-**Total: about 26 seconds** from page load to the final state. It varies by
+**Total: about 27 seconds** from page load to the final state. It varies by
 a second or so between runs.
 
 ---

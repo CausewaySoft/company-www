@@ -562,6 +562,10 @@ export interface Props {
     const keystroke = () => rand(55, 140) + (Math.random() < 0.12 ? rand(180, 380) : 0);
     // Steady, human backspacing
     const backstroke = () => rand(70, 105);
+    // A hyphen breaks the flow: a longer pause before it ("finding the key")
+    // and a slightly longer one after it, on top of the normal keystroke
+    const beforeHyphen = () => rand(200, 320);
+    const afterHyphen = () => rand(280, 420);
 
     // Hidden copy of the line, to check a word fits before typing it
     const measure = document.createElement('span');
@@ -577,8 +581,10 @@ export interface Props {
 
     const typeWord = async (text: string) => {
       for (const ch of text) {
+        const hyphen = ch === '-';
+        if (hyphen) await wait(beforeHyphen());
         word.textContent += ch;
-        await wait(keystroke());
+        await wait(keystroke() + (hyphen ? afterHyphen() : 0));
       }
     };
     const typeDots = async () => {
