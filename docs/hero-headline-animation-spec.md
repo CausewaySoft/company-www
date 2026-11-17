@@ -1,7 +1,7 @@
 # Hero headline animation: current spec
 
-**Status:** Describes the animation as built, on `develop` at `87f64bc`
-("hero copy improvement"), 2026-11-17
+**Status:** Describes the animation as built on
+`feature/hero-headline-animation`, 2026-11-17
 **Code:** `src/components/home/HomeHero.astro` (markup, styles and the
 `initHeroType` script)
 **Branch for changes:** `feature/hero-headline-animation`
@@ -12,7 +12,8 @@ The home page headline reads:
 > built like the
 > Giant's Causeway.
 
-Its first line is animated: after a pause, "Software," is deleted and a short
+Its first line is animated: after a pause, "Software," turns into
+"Software..." and is deleted, and a short
 list of words is typed in its place, one at a time, like someone typing and
 correcting the headline live. The animation plays once and stops.
 
@@ -24,15 +25,17 @@ correcting the headline live. The animation plays once and stops.
 |---|---|---|---|
 | 1 | **Hold** | "Software," as ordinary headline text: same font, size and colour as the other two lines. No highlight, no caret. | `HOLD_MS` = 3,300ms |
 | 2 | **Caret appears** | A solid caret appears after "Software,". | 350–550ms (random) |
-| 3 | **Delete "Software,"** | The caret backspaces "Software," one character at a time, still as plain text. | 9 characters × 70–105ms |
-| 4 | **Highlight on** | The line is now empty; from here on, typed text is highlighted. | 450–700ms gap (random) |
-| 5 | **Type a word** | The word is typed letter by letter on an orange highlight, like selected text. The caret stays solid while typing. | per key: see *Typing rhythm* |
-| 6 | **Type "..."** | Three dots follow the word, one by one. | 3 × 110–200ms |
-| 7 | **Pause** | The finished word sits there with the caret blinking. | `PAUSE_MS` = 3,300ms |
-| 8 | **Delete** | The caret backspaces the dots, then the word, steadily. | per character: 70–105ms |
-| 9 | **Gap** | Empty line, solid caret. | 450–700ms (random) |
-| – | *repeat 5–9* | for each word in the list | |
-| 10 | **Last word** | The last word is typed with its dots, then the caret disappears straight away. No pause and no deletion. The headline stays like this. | – |
+| 3 | **Delete the comma** | The caret backspaces the comma: "Software". Still plain text. | 70–105ms, then a 150–260ms beat |
+| 4 | **Type "..."** | Three dots are typed: "Software...". Still plain text. | 3 × 110–200ms, then a 350–550ms beat |
+| 5 | **Delete "Software..."** | The caret backspaces the dots, then "Software", one character at a time, still as plain text. | 11 characters × 70–105ms |
+| 6 | **Highlight on** | The line is now empty; from here on, typed text is highlighted. | 450–700ms gap (random) |
+| 7 | **Type a word** | The word is typed letter by letter on an orange highlight, like selected text. The caret stays solid while typing. | per key: see *Typing rhythm* |
+| 8 | **Type "..."** | Three dots follow the word, one by one. | 3 × 110–200ms |
+| 9 | **Pause** | The finished word sits there with the caret blinking. | `PAUSE_MS` = 3,300ms |
+| 10 | **Delete** | The caret backspaces the dots, then the word, steadily. | per character: 70–105ms |
+| 11 | **Gap** | Empty line, solid caret. | 450–700ms (random) |
+| – | *repeat 7–11* | for each word in the list | |
+| 12 | **Last word** | The last word is typed with its dots, then the caret disappears straight away. No pause and no deletion. The headline stays like this. | – |
 
 ### Words
 
@@ -56,7 +59,7 @@ const WORDS = ['Web-Sites', 'Web-Apps', 'Giant', 'Dreams'];
 | Keystroke | 55–140ms, plus a 180–380ms hesitation on 12% of keys | fast but uneven, human |
 | Dot | 110–200ms | a little slower, deliberate |
 | Backspace | 70–105ms | steady |
-| Gaps (caret beat before deleting "Software,"; between words) | 350–550ms; 450–700ms | – |
+| Gaps | 350–550ms (caret appears; after "Software..."), 150–260ms (after deleting the comma), 450–700ms (between words) | – |
 
 All ranges are picked at random each time, so no two runs are identical.
 
@@ -66,19 +69,24 @@ All ranges are picked at random each time, so no two runs are identical.
 |---|---|
 | 0.0s | "Software," (plain) |
 | 3.2s | caret appears |
-| 3.65s | deleting starts |
-| 4.35s | line empty |
-| 4.45s | highlight on |
-| 4.95s | typing "Web-Sites" |
-| 6.55s | **Web-Sites...** (pause) |
-| 9.85s | deleting |
-| 12.7s | **Web-Apps...** (pause) |
-| 16.0s | deleting |
-| 18.35s | **Giant...** (pause) |
-| 21.65s | deleting |
-| 24.55s | **Dreams...**, caret gone, done |
+| 3.6s | comma deleted: "Software" |
+| 3.9–4.3s | dots typed: **Software...** (plain) |
+| 4.8s | deleting starts |
+| 5.7s | line empty |
+| 5.8s | highlight on |
+| 6.4s | typing "Web-Sites" |
+| ~8.0s | **Web-Sites...** (pause) |
+| ~11.3s | deleting |
+| ~14.1s | **Web-Apps...** (pause) |
+| ~17.4s | deleting |
+| ~19.8s | **Giant...** (pause) |
+| ~23.1s | deleting |
+| ~26.0s | **Dreams...**, caret gone, done |
 
-**Total: about 24.5 seconds** from page load to the final state. It varies by
+The opening steps (to 6.4s) are measured. The word timings are the earlier
+measured run shifted by the 1.45s the "Software..." step added.
+
+**Total: about 26 seconds** from page load to the final state. It varies by
 a second or so between runs.
 
 ---
@@ -91,7 +99,7 @@ The line's state is held in data attributes on `.hero__type`
 | State | Attributes | Text style | Caret |
 |---|---|---|---|
 | Before the script runs (and no-JS) | none | plain headline text | hidden |
-| Deleting "Software," | `data-state="typing"` | plain | solid |
+| Swapping the comma for "..." and deleting "Software..." | `data-state="typing"` | plain | solid |
 | Typing / deleting words | `data-state="typing"` + `data-highlight` | orange highlight | solid |
 | Pause on a word | `data-state="waiting"` + `data-highlight` | orange highlight | blinking (1s cycle, on/off) |
 | Finished | `data-state="done"` + `data-highlight` | orange highlight | hidden |
@@ -174,9 +182,3 @@ Separate script (`initHeroMark`), independent of the headline:
 | `HOLD_MS` | 3,300 | how long "Software," stays plain |
 | `PAUSE_MS` | 3,300 | pause on each word (except the last) |
 | `MARK_DELAY_MS` | 330 | CTA stroke delay (separate script) |
-
-## Note
-
-The comment just above `WORDS` in the script still describes an older
-version ("backspaces the comma … forever"). The code itself matches this
-spec; that comment should be updated.

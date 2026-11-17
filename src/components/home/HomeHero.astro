@@ -27,7 +27,8 @@ export interface Props {
     <h1 id="hero-title" class="hero__title bs-display">
       <!--
         First line is "typed". "Software," first shows as plain headline text
-        for 3s; then a caret appears and backspaces it. From then on each word
+        for 3.3s; then a caret appears, swaps the comma for "..." and
+        backspaces it all. From then on each word
         is highlighted in the selection colour: the script types each word of
         the list in order plus "...", pauses (caret blinks), backspaces it and
         types the next. It plays once and stops on the last word, where the
@@ -517,9 +518,11 @@ export interface Props {
   document.addEventListener('astro:page-load', initHeroGround);
 
   // Typed first line of the headline. Keeps "Software," on screen at load
-  // (no blank headline), backspaces the comma, types "...", pauses, then
-  // deletes and types the next word, forever. Skips words that won't fit
-  // on one line at the current width. Off for reduced motion.
+  // (no blank headline); after HOLD_MS the caret swaps the comma for "..."
+  // and deletes it all, then types each word below with "...", pausing on
+  // each, and stops on the last. Skips words that won't fit on one line at
+  // the current width. Off for reduced motion. Spec:
+  // docs/hero-headline-animation-spec.md
   // Typed once, in this order, after "Software," is deleted; ends on the last
   const WORDS = ['Web-Sites', 'Web-Apps', 'Giant', 'Dreams' ];
   const PAUSE_MS = 3300;
@@ -598,8 +601,13 @@ export interface Props {
     const run = async () => {
       // "Software," reads as part of the plain headline first
       await wait(HOLD_MS);
-      // Then the caret appears and deletes it, still as plain text
+      // Then the caret appears, swaps the comma for "..." and deletes the
+      // lot, still as plain text
       root.dataset.state = 'typing';
+      await wait(rand(350, 550));
+      await backspace(1); // the comma
+      await wait(rand(150, 260));
+      await typeDots();
       await wait(rand(350, 550));
       await clearAll();
       // From here on, typed words are highlighted
