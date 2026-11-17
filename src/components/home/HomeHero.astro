@@ -20,17 +20,19 @@ export interface Props {
 <section class="hero" aria-labelledby="hero-title">
   <div class="bs-wrap hero__content">
     <div class="hero__meta bs-mono">
-      <p>Independent software studio · Belfast, Northern Ireland</p>
+      <p>Independent software studio · Belfast, NI.</p>
       <p class="hero__meta-right">Giant apps for giant visionaries</p>
     </div>
 
     <h1 id="hero-title" class="hero__title bs-display">
       <!--
-        First line is "typed": highlighted in the selection colour, then the
-        script types a word plus "...", pauses (caret blinks; on the first pause only, the
-        "Start a project" button gets a highlighter pass),
-        backspaces it and types the next. Screen readers and no-JS visitors
-        get the static "Software,".
+        First line is "typed". "Software," first shows as plain headline text
+        for 3s; then a caret appears and backspaces it. From then on each word
+        is highlighted in the selection colour: the script types each word of
+        the list in order plus "...", pauses (caret blinks), backspaces it and
+        types the next. It plays once and stops on the last word, where the
+        caret disappears. Screen readers and no-JS visitors get the static
+        "Software,".
       -->
       <span class="hero__line hero__type" data-hero-type>
         <span class="sr-only">Software,</span>
@@ -44,18 +46,15 @@ export interface Props {
 
     <div class="hero__foot">
       <p class="hero__lede bs-lede">
-        Precisely engineered, creative and built to last.
+        Custom engineered, creative and built to last.
         <br/><br/>
-        Custom software: from blazing fast and semantic websites, to offline-first progessive web applications, with a possibility to add AI tools.
-        <br/>
-        <br/>
-        Welcome to the new era of software.
-        <br/>
+        We build websites and web-apps of the new era.
         Welcome to CausewaySoft! </p>
       <div class="hero__actions">
-        <a class="bs-btn" href="/contact?type=project" data-hero-mark
-          ><span class="hero__mark"><span class="hero__mark-label">Start a project</span></span>
-          <span class="bs-arrow" aria-hidden="true">→</span></a
+        <a class="bs-btn hero__cta" href="/contact?type=project" data-hero-mark
+          ><span class="hero__cta-ink"
+            ><span>Start a project</span> <span class="bs-arrow" aria-hidden="true">→</span></span
+          ></a
         >
         <a class="bs-link" href="#work">See the work</a>
       </div>
@@ -103,6 +102,8 @@ export interface Props {
   .hero {
     position: relative;
     z-index: 1;
+    /* The button's highlighter stroke may reach past the edge on phones */
+    overflow-x: clip;
   }
 
   /* Content sits above the drawing, which slides up underneath it */
@@ -140,8 +141,10 @@ export interface Props {
     white-space: nowrap;
   }
 
-  /* Looks like selected text, in the site's ::selection colours */
-  .hero__typed {
+  /* Once the typing loop starts (data-highlight), typed words look like
+     selected text, in the site's ::selection colours. Before that, the
+     opening "Software," is plain headline text. */
+  .hero__type[data-highlight] .hero__typed {
     background: var(--bs-signal);
     color: var(--bs-signal-ink);
     -webkit-box-decoration-break: clone;
@@ -170,6 +173,11 @@ export interface Props {
     animation: hero-caret 1s steps(1) infinite;
   }
 
+  /* Finished on the last word: the caret goes */
+  .hero__type[data-state='done'] .hero__caret {
+    display: none;
+  }
+
   @keyframes hero-caret {
     50% {
       opacity: 0;
@@ -177,97 +185,162 @@ export interface Props {
   }
 
   /*
-   * Highlighter pass over "Start a project", played once, during the
-   * headline's first typing pause: a marker dragged across the words by
-   * hand (a beat to start, uneven ends, a slight tilt, overshooting the
-   * text), held, then wiped off left to right. The button is already the
-   * signal colour, so the marker uses the button's hover pair instead
-   * (ink marker, background-coloured letters). The letters change exactly
-   * where the marker covers them: a moving gradient clipped to the text.
+   * Hero "Start a project": a plain label with no box or outline (hero
+   * only; .bs-btn stays filled elsewhere), which gets a highlighter stroke
+   * once, 0.33s after the page loads, and keeps it.
+   *
+   * The stroke is a marker in the selection colours, reaching 33px past
+   * the button's sides and 13px past its top and bottom, dragged across
+   * it by hand: a beat to start, a
+   * slight tilt, a ragged chisel-tip start, wobbling edges and a frayed
+   * end. The label is in its final state from the start: bold, white and
+   * scaled up (1.4x, arrow 1.2x), so only the stroke moves.
+   *
+   * Colours are custom properties so hover can swap them: once marked,
+   * hovering turns the stroke ink and the text background-coloured, like
+   * the filled button's hover.
    */
-  .hero__mark {
+  .bs-btn.hero__cta {
+    --mark-out-x: 33px;
+    --mark-out-y: 13px;
+    --mark-color: var(--bs-signal);
+    --mark-text: #fff;
     position: relative;
-    z-index: 0;
+    isolation: isolate;
+    background: transparent;
+    color: var(--mark-text);
+    font-weight: 700;
   }
 
-  .hero__mark::before {
+  .bs-btn.hero__cta:hover {
+    background: var(--bs-ink);
+    color: var(--bs-bg);
+    --mark-color: var(--bs-ink);
+    --mark-text: var(--bs-bg);
+  }
+
+
+  /* The stroke */
+  .hero__cta::before {
     content: '';
     position: absolute;
     z-index: -1;
-    inset: -0.2em -0.45em -0.25em -0.35em;
-    background: var(--bs-ink);
-    clip-path: polygon(1.5% 12%, 99% 0, 100% 86%, 0 100%);
+    inset: calc(-1 * var(--mark-out-y)) calc(-1 * var(--mark-out-x));
+    /* Ink pools where the pen lands and lifts (darker ends), with faint
+       streaks along the stroke */
+    background:
+      repeating-linear-gradient(0deg, transparent 0 2px, color-mix(in srgb, var(--mark-text) 4%, transparent) 2px 3px),
+      /* Deeper colour pooled under the label, fading out to the edges */
+      radial-gradient(
+        ellipse 50% 55% at 50% 50%,
+        color-mix(in srgb, var(--mark-color) 70%, #000) 0,
+        color-mix(in srgb, var(--mark-color) 82%, #000) 45%,
+        transparent 100%
+      ),
+      linear-gradient(
+        90deg,
+        color-mix(in srgb, var(--mark-color) 82%, var(--mark-text)) 0,
+        var(--mark-color) 7%,
+        var(--mark-color) 93%,
+        color-mix(in srgb, var(--mark-color) 85%, var(--mark-text)) 100%
+      );
+    /* Hand-drawn outline: ragged, slanted start; wobbling top and bottom;
+       frayed end where the pen lifts */
+    clip-path: polygon(
+      3.5% 15%,
+      6% 7%,
+      11% 4.5%,
+      21% 3.5%,
+      34% 5%,
+      49% 2.5%,
+      63% 4%,
+      78% 2%,
+      91% 3.5%,
+      95% 1%,
+      97.5% 7%,
+      98.6% 18%,
+      99.6% 30%,
+      98.4% 42%,
+      100% 55%,
+      98.8% 68%,
+      99.4% 80%,
+      97.4% 90%,
+      93% 97%,
+      79% 98.5%,
+      64% 96%,
+      49% 99%,
+      35% 96.5%,
+      20% 100%,
+      8% 97.5%,
+      3.5% 92%,
+      1.4% 81%,
+      0.4% 68%,
+      1.6% 55%,
+      0 42%,
+      1.2% 29%
+    );
     transform: rotate(-1.2deg) scaleX(0);
     transform-origin: left center;
     pointer-events: none;
   }
 
-  /* A separate box, so its clipped-text paint sits above the marker */
-  .is-marking .hero__mark-label {
-    background: linear-gradient(90deg, currentColor 0 33.34%, var(--bs-bg) 33.34% 66.67%, currentColor 66.67% 100%);
-    background-size: 300% 100%;
-    background-position: 100% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: hero-mark-ink var(--mark-ms, 2800ms) linear both;
+  /* Text box stretched (padding, cancelled by margin) to exactly the
+     stroke's box. The label is scaled up by transform, so the button and
+     the stroke keep their size and the label reaches into the overhang. */
+  .hero__cta-ink {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.75em;
+    padding: calc(var(--mark-out-y) + 1em) calc(var(--mark-out-x) + 1.4em);
+    margin: calc(-1 * var(--mark-out-y) - 1em) calc(-1 * var(--mark-out-x) - 1.4em);
+    pointer-events: none;
+    transform: scale(1.4);
   }
 
-  .is-marking .hero__mark::before {
-    animation: hero-mark var(--mark-ms, 2800ms) linear both;
+  .hero__cta .bs-arrow {
+    transform: scale(1.2);
+  }
+
+  .hero__cta:hover .bs-arrow {
+    transform: translateX(3px) scale(1.2);
+  }
+
+  .hero__cta.is-marked::before {
+    transform: rotate(-1.2deg) scaleX(1);
+    animation: hero-mark 0.9s linear both;
   }
 
   @keyframes hero-mark {
     0%,
-    6% {
+    18% {
       transform: rotate(-1.2deg) scaleX(0);
-      transform-origin: left center;
       animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
     }
-    30%,
-    86% {
-      transform: rotate(-1.2deg) scaleX(1);
-      transform-origin: left center;
-    }
-    86.01% {
-      transform-origin: right center;
-      animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.4);
-    }
-    97%,
     100% {
-      transform: rotate(-1.2deg) scaleX(0);
-      transform-origin: right center;
+      transform: rotate(-1.2deg) scaleX(1);
     }
   }
 
-  @keyframes hero-mark-ink {
-    0%,
-    6% {
-      background-position: 100% 0;
-      animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
-    }
-    30%,
-    86% {
-      background-position: 50% 0;
-      animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.4);
-    }
-    97%,
-    100% {
-      background-position: 0 0;
+  /* Reduced motion: the stroke is simply there */
+  @media (prefers-reduced-motion: reduce) {
+    .hero__cta.is-marked::before {
+      animation: none;
     }
   }
 
   .hero__foot {
     margin-top: clamp(28px, 3.5vw, 48px);
     display: grid;
+    /* Room for the stroke above the button when the actions stack */
     gap: 28px;
   }
 
+  /* Gaps leave room for the stroke's overhang (33px sides, 13px top and bottom) */
   .hero__actions {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 16px 28px;
+    gap: 28px 52px;
   }
 
   /* Drawing: mirrored so the cliff stands on the right */
@@ -359,6 +432,16 @@ export interface Props {
       max-width: none;
       margin-left: -75%;
     }
+
+    /* The button gets its own row, with the link centred under it. Inset
+       by the stroke's side overhang so the stroke and the enlarged label
+       stay inside the page margin. */
+    .hero__actions {
+      flex-direction: column;
+      align-items: center;
+      width: fit-content;
+      margin-left: 33px;
+    }
   }
 
   @media (min-width: 768px) {
@@ -369,17 +452,23 @@ export interface Props {
     .hero__foot {
       grid-template-columns: repeat(12, minmax(0, 1fr));
       column-gap: clamp(16px, 2vw, 32px);
-      align-items: end;
+      /* Clears the stroke's 13px top overhang under the lede */
+      row-gap: clamp(32px, 3vw, 44px);
     }
 
     .hero__lede {
       grid-column: 1 / span 6;
     }
 
-    /* Keep actions clear of the cliff, which rises in the last columns */
+    /* Buttons on their own row under the lede: button and link side by
+       side, inset by the stroke's 33px side overhang so the stroke's left
+       end lines up with the headline. The gap still clears the overhang. */
     .hero__actions {
-      grid-column: 7 / span 4;
+      grid-column: 1 / -1;
       justify-content: flex-start;
+      flex-wrap: nowrap;
+      column-gap: 44px;
+      margin-left: 33px;
     }
 
     .hero__ground {
@@ -390,9 +479,6 @@ export interface Props {
   @media (min-width: 1024px) {
     .hero__lede {
       grid-column: 1 / span 5;
-    }
-    .hero__actions {
-      grid-column: 6 / span 4;
     }
   }
 </style>
@@ -434,13 +520,17 @@ export interface Props {
   // (no blank headline), backspaces the comma, types "...", pauses, then
   // deletes and types the next word, forever. Skips words that won't fit
   // on one line at the current width. Off for reduced motion.
-  const WORDS = ['Software', 'Websites', 'Web-Apps', 'Ideas', 'Dreams'];
-  const PAUSE_MS = 3000;
+  // Typed once, in this order, after "Software," is deleted; ends on the last
+  const WORDS = ['Web-Sites', 'Web-Apps', 'Giant', 'Dreams' ];
+  const PAUSE_MS = 3300;
+  // How long the opening "Software," stays as plain text before the caret appears
+  const HOLD_MS = 3300;
 
   function initHeroType() {
     const root = document.querySelector<HTMLElement>('[data-hero-type]');
     if (!root || root.dataset.ready) return;
     root.dataset.ready = 'true';
+    // Reduced motion: no typing
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
 
     const word = root.querySelector<HTMLElement>('.hero__word');
@@ -505,36 +595,32 @@ export interface Props {
     };
     const clearAll = () => backspace(dots.childElementCount + (word.textContent ?? '').length);
 
-    // One highlighter pass over the "Start a project" button, fitted
-    // inside the pause, then the button goes back to plain
-    const button = document.querySelector<HTMLElement>('[data-hero-mark]');
-    const markButton = () => {
-      if (!button) return;
-      const ms = Math.max(1200, PAUSE_MS - 200);
-      button.style.setProperty('--mark-ms', `${ms}ms`);
-      button.classList.add('is-marking');
-      window.setTimeout(() => button.classList.remove('is-marking'), ms + 100);
-    };
-
     const run = async () => {
+      // "Software," reads as part of the plain headline first
+      await wait(HOLD_MS);
+      // Then the caret appears and deletes it, still as plain text
       root.dataset.state = 'typing';
-      let current = 'Software';
-      await wait(900);
-      await backspace(1); // the comma
-      await wait(rand(150, 260));
+      await wait(rand(350, 550));
+      await clearAll();
+      // From here on, typed words are highlighted
+      root.dataset.highlight = '';
+      await wait(rand(450, 700));
 
-      for (let pause = 0; ; pause++) {
+      // Skip any word too wide for this screen
+      const words = WORDS.filter(fits);
+      for (const [i, w] of words.entries()) {
+        await typeWord(w);
         await typeDots();
+        // Stop on the last word; the caret stops and disappears
+        if (i === words.length - 1) {
+          root.dataset.state = 'done';
+          return;
+        }
         root.dataset.state = 'waiting';
-        if (pause === 0) markButton();
         await wait(PAUSE_MS);
         root.dataset.state = 'typing';
         await clearAll();
         await wait(rand(450, 700));
-
-        const options = WORDS.filter((w) => w !== current && fits(w));
-        current = options[Math.floor(Math.random() * options.length)] ?? 'Software';
-        await typeWord(current);
       }
     };
 
@@ -544,4 +630,25 @@ export interface Props {
   }
 
   document.addEventListener('astro:page-load', initHeroType);
+
+  // Highlighter stroke over the hero "Start a project" button, drawn once
+  // MARK_DELAY_MS after the page loads; it stays. The label doesn't change.
+  // Reduced motion: the stroke is simply there.
+  const MARK_DELAY_MS = 33;
+
+  function initHeroMark() {
+    const button = document.querySelector<HTMLElement>('[data-hero-mark]');
+    if (!button || button.dataset.ready) return;
+    button.dataset.ready = 'true';
+
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      button.classList.add('is-marked');
+      return;
+    }
+
+    const timer = window.setTimeout(() => button.classList.add('is-marked'), MARK_DELAY_MS);
+    document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true });
+  }
+
+  document.addEventListener('astro:page-load', initHeroMark);
 </script>
