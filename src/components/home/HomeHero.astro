@@ -309,7 +309,7 @@ export interface Props {
 
   /*
    * Two short strokes, drawn after the main one: each is a third of the
-   * main stroke's width and its full height, sticking out by two thirds of
+   * main stroke's width and its full height, sticking out by a third of
    * that height, one above the main stroke (to its right end) and one
    * below it (from its left end). Percentages here are of the button, so
    * the main stroke's box is rebuilt from the overhang variables.
@@ -325,12 +325,12 @@ export interface Props {
 
   .hero__cta-mark--top {
     right: calc(-1 * var(--mark-out-x));
-    top: calc(-1 * var(--mark-out-y) - var(--mark-h) * 2 / 3);
+    top: calc(-1 * var(--mark-out-y) - var(--mark-h) / 3);
   }
 
   .hero__cta-mark--bottom {
     left: calc(-1 * var(--mark-out-x));
-    bottom: calc(-1 * var(--mark-out-y) - var(--mark-h) * 2 / 3);
+    bottom: calc(-1 * var(--mark-out-y) - var(--mark-h) / 3);
   }
 
   .hero__cta.is-marked .hero__cta-mark {
@@ -534,8 +534,8 @@ export interface Props {
       width: fit-content;
       margin-left: 33px;
       /* Clear the short strokes reaching above and below the button */
-      margin-top: 40px;
-      row-gap: 72px;
+      margin-top: 20px;
+      row-gap: 48px;
     }
   }
 
