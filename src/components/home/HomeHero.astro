@@ -27,7 +27,8 @@ export interface Props {
     <h1 id="hero-title" class="hero__title bs-display">
       <!--
         First line is "typed": highlighted in the selection colour, then the
-        script types a word plus "...", pauses (caret blinks, dots ripple),
+        script types a word plus "...", pauses (caret blinks; on the first pause only, the
+        "Start a project" button gets a highlighter pass),
         backspaces it and types the next. Screen readers and no-JS visitors
         get the static "Software,".
       -->
@@ -48,8 +49,9 @@ export interface Props {
         <br/>
         Welcome to the new era of software. Welcome to CausewaySoft! </p>
       <div class="hero__actions">
-        <a class="bs-btn" href="/contact?type=project"
-          >Start a project <span class="bs-arrow" aria-hidden="true">→</span></a
+        <a class="bs-btn" href="/contact?type=project" data-hero-mark
+          ><span class="hero__mark"><span class="hero__mark-label">Start a project</span></span>
+          <span class="bs-arrow" aria-hidden="true">→</span></a
         >
         <a class="bs-link" href="#work">See the work</a>
       </div>
@@ -164,39 +166,90 @@ export interface Props {
     animation: hero-caret 1s steps(1) infinite;
   }
 
-  /* The pause: the three dots ripple like someone thinking */
-  .hero__dots span {
-    display: inline-block;
-  }
-
-  .hero__type[data-state='waiting'] .hero__dots span {
-    animation: hero-dot 1.2s var(--bs-ease) infinite;
-  }
-
-  .hero__type[data-state='waiting'] .hero__dots span:nth-child(2) {
-    animation-delay: 0.15s;
-  }
-
-  .hero__type[data-state='waiting'] .hero__dots span:nth-child(3) {
-    animation-delay: 0.3s;
-  }
-
   @keyframes hero-caret {
     50% {
       opacity: 0;
     }
   }
 
-  @keyframes hero-dot {
+  /*
+   * Highlighter pass over "Start a project", played once, during the
+   * headline's first typing pause: a marker dragged across the words by
+   * hand (a beat to start, uneven ends, a slight tilt, overshooting the
+   * text), held, then wiped off left to right. The button is already the
+   * signal colour, so the marker uses the button's hover pair instead
+   * (ink marker, background-coloured letters). The letters change exactly
+   * where the marker covers them: a moving gradient clipped to the text.
+   */
+  .hero__mark {
+    position: relative;
+    z-index: 0;
+  }
+
+  .hero__mark::before {
+    content: '';
+    position: absolute;
+    z-index: -1;
+    inset: -0.2em -0.45em -0.25em -0.35em;
+    background: var(--bs-ink);
+    clip-path: polygon(1.5% 12%, 99% 0, 100% 86%, 0 100%);
+    transform: rotate(-1.2deg) scaleX(0);
+    transform-origin: left center;
+    pointer-events: none;
+  }
+
+  /* A separate box, so its clipped-text paint sits above the marker */
+  .is-marking .hero__mark-label {
+    background: linear-gradient(90deg, currentColor 0 33.34%, var(--bs-bg) 33.34% 66.67%, currentColor 66.67% 100%);
+    background-size: 300% 100%;
+    background-position: 100% 0;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: hero-mark-ink var(--mark-ms, 2800ms) linear both;
+  }
+
+  .is-marking .hero__mark::before {
+    animation: hero-mark var(--mark-ms, 2800ms) linear both;
+  }
+
+  @keyframes hero-mark {
     0%,
-    60%,
-    100% {
-      opacity: 1;
-      transform: none;
+    6% {
+      transform: rotate(-1.2deg) scaleX(0);
+      transform-origin: left center;
+      animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
     }
-    30% {
-      opacity: 0.35;
-      transform: translateY(-0.12em);
+    30%,
+    86% {
+      transform: rotate(-1.2deg) scaleX(1);
+      transform-origin: left center;
+    }
+    86.01% {
+      transform-origin: right center;
+      animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.4);
+    }
+    97%,
+    100% {
+      transform: rotate(-1.2deg) scaleX(0);
+      transform-origin: right center;
+    }
+  }
+
+  @keyframes hero-mark-ink {
+    0%,
+    6% {
+      background-position: 100% 0;
+      animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
+    }
+    30%,
+    86% {
+      background-position: 50% 0;
+      animation-timing-function: cubic-bezier(0.5, 0, 0.75, 0.4);
+    }
+    97%,
+    100% {
+      background-position: 0 0;
     }
   }
 
@@ -448,6 +501,17 @@ export interface Props {
     };
     const clearAll = () => backspace(dots.childElementCount + (word.textContent ?? '').length);
 
+    // One highlighter pass over the "Start a project" button, fitted
+    // inside the pause, then the button goes back to plain
+    const button = document.querySelector<HTMLElement>('[data-hero-mark]');
+    const markButton = () => {
+      if (!button) return;
+      const ms = Math.max(1200, PAUSE_MS - 200);
+      button.style.setProperty('--mark-ms', `${ms}ms`);
+      button.classList.add('is-marking');
+      window.setTimeout(() => button.classList.remove('is-marking'), ms + 100);
+    };
+
     const run = async () => {
       root.dataset.state = 'typing';
       let current = 'Software';
@@ -455,9 +519,10 @@ export interface Props {
       await backspace(1); // the comma
       await wait(rand(150, 260));
 
-      for (;;) {
+      for (let pause = 0; ; pause++) {
         await typeDots();
         root.dataset.state = 'waiting';
+        if (pause === 0) markButton();
         await wait(PAUSE_MS);
         root.dataset.state = 'typing';
         await clearAll();
