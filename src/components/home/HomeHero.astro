@@ -28,10 +28,11 @@ export interface Props {
       <!--
         First line is "typed". "Software," first shows as plain headline text
         for 3s; then a caret appears and backspaces it. From then on each word
-        is highlighted in the selection colour: the script types a word plus
-        "...", pauses (caret blinks; on the first pause only, the "Start a
-        project" button gets a highlighter stroke, which stays), backspaces it
-        and types the next. Screen readers and no-JS visitors get the static
+        is highlighted in the selection colour: the script types each word of
+        the list in order plus "...", pauses (caret blinks; on the first pause
+        only, the "Start a project" button gets a highlighter stroke, which
+        stays), backspaces it and types the next. It plays once and stops on
+        the last word. Screen readers and no-JS visitors get the static
         "Software,".
       -->
       <span class="hero__line hero__type" data-hero-type>
@@ -570,7 +571,8 @@ export interface Props {
   // (no blank headline), backspaces the comma, types "...", pauses, then
   // deletes and types the next word, forever. Skips words that won't fit
   // on one line at the current width. Off for reduced motion.
-  const WORDS = ['Software', 'Websites', 'Web-Apps', 'Ideas', 'Dreams'];
+  // Typed once, in this order, after "Software," is deleted; ends on the last
+  const WORDS = ['Websites', 'Web-Apps', 'Ideas', 'Dreams'];
   const PAUSE_MS = 3000;
   // How long the opening "Software," stays as plain text before the caret appears
   const HOLD_MS = 3000;
@@ -660,7 +662,6 @@ export interface Props {
     };
 
     const run = async () => {
-      let current = 'Software';
       // "Software," reads as part of the plain headline first
       await wait(HOLD_MS);
       // Then the caret appears and deletes it, still as plain text
@@ -671,13 +672,15 @@ export interface Props {
       root.dataset.highlight = '';
       await wait(rand(450, 700));
 
-      for (let pause = 0; ; pause++) {
-        const options = WORDS.filter((w) => w !== current && fits(w));
-        current = options[Math.floor(Math.random() * options.length)] ?? 'Software';
-        await typeWord(current);
+      // Skip any word too wide for this screen
+      const words = WORDS.filter(fits);
+      for (const [i, w] of words.entries()) {
+        await typeWord(w);
         await typeDots();
         root.dataset.state = 'waiting';
-        if (pause === 0) markButton();
+        if (i === 0) markButton();
+        // Stop on the last word, caret blinking
+        if (i === words.length - 1) return;
         await wait(PAUSE_MS);
         root.dataset.state = 'typing';
         await clearAll();
