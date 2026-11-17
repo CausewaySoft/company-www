@@ -54,6 +54,8 @@ export interface Props {
         Welcome to CausewaySoft! </p>
       <div class="hero__actions">
         <a class="bs-btn hero__cta" href="/contact?type=project" data-hero-mark
+          ><span class="hero__cta-mark hero__cta-mark--top" aria-hidden="true"></span
+          ><span class="hero__cta-mark hero__cta-mark--bottom" aria-hidden="true"></span
           ><span class="hero__cta-ink"
             ><span>Start a project</span> <span class="bs-arrow" aria-hidden="true">→</span></span
           ></a
@@ -224,8 +226,9 @@ export interface Props {
     pointer-events: none;
   }
 
-  /* The stroke */
-  .hero__cta::before {
+  /* The stroke (and the two short strokes, which share its look) */
+  .hero__cta::before,
+  .hero__cta-mark {
     content: '';
     position: absolute;
     z-index: -1;
@@ -304,6 +307,45 @@ export interface Props {
     animation: hero-mark 0.9s linear both;
   }
 
+  /*
+   * Two short strokes, drawn after the main one: each is a third of the
+   * main stroke's width and its full height, sticking out by a third of
+   * that height, one above the main stroke (from its left end) and one
+   * below it (to its right end). Percentages here are of the button, so
+   * the main stroke's box is rebuilt from the overhang variables.
+   */
+  .hero__cta-mark {
+    --mark-w: calc(100% + 2 * var(--mark-out-x));
+    --mark-h: calc(100% + 2 * var(--mark-out-y));
+    inset: auto;
+    width: calc(var(--mark-w) / 3);
+    height: var(--mark-h);
+    z-index: -2;
+  }
+
+  .hero__cta-mark--top {
+    left: calc(-1 * var(--mark-out-x));
+    top: calc(-1 * var(--mark-out-y) - var(--mark-h) / 3);
+  }
+
+  .hero__cta-mark--bottom {
+    right: calc(-1 * var(--mark-out-x));
+    bottom: calc(-1 * var(--mark-out-y) - var(--mark-h) / 3);
+  }
+
+  .hero__cta.is-marked .hero__cta-mark {
+    transform: rotate(-1.2deg) scaleX(1);
+    animation: hero-mark 0.6s linear both;
+  }
+
+  .hero__cta.is-marked .hero__cta-mark--top {
+    animation-delay: 0.85s;
+  }
+
+  .hero__cta.is-marked .hero__cta-mark--bottom {
+    animation-delay: 1.35s;
+  }
+
   .hero__cta.is-marked .hero__cta-ink {
     background: linear-gradient(90deg, currentColor 0 33.34%, var(--mark-text) 33.34% 66.67%, currentColor 66.67% 100%);
     background-size: 300% 100%;
@@ -372,6 +414,7 @@ export interface Props {
   /* Reduced motion: the stroke is simply there */
   @media (prefers-reduced-motion: reduce) {
     .hero__cta.is-marked::before,
+    .hero__cta.is-marked .hero__cta-mark,
     .hero__cta.is-marked .hero__cta-ink {
       animation: none;
     }
@@ -490,6 +533,9 @@ export interface Props {
       align-items: center;
       width: fit-content;
       margin-left: 33px;
+      /* Clear the short strokes reaching above and below the button */
+      margin-top: 20px;
+      row-gap: 48px;
     }
   }
 
