@@ -30,8 +30,8 @@ export interface Props {
         for 3s; then a caret appears and backspaces it. From then on each word
         is highlighted in the selection colour: the script types each word of
         the list in order plus "...", pauses (caret blinks), backspaces it and
-        types the next. It plays once and stops on
-        the last word. Screen readers and no-JS visitors get the static
+        types the next. It plays once and stops on the last word, where the
+        caret disappears. Screen readers and no-JS visitors get the static
         "Software,".
       -->
       <span class="hero__line hero__type" data-hero-type>
@@ -171,6 +171,11 @@ export interface Props {
 
   .hero__type[data-state='waiting'] .hero__caret {
     animation: hero-caret 1s steps(1) infinite;
+  }
+
+  /* Finished on the last word: the caret goes */
+  .hero__type[data-state='done'] .hero__caret {
+    display: none;
   }
 
   @keyframes hero-caret {
@@ -607,9 +612,12 @@ export interface Props {
       for (const [i, w] of words.entries()) {
         await typeWord(w);
         await typeDots();
+        // Stop on the last word; the caret stops and disappears
+        if (i === words.length - 1) {
+          root.dataset.state = 'done';
+          return;
+        }
         root.dataset.state = 'waiting';
-        // Stop on the last word, caret blinking
-        if (i === words.length - 1) return;
         await wait(PAUSE_MS);
         root.dataset.state = 'typing';
         await clearAll();
