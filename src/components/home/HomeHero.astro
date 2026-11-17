@@ -311,16 +311,19 @@ export interface Props {
    * Two short strokes, drawn after the main one: each is a third of the
    * main stroke's width and its full height, sticking out by a sixth of
    * that height, one above the main stroke (to its right end) and one
-   * below it (from its left end). Percentages here are of the button, so
-   * the main stroke's box is rebuilt from the overhang variables.
+   * below it (from its left end). Both are slanted like a "/" (skewed,
+   * top leaning right). Percentages here are of the button, so the main
+   * stroke's box is rebuilt from the overhang variables.
    */
   .hero__cta-mark {
     --mark-w: calc(100% + 2 * var(--mark-out-x));
     --mark-h: calc(100% + 2 * var(--mark-out-y));
+    --mark-skew: -28deg;
     inset: auto;
     width: calc(var(--mark-w) / 3);
     height: var(--mark-h);
     z-index: -2;
+    transform: rotate(-1.2deg) skewX(var(--mark-skew)) scaleX(0);
   }
 
   .hero__cta-mark--top {
@@ -334,8 +337,20 @@ export interface Props {
   }
 
   .hero__cta.is-marked .hero__cta-mark {
-    transform: rotate(-1.2deg) scaleX(1);
-    animation: hero-mark 0.6s linear both;
+    transform: rotate(-1.2deg) skewX(var(--mark-skew)) scaleX(1);
+    animation: hero-mark-slash 0.6s linear both;
+  }
+
+  /* hero-mark with the slant kept on throughout */
+  @keyframes hero-mark-slash {
+    0%,
+    18% {
+      transform: rotate(-1.2deg) skewX(var(--mark-skew)) scaleX(0);
+      animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
+    }
+    100% {
+      transform: rotate(-1.2deg) skewX(var(--mark-skew)) scaleX(1);
+    }
   }
 
   .hero__cta.is-marked .hero__cta-mark--top {
