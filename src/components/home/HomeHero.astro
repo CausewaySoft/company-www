@@ -234,6 +234,13 @@ export interface Props {
        streaks along the stroke */
     background:
       repeating-linear-gradient(0deg, transparent 0 2px, color-mix(in srgb, var(--mark-text) 4%, transparent) 2px 3px),
+      /* Deeper colour pooled under the label, fading out to the edges */
+      radial-gradient(
+        ellipse 50% 55% at 50% 50%,
+        color-mix(in srgb, var(--mark-color) 70%, #000) 0,
+        color-mix(in srgb, var(--mark-color) 82%, #000) 45%,
+        transparent 100%
+      ),
       linear-gradient(
         90deg,
         color-mix(in srgb, var(--mark-color) 82%, var(--mark-text)) 0,

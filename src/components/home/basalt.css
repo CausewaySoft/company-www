@@ -173,7 +173,7 @@ html:root ::selection {
   text-transform: uppercase;
   color: var(--bs-ink);
   text-decoration: underline;
-  text-decoration-color: var(--bs-rule);
+  text-decoration-color: currentColor;
   text-underline-offset: 0.45em;
   text-decoration-thickness: 1px;
   transition: text-decoration-color 0.25s var(--bs-ease);
