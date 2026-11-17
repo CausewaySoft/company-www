@@ -188,8 +188,8 @@ export interface Props {
    * the button's sides and 13px past its top and bottom, dragged across
    * it by hand: a beat to start, a
    * slight tilt, a ragged chisel-tip start, wobbling edges and a frayed
-   * end. The label and arrow turn selection-ink exactly where the stroke covers them (a
-   * moving gradient clipped to the text, sized to the stroke's box).
+   * end. The label is in its final state from the start: bold, white and
+   * scaled up (1.4x, arrow 1.2x), so only the stroke moves.
    *
    * Colours are custom properties so hover can swap them: once marked,
    * hovering turns the stroke ink and the text background-coloured, like
@@ -199,11 +199,12 @@ export interface Props {
     --mark-out-x: 33px;
     --mark-out-y: 13px;
     --mark-color: var(--bs-signal);
-    --mark-text: var(--bs-signal-ink);
+    --mark-text: #fff;
     position: relative;
     isolation: isolate;
     background: transparent;
-    color: var(--bs-ink);
+    color: var(--mark-text);
+    font-weight: 700;
   }
 
   .bs-btn.hero__cta:hover {
@@ -279,7 +280,8 @@ export interface Props {
   }
 
   /* Text box stretched (padding, cancelled by margin) to exactly the
-     stroke's box, so its gradient edge tracks the stroke's leading edge */
+     stroke's box. The label is scaled up by transform, so the button and
+     the stroke keep their size and the label reaches into the overhang. */
   .hero__cta-ink {
     display: inline-flex;
     align-items: center;
@@ -287,21 +289,20 @@ export interface Props {
     padding: calc(var(--mark-out-y) + 1em) calc(var(--mark-out-x) + 1.4em);
     margin: calc(-1 * var(--mark-out-y) - 1em) calc(-1 * var(--mark-out-x) - 1.4em);
     pointer-events: none;
+    transform: scale(1.4);
+  }
+
+  .hero__cta .bs-arrow {
+    transform: scale(1.2);
+  }
+
+  .hero__cta:hover .bs-arrow {
+    transform: translateX(3px) scale(1.2);
   }
 
   .hero__cta.is-marked::before {
     transform: rotate(-1.2deg) scaleX(1);
     animation: hero-mark 0.9s linear both;
-  }
-
-  .hero__cta.is-marked .hero__cta-ink {
-    background: linear-gradient(90deg, currentColor 0 33.34%, var(--mark-text) 33.34% 66.67%, currentColor 66.67% 100%);
-    background-size: 300% 100%;
-    background-position: 50% 0;
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    animation: hero-mark-ink 0.9s linear both;
   }
 
   @keyframes hero-mark {
@@ -315,46 +316,9 @@ export interface Props {
     }
   }
 
-  @keyframes hero-mark-ink {
-    0%,
-    18% {
-      background-position: 100% 0;
-      animation-timing-function: cubic-bezier(0.45, 0.05, 0.25, 1);
-    }
-    100% {
-      background-position: 50% 0;
-    }
-  }
-
-  /* Once the stroke is down (is-done, added on animationend): the label and
-     arrow grow bolder and turn white. The text grows by transform, so the
-     button and the stroke keep their size; the scaled label reaches into
-     the stroke's overhang. */
-  .hero__cta-ink {
-    transition: transform 0.35s var(--bs-ease);
-  }
-
-  .hero__cta.is-done {
-    --mark-text: #fff;
-    font-weight: 700;
-  }
-
-  .hero__cta.is-done .hero__cta-ink {
-    transform: scale(1.4);
-  }
-
-  .hero__cta.is-done .bs-arrow {
-    transform: scale(1.2);
-  }
-
-  .hero__cta.is-done:hover .bs-arrow {
-    transform: translateX(3px) scale(1.2);
-  }
-
   /* Reduced motion: the stroke is simply there */
   @media (prefers-reduced-motion: reduce) {
-    .hero__cta.is-marked::before,
-    .hero__cta.is-marked .hero__cta-ink {
+    .hero__cta.is-marked::before {
       animation: none;
     }
   }
@@ -661,9 +625,8 @@ export interface Props {
   document.addEventListener('astro:page-load', initHeroType);
 
   // Highlighter stroke over the hero "Start a project" button, drawn once
-  // MARK_DELAY_MS after the page loads; it stays. When the stroke is down
-  // (animationend), the label turns bold and white
-  // (is-done). Reduced motion: the finished state, straight away.
+  // MARK_DELAY_MS after the page loads; it stays. The label doesn't change.
+  // Reduced motion: the stroke is simply there.
   const MARK_DELAY_MS = 330;
 
   function initHeroMark() {
@@ -672,16 +635,11 @@ export interface Props {
     button.dataset.ready = 'true';
 
     if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-      button.classList.add('is-marked', 'is-done');
+      button.classList.add('is-marked');
       return;
     }
 
-    const timer = window.setTimeout(() => {
-      button
-        .querySelector('.hero__cta-ink')
-        ?.addEventListener('animationend', () => button.classList.add('is-done'), { once: true });
-      button.classList.add('is-marked');
-    }, MARK_DELAY_MS);
+    const timer = window.setTimeout(() => button.classList.add('is-marked'), MARK_DELAY_MS);
     document.addEventListener('astro:before-swap', () => clearTimeout(timer), { once: true });
   }
 
