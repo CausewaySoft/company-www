@@ -452,20 +452,23 @@ export interface Props {
     .hero__foot {
       grid-template-columns: repeat(12, minmax(0, 1fr));
       column-gap: clamp(16px, 2vw, 32px);
-      align-items: end;
+      /* Clears the stroke's 13px top overhang under the lede */
+      row-gap: clamp(32px, 3vw, 44px);
     }
 
     .hero__lede {
       grid-column: 1 / span 6;
     }
 
-    /* Two columns: button and link share one row. The gap still clears
-       the stroke's 33px overhang. */
+    /* Buttons on their own row under the lede: button and link side by
+       side, inset by the stroke's 33px side overhang so the stroke's left
+       end lines up with the headline. The gap still clears the overhang. */
     .hero__actions {
-      grid-column: 7 / span 6;
+      grid-column: 1 / -1;
       justify-content: flex-start;
       flex-wrap: nowrap;
       column-gap: 44px;
+      margin-left: 33px;
     }
 
     .hero__ground {
@@ -476,10 +479,6 @@ export interface Props {
   @media (min-width: 1024px) {
     .hero__lede {
       grid-column: 1 / span 5;
-    }
-    /* Keep actions clear of the cliff, which rises in the last columns */
-    .hero__actions {
-      grid-column: 6 / span 5;
     }
   }
 </style>
