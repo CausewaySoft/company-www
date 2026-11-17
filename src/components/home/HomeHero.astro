@@ -308,7 +308,7 @@ export interface Props {
   }
 
   /*
-   * Two short strokes, drawn after the main one: each is a third of the
+   * Two short strokes, drawn after the main one: each is two thirds of the
    * main stroke's width and its full height, sticking out by a sixth of
    * that height, one above the main stroke and one
    * below it, both centred on it. Percentages here are of the button, so
@@ -318,18 +318,18 @@ export interface Props {
     --mark-w: calc(100% + 2 * var(--mark-out-x));
     --mark-h: calc(100% + 2 * var(--mark-out-y));
     inset: auto;
-    width: calc(var(--mark-w) / 3);
+    width: calc(var(--mark-w) * 2 / 3);
     height: var(--mark-h);
     z-index: -2;
   }
 
   .hero__cta-mark--top {
-    left: calc(50% - var(--mark-w) / 6);
+    left: calc(50% - var(--mark-w) / 3);
     top: calc(-1 * var(--mark-out-y) - var(--mark-h) / 6);
   }
 
   .hero__cta-mark--bottom {
-    left: calc(50% - var(--mark-w) / 6);
+    left: calc(50% - var(--mark-w) / 3);
     bottom: calc(-1 * var(--mark-out-y) - var(--mark-h) / 6);
   }
 
