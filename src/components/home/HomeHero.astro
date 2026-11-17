@@ -474,6 +474,13 @@ export interface Props {
       max-width: none;
       margin-left: -75%;
     }
+
+    /* The button gets its own row, with the link centred under it */
+    .hero__actions {
+      flex-direction: column;
+      align-items: center;
+      width: fit-content;
+    }
   }
 
   @media (min-width: 768px) {
@@ -491,10 +498,13 @@ export interface Props {
       grid-column: 1 / span 6;
     }
 
-    /* Keep actions clear of the cliff, which rises in the last columns */
+    /* Two columns: button and link share one row. The gap still clears
+       the stroke's 33px overhang. */
     .hero__actions {
-      grid-column: 7 / span 4;
+      grid-column: 7 / span 6;
       justify-content: flex-start;
+      flex-wrap: nowrap;
+      column-gap: 44px;
     }
 
     .hero__ground {
@@ -506,8 +516,9 @@ export interface Props {
     .hero__lede {
       grid-column: 1 / span 5;
     }
+    /* Keep actions clear of the cliff, which rises in the last columns */
     .hero__actions {
-      grid-column: 6 / span 4;
+      grid-column: 6 / span 5;
     }
   }
 </style>
