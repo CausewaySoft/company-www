@@ -419,14 +419,16 @@ export interface Props {
   /* The ground settles into place on load (CSS only, never hides text) */
   @media (prefers-reduced-motion: no-preference) {
     .hero__drawing {
-      animation: hero-rise 1.4s var(--bs-ease) both;
+      /* Gentler than --bs-ease, which front-loads the motion and would
+         make the long rise look quick */
+      animation: hero-rise 2.4s cubic-bezier(0.3, 0.15, 0.2, 1) both;
     }
   }
 
   @keyframes hero-rise {
     from {
       opacity: 0;
-      transform: translateY(24px);
+      transform: translateY(72px);
     }
     to {
       opacity: 1;
