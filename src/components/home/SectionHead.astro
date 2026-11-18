@@ -2,11 +2,19 @@
 /**
  * Section opener: a full-width hairline, the mono index label, then the
  * heading and lede on the page's two shared edges:
- *   - heading: columns 1–7, the page's left edge (same as the hero
+ *   - heading: columns 1–8, the page's left edge (same as the hero
  *     headline and the work images)
  *   - lede: columns 9–12, the text column (same as the project text),
  *     bottom-aligned with the heading
  * On small screens everything stacks on the left edge.
+ *
+ * Two heading sizes keep pages from reading as a row of equal posters:
+ *   - feature: one or two per page, the sections the page is about
+ *   - standard: everything else
+ * The hero H1 stays the largest type on every page.
+ *
+ * A title with more than one sentence sets each sentence on its own
+ * line, so lines never break mid-phrase ("Senior / engineering. No / …").
  */
 export interface Props {
   index: string;
@@ -14,18 +22,23 @@ export interface Props {
   title: string;
   lede?: string;
   id?: string;
+  size?: 'feature' | 'standard';
 }
 
-const { index, label, title, lede, id } = Astro.props;
+const { index, label, title, lede, id, size = 'standard' } = Astro.props;
+
+const sentences = title.split(/(?<=[.?!])\s+(?=\S)/);
 ---
 
-<header class="head bs-grid" data-reveal>
+<header class:list={['head bs-grid', `head--${size}`]} data-reveal>
   <p class="head__label bs-mono">
     <span class="head__index">{index}</span>
     <span aria-hidden="true">—</span>
     {label}
   </p>
-  <h2 class="head__title bs-display" id={id}>{title}</h2>
+  <h2 class="head__title bs-display" id={id}>
+    {sentences.length > 1 ? sentences.map((s) => <span class="head__line">{s}</span>) : title}
+  </h2>
   {lede && <p class="head__lede bs-lede">{lede}</p>}
 </header>
 
@@ -53,7 +66,19 @@ const { index, label, title, lede, id } = Astro.props;
 
   .head__title {
     margin-top: clamp(8px, 2vw, 24px);
-    font-size: clamp(44px, 6.4vw, 96px);
+  }
+
+  .head__line {
+    display: block;
+  }
+
+  .head--feature .head__title {
+    font-size: clamp(40px, 6.4vw, 96px);
+  }
+
+  .head--standard .head__title {
+    font-size: clamp(36px, 4.4vw, 64px);
+    line-height: 0.95;
   }
 
   @media (min-width: 900px) {
@@ -62,7 +87,7 @@ const { index, label, title, lede, id } = Astro.props;
     }
 
     .head__title {
-      grid-column: 1 / span 7;
+      grid-column: 1 / span 8;
     }
 
     .head__lede {
@@ -70,6 +95,11 @@ const { index, label, title, lede, id } = Astro.props;
       grid-row: 2;
       /* sit on the heading's last baseline, not its descender box */
       padding-bottom: 0.4em;
+    }
+
+    /* Standard headings are smaller, so the lede sits closer to them */
+    .head--standard .head__lede {
+      padding-bottom: 0.15em;
     }
   }
 </style>

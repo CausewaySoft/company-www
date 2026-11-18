@@ -101,6 +101,13 @@ html:root ::selection {
   background: var(--bs-bg);
 }
 
+/* Two rhythms: loose (default) for the sections a page is about, tight for
+   supporting ones. Alternating them gives the page a cadence instead of
+   one even 288px gap between every pair of sections. */
+.bs-section--tight {
+  padding-block: clamp(56px, 7vw, 96px);
+}
+
 /* The first section to cover the drawing has a feathered leading edge,
    so the drawing dissolves into the page like charcoal into paper */
 /* (a hoisted <script> may sit between the drawing and the section) */
@@ -128,7 +135,13 @@ html:root ::selection {
   scroll-margin-top: 96px;
 }
 
-/* ---------- Actions ---------- */
+/* ---------- Actions ----------
+ * One look per role, everywhere:
+ *   - primary: .bs-btn, filled signal. The home hero's highlighter stroke
+ *     is the one sanctioned variant, and it rests in the same signal fill.
+ *   - secondary: .bs-link, mono with an underline.
+ *   - header CTA: outlined, so it never competes with a page's primary.
+ */
 
 .bs-btn {
   display: inline-flex;

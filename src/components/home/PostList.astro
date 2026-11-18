@@ -95,11 +95,18 @@ const items = await Promise.all(
     height: auto;
     aspect-ratio: 16 / 10;
     object-fit: cover;
-    transition: transform 0.9s var(--bs-ease);
+    /* Graded into the site's monochrome, like the founder portrait; the
+       colour comes back on hover */
+    filter: grayscale(1) contrast(1.05);
+    transition:
+      transform 0.9s var(--bs-ease),
+      filter 0.6s var(--bs-ease);
   }
 
-  .pl__row:hover .pl__thumb :global(img) {
+  .pl__row:hover .pl__thumb :global(img),
+  .pl__row:focus-visible .pl__thumb :global(img) {
     transform: scale(1.03);
+    filter: none;
   }
 
   /* Signal rule that draws across on hover/focus */

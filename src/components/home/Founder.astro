@@ -10,9 +10,11 @@ export interface Props {
   quote: string;
   body: string[];
   facts: { label: string; value: string }[];
+  /** "Fig." number of the portrait, following the page's figures */
+  fig?: string;
 }
 
-const { id = 'about', name, role, quote, body, facts } = Astro.props;
+const { id = 'about', name, role, quote, body, facts, fig } = Astro.props;
 ---
 
 <section class="founder bs-section" id={id} aria-labelledby={`${id}-title`}>
@@ -22,6 +24,7 @@ const { id = 'about', name, role, quote, body, facts } = Astro.props;
       index="03"
       label="Who you’ll work with"
       title="Senior engineering. No unnecessary layers."
+      size="feature"
     />
 
     <div class="founder__grid bs-grid" data-reveal>
@@ -33,8 +36,11 @@ const { id = 'about', name, role, quote, body, facts } = Astro.props;
           sizes="(min-width: 1024px) 480px, min(480px, 100vw)"
         />
         <figcaption class="bs-mono">
-          <span class="founder__name">{name}</span>
-          <span>{role}</span>
+          <span class="founder__who">
+            <span class="founder__name">{name}</span>
+            <span>{role}</span>
+          </span>
+          {fig && <span>Fig. {fig}</span>}
         </figcaption>
       </figure>
 
@@ -88,10 +94,16 @@ const { id = 'about', name, role, quote, body, facts } = Astro.props;
   .founder__figure figcaption {
     margin-top: 14px;
     display: flex;
-    flex-direction: column;
-    gap: 2px;
+    justify-content: space-between;
+    gap: 16px;
     border-top: 1px solid var(--bs-rule);
     padding-top: 10px;
+  }
+
+  .founder__who {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
   }
 
   .founder__name {
