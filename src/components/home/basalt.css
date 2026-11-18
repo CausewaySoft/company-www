@@ -94,6 +94,38 @@ html:root body {
   background-size: auto, 240px 240px;
 }
 
+/* Basalt sand, step A (docs/backlog.md, Mateusz's concept): the grain in
+   the page and section backgrounds drifts as you scroll, a little against
+   the content and sideways, like sand pushed by the wind. About a tenth of
+   the scroll speed: felt more than seen. Background positions repaint on
+   every frame, so it's desktop only, scroll-linked where supported, and off
+   with reduced motion. The veil layer (first) stays put; the grain (second)
+   moves. Waves and shapes are a later step (WebGL). */
+@supports (animation-timeline: scroll()) {
+  @media (prefers-reduced-motion: no-preference) and (min-width: 1024px) {
+    html:root body,
+    .bs-section,
+    .cta,
+    .bsf {
+      animation: bs-sand linear both;
+      animation-timeline: scroll(root block);
+    }
+  }
+}
+
+@keyframes bs-sand {
+  from {
+    background-position:
+      0 0,
+      0 0;
+  }
+  to {
+    background-position:
+      0 0,
+      120px -800px;
+  }
+}
+
 html:root ::selection {
   background: var(--bs-signal);
   color: var(--bs-signal-ink);
