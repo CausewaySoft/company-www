@@ -212,6 +212,16 @@ export interface Props {
     font-weight: 700;
   }
 
+  /* Until the stroke is drawn (and with no JS) the label is ink, so it
+     reads on limestone too. It turns white once the stroke is under it. */
+  .bs-btn.hero__cta:not(.is-marked) {
+    color: var(--bs-ink);
+  }
+
+  .bs-btn.hero__cta.is-marked:not(:hover) {
+    transition: color 0.3s var(--bs-ease) 0.45s;
+  }
+
   .bs-btn.hero__cta:hover {
     background: var(--bs-ink);
     color: var(--bs-bg);

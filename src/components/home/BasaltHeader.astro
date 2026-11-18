@@ -615,16 +615,21 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
       .map((link) => document.getElementById(link.dataset.section!))
       .filter((s): s is HTMLElement => Boolean(s));
 
+    // Sections crossing the band at mid-screen. When none is (the hero, or
+    // a section that isn't in the nav), no item is marked.
+    const inBand = new Set<string>();
+
     let io: IntersectionObserver | undefined;
     if (sections.length && 'IntersectionObserver' in window) {
       io = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            links.forEach((link) => {
-              if (link.dataset.section === entry.target.id) link.setAttribute('aria-current', 'true');
-              else link.removeAttribute('aria-current');
-            });
+            if (entry.isIntersecting) inBand.add(entry.target.id);
+            else inBand.delete(entry.target.id);
+          });
+          links.forEach((link) => {
+            if (inBand.has(link.dataset.section!)) link.setAttribute('aria-current', 'true');
+            else link.removeAttribute('aria-current');
           });
         },
         { rootMargin: '-45% 0px -50% 0px' }

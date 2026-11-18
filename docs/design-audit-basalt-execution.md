@@ -43,10 +43,11 @@ None of this needs Basalt to be redesigned. It needs Basalt to be **varied and t
 #### C1. The hero button text is hard-coded white
 
 - **Location:** Home → hero, "Start a project" (`src/components/home/HomeHero.astro:207`, `--mark-text: #fff`).
-- **Observation:** In light mode, the main hero button's text is white on limestone (#f3f0ea). It's invisible until the highlighter stroke draws, and it was barely legible in my light-mode screenshot. Once the stroke is drawn, white on orange measures about **4.2:1** in light mode (#d4511c) and **3.4:1** in dark mode (#e8622c).
-- **Problem:** Both ratios fail WCAG AA for text this size (13px × 1.4 scale = 18px, weight 500). Every other `.bs-btn` uses `--bs-signal-ink` (#0e0f10), which gives roughly 5–6:1. Without JavaScript, the label also has no visible button shape.
-- **Recommendation:** Set `--mark-text: var(--bs-signal-ink)` and give the button a visible default state that doesn't depend on JavaScript, such as a 1px ink underline or the stroke already drawn. The stroke animation should add to the button, not make it work.
-- **Expected outcome:** The main call to action is readable in both themes and passes AA.
+- **Observation:** In light mode, the main hero button's text is white on limestone (#f3f0ea). It's invisible until the highlighter stroke draws, and it stays invisible without JavaScript.
+- **Correction (2026-11-18):** I first reported that white on the drawn stroke fails AA. That was wrong: the stroke darkens toward the centre, under the label, so the label measures about 6–7:1 there. The problem is only the state before the stroke draws.
+- **Recommendation:** Keep the label in ink until the stroke has drawn, then fade it to white.
+- **Expected outcome:** The main call to action is readable in both themes from the first paint.
+- **Done:** Phase 1, `HomeHero.astro`.
 - **Priority:** Critical
 
 ### High
@@ -128,7 +129,8 @@ None of this needs Basalt to be redesigned. It needs Basalt to be **varied and t
 - **Observation:** The "01" sits visually lower than the "Websites" baseline. The 12px mono number is matched against a 76px title, and its line box doesn't share the baseline.
 - **Recommendation:** Align the number to the cap height of the title (`align-self: start; padding-top: ~0.35em` of the title size) instead of relying on grid baseline alignment.
 - **Expected outcome:** A precise, engineered-looking index row.
-- **Priority:** Medium
+- **Priority:** Low (corrected)
+- **Correction (2026-11-18):** I measured again and the number already sits on the title's baseline. This is a preference (cap-height vs baseline alignment), not a defect. It isn't scheduled.
 
 #### M4. The nav highlights the wrong section
 
@@ -136,6 +138,8 @@ None of this needs Basalt to be redesigned. It needs Basalt to be **varied and t
 - **Observation:** "01 Services" is highlighted while you're still in the hero. "03 About" stays highlighted through section 04, "How we work", which isn't in the nav.
 - **Recommendation:** Only highlight once a section's heading has crossed about 40% of the viewport, and clear the highlight on sections that aren't in the nav.
 - **Expected outcome:** The nav tells the truth about where you are.
+- **Cause:** the highlight was set when a section entered the mid-screen band but never cleared when it left.
+- **Done:** Phase 1, `BasaltHeader.astro`.
 - **Priority:** Medium
 
 #### M5. The blog illustrations clash with the site
@@ -157,9 +161,10 @@ None of this needs Basalt to be redesigned. It needs Basalt to be **varied and t
 ### Low
 
 - **L1. Hero intro text (Home):** "Welcome to CausewaySoft!" after a blank line made with `<br><br>` reads like a placeholder. The services intro, "Precisely engineered and to create an experience", is ungrammatical. Hand these to the copy skill. The layout point is that the hero intro should be one block of 2 lines or fewer, at most 34em wide.
-- **L2. Typed headline:** the final word is "Dreams..", with two dots. Use a real ellipsis (…) or a single full stop.
+- **L2. Typed headline:** ~~the final word has two dots.~~ Withdrawn: it ends on three dots ("Dreams..."). My screenshot caught it mid-typing.
 - **L3. Header meta:** "Belfast, NI." ends with a stray full stop, and "Giant apps for giant visionaries" appears in the hero meta and again as the footer headline. Keep it in the footer only.
-- **L4. Founder section:** there's about 300px of empty space under the portrait and the facts list before section 04. Either cut the section's bottom padding or let the facts list run to the bottom of the portrait.
+- **L4. Founder section:** there's about 300px of empty space under the portrait and the facts list before section 04. On a second look, this is the standard 144px + 144px gap between sections, not a one-off. It moves to Phase 2 (the loose/tight section rhythm).
+- **L1 and L3** are copy decisions, left to the owner or the copy skill.
 
 ---
 
@@ -191,7 +196,7 @@ None of this needs Basalt to be redesigned. It needs Basalt to be **varied and t
 
 ## Proposed order of work
 
-1. **Phase 1, fixes (about half a day):** C1, M3, M4, L1–L4.
+1. **Phase 1, fixes:** C1 and M4 done. M3 and L2 withdrawn after measuring. L1 and L3 left for copy. L4 moved to Phase 2.
 2. **Phase 2, hierarchy (1 day):** H1 and H2, adding a heading size option to `SectionHead`, then a pass over every page.
 3. **Phase 3, hero composition (1 day):** H4 option (b), plus M1 button rules.
 4. **Phase 4, Websites page restructure (1–2 days):** H3 and M6.
