@@ -45,11 +45,13 @@ export interface Props {
     </h1>
 
     <div class="hero__foot">
+      <!-- Line 1 answers "built like the Giant's Causeway… how?"; then what
+           we build, then who builds it. One thought per line. -->
       <p class="hero__lede bs-lede">
-        Custom engineered. Creative. Built to last.
-        <br/><br/>
-        We build websites and web-apps.<br/>
-        Welcome to CausewaySoft! </p>
+        <span class="hero__lede-line">Column by column. Precisely fitted. Built to last.</span>
+        <span class="hero__lede-line">Websites that win business. Web apps that run it.</span>
+        <span class="hero__lede-line">One engineer. No middlemen.</span>
+      </p>
       <div class="hero__actions">
         <a class="bs-btn hero__cta" href="/contact?type=project" data-hero-mark
           ><span class="hero__cta-ink"
@@ -497,10 +499,11 @@ export interface Props {
     }
   }
 
-  @media (min-width: 1024px) {
-    .hero__lede {
-      grid-column: 1 / span 5;
-    }
+  /* Each thought on its own line; on narrow screens a line wraps at its
+     own full stop instead of running into the next one */
+  .hero__lede-line {
+    display: block;
+    text-wrap: balance;
   }
 </style>
 
