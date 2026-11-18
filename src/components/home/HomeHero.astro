@@ -548,7 +548,10 @@ export interface Props {
   // deletes and types the next word, forever. Skips words that won't fit
   // on one line at the current width. Off for reduced motion.
   // Typed once, in this order, after "Software," is deleted; ends on the last
-  const WORDS = ['Web-Sites', 'Web-Apps', 'Giant', 'Dreams' ];
+  // word. Every word reads as a sentence with the rest of the headline, and
+  // the last one turns it to the visitor: "Yours... built like the Giant's
+  // Causeway."
+  const WORDS = ['Websites', 'Web apps', 'Products', 'Yours'];
   const PAUSE_MS = 3300;
   // How long the opening "Software," stays as plain text before the caret appears
   const HOLD_MS = 3300;
