@@ -41,21 +41,22 @@ html.dark {
   --aw-color-bg-page: var(--bs-bg);
 }
 
-/* ---------- Material: grit ----------
- * Sparse, hard-edged specks over every Basalt page, like charcoal dust on
- * rough paper, so the black reads as a surface and not a flat screen
- * colour. The noise is thresholded, so each grain has a crisp edge and
- * most pixels stay fully transparent: light grit shows on basalt, dark
- * grit on limestone, and the page is never washed over evenly (the old
- * uniform grey layer read as fog). Static SVG (no image request), one
+/* ---------- Material: grain ----------
+ * Fine specks over every Basalt page, like the tooth of the paper the
+ * charcoal drawing sits on, so the black reads as a surface and not a flat
+ * screen colour. The noise is thresholded with a soft ramp: grains have
+ * defined but not harsh edges, and most pixels stay transparent. Light
+ * grain shows on basalt, dark grain on limestone, and the page is never
+ * washed over evenly (a uniform grey layer read as fog; a hard threshold
+ * read as too rough). Static SVG (no image request), one
  * fixed layer, never catches clicks. Tune --bs-grain only.
  */
 html:root {
-  --bs-grain: 0.2;
+  --bs-grain: 0.13;
 }
 
 html.dark {
-  --bs-grain: 0.22;
+  --bs-grain: 0.14;
 }
 
 html:root body::after {
@@ -64,7 +65,7 @@ html:root body::after {
   inset: 0;
   z-index: 60;
   pointer-events: none;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='l' x='0' y='0' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 14 0 0 0 -9.8'/%3E%3C/filter%3E%3Cfilter id='d' x='0' y='0' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -14 0 0 0 4.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23l%29'/%3E%3Crect width='100%25' height='100%25' filter='url%28%23d%29'/%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='l' x='0' y='0' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 5.5 0 0 0 -3.3'/%3E%3C/filter%3E%3Cfilter id='d' x='0' y='0' color-interpolation-filters='sRGB'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' seed='11' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 -5.5 0 0 0 2.2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url%28%23l%29'/%3E%3Crect width='100%25' height='100%25' filter='url%28%23d%29'/%3E%3C/svg%3E");
   background-size: 240px 240px;
   opacity: var(--bs-grain);
 }
