@@ -290,3 +290,24 @@ html:root ::selection {
     transition: none;
   }
 }
+
+/* ---------- Reduced motion, everywhere ----------
+ * One rule for every Basalt page: with reduced motion on, transitions and
+ * animations finish at once in their final state, so nothing moves and
+ * nothing is left half-shown. Colour changes and focus rings still apply
+ * (they're feedback, not movement); hover shifts happen without travel.
+ * Components may still opt out of a motion entirely (the page transition,
+ * the hero typing) with their own rules.
+ */
+@media (prefers-reduced-motion: reduce) {
+  html:root *,
+  html:root *::before,
+  html:root *::after {
+    animation-duration: 1ms !important;
+    animation-delay: 0ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 1ms !important;
+    transition-delay: 0ms !important;
+    scroll-behavior: auto !important;
+  }
+}
