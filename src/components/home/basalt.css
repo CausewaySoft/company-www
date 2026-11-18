@@ -179,6 +179,15 @@ html:root ::selection {
   pointer-events: none;
 }
 
+/* Page changes: no browser cross-fade. The basalt columns
+   (BasaltTransition) cover the swap, and the header stays still instead of
+   fading out and back in. */
+::view-transition-group(root),
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+}
+
 /* Keep anchor targets clear of the sticky header */
 .bs [id] {
   scroll-margin-top: 96px;

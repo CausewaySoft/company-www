@@ -1,0 +1,169 @@
+---
+/**
+ * Page transition, option A "basalt columns" (docs/motion-plan.md, chosen
+ * by Mateusz). On a page change, grained columns rise from the ground,
+ * staggered and with uneven slanted tops, until they cover the page; the
+ * next page loads behind them; then they sink back into the ground.
+ *
+ * - The header stays visible and still: the columns rise under it (they
+ *   start below the 60px scrolled header), and the default cross-fade is
+ *   switched off in basalt.css, so nothing fades out and back in.
+ * - The columns and the page fetch run in parallel, so the transition adds
+ *   almost no wait: about 0.3s up, the swap, about 0.3s down.
+ * - On a slow connection a thin signal line draws along the top of the
+ *   columns while they wait.
+ * - Same-page links (#anchors) never trigger it; the router doesn't.
+ * - Reduced motion: no columns, an instant swap.
+ *
+ * Rendered by BasaltHeader, so every Basalt page has it, and persisted
+ * across page changes so the same element rises on one page and sinks on
+ * the next.
+ */
+
+// Rise order across the columns, in ms: irregular, like stones settling
+const DELAYS = [30, 0, 60, 15, 75, 45, 90];
+---
+
+<div class="bsx" data-bs-columns data-state="idle" aria-hidden="true" transition:persist="bs-columns">
+  {DELAYS.map((d, i) => <span class="bsx__col" style={`--d:${d}ms`} />)}
+  <span class="bsx__wait"></span>
+</div>
+
+<style>
+  .bsx {
+    /* Rise and sink times; the script waits for --bsx-up before swapping */
+    --bsx-up: 240ms;
+    --bsx-down: 260ms;
+    position: fixed;
+    inset: 60px 0 0 0;
+    z-index: 30;
+    display: flex;
+    align-items: flex-end;
+    overflow: hidden;
+    pointer-events: none;
+    visibility: hidden;
+  }
+
+  .bsx[data-state='cover'],
+  .bsx[data-state='reveal'] {
+    visibility: visible;
+  }
+
+  .bsx__col {
+    flex: 1;
+    /* Taller than the space, so the slanted tops still cover the top edge */
+    height: calc(100% + 6vh);
+    margin-right: -1px;
+    /* Each column a distinct stone: alternating tones, dark joints */
+    --tone: #17191b;
+    background:
+      var(--bs-grain) 0 0 / 240px 240px,
+      var(--tone);
+    border-left: 3px solid #0b0c0d;
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.07);
+    transform: translateY(100%);
+    /* The profile of a basalt column: alternating slanted tops */
+    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+  }
+
+  .bsx__col:nth-child(even) {
+    --tone: #1c1e21;
+    clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 100%);
+  }
+
+  .bsx__col:nth-child(3n) {
+    --tone: #141618;
+  }
+
+  /* Rise: from the ground, staggered, settling into place */
+  .bsx[data-state='cover'] .bsx__col {
+    transform: translateY(0);
+    transition: transform var(--bsx-up) var(--bs-ease) var(--d);
+  }
+
+  /* Sink: back into the ground, accelerating, in reverse order */
+  .bsx[data-state='reveal'] .bsx__col {
+    transform: translateY(100%);
+    transition: transform var(--bsx-down) cubic-bezier(0.5, 0, 0.75, 0) calc(90ms - var(--d));
+  }
+
+  /* Slow connection: a signal line draws along the top while waiting */
+  .bsx__wait {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--bs-signal);
+    transform: scaleX(0);
+    transform-origin: left;
+  }
+
+  .bsx[data-waiting='true'] .bsx__wait {
+    animation: bsx-wait 3s var(--bs-ease) forwards;
+  }
+
+  @keyframes bsx-wait {
+    to {
+      transform: scaleX(0.9);
+    }
+  }
+
+  /* Phones: four wider columns */
+  @media (max-width: 767px) {
+    .bsx__col:nth-child(n + 5) {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .bsx {
+      display: none;
+    }
+  }
+</style>
+
+<script>
+  const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const columns = () => document.querySelector<HTMLElement>('[data-bs-columns]');
+  const ms = (el: HTMLElement, prop: string) => parseFloat(getComputedStyle(el).getPropertyValue(prop)) || 0;
+  // Longest stagger in the column delays (see DELAYS)
+  const MAX_DELAY = 90;
+
+  let waitTimer = 0;
+
+  // Raise the columns while the next page loads; the swap waits for both
+  document.addEventListener('astro:before-preparation', (event) => {
+    const el = columns();
+    if (!el || reduced()) return;
+
+    const load = event.loader;
+    event.loader = async () => {
+      el.dataset.state = 'cover';
+      const up = ms(el, '--bsx-up') + MAX_DELAY;
+      const covered = new Promise<void>((resolve) => setTimeout(resolve, up));
+      waitTimer = window.setTimeout(() => (el.dataset.waiting = 'true'), up + 250);
+      try {
+        await Promise.all([covered, load()]);
+      } finally {
+        clearTimeout(waitTimer);
+      }
+    };
+  });
+
+  // New page is in place behind the columns: let them sink
+  const sink = () => {
+    const el = columns();
+    if (!el || el.dataset.state !== 'cover') return;
+    delete el.dataset.waiting;
+    el.dataset.state = 'reveal';
+    const down = ms(el, '--bsx-down') + MAX_DELAY;
+    setTimeout(() => {
+      if (el.dataset.state === 'reveal') el.dataset.state = 'idle';
+    }, down + 50);
+  };
+
+  document.addEventListener('astro:after-swap', sink);
+  // Safety net: never leave the page covered, e.g. if a swap was skipped
+  document.addEventListener('astro:page-load', sink);
+</script>

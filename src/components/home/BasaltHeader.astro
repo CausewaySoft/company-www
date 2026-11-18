@@ -36,6 +36,7 @@ const { items, cta, bookingHref } = Astro.props;
 const pad = (i: number) => String(i + 1).padStart(2, '0');
 // Numbers follow the home-page sections, so plain items don't take one
 const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).filter((x) => !x.plain).length)));
+import BasaltTransition from './BasaltTransition.astro';
 ---
 
 <header class="bsh" id="bs-header" data-scrolled="false">
@@ -137,6 +138,9 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     </div>
   </div>
 </header>
+
+<!-- Page transition: basalt columns rise under the header -->
+<BasaltTransition />
 
 <style>
   .bsh {

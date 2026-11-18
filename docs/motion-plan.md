@@ -4,7 +4,7 @@
 **Branch:** `feature/motion` (cut from `develop` after PR #6 merged)
 **Reviewer:** Claude Opus 5.5, as senior motion and interaction designer, working with Mateusz Cichy
 **Follows:** `docs/design-audit-basalt-execution.md`, `docs/copy-content-audit.md`
-**Status:** Agreed. Step 1 (fewer reveals, one shared script) done; the rest not started.
+**Status:** Agreed. Step 1 (fewer reveals, one shared script) and the page transition done; the rest not started.
 
 ---
 
@@ -38,7 +38,7 @@
 
 1. **Done: fewer reveals, one shared script.** Body blocks no longer fade up; they're simply there. `data-reveal` remains only on section headings (`SectionHead`, and the Websites "Why" statement, which is that section's heading) and the process columns. The script moved from `index.astro` to `src/components/home/reveal.ts`, loaded by `BasaltHeader` on every Basalt page, so a page behaves the same whether it's opened directly or reached from Home. Anything a jump scrolls past is revealed, so nothing is left hidden behind the visitor.
 2. **Reduced motion everywhere:** one global rule.
-3. **Page transition, option A, basalt columns:** dark grained columns of uneven heights rise from the bottom, staggered, cover the page (about 250ms), the new page loads behind them, and they sink back (about 250ms). The header stays put (`transition:persist`). Same-page anchor links never trigger it. With reduced motion, the page swaps instantly.
+3. **Done: page transition, option A, basalt columns** (`src/components/home/BasaltTransition.astro`, rendered by `BasaltHeader`). As built: seven columns (four on phones), each a separate grained stone with dark joints, alternating tones and a slanted top, rise under the header in about 0.33s while the next page loads in parallel, then sink in reverse order. Header stays visible. The browser's cross-fade is switched off in `basalt.css`. A thin signal line draws along the top while a slow page is still loading. Original spec:  dark grained columns of uneven heights rise from the bottom, staggered, cover the page (about 250ms), the new page loads behind them, and they sink back (about 250ms). The header stays put (`transition:persist`). Same-page anchor links never trigger it. With reduced motion, the page swaps instantly.
 4. **"Set in stone" headings:** each sentence line of a heading rises into place from its own line box, 80ms apart, after the section rule draws across. Not on the hero H1 or body text.
 5. **The ground answers the scroll** (CSS scroll-linked animation where supported, static elsewhere):
    - The hero drawing drifts and darkens while pinned.
