@@ -4,7 +4,7 @@
 **Branch:** `feature/motion` (cut from `develop` after PR #6 merged)
 **Reviewer:** Claude Opus 5.5, as senior motion and interaction designer, working with Mateusz Cichy
 **Follows:** `docs/design-audit-basalt-execution.md`, `docs/copy-content-audit.md`
-**Status:** Agreed. Step 1 (fewer reveals, one shared script) and the page transition done; the rest not started.
+**Status:** Done, except step 7 (column-shape image reveals), which moved to the backlog. See section 3.
 
 ---
 
@@ -37,16 +37,18 @@
 ## 3. Plan (in order)
 
 1. **Done: fewer reveals, one shared script.** Body blocks no longer fade up; they're simply there. `data-reveal` remains only on section headings (`SectionHead`, and the Websites "Why" statement, which is that section's heading) and the process columns. The script moved from `index.astro` to `src/components/home/reveal.ts`, loaded by `BasaltHeader` on every Basalt page, so a page behaves the same whether it's opened directly or reached from Home. Anything a jump scrolls past is revealed, so nothing is left hidden behind the visitor.
-2. **Reduced motion everywhere:** one global rule.
+2. **Done: reduced motion everywhere.** One global rule at the end of `basalt.css`: with reduced motion on, every transition and animation finishes at once in its final state.
 3. **Done: page transition, option A, basalt columns** (`src/components/home/BasaltTransition.astro`, rendered by `BasaltHeader`). As built: twelve columns in four groups of three (two groups on phones). Each group rises and sinks together and is shaped / ‾ \, like the top of a basalt column. Its faces are shaded like a lit prism (left mid-tone, flat top lightest, right darkest), with dark joints only between groups. They rise under the header in about 0.35s, with the groups starting up to 150ms apart so the uneven skyline shows while they move, while the next page loads in parallel, then sink in reverse order. Header stays visible. The browser's cross-fade is switched off in `basalt.css`. A thin signal line draws along the top while a slow page is still loading. Original spec:  dark grained columns of uneven heights rise from the bottom, staggered, cover the page (about 250ms), the new page loads behind them, and they sink back (about 250ms). The header stays put (`transition:persist`). Same-page anchor links never trigger it. With reduced motion, the page swaps instantly.
-4. **"Set in stone" headings:** each sentence line of a heading rises into place from its own line box, 80ms apart, after the section rule draws across. Not on the hero H1 or body text.
-5. **The ground answers the scroll** (CSS scroll-linked animation where supported, static elsewhere):
-   - The hero drawing drifts and darkens while pinned.
-   - The footer wordmark rises to its final cut over the last screen.
-   - Basalt sand step A: the grain drifts with the scroll.
-6. **FAQ answers open smoothly** (`::details-content` / `interpolate-size`; snaps where unsupported).
-7. **Column-shape image reveals** for the work images and the portrait.
-8. **Timing tokens** (`--bs-dur-quick`, `--bs-dur-base`, `--bs-dur-draw`, `--bs-dur-rise`), done alongside the above. This is low priority: consistency and easy retuning, not a visible fix.
+4. **Done: "set in stone" headings.** A shared pattern in `basalt.css` (`data-stone`, `.bs-stone-line`, `.bs-stone-fade`), used by `SectionHead` and the Websites "Why" statement. The hairline draws left to right (600ms), the label appears, each sentence line rises from behind its own line box (900ms, 80ms apart), then the supporting text fades in. Transitions run only on the way in, so the waiting state is never animated. Not on the hero H1 or body text.
+5. **Done: the ground answers the scroll.** CSS scroll-linked animation inside `@supports` and `prefers-reduced-motion: no-preference`; static elsewhere.
+   - **Hero drawing** (`HomeHero.astro`, desktop): over the first 110vh, it drifts up 4% and darkens to 60% while pinned. It uses `translate` and `filter`, so the load-in rise and mirroring are untouched.
+   - **Footer wordmark** (`BasaltFooter.astro`, all sizes): rises 0.32em to its final cut over its entry into view, landing as the page ends.
+   - **Basalt sand, step A** (`basalt.css`, 1024px and up): the grain in the page, section, CTA and footer backgrounds drifts 120px sideways and 800px against the content over the whole page. Desktop only, because moving backgrounds repaint every frame.
+6. **Done: FAQ answers open smoothly** (`FaqList.astro`). Height over 280ms with the text fading in, using `::details-content` and `interpolate-size`; other browsers snap open as before.
+7. **Not done; moved to the backlog: column-shape image reveals.** After the "fewer reveals" decision, motion stays only where it carries the stone idea: headings and the process columns. An image reveal on every work plate would bring back the "everything animates" feel.
+8. **Done: timing tokens.** `--bs-dur-quick` 160ms, `--bs-dur-base` 280ms, `--bs-dur-draw` 600ms, `--bs-dur-rise` 900ms and `--bs-ease-in`, replacing 61 ad-hoc values. Mateusz's hero animations keep their own tuned timings.
+
+**How it was checked:** the reveal states, heading sequence frames, transition cycle and FAQ were checked in the browser. The three scroll-linked effects (drawing drift, wordmark rise, sand drift) were checked as attached to the right scroll timelines and ranges, and by rendering their start and end states. But the review browser pane doesn't paint frames, so they haven't been *seen* moving. Mateusz to check them in a visible browser.
 
 **Not doing:** scroll hijacking, custom cursors, magnetic buttons, scrolling text tickers, depth effects on text, animated body text, more hero motion.
 

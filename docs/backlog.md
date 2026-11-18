@@ -61,6 +61,29 @@ These are not agreed yet; each needs trying in a real browser.
 
 ---
 
+## Column-shape image reveals (motion backlog)
+
+**Status:** Idea, set aside on purpose during the motion pass
+**Area:** `src/components/home/WorkIndex.astro` (work images),
+`src/components/home/Founder.astro` (portrait)
+**Added:** 2026-11-18
+
+### The idea
+
+As a work image or the founder portrait enters, it opens upward through the
+slanted column profile the portrait already uses (`clip-path` from closed to
+the slanted shape, about 900ms, once).
+
+### Why it's on the backlog
+
+Mateusz agreed that motion should stay only where it carries the stone idea:
+headings "set in stone" and the process columns. Revealing every image would
+bring back the "everything animates" feel that the motion pass removed.
+Worth reconsidering for one image only, perhaps the full-width lead plate on
+Home, if a page ever feels too still.
+
+---
+
 ## Self-audit counter: a small "tick" when the score changes (motion backlog)
 
 **Status:** Idea, not started; polish, not a fix
@@ -91,7 +114,9 @@ than drop it.
 
 ## Basalt sand: the grain in motion (motion backlog)
 
-**Status:** Idea for the motion pass, not started
+**Status:** Step A done (2026-11-18): the grain drifts with the scroll on
+desktop, in `basalt.css` (`bs-sand`). Waves and shapes (options B and C) not
+started
 **Area:** the grain in `src/components/home/basalt.css` (`--bs-grain`,
 `--bs-ground`, `--bs-grain-opacity`); likely a new ground component
 **Added:** 2026-11-18
