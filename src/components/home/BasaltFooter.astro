@@ -142,6 +142,29 @@ const year = new Date().getFullYear();
     margin-left: -0.04em;
   }
 
+  /* The name surfaces from the ground: over the last stretch of scrolling
+     it rises from deeper in the page edge to its final cut, landing as the
+     page ends (docs/motion-plan.md). Scroll-linked where supported;
+     elsewhere, and with reduced motion, it simply sits at its cut. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .bsf__giant-word {
+        animation: bsf-surface linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+      }
+    }
+  }
+
+  @keyframes bsf-surface {
+    from {
+      translate: 0 0.32em;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
   .bsf__tagline {
     margin-top: 8px;
     font-size: clamp(40px, 5vw, 72px);
