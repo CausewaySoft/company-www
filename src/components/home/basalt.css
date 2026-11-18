@@ -22,6 +22,12 @@ html:root {
   --bs-font-text: 'Inter Variable', ui-sans-serif, system-ui, sans-serif;
   --bs-font-mono: 'IBM Plex Mono', ui-monospace, 'SFMono-Regular', monospace;
   --bs-ease: cubic-bezier(0.2, 0.7, 0.2, 1);
+  /* Motion tokens (docs/motion-plan.md): one set of durations everywhere */
+  --bs-ease-in: cubic-bezier(0.5, 0, 0.75, 0); /* leaving: exits and sinks */
+  --bs-dur-quick: 160ms; /* colour and underline feedback */
+  --bs-dur-base: 280ms; /* buttons, arrows, icons, small state changes */
+  --bs-dur-draw: 600ms; /* rules and lines drawing, larger hover moves */
+  --bs-dur-rise: 900ms; /* reveals, columns rising */
 
   /* Align the shared header/footer with the page */
   --aw-color-bg-page: var(--bs-bg);
@@ -215,8 +221,8 @@ html:root ::selection {
   text-transform: uppercase;
   border-radius: 0;
   transition:
-    background-color 0.25s var(--bs-ease),
-    transform 0.25s var(--bs-ease);
+    background-color var(--bs-dur-base) var(--bs-ease),
+    transform var(--bs-dur-base) var(--bs-ease);
 }
 
 .bs-btn:hover {
@@ -229,7 +235,7 @@ html:root ::selection {
 }
 
 .bs-btn .bs-arrow {
-  transition: transform 0.25s var(--bs-ease);
+  transition: transform var(--bs-dur-base) var(--bs-ease);
 }
 
 .bs-btn:hover .bs-arrow {
@@ -247,7 +253,7 @@ html:root ::selection {
   text-decoration-color: currentColor;
   text-underline-offset: 0.45em;
   text-decoration-thickness: 1px;
-  transition: text-decoration-color 0.25s var(--bs-ease);
+  transition: text-decoration-color var(--bs-dur-base) var(--bs-ease);
 }
 
 .bs-link:hover {
@@ -267,8 +273,8 @@ html:root ::selection {
 
 [data-reveal] {
   transition:
-    opacity 0.8s var(--bs-ease),
-    transform 0.8s var(--bs-ease);
+    opacity var(--bs-dur-rise) var(--bs-ease),
+    transform var(--bs-dur-rise) var(--bs-ease);
 }
 
 .bs-js [data-reveal]:not(.is-in) {

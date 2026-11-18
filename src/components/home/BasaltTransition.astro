@@ -101,7 +101,7 @@ const columns = GROUP_DELAYS.flatMap((d) => FACES.map((face) => ({ d, face })));
   /* Sink: back into the ground, accelerating, in reverse order */
   .bsx[data-state='reveal'] .bsx__col {
     transform: translateY(100%);
-    transition: transform var(--bsx-down) cubic-bezier(0.5, 0, 0.75, 0) calc(var(--bsx-stagger) - var(--d));
+    transition: transform var(--bsx-down) var(--bs-ease-in) calc(var(--bsx-stagger) - var(--d));
   }
 
   /* Slow connection: a signal line draws along the top while waiting */

@@ -99,8 +99,8 @@ const items = await Promise.all(
        colour comes back on hover */
     filter: grayscale(1) contrast(1.05);
     transition:
-      transform 0.9s var(--bs-ease),
-      filter 0.6s var(--bs-ease);
+      transform var(--bs-dur-rise) var(--bs-ease),
+      filter var(--bs-dur-draw) var(--bs-ease);
   }
 
   .pl__row:hover .pl__thumb :global(img),
@@ -120,7 +120,7 @@ const items = await Promise.all(
     background: var(--bs-signal);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.6s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .pl__row:hover::before,
@@ -148,7 +148,7 @@ const items = await Promise.all(
     font-size: clamp(30px, 3.4vw, 50px);
     line-height: 1;
     text-wrap: balance;
-    transition: transform 0.6s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .pl__row:hover .pl__title {
@@ -182,7 +182,7 @@ const items = await Promise.all(
 
   .pl__read {
     color: var(--bs-ink);
-    transition: color 0.2s;
+    transition: color var(--bs-dur-quick);
   }
 
   .pl__row:hover .pl__read {

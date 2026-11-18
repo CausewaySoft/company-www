@@ -241,7 +241,7 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
   .pw__seg {
     height: 3px;
     background: var(--bs-rule);
-    transition: background-color 0.4s var(--bs-ease);
+    transition: background-color var(--bs-dur-draw) var(--bs-ease);
   }
 
   .pw__seg.is-done {
@@ -321,8 +321,8 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
     border: 1px solid var(--bs-rule);
     cursor: pointer;
     transition:
-      border-color 0.2s var(--bs-ease),
-      background-color 0.2s var(--bs-ease);
+      border-color var(--bs-dur-quick) var(--bs-ease),
+      background-color var(--bs-dur-quick) var(--bs-ease);
   }
 
   /* Square marker: empty, then filled signal when chosen */
@@ -335,8 +335,8 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
     height: 12px;
     border: 1px solid var(--bs-rule);
     transition:
-      background-color 0.2s var(--bs-ease),
-      border-color 0.2s var(--bs-ease);
+      background-color var(--bs-dur-quick) var(--bs-ease),
+      border-color var(--bs-dur-quick) var(--bs-ease);
   }
 
   .pw__card-title {
@@ -401,9 +401,9 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
     color: var(--bs-text);
     cursor: pointer;
     transition:
-      border-color 0.2s var(--bs-ease),
-      background-color 0.2s var(--bs-ease),
-      color 0.2s var(--bs-ease);
+      border-color var(--bs-dur-quick) var(--bs-ease),
+      background-color var(--bs-dur-quick) var(--bs-ease),
+      color var(--bs-dur-quick) var(--bs-ease);
   }
 
   .pw__chip:hover span {
@@ -445,7 +445,7 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
     font: inherit;
     font-size: 18px;
     line-height: 1.5;
-    transition: border-color 0.2s var(--bs-ease);
+    transition: border-color var(--bs-dur-quick) var(--bs-ease);
   }
 
   .pw__textarea {
@@ -517,7 +517,7 @@ const steps = ['What you’re building', 'Your idea', 'Project details', 'Your d
     letter-spacing: 0.08em;
     text-transform: uppercase;
     color: var(--bs-muted);
-    transition: color 0.2s;
+    transition: color var(--bs-dur-quick);
   }
 
   .pw__back:hover {

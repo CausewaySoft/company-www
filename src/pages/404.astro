@@ -155,7 +155,7 @@ const routes = [
   @media (prefers-reduced-motion: no-preference) {
     .nf__stone:not(.nf__stone--gap) {
       transform-origin: bottom;
-      animation: nf-rise 0.9s var(--bs-ease) both;
+      animation: nf-rise var(--bs-dur-rise) var(--bs-ease) both;
       animation-delay: calc(var(--i) * 50ms);
     }
   }
@@ -257,7 +257,7 @@ const routes = [
   .nf__route-title {
     font-size: clamp(24px, 2vw, 30px);
     line-height: 1.05;
-    transition: color 0.2s var(--bs-ease);
+    transition: color var(--bs-dur-quick) var(--bs-ease);
   }
 
   .nf__route-desc {
@@ -273,8 +273,8 @@ const routes = [
     font-size: 22px;
     color: var(--bs-ink);
     transition:
-      transform 0.3s var(--bs-ease),
-      color 0.2s;
+      transform var(--bs-dur-base) var(--bs-ease),
+      color var(--bs-dur-quick);
   }
 
   .nf__routes a:hover .nf__route-title,

@@ -152,8 +152,8 @@ import BasaltTransition from './BasaltTransition.astro';
     background: transparent;
     border-bottom: 1px solid transparent;
     transition:
-      background-color 0.3s var(--bs-ease),
-      border-color 0.3s var(--bs-ease);
+      background-color var(--bs-dur-base) var(--bs-ease),
+      border-color var(--bs-dur-base) var(--bs-ease);
   }
 
   .bsh[data-scrolled='true'],
@@ -167,7 +167,7 @@ import BasaltTransition from './BasaltTransition.astro';
     align-items: center;
     gap: 24px;
     height: 72px;
-    transition: height 0.3s var(--bs-ease);
+    transition: height var(--bs-dur-base) var(--bs-ease);
   }
 
   .bsh[data-scrolled='true'] .bsh__bar {
@@ -186,7 +186,7 @@ import BasaltTransition from './BasaltTransition.astro';
   .bsh__mark {
     width: 33px;
     height: auto;
-    transition: transform 0.6s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .bsh__brand:hover .bsh__mark {
@@ -233,7 +233,7 @@ import BasaltTransition from './BasaltTransition.astro';
 
   .bsh__num {
     color: var(--bs-muted);
-    transition: color 0.2s;
+    transition: color var(--bs-dur-quick);
   }
 
   .bsh__link::after {
@@ -246,7 +246,7 @@ import BasaltTransition from './BasaltTransition.astro';
     background: var(--bs-signal);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .bsh__link:hover::after,
@@ -292,9 +292,9 @@ import BasaltTransition from './BasaltTransition.astro';
     visibility: hidden;
     transform: translateY(-4px);
     transition:
-      opacity 0.2s var(--bs-ease),
-      transform 0.2s var(--bs-ease),
-      visibility 0.2s;
+      opacity var(--bs-dur-quick) var(--bs-ease),
+      transform var(--bs-dur-quick) var(--bs-ease),
+      visibility var(--bs-dur-quick);
   }
 
   .bsh__item--sub:hover .bsh__sub,
@@ -310,8 +310,8 @@ import BasaltTransition from './BasaltTransition.astro';
     font-size: 14px;
     color: var(--bs-text);
     transition:
-      color 0.2s,
-      background-color 0.2s;
+      color var(--bs-dur-quick),
+      background-color var(--bs-dur-quick);
   }
 
   .bsh__sub a:hover {
@@ -333,7 +333,7 @@ import BasaltTransition from './BasaltTransition.astro';
     height: 40px;
     color: var(--bs-ink);
     border: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color var(--bs-dur-quick);
   }
 
   .bsh__icon:hover {
@@ -372,8 +372,8 @@ import BasaltTransition from './BasaltTransition.astro';
     text-transform: uppercase;
     color: var(--bs-ink);
     transition:
-      background-color 0.25s var(--bs-ease),
-      color 0.25s var(--bs-ease);
+      background-color var(--bs-dur-base) var(--bs-ease),
+      color var(--bs-dur-base) var(--bs-ease);
   }
 
   .bsh__cta:hover {
