@@ -20,8 +20,9 @@ export interface Props {
 <section class="hero" aria-labelledby="hero-title">
   <div class="bs-wrap hero__content">
     <div class="hero__meta bs-mono">
-      <p>Independent software engineering studio · Belfast, NI.</p>
-      <p class="hero__meta-right">Giant apps for giant visionaries</p>
+      <p>Independent software engineering studio · Belfast, NI</p>
+      <!-- The tagline lives in the footer only, where it closes the page -->
+      <p class="hero__meta-right">Websites &amp; web applications</p>
     </div>
 
     <h1 id="hero-title" class="hero__title bs-display">
@@ -45,11 +46,13 @@ export interface Props {
     </h1>
 
     <div class="hero__foot">
+      <!-- Line 1 answers "built like the Giant's Causeway… how?"; then what
+           we build, then who builds it. One thought per line. -->
       <p class="hero__lede bs-lede">
-        Custom engineered. Creative. Built to last.
-        <br/><br/>
-        We build websites and web-apps.<br/>
-        Welcome to CausewaySoft! </p>
+        <span class="hero__lede-line">Column by column. Precisely fitted. Built to last.</span>
+        <span class="hero__lede-line">Websites that win business. Web apps that run it.</span>
+        <span class="hero__lede-line">One engineer. No middlemen.</span>
+      </p>
       <div class="hero__actions">
         <a class="bs-btn hero__cta" href="/contact?type=project" data-hero-mark
           ><span class="hero__cta-ink"
@@ -497,10 +500,11 @@ export interface Props {
     }
   }
 
-  @media (min-width: 1024px) {
-    .hero__lede {
-      grid-column: 1 / span 5;
-    }
+  /* Each thought on its own line; on narrow screens a line wraps at its
+     own full stop instead of running into the next one */
+  .hero__lede-line {
+    display: block;
+    text-wrap: balance;
   }
 </style>
 
@@ -545,7 +549,10 @@ export interface Props {
   // deletes and types the next word, forever. Skips words that won't fit
   // on one line at the current width. Off for reduced motion.
   // Typed once, in this order, after "Software," is deleted; ends on the last
-  const WORDS = ['Web-Sites', 'Web-Apps', 'Giant', 'Dreams' ];
+  // word. Every word reads as a sentence with the rest of the headline, and
+  // the last one turns it to the visitor: "Yours... built like the Giant's
+  // Causeway."
+  const WORDS = ['Websites', 'Web apps', 'Products', 'Yours'];
   const PAUSE_MS = 3300;
   // How long the opening "Software," stays as plain text before the caret appears
   const HOLD_MS = 3300;
