@@ -282,12 +282,93 @@ html:root ::selection {
   transform: translateY(16px);
 }
 
+/* ---------- "Set in stone" headings ----------
+ * A heading that enters (data-stone + data-reveal) plays one short
+ * sequence instead of fading as a block: the hairline above it draws
+ * left to right, the label appears, each line rises into place from
+ * behind its own line box (80ms apart), then the supporting text fades in.
+ *
+ *   data-stone        on the block (its border-top is the hairline)
+ *   .bs-stone-line    a line mask; its inner <span> rises. --li = index
+ *   .bs-stone-fade    fades in; --fd = delay (default after the lines)
+ */
+.bs-js [data-stone][data-reveal]:not(.is-in) {
+  opacity: 1;
+  transform: none;
+}
+
+[data-stone] {
+  position: relative;
+}
+
+/* The hairline draws: a strip of page colour over the border shrinks away
+   to the right */
+[data-stone]::after {
+  content: '';
+  position: absolute;
+  top: -1px;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--bs-bg);
+  transform: scaleX(0);
+  transform-origin: right;
+  pointer-events: none;
+}
+
+.bs-js [data-stone]:not(.is-in)::after {
+  transform: scaleX(1);
+}
+
+.bs-stone-line {
+  display: block;
+  overflow: hidden;
+  /* room for ascenders and descenders inside the mask */
+  padding-block: 0.06em 0.12em;
+  margin-block: -0.06em -0.12em;
+}
+
+.bs-stone-line > span {
+  display: block;
+}
+
+.bs-js [data-stone]:not(.is-in) .bs-stone-line > span {
+  transform: translateY(110%);
+}
+
+/* Transitions only on the way in, so moving to the waiting state is
+   instant (never an animated "un-reveal") */
+[data-stone].is-in::after {
+  transition: transform var(--bs-dur-draw) var(--bs-ease);
+}
+
+[data-stone].is-in .bs-stone-line > span {
+  transition: transform var(--bs-dur-rise) var(--bs-ease) calc(180ms + var(--li, 0) * 80ms);
+}
+
+[data-stone].is-in .bs-stone-fade {
+  transition:
+    opacity var(--bs-dur-draw) var(--bs-ease) var(--fd, 520ms),
+    transform var(--bs-dur-draw) var(--bs-ease) var(--fd, 520ms);
+}
+
+.bs-js [data-stone]:not(.is-in) .bs-stone-fade {
+  opacity: 0;
+  transform: translateY(8px);
+}
+
 @media (prefers-reduced-motion: reduce) {
   [data-reveal],
-  .bs-js [data-reveal]:not(.is-in) {
+  .bs-js [data-reveal]:not(.is-in),
+  .bs-js [data-stone]:not(.is-in) .bs-stone-line > span,
+  .bs-js [data-stone]:not(.is-in) .bs-stone-fade {
     opacity: 1;
     transform: none;
     transition: none;
+  }
+
+  .bs-js [data-stone]:not(.is-in)::after {
+    transform: scaleX(0);
   }
 }
 
