@@ -71,14 +71,15 @@ const footerServices = [
       <div class="bs-wrap">
         <div class="sintro__meta bs-mono">
           <p>Services · Belfast, Northern Ireland</p>
-          <p>Two services, one engineer</p>
+          <p>Websites · Web applications</p>
         </div>
         <h1 id="services-title" class="sintro__title bs-display">
-          Websites and software, built properly<span class="sintro__stop">.</span>
+          <span class="sintro__line">Two services.</span>
+          <span class="sintro__line">One engineer<span class="sintro__stop">.</span></span>
         </h1>
         <p class="sintro__lede bs-lede">
-          Two things, done well: websites that win you business, and custom software that builds a product or improves
-          how your business operates. AI and automation are part of both, where they genuinely help.
+          Websites for businesses that want more enquiries. Custom software for founders building a product and teams
+          still running on spreadsheets. AI and automation in both, where they genuinely help.
         </p>
       </div>
     </section>
@@ -134,6 +135,11 @@ const footerServices = [
 </Layout>
 
 <style>
+  /* One sentence per line */
+  .sintro__line {
+    display: block;
+  }
+
   /* Intro */
   .sintro {
     padding-top: clamp(28px, 4.5vw, 56px);
