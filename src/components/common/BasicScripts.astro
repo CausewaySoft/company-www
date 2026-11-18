@@ -183,7 +183,9 @@ import { UI } from 'astrowind:config';
       //elem.textContent = decoded_phone;
 
       if (!classList.includes('dont-replace-title')) {
-        elem.textContent = decoded_phone;
+        // Shown spaced for reading (+44 7548 003345); the tel: link above
+        // keeps the raw number
+        elem.textContent = decoded_phone.replace(/^\+44(\d{4})(\d{6})$/, '+44 $1 $2');
       }
     });
 
