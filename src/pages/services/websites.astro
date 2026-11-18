@@ -297,13 +297,13 @@ const faqs = [
         </div>
 
         <div class="after" id="outcomes" aria-labelledby="outcomes-title" role="group">
-          <h3 id="outcomes-title" class="after__title bs-display" data-reveal>
+          <h3 id="outcomes-title" class="after__title bs-display">
             Five jobs every business website should do.
           </h3>
           <ol class="after__list">
             {
               outcomes.map((o, i) => (
-                <li class="after__item" data-reveal>
+                <li class="after__item">
                   <span class="bs-mono after__num">{String(i + 1).padStart(2, '0')}</span>
                   <h4 class="after__name bs-display">{o.title}</h4>
                   <p class="after__desc">{o.description}</p>
@@ -329,7 +329,7 @@ const faqs = [
         <ol class="offers section-body">
           {
             offers.map((o, i) => (
-              <li class:list={['offer', { 'offer--featured': o.featured }]} data-reveal>
+              <li class:list={['offer', { 'offer--featured': o.featured }]}>
                 <p class="bs-mono offer__label">
                   <span class="offer__num">{String(i + 1).padStart(2, '0')}</span> — {o.key}
                 </p>
@@ -408,7 +408,7 @@ const faqs = [
         <ul class="quad section-body">
           {
             reasons.map((r, i) => (
-              <li class="quad__item" data-reveal>
+              <li class="quad__item">
                 <span class="bs-mono quad__num">{String(i + 1).padStart(2, '0')}</span>
                 <h3 class="quad__title bs-display">{r.title}</h3>
                 <p class="quad__desc">{r.description}</p>

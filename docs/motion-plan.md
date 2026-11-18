@@ -4,7 +4,7 @@
 **Branch:** `feature/motion` (cut from `develop` after PR #6 merged)
 **Reviewer:** Claude Opus 5.5, as senior motion and interaction designer, working with Mateusz Cichy
 **Follows:** `docs/design-audit-basalt-execution.md`, `docs/copy-content-audit.md`
-**Status:** Proposal agreed in part; nothing built yet.
+**Status:** Agreed. Step 1 (fewer reveals, one shared script) done; the rest not started.
 
 ---
 
@@ -36,7 +36,7 @@
 
 ## 3. Plan (in order)
 
-1. **One shared reveal script** for every Basalt page, so the few remaining reveals behave the same however a visitor arrives.
+1. **Done: fewer reveals, one shared script.** Body blocks no longer fade up; they're simply there. `data-reveal` remains only on section headings (`SectionHead`, and the Websites "Why" statement, which is that section's heading) and the process columns. The script moved from `index.astro` to `src/components/home/reveal.ts`, loaded by `BasaltHeader` on every Basalt page, so a page behaves the same whether it's opened directly or reached from Home. Anything a jump scrolls past is revealed, so nothing is left hidden behind the visitor.
 2. **Reduced motion everywhere:** one global rule.
 3. **Page transition, option A, basalt columns:** dark grained columns of uneven heights rise from the bottom, staggered, cover the page (about 250ms), the new page loads behind them, and they sink back (about 250ms). The header stays put (`transition:persist`). Same-page anchor links never trigger it. With reduced motion, the page swaps instantly.
 4. **"Set in stone" headings:** each sentence line of a heading rises into place from its own line box, 80ms apart, after the section rule draws across. Not on the hero H1 or body text.
@@ -58,10 +58,11 @@
 2. **Page transition:** chose **option A, basalt columns**, over B (a hard cut with an orange line).
 3. **Challenged the reveal principle:** "is an award-winning site using motion to reveal things, hiding as many things as possible?" The answer is no. That question led to principle 3 and to the proposal to cut generic fade-ups, still to be decided (section 5).
 4. **Questioned the duration tokens** ("how is that a problem?"). They were downgraded to low priority, with the reasoning written down.
-5. **Earlier motion he originated:** the typed, highlighted headline word and the highlighter CTA concept (credited in `docs/copy-content-audit.md`), and **Basalt sand**, the grain in motion (`docs/backlog.md`).
+5. **Fewer reveals:** agreed to remove the fade-up from body blocks so content is simply there ("then we can start from a blank canvas"). He agreed to keep motion only where it means something: headings "set in stone" and the process columns growing from the ground.
+6. **Earlier motion he originated:** the typed, highlighted headline word and the highlighter CTA concept (credited in `docs/copy-content-audit.md`), and **Basalt sand**, the grain in motion (`docs/backlog.md`).
 
 ---
 
-## 5. Open question
+## 5. Open questions
 
-**Fewer reveals?** The proposal is to remove the fade-up from body blocks (service rows, work text, the founder block, offers and the closing CTA). Those would simply be there. The reveals would stay only where they carry the stone idea: headings "set in stone" and the rising process columns. Awaiting Mateusz's decision.
+None at the moment.

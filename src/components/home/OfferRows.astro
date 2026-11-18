@@ -23,7 +23,7 @@ const { items } = Astro.props;
 <ol class="caps">
   {
     items.map((o, i) => (
-      <li class="cap bs-grid" id={o.id} data-reveal>
+      <li class="cap bs-grid" id={o.id}>
         <div class="cap__head">
           <p class="bs-mono cap__meta">
             <span class="cap__num">{String(i + 1).padStart(2, '0')}</span> · {o.audience}

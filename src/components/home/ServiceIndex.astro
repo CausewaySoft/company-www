@@ -33,7 +33,7 @@ const {
     <ol class="svc">
       {
         services.map((s, i) => (
-          <li data-reveal>
+          <li>
             <a class="svc__row bs-grid" href={s.href}>
               <span class="svc__num bs-mono">{String(i + 1).padStart(2, '0')}</span>
               <span class="svc__title bs-display">{s.title}</span>

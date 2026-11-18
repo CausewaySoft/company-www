@@ -538,6 +538,9 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
 </style>
 
 <script>
+  // Reveal on scroll for every Basalt page (every Basalt page has this header)
+  import './reveal';
+
   function initBasaltHeader() {
     const header = document.getElementById('bs-header');
     if (!header || header.dataset.ready) return;
