@@ -20,8 +20,10 @@
  * the next.
  */
 
-// Rise order across the columns, in ms: irregular, like stones settling
-const DELAYS = [30, 0, 60, 15, 75, 45, 90];
+// Rise order across the columns, in ms: irregular, like stones settling.
+// Spread over --bsx-stagger, so the uneven tops are visible while they move.
+// Phones show the first six.
+const DELAYS = [60, 10, 110, 30, 150, 0, 90, 40, 130, 20, 80];
 ---
 
 <div class="bsx" data-bs-columns data-state="idle" aria-hidden="true" transition:persist="bs-columns">
@@ -31,9 +33,12 @@ const DELAYS = [30, 0, 60, 15, 75, 45, 90];
 
 <style>
   .bsx {
-    /* Rise and sink times; the script waits for --bsx-up before swapping */
-    --bsx-up: 240ms;
-    --bsx-down: 260ms;
+    /* Each column's rise and sink time, and the spread of start times
+       across the columns (the latest delay in DELAYS). The script waits
+       for --bsx-up + --bsx-stagger before swapping. Total stays ~0.7s. */
+    --bsx-up: 200ms;
+    --bsx-down: 220ms;
+    --bsx-stagger: 150ms;
     position: fixed;
     inset: 60px 0 0 0;
     z-index: 30;
@@ -52,27 +57,31 @@ const DELAYS = [30, 0, 60, 15, 75, 45, 90];
   .bsx__col {
     flex: 1;
     /* Taller than the space, so the slanted tops still cover the top edge */
-    height: calc(100% + 6vh);
+    height: calc(100% + 16vh);
     margin-right: -1px;
     /* Each column a distinct stone: alternating tones, dark joints */
-    --tone: #17191b;
+    --tone: #1d2023;
+    /* Grain at the site's --bs-grain-opacity (a touch stronger, so the
+       stone has texture), veiled in the column's own tone */
+    --veil: color-mix(in srgb, var(--tone) calc((1 - var(--bs-grain-opacity) * 1.5) * 100%), transparent);
     background:
+      linear-gradient(var(--veil), var(--veil)),
       var(--bs-grain) 0 0 / 240px 240px,
       var(--tone);
-    border-left: 3px solid #0b0c0d;
-    box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.07);
+    border-left: 3px solid #070808;
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.09);
     transform: translateY(100%);
     /* The profile of a basalt column: alternating slanted tops */
-    clip-path: polygon(0 3%, 100% 0, 100% 100%, 0 100%);
+    clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
   }
 
   .bsx__col:nth-child(even) {
-    --tone: #1c1e21;
-    clip-path: polygon(0 0, 100% 4%, 100% 100%, 0 100%);
+    --tone: #24272b;
+    clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 100%);
   }
 
   .bsx__col:nth-child(3n) {
-    --tone: #141618;
+    --tone: #191b1e;
   }
 
   /* Rise: from the ground, staggered, settling into place */
@@ -84,7 +93,7 @@ const DELAYS = [30, 0, 60, 15, 75, 45, 90];
   /* Sink: back into the ground, accelerating, in reverse order */
   .bsx[data-state='reveal'] .bsx__col {
     transform: translateY(100%);
-    transition: transform var(--bsx-down) cubic-bezier(0.5, 0, 0.75, 0) calc(90ms - var(--d));
+    transition: transform var(--bsx-down) cubic-bezier(0.5, 0, 0.75, 0) calc(var(--bsx-stagger) - var(--d));
   }
 
   /* Slow connection: a signal line draws along the top while waiting */
@@ -109,9 +118,9 @@ const DELAYS = [30, 0, 60, 15, 75, 45, 90];
     }
   }
 
-  /* Phones: four wider columns */
+  /* Phones: six columns */
   @media (max-width: 767px) {
-    .bsx__col:nth-child(n + 5) {
+    .bsx__col:nth-child(n + 7) {
       display: none;
     }
   }
@@ -127,8 +136,6 @@ const DELAYS = [30, 0, 60, 15, 75, 45, 90];
   const reduced = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const columns = () => document.querySelector<HTMLElement>('[data-bs-columns]');
   const ms = (el: HTMLElement, prop: string) => parseFloat(getComputedStyle(el).getPropertyValue(prop)) || 0;
-  // Longest stagger in the column delays (see DELAYS)
-  const MAX_DELAY = 90;
 
   let waitTimer = 0;
 
@@ -140,7 +147,7 @@ const DELAYS = [30, 0, 60, 15, 75, 45, 90];
     const load = event.loader;
     event.loader = async () => {
       el.dataset.state = 'cover';
-      const up = ms(el, '--bsx-up') + MAX_DELAY;
+      const up = ms(el, '--bsx-up') + ms(el, '--bsx-stagger');
       const covered = new Promise<void>((resolve) => setTimeout(resolve, up));
       waitTimer = window.setTimeout(() => (el.dataset.waiting = 'true'), up + 250);
       try {
@@ -157,7 +164,7 @@ const DELAYS = [30, 0, 60, 15, 75, 45, 90];
     if (!el || el.dataset.state !== 'cover') return;
     delete el.dataset.waiting;
     el.dataset.state = 'reveal';
-    const down = ms(el, '--bsx-down') + MAX_DELAY;
+    const down = ms(el, '--bsx-down') + ms(el, '--bsx-stagger');
     setTimeout(() => {
       if (el.dataset.state === 'reveal') el.dataset.state = 'idle';
     }, down + 50);
