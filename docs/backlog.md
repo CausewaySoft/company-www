@@ -5,6 +5,83 @@ but not scheduled. Newest first.
 
 ---
 
+## Basalt sand: the grain in motion (motion backlog)
+
+**Status:** Idea for the motion pass, not started
+**Area:** the grain in `src/components/home/basalt.css` (`--bs-grain`,
+`--bs-ground`, `--bs-grain-opacity`); likely a new ground component
+**Added:** 2026-11-18
+
+### The idea
+
+The flat backgrounds already carry a fine grain, like the tooth of the paper
+the charcoal drawing sits on. "Basalt sand" brings that grain to life: as you
+scroll down a page, the specks drift like wind-blown sand, gather into waves,
+and form shapes that dance and dissolve again, then settle back into still
+grain when you stop.
+
+It's the material made alive. It's also the natural partner for the "columns
+rising" motion idea: sand that gathers and hardens into stone.
+
+### Why it fits the brand
+
+- **Basalt to sand:** columns weather into sand over time, so the background
+  becomes the same stone, just at a different scale.
+- **Shapes with meaning:** the shapes the sand forms can be the brand's own:
+  hexagonal column cells (the Causeway's pattern and the logo mark), the
+  rising columns of the process section, or the slanted column profile used on
+  the portrait. The sand gathers into a hexagon field, holds for a moment, and
+  drifts apart.
+- **Scroll as the wind:** scroll speed drives the movement, so the page
+  answers the visitor instead of looping on its own.
+
+### Rules it must keep
+
+These follow from decisions already made about the grain:
+
+1. **Backgrounds only.** Never over text, images, the drawing or the signal
+   orange, the same as the static grain today.
+2. **Quiet.** It stays at the current strength (`--bs-grain-opacity`, 0.1).
+   The movement should be felt more than seen; it must never look like fog or
+   TV static.
+3. **Still by default.** With `prefers-reduced-motion`, or without JS or WebGL,
+   it's exactly today's static grain.
+4. **Cheap.** It pauses off-screen and in background tabs, never drops scrolling
+   below 60fps on a mid-range phone, and never delays the first paint (the
+   static grain shows until the motion layer is ready).
+
+### How it could be built (to decide in the motion pass)
+
+- **A. Scroll-shifted grain (cheapest).** Two grain layers move at different
+  speeds with the scroll (`animation-timeline: scroll()`), which gives a sense
+  of drift. No waves or shapes, but a good first step and pure CSS.
+- **B. Displaced grain (SVG filters).** Run the grain through
+  `feDisplacementMap` driven by scroll for wave-like warping. This risks being
+  expensive: full-screen SVG filters are recomputed on every frame. Prototype
+  before committing to it.
+- **C. One WebGL ground layer (the full idea).** A single fixed canvas draws
+  the grain as particles or a thresholded noise field moved by a flow field,
+  with the scroll position as time. Shapes come from blending in a target
+  field, such as a hexagon (Voronoi) pattern, so the sand gathers into it and
+  lets go. This is the only option that really gives "waves of sand forming
+  dancing shapes".
+  - **Catch:** sections are opaque today so they can slide over the pinned
+    hero drawing. With one shared canvas, the sections' grain layer would have
+    to come from the canvas instead. The structure needs working out before
+    building.
+
+### Open questions
+
+- **Where:** the whole page, or only the big moments (the hero sky, the space
+  around the closing CTA, the footer)? Starting with one place is lower risk.
+- **How literal the shapes are:** a recognisable hexagon field, or only a
+  suggestion of order in the noise?
+- **Scroll only, or idle too:** does it move only when scrolling, or breathe
+  very slowly at rest?
+- **Mobile:** run it at all on phones, or keep phones static?
+
+---
+
 ## Set up the 301 redirects for the retired pages
 
 **Status:** Deferred by Mateusz; to do soon after the redesign goes live
