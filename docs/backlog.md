@@ -5,6 +5,34 @@ but not scheduled. Newest first.
 
 ---
 
+## Self-audit counter: a small "tick" when the score changes (motion backlog)
+
+**Status:** Idea, not started; polish, not a fix
+**Area:** Websites page self-audit (`src/components/home/SelfAudit.astro`,
+the `[data-bs-score]` number)
+**Added:** 2026-11-18
+
+### The idea
+
+The counter already works: ticking a symptom updates the score ("3/7") and
+the message under it. This would only add motion to the number itself, so
+each tick feels registered:
+
+- **Trigger:** checking or unchecking an item.
+- **Motion:** the score number moves up 4px as it changes and settles back,
+  over about 280ms with the Basalt ease. The "/7" stays still.
+- **Mobile:** the same.
+- **Reduced motion:** the number just changes, as it does today.
+
+### Why it's on the backlog, not in the motion pass
+
+It came up in the motion audit (2026-11-18). Mateusz pointed out that the
+counter already changes correctly, and the message under it is feedback in
+itself, so this is polish. He asked to keep it on the motion backlog rather
+than drop it.
+
+---
+
 ## Basalt sand: the grain in motion (motion backlog)
 
 **Status:** Idea for the motion pass, not started
