@@ -20,21 +20,24 @@
  * the next.
  */
 
-// Rise order across the columns, in ms: irregular, like stones settling.
-// Spread over --bsx-stagger, so the uneven tops are visible while they move.
-// Phones show the first six.
-const DELAYS = [60, 10, 110, 30, 150, 0, 90, 40, 130, 20, 80];
+// Columns come in groups of three (Mateusz's direction): each group rises
+// and sinks together, shaped / ‾ \ like the top of a basalt column. Groups
+// start at irregular times, spread over --bsx-stagger, like stones
+// settling. Phones show the first two groups.
+const GROUP_DELAYS = [90, 0, 150, 40];
+const FACES = ['rise', 'flat', 'fall'] as const; // '/', flat, '\'
+const columns = GROUP_DELAYS.flatMap((d) => FACES.map((face) => ({ d, face })));
 ---
 
 <div class="bsx" data-bs-columns data-state="idle" aria-hidden="true" transition:persist="bs-columns">
-  {DELAYS.map((d, i) => <span class="bsx__col" style={`--d:${d}ms`} />)}
+  {columns.map((c) => <span class={`bsx__col bsx__col--${c.face}`} style={`--d:${c.d}ms`} />)}
   <span class="bsx__wait"></span>
 </div>
 
 <style>
   .bsx {
     /* Each column's rise and sink time, and the spread of start times
-       across the columns (the latest delay in DELAYS). The script waits
+       across the groups (the latest of GROUP_DELAYS). The script waits
        for --bsx-up + --bsx-stagger before swapping. Total stays ~0.7s. */
     --bsx-up: 200ms;
     --bsx-down: 220ms;
@@ -59,7 +62,6 @@ const DELAYS = [60, 10, 110, 30, 150, 0, 90, 40, 130, 20, 80];
     /* Taller than the space, so the slanted tops still cover the top edge */
     height: calc(100% + 16vh);
     margin-right: -1px;
-    /* Each column a distinct stone: alternating tones, dark joints */
     --tone: #1d2023;
     /* Grain at the site's --bs-grain-opacity (a touch stronger, so the
        stone has texture), veiled in the column's own tone */
@@ -68,20 +70,26 @@ const DELAYS = [60, 10, 110, 30, 150, 0, 90, 40, 130, 20, 80];
       linear-gradient(var(--veil), var(--veil)),
       var(--bs-grain) 0 0 / 240px 240px,
       var(--tone);
-    border-left: 3px solid #070808;
-    box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.09);
     transform: translateY(100%);
-    /* The profile of a basalt column: alternating slanted tops */
+  }
+
+  /* A group of three reads as one stone, / ‾ \, shaded like a lit prism:
+     left face mid-tone, flat top face lightest, right face darkest */
+  .bsx__col--rise {
+    --tone: #1d2023;
     clip-path: polygon(0 10%, 100% 0, 100% 100%, 0 100%);
+    /* Dark joint between stones (not between faces of one stone) */
+    border-left: 4px solid #070808;
+    box-shadow: inset 1px 0 0 rgb(255 255 255 / 0.09);
   }
 
-  .bsx__col:nth-child(even) {
-    --tone: #24272b;
-    clip-path: polygon(0 0, 100% 12%, 100% 100%, 0 100%);
+  .bsx__col--flat {
+    --tone: #25282c;
   }
 
-  .bsx__col:nth-child(3n) {
-    --tone: #191b1e;
+  .bsx__col--fall {
+    --tone: #16181a;
+    clip-path: polygon(0 0, 100% 10%, 100% 100%, 0 100%);
   }
 
   /* Rise: from the ground, staggered, settling into place */
@@ -118,7 +126,7 @@ const DELAYS = [60, 10, 110, 30, 150, 0, 90, 40, 130, 20, 80];
     }
   }
 
-  /* Phones: six columns */
+  /* Phones: two groups (six columns) */
   @media (max-width: 767px) {
     .bsx__col:nth-child(n + 7) {
       display: none;
