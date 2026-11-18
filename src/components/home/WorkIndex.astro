@@ -25,6 +25,8 @@ export interface Props {
   headSize?: 'feature' | 'standard';
   /** Number of the first project's "Fig." caption, following the page's figures */
   figStart?: number;
+  /** First project as a full-bleed plate: the page's one edge-to-edge image */
+  leadFullBleed?: boolean;
 }
 
 const {
@@ -35,6 +37,7 @@ const {
   title = 'Built, shipped and in use.',
   headSize = 'standard',
   figStart,
+  leadFullBleed = false,
   lede = 'Two products, live today: one is built for AI agents to use, the other works fully offline.',
 } = Astro.props;
 ---
@@ -46,14 +49,20 @@ const {
     <ol class="work__list">
       {
         projects.map((p, i) => (
-          <li class:list={['work__item bs-grid', { 'work__item--flip': i % 2 === 1 }]} data-reveal>
+          <li
+            class:list={[
+              'work__item bs-grid',
+              { 'work__item--lead': leadFullBleed && i === 0, 'work__item--flip': i % 2 === (leadFullBleed ? 0 : 1) && i > 0 },
+            ]}
+            data-reveal
+          >
             <figure class="work__figure">
               <a class="work__media" href={p.href} target="_blank" rel="noopener" tabindex="-1" aria-hidden="true">
                 <Image
                   src={p.image.src}
                   alt={p.image.alt}
                   widths={[640, 960, 1280]}
-                  sizes="(min-width: 1024px) 58vw, 100vw"
+                  sizes={leadFullBleed && i === 0 ? '(min-width: 1320px) 1224px, 100vw' : '(min-width: 1024px) 58vw, 100vw'}
                 />
               </a>
               {figStart !== undefined && (
@@ -181,7 +190,52 @@ const {
     font-size: 13px !important;
   }
 
+  /* Lead project: the mount runs edge to edge, the screenshot spans the
+     full content width, and the text sits below in two columns */
+  .work__item--lead .work__figure {
+    grid-column: 1 / -1;
+    margin-inline: calc(50% - 50vw);
+  }
+
+  .work__item--lead .work__media {
+    border-inline: 0;
+    padding: clamp(24px, 6vw, 96px) max(clamp(16px, 4vw, 48px), calc((100vw - 1320px) / 2 + 48px));
+  }
+
+  .work__item--lead .work__media img {
+    aspect-ratio: 16 / 9;
+  }
+
+  .work__item--lead .work__caption {
+    padding-inline: max(clamp(16px, 4vw, 48px), calc((100vw - 1320px) / 2 + 48px));
+  }
+
   @media (min-width: 1024px) {
+    .work__item--lead .work__text {
+      grid-column: 1 / -1;
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      column-gap: clamp(16px, 2vw, 32px);
+      align-items: start;
+    }
+
+    .work__item--lead .work__text > * {
+      grid-column: 1 / span 6;
+    }
+
+    /* Same selector shape as the "> *" rule above, so it outranks it once
+       Astro adds its scoping attributes */
+    .work__item--lead .work__text > .work__facts {
+      grid-column: 8 / -1;
+      grid-row: 1 / span 3;
+      margin-top: 0;
+    }
+
+    .work__item--lead .work__text > .bs-link {
+      grid-column: 8 / -1;
+      justify-self: start;
+    }
+
     .work__figure {
       grid-column: 1 / span 7;
     }

@@ -41,6 +41,38 @@ html.dark {
   --aw-color-bg-page: var(--bs-bg);
 }
 
+/* ---------- Material: paper grain ----------
+ * A fine, colourless grain over every Basalt page, like the tooth of the
+ * paper the charcoal drawing sits on, so the black reads as a surface and
+ * not a flat screen colour. Static SVG noise (no image request), one fixed
+ * layer, never catches clicks. If it's noticeable as a pattern, it's too
+ * strong: tune --bs-grain only.
+ */
+html:root {
+  --bs-grain: 0.05;
+}
+
+html.dark {
+  --bs-grain: 0.045;
+}
+
+html:root body::after {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: 60;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  opacity: var(--bs-grain);
+}
+
+@media print {
+  html:root body::after {
+    display: none;
+  }
+}
+
 html:root ::selection {
   background: var(--bs-signal);
   color: var(--bs-signal-ink);
@@ -49,6 +81,10 @@ html:root ::selection {
 /* ---------- Primitives ---------- */
 
 .bs {
+  /* Full-bleed moments break out of .bs-wrap with 100vw; clip (not
+     hidden) so the scrollbar's width never adds a sideways scroll and
+     the pinned hero drawing keeps working */
+  overflow-x: clip;
   color: var(--bs-text);
   font-family: var(--bs-font-text);
   letter-spacing: -0.006em;
