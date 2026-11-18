@@ -2,7 +2,7 @@
 /**
  * Websites service page: Basalt redesign.
  * Art direction: docs/design-review-claude-opus5.5.md (section 5)
- * Images are placeholders until real photography is in place.
+ * Section order and rhythm: docs/design-audit-basalt-execution.md (H3)
  */
 import Layout from '~/layouts/PageLayout.astro';
 
@@ -40,10 +40,11 @@ export const metadata = {
 
 const projectHref = '/contact?type=project&service=website';
 
-// Placeholder photo (to be replaced with our own photography)
+// Real work instead of stock: a close crop on the phone, with the full
+// plate further down in the work section
 const heroImage = {
-  src: 'https://images.unsplash.com/photo-1586863981824-d9dd81824d6b?auto=format&fit=crop&w=2070&q=80',
-  alt: 'Someone working on a laptop in a café',
+  src: portfolioImg_Renovations,
+  alt: 'The Causeway Renovations website on an iPhone',
 };
 
 const symptoms = [
@@ -267,17 +268,20 @@ const faqs = [
             <Image
               src={heroImage.src}
               alt={heroImage.alt}
-              layout="fullWidth"
-              widths={[400, 640, 900]}
+              widths={[640, 960, 1280]}
               sizes="(min-width: 900px) 40vw, 100vw"
               loading="eager"
             />
+            <figcaption class="whero__caption bs-mono">
+              <span>Fig. 01</span>
+              <a href="#work">Causeway Renovations</a>
+            </figcaption>
           </figure>
         </div>
       </div>
     </section>
 
-    <!-- 01 Diagnosis -->
+    <!-- 01 Diagnosis, with what a good website does as the "after" -->
     <section class="bs-section" id="diagnosis" aria-labelledby="diagnosis-title">
       <div class="bs-wrap">
         <SectionHead
@@ -286,62 +290,41 @@ const faqs = [
           label="The diagnosis"
           title="Is your website doing its job?"
           lede="It’s your business card, your shop window and your sales tool, and often the first thing a potential customer sees."
+          size="feature"
         />
         <div class="section-body">
           <SelfAudit intro="If your website…" items={symptoms} reviewHref={reviewCallHref} projectHref={projectHref} />
         </div>
-      </div>
-    </section>
 
-    <!-- 02 Outcomes -->
-    <section class="bs-section" id="outcomes" aria-labelledby="outcomes-title">
-      <div class="bs-wrap">
-        <SectionHead
-          id="outcomes-title"
-          index="02"
-          label="What a good website does"
-          title="We turn underperforming websites into business assets."
-          lede="Strategic design, conversion-focused UX and serious technical performance: websites that do more than look good."
-        />
-        <ol class="rows section-body">
-          {
-            outcomes.map((o, i) => (
-              <li class="row bs-grid" data-reveal>
-                <span class="row__num bs-mono">{String(i + 1).padStart(2, '0')}</span>
-                <h3 class="row__title bs-display">{o.title}</h3>
-                <p class="row__desc">{o.description}</p>
-              </li>
-            ))
-          }
-        </ol>
-      </div>
-    </section>
-
-    <!-- 03 What we build -->
-    <section class="bs-section" id="what-we-build" aria-labelledby="kinds-title">
-      <div class="bs-wrap">
-        <SectionHead
-          id="kinds-title"
-          index="03"
-          label="What we build"
-          title="Three kinds of website, each built to do a job."
-          lede="Whether you’re a local business, a startup or a growing company, we build around what your website needs to achieve."
-        />
-        <div class="section-body">
-          <OfferRows items={kinds} />
+        <div class="after" id="outcomes" aria-labelledby="outcomes-title" role="group">
+          <h3 id="outcomes-title" class="after__title bs-display" data-reveal>
+            We turn underperforming websites into business assets.
+          </h3>
+          <ol class="after__list">
+            {
+              outcomes.map((o, i) => (
+                <li class="after__item" data-reveal>
+                  <span class="bs-mono after__num">{String(i + 1).padStart(2, '0')}</span>
+                  <h4 class="after__name bs-display">{o.title}</h4>
+                  <p class="after__desc">{o.description}</p>
+                </li>
+              ))
+            }
+          </ol>
         </div>
       </div>
     </section>
 
-    <!-- 04 Offers -->
+    <!-- 02 Offers: the commercial core, straight after the diagnosis -->
     <section class="bs-section" id="offers" aria-labelledby="offers-title">
       <div class="bs-wrap">
         <SectionHead
           id="offers-title"
-          index="04"
+          index="02"
           label="Three ways in"
           title="What we can do for your website."
           lede="Improve what you have, build something new, or make it do more."
+          size="feature"
         />
         <ol class="offers section-body">
           {
@@ -369,42 +352,59 @@ const faqs = [
             ))
           }
         </ol>
-        <div class="statement" data-reveal>
-          <p class="statement__line bs-display">We’re software engineers, not just website builders.</p>
-          <p class="statement__sub">
-            When off-the-shelf solutions aren’t enough, we build exactly what your business needs.
-          </p>
+      </div>
+    </section>
+
+    <!-- 03 What we build -->
+    <section class="bs-section bs-section--tight" id="what-we-build" aria-labelledby="kinds-title">
+      <div class="bs-wrap">
+        <SectionHead
+          id="kinds-title"
+          index="03"
+          label="What we build"
+          title="Three kinds of website, each built to do a job."
+          lede="Whether you’re a local business, a startup or a growing company, we build around what your website needs to achieve."
+        />
+        <div class="section-body">
+          <OfferRows items={kinds} />
         </div>
       </div>
     </section>
 
-    <!-- 05 Proof -->
+    <!-- 04 Proof -->
     <WorkIndex
       projects={projects}
-      index="05"
+      index="04"
       label="Recent website"
       title="Built for a real business."
       lede="A renovation company’s website, designed to bring in enquiries and ready for AI agents to use."
+      figStart={2}
     />
 
-    <!-- 06 Process -->
+    <!-- 05 Process -->
     <ColumnSteps
       steps={steps}
-      index="06"
+      index="05"
       label="How we work"
       title="From “just a website” to a system that brings in business."
       lede="Every project starts with one question: what should this website actually achieve? Then we work backwards."
+      tight
     />
 
-    <!-- 07 Why us -->
-    <section class="bs-section" id="why" aria-labelledby="why-title">
+    <!-- 06 Why us: one full-width statement instead of another section opener -->
+    <section class="bs-section bs-section--tight" id="why" aria-labelledby="why-title">
       <div class="bs-wrap">
-        <SectionHead
-          id="why-title"
-          index="07"
-          label="Why build with us"
-          title="Design with a job. Engineering behind it."
-        />
+        <div class="statement" data-reveal>
+          <p class="bs-mono statement__label">
+            <span class="statement__index">06</span> <span aria-hidden="true">—</span> Why build with us
+          </p>
+          <h2 id="why-title" class="statement__line bs-display">
+            We’re software engineers, not just website builders<span class="whero__stop">.</span>
+          </h2>
+          <p class="statement__sub">
+            When off-the-shelf solutions aren’t enough, we build exactly what your business needs.
+          </p>
+        </div>
         <ul class="quad section-body">
           {
             reasons.map((r, i) => (
@@ -419,12 +419,12 @@ const faqs = [
       </div>
     </section>
 
-    <!-- 08 FAQs -->
-    <section class="bs-section" id="faq" aria-labelledby="faq-title">
+    <!-- 07 FAQs -->
+    <section class="bs-section bs-section--tight" id="faq" aria-labelledby="faq-title">
       <div class="bs-wrap">
         <SectionHead
           id="faq-title"
-          index="08"
+          index="07"
           label="Questions"
           title="The things people ask first."
           lede="Price, timing and what happens after launch. Anything else, just ask."
@@ -435,7 +435,7 @@ const faqs = [
       </div>
     </section>
 
-    <ClosingCta bookingHref={bookingHref} index="09" projectHref={projectHref} />
+    <ClosingCta bookingHref={bookingHref} index="08" projectHref={projectHref} />
   </div>
 
   <BasaltFooter slot="footer" links={footerLinks} services={serviceLinks} />
@@ -494,41 +494,82 @@ const faqs = [
     gap: 16px 28px;
   }
 
+  /* Close crop on the phone; the full plate is in the work section */
   .whero__figure :global(img) {
     display: block;
     width: 100%;
-    aspect-ratio: 4 / 5;
+    height: auto;
+    /* !important: the shared Image component sets these inline */
+    aspect-ratio: 4 / 5 !important;
     object-fit: cover;
-    filter: grayscale(1) contrast(1.05);
+    object-position: 12% 60% !important;
     clip-path: polygon(0 5%, 100% 0, 100% 100%, 0 100%);
   }
 
-  /* Outcome rows (same rhythm as the home services list, without links) */
-  .rows {
-    border-bottom: 1px solid var(--bs-rule);
+  .whero__caption {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 12px;
   }
 
-  .row {
-    padding-block: clamp(22px, 2.6vw, 34px);
+  .whero__caption a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: transparent;
+    text-underline-offset: 0.35em;
+    transition: text-decoration-color 0.2s var(--bs-ease);
+  }
+
+  .whero__caption a:hover {
+    color: var(--bs-ink);
+    text-decoration-color: var(--bs-signal);
+  }
+
+  /* "After" strip: what a good website does, as a compact five-up row
+     under the self-audit rather than a section of its own */
+  .after {
+    margin-top: clamp(64px, 8vw, 112px);
+    padding-top: 20px;
     border-top: 1px solid var(--bs-rule);
-    row-gap: 10px;
-    align-items: baseline;
   }
 
-  .row__num {
-    grid-column: 1 / span 2;
+  .after__title {
+    font-size: clamp(30px, 3.2vw, 46px);
+    line-height: 1;
+    max-width: 22ch;
   }
 
-  .row__title {
-    grid-column: 3 / -1;
-    font-size: clamp(34px, 4.4vw, 64px);
+  .after__list {
+    display: grid;
+    gap: 0;
+    margin-top: clamp(32px, 4vw, 56px);
   }
 
-  .row__desc {
-    grid-column: 3 / -1;
-    font-size: 16px;
+  .after__item {
+    display: grid;
+    grid-template-columns: 3rem 1fr;
+    column-gap: 16px;
+    row-gap: 8px;
+    align-content: start;
+    padding-block: 20px 24px;
+    border-top: 1px solid var(--bs-rule);
+  }
+
+  .after__num {
+    grid-row: 1 / span 2;
+    color: var(--bs-ink);
+    padding-top: 6px;
+  }
+
+  .after__name {
+    font-size: clamp(24px, 1.9vw, 28px);
+    line-height: 1.02;
+  }
+
+  .after__desc {
+    font-size: 15px;
     line-height: 1.55;
-    max-width: 32em;
   }
 
   /* Offers: three tall columns */
@@ -598,12 +639,20 @@ const faqs = [
   }
 
   .statement {
-    margin-top: clamp(64px, 8vw, 120px);
+    border-top: 1px solid var(--bs-rule);
+    padding-top: 20px;
   }
 
+  .statement__index {
+    color: var(--bs-ink);
+  }
+
+  /* Full width, one size up from a standard heading: the page's one
+     typographic moment between the hero and the closing CTA */
   .statement__line {
-    font-size: clamp(40px, 5.6vw, 84px);
-    max-width: 16ch;
+    margin-top: clamp(24px, 3vw, 40px);
+    font-size: clamp(44px, 6.4vw, 96px);
+    max-width: 18ch;
   }
 
   .statement__sub {
@@ -656,16 +705,19 @@ const faqs = [
       grid-column: 9 / -1;
     }
 
-    .row__num {
-      grid-column: 1 / span 1;
+    /* Five outcomes in one row: number above, no side column */
+    .after__list {
+      grid-template-columns: repeat(5, minmax(0, 1fr));
+      column-gap: clamp(16px, 2vw, 32px);
     }
 
-    .row__title {
-      grid-column: 2 / span 6;
+    .after__item {
+      grid-template-columns: 1fr;
     }
 
-    .row__desc {
-      grid-column: 9 / -1;
+    .after__num {
+      grid-row: auto;
+      padding-top: 0;
     }
 
     .offers {

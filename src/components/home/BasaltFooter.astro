@@ -35,7 +35,6 @@ const year = new Date().getFullYear();
             stroke-linejoin="round"
             stroke-width="7"></path>
         </svg>
-        <span class="bsf__word">CausewaySoft</span>
       </a>
       <p class="bsf__tagline bs-display">
         <span>Giant apps</span>
@@ -80,13 +79,18 @@ const year = new Date().getFullYear();
       <a class="bsf__top" href="#">Back to top <span aria-hidden="true">↑</span></a>
     </div>
   </div>
+
+  <!-- The "giant": the name at full width, cut off by the edge of the page -->
+  <div class="bsf__giant bs-wrap" aria-hidden="true">
+    <span class="bsf__giant-word">CausewaySoft</span>
+  </div>
 </footer>
 
 <style>
   .bsf {
     color: var(--bs-text);
     font-family: var(--bs-font-text);
-    background: var(--bs-bg);
+    background: var(--bs-ground);
     border-top: 1px solid var(--bs-rule);
   }
 
@@ -114,14 +118,28 @@ const year = new Date().getFullYear();
     height: auto;
   }
 
-  .bsf__word {
+  /* Spans the content width exactly (container units), and the page's
+     bottom edge cuts through it about a fifth of the way up */
+  .bsf__giant {
+    container-type: inline-size;
+    overflow: hidden;
+  }
+
+  .bsf__giant-word {
+    display: block;
     font-family: var(--bs-font-display);
-    font-stretch: 75%;
+    font-stretch: 68%;
     font-weight: 800;
-    font-size: 22px;
-    letter-spacing: 0.01em;
+    /* "CAUSEWAYSOFT" sets about 6.05× its font size wide */
+    font-size: 16.5cqi;
+    line-height: 0.8;
+    /* The page edge cuts through the letters */
+    margin-bottom: -0.17em;
+    letter-spacing: -0.02em;
     text-transform: uppercase;
-    line-height: 1;
+    white-space: nowrap;
+    color: var(--bs-ink);
+    margin-left: -0.04em;
   }
 
   .bsf__tagline {

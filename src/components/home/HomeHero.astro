@@ -58,6 +58,17 @@ export interface Props {
         >
         <a class="bs-link" href="#work">See the work</a>
       </div>
+      <!-- No JS: the stroke is simply there, as for reduced motion -->
+      <noscript
+        ><style is:inline>
+          .hero__cta::before {
+            transform: rotate(-1.2deg) scaleX(1) !important;
+          }
+          .hero__cta {
+            color: #fff !important;
+          }
+        </style></noscript
+      >
     </div>
   </div>
 </section>
@@ -210,6 +221,16 @@ export interface Props {
     background: transparent;
     color: var(--mark-text);
     font-weight: 700;
+  }
+
+  /* Until the stroke is drawn (and with no JS) the label is ink, so it
+     reads on limestone too. It turns white once the stroke is under it. */
+  .bs-btn.hero__cta:not(.is-marked) {
+    color: var(--bs-ink);
+  }
+
+  .bs-btn.hero__cta.is-marked:not(:hover) {
+    transition: color 0.3s var(--bs-ease) 0.45s;
   }
 
   .bs-btn.hero__cta:hover {
@@ -496,8 +517,11 @@ export interface Props {
     const pin = () => {
       ground.classList.remove('is-pinned');
       const naturalTop = ground.getBoundingClientRect().top + window.scrollY;
-      // Never pin lower than half the drawing's height above the fold
-      const maxTop = window.innerHeight - ground.offsetHeight * 0.5;
+      // Pin with the whole drawing (and its caption) above the fold: it
+      // first scrolls up into full view, then holds while the next section
+      // slides over it. Pinning any lower kept the stones below the fold
+      // for good and left an empty band under the hero.
+      const maxTop = window.innerHeight - ground.offsetHeight;
       ground.style.setProperty('--ground-top', `${Math.max(0, Math.min(naturalTop, maxTop))}px`);
       ground.classList.add('is-pinned');
     };

@@ -135,9 +135,9 @@ const founder = {
   <div class="bs">
     <HomeHero services={services.map(({ title, href }) => ({ title, href }))} />
     <ServiceIndex services={services} />
-    <WorkIndex projects={projects} />
-    <Founder {...founder} />
-    <ColumnSteps steps={steps} />
+    <WorkIndex projects={projects} headSize="feature" figStart={2} leadFullBleed />
+    <Founder {...founder} fig="04" />
+    <ColumnSteps steps={steps} tight />
     <ClosingCta bookingHref={bookingHref} />
   </div>
   <BasaltFooter slot="footer" links={footerLinks} />

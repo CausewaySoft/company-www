@@ -1,4 +1,12 @@
 ---
+/**
+ * Closing CTA, set on the same charcoal Causeway study as the hero but
+ * unmirrored, so the cliff stands on the left: the page opens and closes
+ * on the stones.
+ */
+import { Image } from 'astro:assets';
+import causewayDrawing from '~/assets/images/giants-causeway-causewaysoft-herobg.png';
+
 export interface Props {
   bookingHref: string;
   index?: string;
@@ -29,15 +37,58 @@ const { bookingHref, index = '05', projectHref = '/contact?type=project' } = Ast
       <p class="bs-mono cta__note">We typically reply within one business day.</p>
     </div>
   </div>
+  <div class="cta__ground" aria-hidden="true">
+    <Image src={causewayDrawing} alt="" widths={[768, 1436]} sizes="(max-width: 767px) 175vw, 100vw" loading="lazy" />
+  </div>
 </section>
 
 <style>
   .cta {
+    /* Rendered height of the drawing (1436 × 508) */
+    --cta-ground-h: 35.4vw;
     position: relative;
     z-index: 1;
-    padding-block: clamp(96px, 14vw, 200px);
-    background: var(--bs-surface);
+    overflow: hidden;
+    padding-top: clamp(96px, 14vw, 200px);
+    /* Text ends where the stones begin to rise */
+    padding-bottom: calc(var(--cta-ground-h) * 0.62 + 48px);
+    background: var(--bs-ground);
     border-top: 1px solid var(--bs-rule);
+  }
+
+  .cta .bs-wrap {
+    position: relative;
+    z-index: 1;
+  }
+
+  .cta__ground {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 0;
+    pointer-events: none;
+  }
+
+  .cta__ground img {
+    display: block;
+    width: 100%;
+    height: auto;
+    opacity: var(--bs-drawing-opacity);
+    -webkit-mask-image: linear-gradient(to top, #000 55%, transparent);
+    mask-image: linear-gradient(to top, #000 55%, transparent);
+  }
+
+  /* Phones: crop in on the cliff, as in the hero */
+  @media (max-width: 767px) {
+    .cta {
+      --cta-ground-h: 62vw;
+    }
+
+    .cta__ground img {
+      width: 175%;
+      max-width: none;
+    }
   }
 
   .cta__inner {
@@ -49,7 +100,8 @@ const { bookingHref, index = '05', projectHref = '/contact?type=project' } = Ast
 
   .cta__title {
     margin-top: 28px;
-    font-size: clamp(56px, 11vw, 168px);
+    /* Never larger than the hero headline */
+    font-size: clamp(52px, 8.6vw, 132px);
     line-height: 0.86;
     font-weight: 800;
     font-stretch: 68%;
