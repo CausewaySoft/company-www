@@ -398,6 +398,29 @@ export interface Props {
     }
   }
 
+  /* While pinned, the drawing drifts up a little and darkens as the page
+     slides over it, like a coastline seen from a departing boat
+     (docs/motion-plan.md, "the ground answers the scroll"). Scroll-linked,
+     desktop only, where supported; elsewhere it simply stays still. Uses
+     translate and filter, so the load-in rise and the mirroring (both
+     transform) are untouched. */
+  @supports (animation-timeline: scroll()) {
+    @media (prefers-reduced-motion: no-preference) and (min-width: 768px) {
+      .hero__drawing img {
+        animation: hero-drift linear both;
+        animation-timeline: scroll(root block);
+        animation-range: 0 110vh;
+      }
+    }
+  }
+
+  @keyframes hero-drift {
+    to {
+      translate: 0 -4%;
+      filter: brightness(0.6);
+    }
+  }
+
   @keyframes hero-rise {
     from {
       opacity: 0;
