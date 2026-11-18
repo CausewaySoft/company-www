@@ -201,3 +201,35 @@ None of this needs Basalt to be redesigned. It needs Basalt to be **varied and t
 3. **Phase 3, hero and buttons:** done. The drawing now pins with its bottom on the fold, so it scrolls up into full view and holds while section 01 slides over it, instead of keeping the stones below the fold. Option (b)'s `100svh` hero wasn't needed. Button roles are written down in `basalt.css`. Without JS, the hero stroke is drawn from the start.
 4. **Phase 4, Websites page:** done. The order is now Hero → Diagnosis (with the outcomes as a five-up "after" strip) → Offers → Kinds → Work → Process → Why (a full-width statement) → FAQ → CTA. The page went from 13,343px to 10,900px at 1440px wide. The old "Design with a job. Engineering behind it." heading was replaced by the existing "We’re software engineers…" statement, which now leads the Why section. The hero shows a close crop of the Causeway Renovations phone instead of the stock photo.
 5. **Phase 5, imagery:** partly done in code. Work screenshots sit on one shared surface mount (M2). The blog list and post hero images are graded to monochrome, with colour back on hover in the list (M5). "Fig." captions run through Home (01 drawing, 02–03 work, 04 portrait) and Websites (01 hero, 02 work). **Still open:** re-export the portfolio screenshots on one background, commission real photography, and replace the blog illustrations rather than just grading them.
+
+**Copy items L1 and L3:** done in the copy pass. See `docs/copy-content-audit.md`.
+
+---
+
+## After the phases: material and scale
+
+These were added after the five phases, prompted by Mateusz (see below):
+
+- **Grain in the flat backgrounds only:** `--bs-ground` and `--bs-ground-surface` in `basalt.css`. Its strength is set with `--bs-grain-opacity`.
+- **The closing CTA on the charcoal drawing**, unmirrored, book-ending the hero.
+- **"CAUSEWAYSOFT" across the footer**, cut by the page edge.
+- **The lead project on Home as a full-width plate.**
+
+---
+
+## Decisions and contributions (Mateusz)
+
+Mateusz's decisions, suggestions and art direction during the design pass, in order:
+
+1. **Commissioned the audit** through his own art-director skill prompt, and asked for the plan to be saved to `docs/` before any work started.
+2. **Asked for the audit work to have its own branch,** and took the "3 skills" commit out of `develop`. He decided the skill prompts shouldn't be in this public repo; they now live in `~/.claude/skills/`.
+3. **Approved all five phases** ("start work on the rest of all phases").
+4. **Spotted that the site felt washed out and that "there is still something missing",** and asked for it to be judged against award-winning sites. That led to the material and scale work above. He chose to build the texture and the big-scale pieces before the motion pass.
+5. **Art-directed the grain,** across four rounds:
+   - It looked foggy, so he asked for a "more edgy, rough, granular grain".
+   - That was too rough, so he asked for "something between the og and this".
+   - **The key decision: grain only in the flat backgrounds of containers, never over the elements.** This is why the overlay became the `--bs-ground` tokens.
+   - He asked for an opacity setting, then set `--bs-grain-opacity` to 0.1 himself (`918e807`).
+6. **Originated "Basalt sand":** the grain in motion, forming waves of sand that make shapes that move as you scroll. It's documented in `docs/backlog.md` for the motion pass.
+7. **Questioned the cut footer wordmark, then kept it cut.**
+8. **Set the branch workflow:** feature branches merge into `develop`, not `main`. He merged PR #5 into `develop`.
