@@ -28,7 +28,8 @@ export interface Props {
     <h1 id="hero-title" class="hero__title bs-display">
       <!--
         First line is "typed". "Software," first shows as plain headline text
-        for 3s; then a caret appears and backspaces it. From then on each word
+        for 3.3s; then a caret appears, swaps the comma for "..." and
+        backspaces it all. From then on each word
         is highlighted in the selection colour: the script types each word of
         the list in order plus "...", pauses (caret blinks), backspaces it and
         types the next. It plays once and stops on the last word, where the
@@ -568,14 +569,18 @@ export interface Props {
   document.addEventListener('astro:page-load', initHeroGround);
 
   // Typed first line of the headline. Keeps "Software," on screen at load
-  // (no blank headline), backspaces the comma, types "...", pauses, then
-  // deletes and types the next word, forever. Skips words that won't fit
-  // on one line at the current width. Off for reduced motion.
+  // (no blank headline); after HOLD_MS the caret swaps the comma for "..."
+  // and deletes it all, then types each word below with "...", pausing on
+  // each, and stops on the last. Skips words that won't fit on one line at
+  // the current width. Off for reduced motion. Spec:
+  // docs/hero-headline-animation-spec.md
   // Typed once, in this order, after "Software," is deleted; ends on the last
   // word. Every word reads as a sentence with the rest of the headline, and
   // the last one turns it to the visitor: "Yours... built like the Giant's
   // Causeway."
-  const WORDS = ['Websites', 'Web apps', 'Products', 'Yours'];
+  // "Web-Sites" and "Web-Apps" are always hyphenated (the typing pauses
+  // around the "-")
+  const WORDS = ['Web-Sites', 'Web-Apps', 'Products', 'Yours'];
   const PAUSE_MS = 3300;
   // How long the opening "Software," stays as plain text before the caret appears
   const HOLD_MS = 3300;
@@ -613,6 +618,10 @@ export interface Props {
     const keystroke = () => rand(55, 140) + (Math.random() < 0.12 ? rand(180, 380) : 0);
     // Steady, human backspacing
     const backstroke = () => rand(70, 105);
+    // A hyphen breaks the flow: a longer pause before it ("finding the key")
+    // and a slightly longer one after it, on top of the normal keystroke
+    const beforeHyphen = () => rand(200, 320);
+    const afterHyphen = () => rand(280, 420);
 
     // Hidden copy of the line, to check a word fits before typing it
     const measure = document.createElement('span');
@@ -628,8 +637,10 @@ export interface Props {
 
     const typeWord = async (text: string) => {
       for (const ch of text) {
+        const hyphen = ch === '-';
+        if (hyphen) await wait(beforeHyphen());
         word.textContent += ch;
-        await wait(keystroke());
+        await wait(keystroke() + (hyphen ? afterHyphen() : 0));
       }
     };
     const typeDots = async () => {
@@ -652,8 +663,13 @@ export interface Props {
     const run = async () => {
       // "Software," reads as part of the plain headline first
       await wait(HOLD_MS);
-      // Then the caret appears and deletes it, still as plain text
+      // Then the caret appears, swaps the comma for "..." and deletes the
+      // lot, still as plain text
       root.dataset.state = 'typing';
+      await wait(rand(350, 550));
+      await backspace(1); // the comma
+      await wait(rand(150, 260));
+      await typeDots();
       await wait(rand(350, 550));
       await clearAll();
       // From here on, typed words are highlighted
