@@ -86,7 +86,7 @@ const schema = {
     top: 7px;
     height: 2px;
     background: currentColor;
-    transition: transform 0.3s var(--bs-ease);
+    transition: transform var(--bs-dur-base) var(--bs-ease);
   }
 
   .faq__icon::after {
@@ -106,5 +106,36 @@ const schema = {
     font-size: 17px;
     line-height: 1.65;
     max-width: 40em;
+  }
+
+  /* Answers open to their height instead of jumping, with the text fading
+     in just behind (docs/motion-plan.md). Native CSS where supported
+     (::details-content and interpolate-size); elsewhere they snap open as
+     before. Reduced motion: the global rule makes it instant. */
+  @supports selector(::details-content) {
+    .faq__item {
+      interpolate-size: allow-keywords;
+    }
+
+    .faq__item::details-content {
+      block-size: 0;
+      overflow: hidden;
+      transition:
+        block-size var(--bs-dur-base) var(--bs-ease),
+        content-visibility var(--bs-dur-base) allow-discrete;
+    }
+
+    .faq__item[open]::details-content {
+      block-size: auto;
+    }
+
+    .faq__a {
+      opacity: 0;
+      transition: opacity var(--bs-dur-base) var(--bs-ease) 60ms;
+    }
+
+    .faq__item[open] .faq__a {
+      opacity: 1;
+    }
   }
 </style>

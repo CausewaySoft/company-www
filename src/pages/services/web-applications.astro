@@ -238,7 +238,7 @@ const faqs = [
         <ul class="routes section-body">
           {
             routes.map((r) => (
-              <li class="route" data-reveal>
+              <li class="route">
                 <p class="bs-mono route__label">{r.label}</p>
                 <h3 class="route__title bs-display">{r.title}</h3>
                 <p class="route__desc">{r.description}</p>
@@ -293,7 +293,7 @@ const faqs = [
         <ul class="quad section-body">
           {
             principles.map((p, i) => (
-              <li class="quad__item" data-reveal>
+              <li class="quad__item">
                 <span class="bs-mono quad__num">{String(i + 1).padStart(2, '0')}</span>
                 <h3 class="quad__title bs-display">{p.title}</h3>
                 <p class="quad__desc">{p.description}</p>
@@ -440,7 +440,7 @@ const faqs = [
     padding-block: 10px;
     font-size: 15px;
     color: var(--bs-ink);
-    transition: color 0.2s var(--bs-ease);
+    transition: color var(--bs-dur-quick) var(--bs-ease);
   }
 
   .route__links a:hover {

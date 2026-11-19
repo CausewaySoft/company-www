@@ -297,13 +297,13 @@ const faqs = [
         </div>
 
         <div class="after" id="outcomes" aria-labelledby="outcomes-title" role="group">
-          <h3 id="outcomes-title" class="after__title bs-display" data-reveal>
+          <h3 id="outcomes-title" class="after__title bs-display">
             Five jobs every business website should do.
           </h3>
           <ol class="after__list">
             {
               outcomes.map((o, i) => (
-                <li class="after__item" data-reveal>
+                <li class="after__item">
                   <span class="bs-mono after__num">{String(i + 1).padStart(2, '0')}</span>
                   <h4 class="after__name bs-display">{o.title}</h4>
                   <p class="after__desc">{o.description}</p>
@@ -329,7 +329,7 @@ const faqs = [
         <ol class="offers section-body">
           {
             offers.map((o, i) => (
-              <li class:list={['offer', { 'offer--featured': o.featured }]} data-reveal>
+              <li class:list={['offer', { 'offer--featured': o.featured }]}>
                 <p class="bs-mono offer__label">
                   <span class="offer__num">{String(i + 1).padStart(2, '0')}</span> — {o.key}
                 </p>
@@ -394,21 +394,23 @@ const faqs = [
     <!-- 06 Why us: one full-width statement instead of another section opener -->
     <section class="bs-section bs-section--tight" id="why" aria-labelledby="why-title">
       <div class="bs-wrap">
-        <div class="statement" data-reveal>
-          <p class="bs-mono statement__label">
+        <div class="statement" data-reveal data-stone>
+          <p class="bs-mono statement__label bs-stone-fade" style="--fd: 120ms">
             <span class="statement__index">06</span> <span aria-hidden="true">—</span> Why build with us
           </p>
           <h2 id="why-title" class="statement__line bs-display">
-            We’re software engineers, not just website builders<span class="whero__stop">.</span>
+            <span class="bs-stone-line"
+              ><span>We’re software engineers, not just website builders<span class="whero__stop">.</span></span></span
+            >
           </h2>
-          <p class="statement__sub">
+          <p class="statement__sub bs-stone-fade">
             When off-the-shelf solutions aren’t enough, we build exactly what your business needs.
           </p>
         </div>
         <ul class="quad section-body">
           {
             reasons.map((r, i) => (
-              <li class="quad__item" data-reveal>
+              <li class="quad__item">
                 <span class="bs-mono quad__num">{String(i + 1).padStart(2, '0')}</span>
                 <h3 class="quad__title bs-display">{r.title}</h3>
                 <p class="quad__desc">{r.description}</p>
@@ -518,7 +520,7 @@ const faqs = [
     text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 0.35em;
-    transition: text-decoration-color 0.2s var(--bs-ease);
+    transition: text-decoration-color var(--bs-dur-quick) var(--bs-ease);
   }
 
   .whero__caption a:hover {

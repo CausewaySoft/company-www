@@ -33,7 +33,7 @@ const {
     <ol class="svc">
       {
         services.map((s, i) => (
-          <li data-reveal>
+          <li>
             <a class="svc__row bs-grid" href={s.href}>
               <span class="svc__num bs-mono">{String(i + 1).padStart(2, '0')}</span>
               <span class="svc__title bs-display">{s.title}</span>
@@ -78,7 +78,7 @@ const {
     background: var(--bs-signal);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.6s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .svc__row:hover::before,
@@ -93,7 +93,7 @@ const {
   .svc__title {
     grid-column: 3 / -1;
     font-size: clamp(36px, 5.2vw, 76px);
-    transition: transform 0.6s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .svc__row:hover .svc__title {
@@ -141,8 +141,8 @@ const {
       font-size: 28px;
       color: var(--bs-ink);
       transition:
-        transform 0.6s var(--bs-ease),
-        color 0.3s;
+        transform var(--bs-dur-draw) var(--bs-ease),
+        color var(--bs-dur-base);
     }
     .svc__row:hover .svc__arrow {
       transform: translateX(6px);

@@ -5,9 +5,118 @@ but not scheduled. Newest first.
 
 ---
 
+## Basalt-column page transition: develop it further (motion backlog)
+
+**Status:** The first version is live on `feature/motion` and Mateusz says it
+"looks right"; further work is open
+**Area:** `src/components/home/BasaltTransition.astro` (rendered by
+`BasaltHeader`); the cross-fade switch-off in `basalt.css`
+**Added:** 2026-11-18
+
+### Where it stands
+
+On a page change, 12 columns in four groups of three (two groups on phones)
+rise under the header, then sink back once the next page has loaded. Each
+group moves as one stone shaped / ‾ \ (Mateusz's direction), shaded like a lit
+prism. The groups start at uneven times (0–150ms apart). It takes about 0.35s up
+and 0.37s down. A signal line draws along the top while a slow page is still
+loading. With reduced motion, the page just swaps instantly. The history and
+decisions are in `docs/motion-plan.md`.
+
+### Ideas to explore
+
+These are not agreed yet; each needs trying in a real browser.
+
+1. **Direction-aware:** going *back* (browser back, or a link to a parent page)
+   sinks the stones in the opposite order, so forward and back feel different.
+2. **A different skyline each time:** shuffle the group order per page change
+   (from a fixed set, so it never looks random-noisy), so repeat visits don't
+   feel mechanical.
+3. **Uneven stones:** vary group widths slightly, and the steepness of each
+   / ‾ \ top, like real columns that are never identical.
+4. **Hand-off to the new page:** as the stones sink, the new page's first
+   heading is "set in stone" (motion plan step 4), so the transition and the
+   page's first move read as one gesture.
+5. **One signal stone:** on the way to the project planner (`/contact?type=project`)
+   only, one group carries a signal-orange top face: a quiet "you're starting
+   something".
+6. **Truer tops:** draw the / ‾ \ with real hexagon proportions (30° slants),
+   possibly as one SVG or CSS shape per group, instead of three clipped
+   columns.
+7. **Weight and sound of the stone:** try a tiny settle at the top (overshoot
+   0–2px, then rest) to suggest mass, without becoming bouncy (principle 1:
+   geological, not elastic).
+8. **Grain in motion:** link to "Basalt sand". The grain on the stones could
+   drift as they move.
+
+### To check before tuning
+
+- **Real devices:** test on a mid-range phone and an older laptop. The motion
+  only uses transforms, but 12 full-height layers with grain should be checked
+  for dropped frames.
+- **Browsers:** Safari and Firefox, where view transitions behave differently.
+  The router falls back to a plain swap, and the columns should still work.
+- **Speed:** the first version's timing felt right to Mateusz. Keep the total
+  under about 0.75s.
+
+---
+
+## Column-shape image reveals (motion backlog)
+
+**Status:** Idea, set aside on purpose during the motion pass
+**Area:** `src/components/home/WorkIndex.astro` (work images),
+`src/components/home/Founder.astro` (portrait)
+**Added:** 2026-11-18
+
+### The idea
+
+As a work image or the founder portrait enters, it opens upward through the
+slanted column profile the portrait already uses (`clip-path` from closed to
+the slanted shape, about 900ms, once).
+
+### Why it's on the backlog
+
+Mateusz agreed that motion should stay only where it carries the stone idea:
+headings "set in stone" and the process columns. Revealing every image would
+bring back the "everything animates" feel that the motion pass removed.
+Worth reconsidering for one image only, perhaps the full-width lead plate on
+Home, if a page ever feels too still.
+
+---
+
+## Self-audit counter: a small "tick" when the score changes (motion backlog)
+
+**Status:** Idea, not started; polish, not a fix
+**Area:** Websites page self-audit (`src/components/home/SelfAudit.astro`,
+the `[data-bs-score]` number)
+**Added:** 2026-11-18
+
+### The idea
+
+The counter already works: ticking a symptom updates the score ("3/7") and
+the message under it. This would only add motion to the number itself, so
+each tick feels registered:
+
+- **Trigger:** checking or unchecking an item.
+- **Motion:** the score number moves up 4px as it changes and settles back,
+  over about 280ms with the Basalt ease. The "/7" stays still.
+- **Mobile:** the same.
+- **Reduced motion:** the number just changes, as it does today.
+
+### Why it's on the backlog, not in the motion pass
+
+It came up in the motion audit (2026-11-18). Mateusz pointed out that the
+counter already changes correctly, and the message under it is feedback in
+itself, so this is polish. He asked to keep it on the motion backlog rather
+than drop it.
+
+---
+
 ## Basalt sand: the grain in motion (motion backlog)
 
-**Status:** Idea for the motion pass, not started
+**Status:** Step A done (2026-11-18): the grain drifts with the scroll on
+desktop, in `basalt.css` (`bs-sand`). Waves and shapes (options B and C) not
+started
 **Area:** the grain in `src/components/home/basalt.css` (`--bs-grain`,
 `--bs-ground`, `--bs-grain-opacity`); likely a new ground component
 **Added:** 2026-11-18

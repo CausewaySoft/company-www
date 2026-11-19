@@ -30,16 +30,22 @@ const { index, label, title, lede, id, size = 'standard' } = Astro.props;
 const sentences = title.split(/(?<=[.?!])\s+(?=\S)/);
 ---
 
-<header class:list={['head bs-grid', `head--${size}`]} data-reveal>
-  <p class="head__label bs-mono">
+<header class:list={['head bs-grid', `head--${size}`]} data-reveal data-stone>
+  <p class="head__label bs-mono bs-stone-fade" style="--fd: 120ms">
     <span class="head__index">{index}</span>
     <span aria-hidden="true">—</span>
     {label}
   </p>
   <h2 class="head__title bs-display" id={id}>
-    {sentences.length > 1 ? sentences.map((s) => <span class="head__line">{s}</span>) : title}
+    {
+      sentences.map((s, i) => (
+        <span class="head__line bs-stone-line" style={`--li:${i}`}>
+          <span>{s}</span>
+        </span>
+      ))
+    }
   </h2>
-  {lede && <p class="head__lede bs-lede">{lede}</p>}
+  {lede && <p class="head__lede bs-lede bs-stone-fade">{lede}</p>}
 </header>
 
 <style>

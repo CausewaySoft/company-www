@@ -36,6 +36,7 @@ const { items, cta, bookingHref } = Astro.props;
 const pad = (i: number) => String(i + 1).padStart(2, '0');
 // Numbers follow the home-page sections, so plain items don't take one
 const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).filter((x) => !x.plain).length)));
+import BasaltTransition from './BasaltTransition.astro';
 ---
 
 <header class="bsh" id="bs-header" data-scrolled="false">
@@ -138,6 +139,9 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
   </div>
 </header>
 
+<!-- Page transition: basalt columns rise under the header -->
+<BasaltTransition />
+
 <style>
   .bsh {
     position: sticky;
@@ -148,8 +152,8 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     background: transparent;
     border-bottom: 1px solid transparent;
     transition:
-      background-color 0.3s var(--bs-ease),
-      border-color 0.3s var(--bs-ease);
+      background-color var(--bs-dur-base) var(--bs-ease),
+      border-color var(--bs-dur-base) var(--bs-ease);
   }
 
   .bsh[data-scrolled='true'],
@@ -163,7 +167,7 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     align-items: center;
     gap: 24px;
     height: 72px;
-    transition: height 0.3s var(--bs-ease);
+    transition: height var(--bs-dur-base) var(--bs-ease);
   }
 
   .bsh[data-scrolled='true'] .bsh__bar {
@@ -182,7 +186,7 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
   .bsh__mark {
     width: 33px;
     height: auto;
-    transition: transform 0.6s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .bsh__brand:hover .bsh__mark {
@@ -229,7 +233,7 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
 
   .bsh__num {
     color: var(--bs-muted);
-    transition: color 0.2s;
+    transition: color var(--bs-dur-quick);
   }
 
   .bsh__link::after {
@@ -242,7 +246,7 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     background: var(--bs-signal);
     transform: scaleX(0);
     transform-origin: left;
-    transition: transform 0.4s var(--bs-ease);
+    transition: transform var(--bs-dur-draw) var(--bs-ease);
   }
 
   .bsh__link:hover::after,
@@ -288,9 +292,9 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     visibility: hidden;
     transform: translateY(-4px);
     transition:
-      opacity 0.2s var(--bs-ease),
-      transform 0.2s var(--bs-ease),
-      visibility 0.2s;
+      opacity var(--bs-dur-quick) var(--bs-ease),
+      transform var(--bs-dur-quick) var(--bs-ease),
+      visibility var(--bs-dur-quick);
   }
 
   .bsh__item--sub:hover .bsh__sub,
@@ -306,8 +310,8 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     font-size: 14px;
     color: var(--bs-text);
     transition:
-      color 0.2s,
-      background-color 0.2s;
+      color var(--bs-dur-quick),
+      background-color var(--bs-dur-quick);
   }
 
   .bsh__sub a:hover {
@@ -329,7 +333,7 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     height: 40px;
     color: var(--bs-ink);
     border: 1px solid transparent;
-    transition: border-color 0.2s;
+    transition: border-color var(--bs-dur-quick);
   }
 
   .bsh__icon:hover {
@@ -368,8 +372,8 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
     text-transform: uppercase;
     color: var(--bs-ink);
     transition:
-      background-color 0.25s var(--bs-ease),
-      color 0.25s var(--bs-ease);
+      background-color var(--bs-dur-base) var(--bs-ease),
+      color var(--bs-dur-base) var(--bs-ease);
   }
 
   .bsh__cta:hover {
@@ -538,6 +542,9 @@ const numbers = items.map((item, i) => (item.plain ? '' : pad(items.slice(0, i).
 </style>
 
 <script>
+  // Reveal on scroll for every Basalt page (every Basalt page has this header)
+  import './reveal';
+
   function initBasaltHeader() {
     const header = document.getElementById('bs-header');
     if (!header || header.dataset.ready) return;

@@ -142,6 +142,29 @@ const year = new Date().getFullYear();
     margin-left: -0.04em;
   }
 
+  /* The name surfaces from the ground: over the last stretch of scrolling
+     it rises from deeper in the page edge to its final cut, landing as the
+     page ends (docs/motion-plan.md). Scroll-linked where supported;
+     elsewhere, and with reduced motion, it simply sits at its cut. */
+  @supports (animation-timeline: view()) {
+    @media (prefers-reduced-motion: no-preference) {
+      .bsf__giant-word {
+        animation: bsf-surface linear both;
+        animation-timeline: view();
+        animation-range: entry 0% entry 100%;
+      }
+    }
+  }
+
+  @keyframes bsf-surface {
+    from {
+      translate: 0 0.32em;
+    }
+    to {
+      translate: 0 0;
+    }
+  }
+
   .bsf__tagline {
     margin-top: 8px;
     font-size: clamp(40px, 5vw, 72px);
@@ -183,7 +206,7 @@ const year = new Date().getFullYear();
     text-decoration: underline;
     text-decoration-color: transparent;
     text-underline-offset: 0.3em;
-    transition: text-decoration-color 0.2s var(--bs-ease);
+    transition: text-decoration-color var(--bs-dur-quick) var(--bs-ease);
   }
 
   .bsf__services a:hover {
@@ -207,7 +230,7 @@ const year = new Date().getFullYear();
 
   .bsf__base a {
     color: var(--bs-ink);
-    transition: color 0.2s;
+    transition: color var(--bs-dur-quick);
   }
 
   .bsf__base a:hover {
